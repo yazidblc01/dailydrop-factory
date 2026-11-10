@@ -2,5 +2,12 @@
   "done": [
     "invest__big_tech__2015"
   ],
-  "skipped": []
+  "skipped": [
+    "wb__pop__americas__2000",
+    "wb__pop__americas__1990",
+    "wb__pop__africa__2000",
+    "wb__gdp__mena__2000",
+    "wb__gdp_pc__africa__2000",
+    "wb__gdp_pc__africa__1990"
+  ]
 }
