@@ -88,7 +88,8 @@ const THEMES: Record<ThemeName, Theme> = {
 // and the bottom ~500px (title, channel, subscribe, nav). Text never goes there.
 const W = 1080;
 const H = 1920;
-const SAFE = {left: 60, right: 890, top: 290, bottom: 1400};
+// Centered on the screen. The like/comment buttons only cover the lower right, below the chart area.
+const SAFE = {left: 110, right: 970, top: 280, bottom: 1440};
 const SAFE_W = SAFE.right - SAFE.left;
 const clamp = {extrapolateLeft: 'clamp' as const, extrapolateRight: 'clamp' as const};
 const sec = (sections: Section[], name: string) => sections.find((s) => s.name === name);
@@ -226,7 +227,7 @@ const Poster: React.FC<{p: RevealProps; tl: Timeline; T: Theme; mode: 'hook' | '
 
   // ----- question -----
   const tokens = p.hook.split(' ');
-  const fs = p.hook.length <= 30 ? 112 : p.hook.length <= 46 ? 98 : 86;
+  const fs = p.hook.length <= 30 ? 124 : p.hook.length <= 46 ? 108 : 94;
   const wordTime = (i: number) => (p.hookWords[i] ? p.hookWords[i].start : (i / tokens.length) * tl.hookEnd);
 
   // ----- grid -----
@@ -234,9 +235,9 @@ const Poster: React.FC<{p: RevealProps; tl: Timeline; T: Theme; mode: 'hook' | '
   const cols = n <= 4 ? n : n <= 6 ? 3 : 4;
   const rows = Math.ceil(n / cols);
   const cellW = SAFE_W / cols;
-  const gridTop = 830;
+  const gridTop = 820;
   const cellH = (SAFE.bottom - gridTop) / rows;
-  const tile = Math.min(cellW * 0.6, cellH - 140, 170);
+  const tile = Math.min(cellW * 0.66, cellH - 150, 200);
   const top = p.badges[0];
   const bottom = p.badges[1];
   const winner = p.items.find((i) => i.short === top.short)!;
@@ -249,7 +250,7 @@ const Poster: React.FC<{p: RevealProps; tl: Timeline; T: Theme; mode: 'hook' | '
   return (
     <AbsoluteFill style={{opacity}}>
       {/* question: fully on screen from frame 0, words light up as they are spoken */}
-      <div style={{position: 'absolute', top: SAFE.top, left: SAFE.left, width: SAFE_W, height: 380, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <div style={{position: 'absolute', top: SAFE.top, left: SAFE.left, width: SAFE_W, height: 360, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <div style={{textAlign: 'center', lineHeight: 1.0}}>
           {tokens.map((tok, i) => {
             const spoken = mode === 'hook' ? t >= wordTime(i) : true;
@@ -273,7 +274,7 @@ const Poster: React.FC<{p: RevealProps; tl: Timeline; T: Theme; mode: 'hook' | '
       </div>
 
       {/* teaser pill, which turns into the result banner on the end card */}
-      <div style={{position: 'absolute', top: 700, left: SAFE.left, width: SAFE_W, display: 'flex', justifyContent: 'center'}}>
+      <div style={{position: 'absolute', top: 680, left: SAFE.left, width: SAFE_W, display: 'flex', justifyContent: 'center'}}>
         <div style={{position: 'relative', height: 76}}>
           <Pill T={T} opacity={1 - results} pulse={mode === 'hook' ? t : 0}>
             {p.startLabel.toUpperCase()} <Arrow color={T.onAccent} /> ???
@@ -374,8 +375,8 @@ const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) =
   };
   const n = p.items.length;
   // The order re-sorts in quick eased steps (every STEP seconds) instead of drifting, so rows never smear together
-  const STEP = 0.6;
-  const SWAP = 0.32;
+  const STEP = 0.4;
+  const SWAP = 0.26;
   const checkpoint = (k: number) => Math.min(tl.raceStart + k * STEP, tl.raceEnd);
   const kNow = t < tl.raceStart ? -1 : Math.min(Math.floor((t - tl.raceStart) / STEP), Math.ceil((tl.raceEnd - tl.raceStart) / STEP));
   const from = kNow <= 0 ? rankAt(tl.raceStart - 0.01) : rankAt(checkpoint(kNow - 1));
@@ -397,15 +398,15 @@ const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) =
   const revealed = t >= tl.revealAt;
 
   // ----- layout -----
-  const HEAD_H = 170;
+  const HEAD_H = 190;
   const ROWS_TOP = SAFE.top + HEAD_H;
-  const ROWS_BOTTOM = 1160;
+  const ROWS_BOTTOM = 1250;
   const ROW_H = (ROWS_BOTTOM - ROWS_TOP) / n;
-  const TILE = Math.min(88, ROW_H - 16);
+  const TILE = Math.min(104, ROW_H - 18);
   const BAR_X = SAFE.left + TILE + 18;
   const VALUE_W = 170;
   const BAR_MAX = SAFE.right - BAR_X - VALUE_W;
-  const NAME_FS = Math.max(24, Math.min(34, ROW_H * 0.27));
+  const NAME_FS = Math.max(26, Math.min(38, ROW_H * 0.28));
   const BAR_H = Math.max(26, ROW_H - NAME_FS - 26);
 
   // ----- header -----
@@ -476,7 +477,7 @@ const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) =
         );
       })}
 
-      <div style={{position: 'absolute', top: 1172, left: SAFE.left, width: SAFE_W, fontFamily: INTER, fontWeight: 600, fontSize: 22, lineHeight: 1.2, color: T.dim, textAlign: 'center'}}>
+      <div style={{position: 'absolute', top: 1262, left: SAFE.left, width: SAFE_W, fontFamily: INTER, fontWeight: 600, fontSize: 22, lineHeight: 1.2, color: T.dim, textAlign: 'center'}}>
         {p.sourceLabel}
       </div>
     </AbsoluteFill>
@@ -512,10 +513,10 @@ const Captions: React.FC<{captions: Caption[]; T: Theme}> = ({captions, T}) => {
   return (
     <div
       style={{
-        position: 'absolute', top: 1250, left: SAFE.left, width: SAFE_W, height: 140,
+        position: 'absolute', top: 1318, left: SAFE.left, width: SAFE_W, height: 100,
         display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
-        fontFamily: INTER, fontWeight: 900, fontSize: 76, lineHeight: 1.0, textTransform: 'uppercase',
-        WebkitTextStroke: `9px ${T.capStroke}`, paintOrder: 'stroke fill',
+        fontFamily: INTER, fontWeight: 900, fontSize: 50, lineHeight: 1.0, textTransform: 'uppercase', whiteSpace: 'nowrap',
+        WebkitTextStroke: `7px ${T.capStroke}`, paintOrder: 'stroke fill',
         transform: `scale(${0.75 + 0.25 * gIn})`,
       }}
     >
@@ -524,7 +525,7 @@ const Captions: React.FC<{captions: Caption[]; T: Theme}> = ({captions, T}) => {
           const active = t >= w.start && t <= w.end + 0.06;
           const isNum = /\d/.test(w.w);
           return (
-            <span key={i} style={{display: 'inline-block', margin: '0 10px', color: active || isNum ? T.accent : T.capText, transform: `scale(${active ? 1.1 : 1})`}}>
+            <span key={i} style={{display: 'inline-block', margin: '0 7px', color: active || isNum ? T.accent : T.capText, transform: `scale(${active ? 1.08 : 1})`}}>
               {w.w}
             </span>
           );
@@ -574,6 +575,24 @@ const Sound: React.FC<{p: RevealProps; tl: Timeline}> = ({p, tl}) => {
   );
 };
 
+// ---------- Logo badge: the drop chart mark, small, top left, on every frame ----------
+const LogoBadge: React.FC<{T: Theme}> = ({T}) => (
+  <div
+    style={{
+      position: 'absolute', left: 40, top: 200, width: 76, height: 76, borderRadius: 38,
+      background: T.accent, display: 'flex', alignItems: 'center', justifyContent: 'center',
+      boxShadow: '0 4px 14px rgba(0,0,0,0.35)', opacity: 0.95,
+    }}
+  >
+    <svg width={40} height={52} viewBox="0 0 400 520">
+      <path d="M200 8 C200 8 36 222 36 344 A164 164 0 0 0 364 344 C364 222 200 8 200 8 Z" fill={T.onAccent} />
+      <rect x="112" y="350" width="48" height="96" rx="10" fill={T.accent} />
+      <rect x="176" y="290" width="48" height="156" rx="10" fill={T.accent} />
+      <rect x="240" y="214" width="48" height="232" rx="10" fill={T.accent} />
+    </svg>
+  </div>
+);
+
 // ---------- Composition ----------
 export const RankingReveal: React.FC<RevealProps> = (p) => {
   const T = THEMES[p.theme] ?? THEMES.neon;
@@ -589,6 +608,7 @@ export const RankingReveal: React.FC<RevealProps> = (p) => {
       <Vignette from={tl.beatsEnd} to={tl.revealAt} />
       <Flash at={tl.revealAt} />
       <Captions captions={p.captions} T={T} />
+      <LogoBadge T={T} />
       <Progress duration={p.duration} T={T} />
       <Sound p={p} tl={tl} />
       <Audio src={staticFile(p.audio)} />

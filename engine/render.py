@@ -25,8 +25,8 @@ PUBLIC = VIDEO_DIR / "public"
 THEMES = ["neon", "money", "blood", "ice", "paper"]
 MUSIC_LIB = DATA_DIR / "music.json"
 CAPTION_SECTIONS = ("beat", "tension")  # captions only where the screen is not already showing the words
-MAX_CAPTION_WORDS = 3
-MAX_CAPTION_CHARS = 18
+MAX_CAPTION_WORDS = 6
+MAX_CAPTION_CHARS = 30  # one line at the caption size
 
 
 # ---------- helpers ----------
