@@ -52,12 +52,19 @@ def pick_next():
     rng = random.Random(date.today().isoformat())
     rng.shuffle(preferred)
 
+    errors = []
     for topic_id in preferred[:MAX_TRIES]:
         try:
             payload = data.build(topic_id)
-        except Exception as e:
+        except ValueError as e:
+            # the data itself doesn't work for this topic (e.g. missing years): skip it for good
             print(f"  skip {topic_id}: {e}")
             h["skipped"].append(topic_id)
+            continue
+        except Exception as e:
+            # a bug or a network hiccup: try the next topic, but keep this one for another day
+            print(f"  error on {topic_id} ({e.__class__.__name__}: {e}), trying another")
+            errors.append(f"{topic_id}: {e}")
             continue
         score = recipes.interest(payload)
         if score < MIN_INTEREST:
@@ -68,6 +75,8 @@ def pick_next():
         return topic_id, payload
 
     save_history(h)
+    if errors:
+        raise RuntimeError("Every topic tried hit an error: " + " | ".join(errors[:3]))
     raise RuntimeError("No interesting topic found in this batch; run again to try the next ones.")
 
 

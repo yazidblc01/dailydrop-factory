@@ -223,9 +223,9 @@ def build_wb(topic_id):
         if not s:
             continue
         short = names.get(s["name"], s["name"])
-        series = [[y, s["v"][y]] for y in sorted(s["v"]) if start_year <= y <= end_year]
+        pts = [[y, s["v"][y]] for y in sorted(s["v"]) if start_year <= y <= end_year]
         items.append(make_item(s["name"], short, s["v"][start_year], s["v"][end_year], unit,
-                               image=f"https://flagcdn.com/w160/{s['iso2'].lower()}.png", series=series))
+                               image=f"https://flagcdn.com/w160/{s['iso2'].lower()}.png", series=pts))
 
     return finish({
         "topic": topic_id,
