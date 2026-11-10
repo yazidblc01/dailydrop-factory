@@ -7,6 +7,7 @@
     python run.py --no-post                makes the video but does not post it
     python run.py --post-only <topic>      posts a video that's already rendered, right now
     python run.py --check                  pings Telegram with the links of scheduled posts that went live
+    python run.py --once-a-day             skips if today's video already exists (used by the backup morning runs)
 
 Steps: live-link check -> topic -> data -> script -> voice -> render -> schedule on YouTube -> Telegram
 """
@@ -14,6 +15,7 @@ import argparse
 import json
 import os
 import time
+from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
@@ -68,6 +70,16 @@ def post(topic, now=False):
     return res
 
 
+def made_today():
+    """True if a video was already posted or scheduled today (Toronto date). Used by the backup morning runs."""
+    today = datetime.now(schedule.TZ).date()
+    for p in upload.load_posts().values():
+        stamp = p.get("when") or p.get("posted_at")
+        if stamp and datetime.fromisoformat(stamp).astimezone(schedule.TZ).date() == today:
+            return True
+    return False
+
+
 def make(topic=None, dry=False, publish=True, now=False):
     t0 = time.time()
     if topic:
@@ -111,6 +123,7 @@ if __name__ == "__main__":
     ap.add_argument("--no-post", action="store_true")
     ap.add_argument("--post-only", action="store_true")
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--once-a-day", action="store_true")
     a = ap.parse_args()
     try:
         if a.check:
@@ -119,6 +132,8 @@ if __name__ == "__main__":
             if not a.topic:
                 raise SystemExit("--post-only needs a topic, e.g. python run.py --post-only invest__big_tech__2015")
             post(a.topic, now=True)
+        elif a.once_a_day and made_today():
+            print("Today's video already exists, nothing to do.")
         else:
             if not a.dry:
                 report_live()

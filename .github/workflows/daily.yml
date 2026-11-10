@@ -4,8 +4,12 @@ name: Daily Short
 
 on:
   schedule:
-    - cron: "13 11 * * *"   # make: 6:13 AM Toronto in winter, 7:13 AM in summer
-    - cron: "47 23 * * *"   # check: 6:47 PM Toronto in winter, 7:47 PM in summer (after every slot)
+    # GitHub sometimes drops scheduled runs, so the morning run is tried 3 times.
+    # The first one that runs makes the video; the others see it exists and stop (--once-a-day).
+    - cron: "13 11 * * *"   # make: 6:13 AM Toronto in winter (7:13 in summer)
+    - cron: "43 12 * * *"   # make, backup: 7:43 AM
+    - cron: "13 14 * * *"   # make, backup: 9:13 AM
+    - cron: "47 23 * * *"   # check: 6:47 PM Toronto in winter (7:47 in summer), after every slot
   workflow_dispatch:
     inputs:
       mode:
@@ -93,6 +97,7 @@ jobs:
           ARGS=""
           if [ -n "${{ inputs.topic }}" ]; then ARGS="${{ inputs.topic }}"; fi
           if [ "${{ inputs.now }}" = "yes" ]; then ARGS="$ARGS --now"; fi
+          if [ "${{ github.event_name }}" = "schedule" ]; then ARGS="$ARGS --once-a-day"; fi
           python run.py $ARGS
 
       - name: Ping live links
