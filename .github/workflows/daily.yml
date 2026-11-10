@@ -1,0 +1,111 @@
+# The Daily Drop: makes one Short every morning and schedules it for today's slot (engine/schedule.py).
+# An evening run pings Telegram with the live link. Times are UTC; the slots themselves are Toronto time.
+name: Daily Short
+
+on:
+  schedule:
+    - cron: "13 11 * * *"   # make: 6:13 AM Toronto in winter, 7:13 AM in summer
+    - cron: "47 23 * * *"   # check: 6:47 PM Toronto in winter, 7:47 PM in summer (after every slot)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "make or check"
+        default: "make"
+      topic:
+        description: "optional topic id (blank = pick automatically)"
+        default: ""
+      now:
+        description: "post immediately instead of today's slot (yes/no)"
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-short
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+      UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
+      TZ: America/Toronto
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pick mode
+        id: m
+        run: |
+          if [ "${{ github.event.schedule }}" = "47 23 * * *" ] || [ "${{ inputs.mode }}" = "check" ]; then
+            echo "mode=check" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=make" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Python packages
+        run: pip install -r requirements.txt
+
+      - name: System packages (ffmpeg, Chrome libraries)
+        if: steps.m.outputs.mode == 'make'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libnss3 libatk-bridge2.0-0 libcups2 libxcomposite1 libxdamage1 \
+            libxrandr2 libgbm1 libxkbcommon0 libpango-1.0-0 libcairo2 libasound2t64
+
+      - uses: actions/setup-node@v4
+        if: steps.m.outputs.mode == 'make'
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: video/package-lock.json
+
+      - name: Video tools
+        if: steps.m.outputs.mode == 'make'
+        working-directory: video
+        run: npm ci --no-audit --no-fund
+
+      - name: Cache speech model and Chrome
+        if: steps.m.outputs.mode == 'make'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/huggingface
+            video/node_modules/.remotion
+          key: models-v1
+
+      - name: Make and schedule today's Short
+        if: steps.m.outputs.mode == 'make'
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.topic }}" ]; then ARGS="${{ inputs.topic }}"; fi
+          if [ "${{ inputs.now }}" = "yes" ]; then ARGS="$ARGS --now"; fi
+          python run.py $ARGS
+
+      - name: Ping live links
+        if: steps.m.outputs.mode == 'check'
+        run: python run.py --check
+
+      - name: Save topic history and post records
+        if: always()
+        run: |
+          git config user.name "daily-drop-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for f in data/history.json data/posts.json; do [ -f "$f" ] && git add "$f"; done
+          if ! git diff --cached --quiet; then
+            git commit -m "state: $(date +%F) ${{ steps.m.outputs.mode }}"
+            git pull --rebase -q && git push -q
+          fi

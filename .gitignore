@@ -1,0 +1,18 @@
+# secrets
+.env
+client_secret.json
+token.json
+
+# python
+.venv/
+__pycache__/
+
+# generated
+media/
+video/node_modules/
+video/public/img/
+video/public/voice.wav
+video/out/
+*.zip
+preview*.mp4
+.DS_Store
