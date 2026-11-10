@@ -60,12 +60,12 @@ export type RevealProps = {
 };
 
 // ---------- Themes ----------
-type Theme = {
+export type Theme = {
   bg: string; blobA: string; blobB: string; grid: string;
   text: string; dim: string; accent: string; bar: string; good: string; bad: string;
   onAccent: string; tileBorder: string; capText: string; capStroke: string; shadow: string; glow: number;
 };
-const THEMES: Record<ThemeName, Theme> = {
+export const THEMES: Record<ThemeName, Theme> = {
   neon: {bg: '#07090D', blobA: 'rgba(59,130,246,0.38)', blobB: 'rgba(255,46,136,0.24)', grid: 'rgba(255,255,255,0.05)',
     text: '#F8FAFC', dim: 'rgba(248,250,252,0.62)', accent: '#FACC15', bar: '#3B82F6', good: '#22C55E', bad: '#EF4444',
     onAccent: '#07090D', tileBorder: 'transparent', capText: '#FFFFFF', capStroke: '#000000', shadow: '0 8px 0 rgba(0,0,0,0.7)', glow: 1},
@@ -97,7 +97,7 @@ const bump = (x: number) => (x < 0 ? 0 : Math.exp(-x * 9) * (1 - Math.exp(-x * 6
 const src = (path: string) => (path.startsWith('http') ? path : staticFile(path));
 
 // ---------- Number formats ----------
-const compact = (v: number, prefix: string) => {
+export const compact = (v: number, prefix: string) => {
   const a = Math.abs(v);
   const sc = (x: number) => (Math.abs(x) >= 100 ? x.toFixed(0) : x.toFixed(1));
   if (a >= 1e12) return `${prefix}${sc(v / 1e12)}T`;
@@ -107,15 +107,16 @@ const compact = (v: number, prefix: string) => {
   return `${prefix}${Math.round(v).toLocaleString('en-US')}`;
 };
 // Short form for the screen: never more than 6 or 7 characters
-const short = (v: number, unit: RevealProps['unit']) => {
+export const short = (v: number, unit: RevealProps['unit']) => {
   if (unit === 'usd2') return `$${v.toFixed(2)}`;
   if (unit === 'num_compact') return compact(v, '');
   return compact(v, '$');
 };
 
 // ---------- Timeline ----------
-type Timeline = {hookEnd: number; chartIn: number; raceStart: number; raceEnd: number; revealAt: number; endIn: number; beatsEnd: number};
-const timeline = (p: RevealProps): Timeline => {
+export type Timeline = {hookEnd: number; chartIn: number; raceStart: number; raceEnd: number; revealAt: number; endIn: number; beatsEnd: number;
+  keys?: number[][]};  // optional [videoTime, raceProgress] keyframes, so race moments land exactly when the voice says them
+export const timeline = (p: RevealProps): Timeline => {
   const hook = sec(p.sections, 'hook')!;
   const beats = p.sections.filter((s) => s.name.startsWith('beat'));
   const tension = sec(p.sections, 'tension')!;
@@ -144,10 +145,12 @@ const valueAt = (pts: number[][], tq: number) => {
   return pts[pts.length - 1][1];
 };
 const progressAt = (t: number, tl: Timeline) =>
-  interpolate(t, [tl.raceStart, tl.raceEnd], [0, 1], {...clamp, easing: Easing.bezier(0.35, 0, 0.55, 1)});
+  tl.keys && tl.keys.length > 1
+    ? interpolate(t, tl.keys.map((k) => k[0]), tl.keys.map((k) => k[1]), {...clamp, easing: Easing.inOut(Easing.sin)})
+    : interpolate(t, [tl.raceStart, tl.raceEnd], [0, 1], {...clamp, easing: Easing.bezier(0.35, 0, 0.55, 1)});
 
 // ---------- Background (always moving) ----------
-const Background: React.FC<{T: Theme}> = ({T}) => {
+export const Background: React.FC<{T: Theme}> = ({T}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const t = frame / fps;
@@ -184,7 +187,7 @@ const Camera: React.FC<{p: RevealProps; tl: Timeline; children: React.ReactNode}
 };
 
 // ---------- Logo tile: logos sit on a white card so dark logos (Apple) stay visible ----------
-const Tile: React.FC<{it: Item; size: number; T: Theme; ring?: string | null}> = ({it, size, T, ring}) => {
+export const Tile: React.FC<{it: Item; size: number; T: Theme; ring?: string | null}> = ({it, size, T, ring}) => {
   const r = Math.round(size * 0.22);
   const base: React.CSSProperties = {
     width: size, height: size, borderRadius: r, flexShrink: 0, overflow: 'hidden',
@@ -211,7 +214,7 @@ const Tile: React.FC<{it: Item; size: number; T: Theme; ring?: string | null}> =
 // ---------- Poster: the opening frame and the end card share this layout, so the video loops ----------
 const KEY = /expensive|cheapest|actually|most|best|biggest|richest|now|today|worst|\d/i;
 
-const Poster: React.FC<{p: RevealProps; tl: Timeline; T: Theme; mode: 'hook' | 'end'}> = ({p, tl, T, mode}) => {
+export const Poster: React.FC<{p: RevealProps; tl: Timeline; T: Theme; mode: 'hook' | 'end'}> = ({p, tl, T, mode}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const t = frame / fps;
@@ -335,7 +338,8 @@ const Pill: React.FC<{T: Theme; opacity: number; pulse: number; children: React.
 );
 
 // ---------- Chart: bar race (or start-vs-today morph), rows re-sort smoothly ----------
-const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) => {
+export type Callout = {at: number; text: string; item?: string};
+export const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme; callouts?: Callout[]}> = ({p, tl, T, callouts = []}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const t = frame / fps;
@@ -409,6 +413,10 @@ const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) =
   const NAME_FS = Math.max(26, Math.min(38, ROW_H * 0.28));
   const BAR_H = Math.max(26, ROW_H - NAME_FS - 26);
 
+  // ----- callouts: a pill under the year at each key moment, and that row lights up -----
+  const activeCallout = callouts.find((c) => t >= c.at && t < c.at + 1.8);
+  const calloutPop = activeCallout ? spring({frame: frame - activeCallout.at * fps, fps, config: {damping: 9, stiffness: 200}}) : 0;
+
   // ----- header -----
   const year = Math.floor(t0 + (t1 - t0) * u);
   const titleIn = spring({frame: frame - tl.revealAt * fps, fps, config: {damping: 12}});
@@ -417,9 +425,16 @@ const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) =
       <div style={{fontFamily: ANTON, fontSize: 132, lineHeight: 1, color: T.text, textShadow: T.shadow}}>
         {revealed ? <span style={{color: T.accent, display: 'inline-block', transform: `scale(${1.5 - 0.5 * titleIn})`}}>{p.endLabel.toUpperCase()}</span> : year}
       </div>
-      <div style={{fontFamily: INTER, fontWeight: 900, fontSize: 30, color: T.dim, letterSpacing: 3, textTransform: 'uppercase', marginTop: 4}}>
-        {revealed ? `${p.startLabel}` : u > 0 ? `${p.startLabel} · race to today` : p.startLabel}
-      </div>
+      {activeCallout ? (
+        <div style={{marginTop: 10, background: T.accent, color: T.onAccent, borderRadius: 999, padding: '8px 30px', fontFamily: ANTON, fontSize: 52, lineHeight: 1.05,
+          letterSpacing: 1, textTransform: 'uppercase', transform: `scale(${calloutPop}) rotate(-2deg)`, boxShadow: `0 0 ${40 * T.glow}px ${T.accent}`}}>
+          {activeCallout.text}
+        </div>
+      ) : (
+        <div style={{fontFamily: INTER, fontWeight: 900, fontSize: 30, color: T.dim, letterSpacing: 3, textTransform: 'uppercase', marginTop: 4}}>
+          {revealed ? `${p.startLabel}` : u > 0 ? `${p.startLabel} · race to today` : p.startLabel}
+        </div>
+      )}
     </>
   ) : (
     <div style={{fontFamily: ANTON, fontSize: 92, lineHeight: 1.02, color: u > 0.5 ? T.accent : T.text, textShadow: T.shadow, textTransform: 'uppercase'}}>
@@ -440,7 +455,8 @@ const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) =
         const barW = Math.max(18, (v / maxV) * BAR_MAX);
         const badge = revealed ? p.badges.find((b) => b.short === it.short) : undefined;
         const tone = badge ? T[badge.tone] : null;
-        const hl = (it.mentions || []).reduce((a, m) => Math.max(a, interpolate(t - m, [0, 0.12, 0.9, 1.3], [0, 1, 1, 0], clamp)), 0);
+        const marks = [...(it.mentions || []), ...callouts.filter((c) => c.item === it.short).map((c) => c.at)];
+        const hl = marks.reduce((a, m) => Math.max(a, interpolate(t - m, [0, 0.12, 1.4, 1.8], [0, 1, 1, 0], clamp)), 0);
         const color = tone ?? T.bar;
         const badgeIn = spring({frame: frame - tl.revealAt * fps, fps, config: {damping: 9}});
         return (
@@ -485,7 +501,7 @@ const Chart: React.FC<{p: RevealProps; tl: Timeline; T: Theme}> = ({p, tl, T}) =
 };
 
 // ---------- Effects ----------
-const Flash: React.FC<{at: number}> = ({at}) => {
+export const Flash: React.FC<{at: number}> = ({at}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   if (frame < at * fps) return null;
@@ -503,29 +519,34 @@ const Vignette: React.FC<{from: number; to: number}> = ({from, to}) => {
 };
 
 // ---------- Captions: only during the beats and the tension line, script words, numbers kept whole ----------
-const Captions: React.FC<{captions: Caption[]; T: Theme}> = ({captions, T}) => {
+export const Captions: React.FC<{captions: Caption[]; T: Theme; top?: number}> = ({captions, T, top = 1290}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const t = frame / fps;
   const g = captions.find((c) => t >= c.start - 0.03 && t <= c.end + 0.12);
   if (!g) return null;
   const gIn = spring({frame: frame - g.start * fps, fps, config: {damping: 12, mass: 0.4, stiffness: 220}});
+  // fit the text to the safe width: one line when short, two lines when long, never off screen
+  const chars = g.words.reduce((a, w) => a + w.w.length + 1, 0);
+  const lines = chars > 24 ? 2 : 1;
+  const perLine = chars / lines + 2;
+  const fs = Math.min(58, Math.floor(SAFE_W / (perLine * 0.7)));
   return (
     <div
       style={{
-        position: 'absolute', top: 1318, left: SAFE.left, width: SAFE_W, height: 100,
+        position: 'absolute', top, left: SAFE.left, width: SAFE_W, height: 140,
         display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
-        fontFamily: INTER, fontWeight: 900, fontSize: 50, lineHeight: 1.0, textTransform: 'uppercase', whiteSpace: 'nowrap',
-        WebkitTextStroke: `7px ${T.capStroke}`, paintOrder: 'stroke fill',
-        transform: `scale(${0.75 + 0.25 * gIn})`,
+        fontFamily: INTER, fontWeight: 900, fontSize: fs, lineHeight: 1.08, textTransform: 'uppercase',
+        WebkitTextStroke: `${Math.round(fs / 7)}px ${T.capStroke}`, paintOrder: 'stroke fill',
+        transform: `scale(${0.8 + 0.2 * gIn})`,
       }}
     >
-      <div>
+      <div style={{maxWidth: SAFE_W}}>
         {g.words.map((w, i) => {
           const active = t >= w.start && t <= w.end + 0.06;
           const isNum = /\d/.test(w.w);
           return (
-            <span key={i} style={{display: 'inline-block', margin: '0 7px', color: active || isNum ? T.accent : T.capText, transform: `scale(${active ? 1.08 : 1})`}}>
+            <span key={i} style={{display: 'inline-block', margin: `0 ${Math.round(fs * 0.32)}px`, color: active || isNum ? T.accent : T.capText, transform: `scale(${active ? 1.08 : 1})`}}>
               {w.w}
             </span>
           );
@@ -535,7 +556,7 @@ const Captions: React.FC<{captions: Caption[]; T: Theme}> = ({captions, T}) => {
   );
 };
 
-const Progress: React.FC<{duration: number; T: Theme}> = ({duration, T}) => {
+export const Progress: React.FC<{duration: number; T: Theme}> = ({duration, T}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const w = Math.min(1, frame / (duration * fps)) * W;
@@ -576,7 +597,7 @@ const Sound: React.FC<{p: RevealProps; tl: Timeline}> = ({p, tl}) => {
 };
 
 // ---------- Logo badge: the drop chart mark, small, top left, on every frame ----------
-const LogoBadge: React.FC<{T: Theme}> = ({T}) => (
+export const LogoBadge: React.FC<{T: Theme}> = ({T}) => (
   <div
     style={{
       position: 'absolute', left: 40, top: 200, width: 76, height: 76, borderRadius: 38,

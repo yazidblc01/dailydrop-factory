@@ -16,3 +16,5 @@ video/out/
 *.zip
 preview*.mp4
 .DS_Store
+video/public/bg/
+video/public/bg/

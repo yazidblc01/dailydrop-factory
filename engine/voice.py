@@ -32,10 +32,17 @@ PRE_REVEAL_GAP = 0.3  # longer pause right before the reveal
 
 
 def sections(script):
-    """Spoken order: hook, beats, tension, reveal, twist (twist last so the video loops)."""
+    """Spoken order, twist last so the video loops.
+    story:   hook, tension (race intro), call1..callM (race moments), reveal, twist
+    classic: hook, beat1..beatN, tension, reveal, twist"""
     out = [("hook", script["hook"])]
-    out += [(f"beat{i}", b["say"]) for i, b in enumerate(script["beats"], 1)]
-    out += [("tension", script["tension"]), ("reveal", script["reveal"]), ("twist", script["twist"])]
+    if "race_intro" in script:
+        out += [("tension", script["race_intro"])]
+        out += [(f"call{i}", c) for i, c in enumerate(script["callouts"], 1)]
+    else:
+        out += [(f"beat{i}", b["say"]) for i, b in enumerate(script["beats"], 1)]
+        out += [("tension", script["tension"])]
+    out += [("reveal", script["reveal"]), ("twist", script["twist"])]
     return out
 
 

@@ -14,3 +14,6 @@ PLATFORMS = ["youtube", "facebook"]
 
 # Label the videos as AI-made on platforms that ask for it (the voice is AI). Protects the accounts.
 AI_LABEL = True
+
+# Video format: "story" (countdown, race with callouts, #1 reveal) or "classic" (the original one-chart video)
+TEMPLATE = "story"

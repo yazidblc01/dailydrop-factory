@@ -19,14 +19,16 @@ from datetime import date
 import requests
 
 from config import DATA_DIR, MEDIA_DIR, ROOT
+from engine import images, story
 
 VIDEO_DIR = ROOT / "video"
 PUBLIC = VIDEO_DIR / "public"
 THEMES = ["neon", "money", "blood", "ice", "paper"]
 MUSIC_LIB = DATA_DIR / "music.json"
-CAPTION_SECTIONS = ("beat", "tension")  # captions only where the screen is not already showing the words
-MAX_CAPTION_WORDS = 6
-MAX_CAPTION_CHARS = 30  # one line at the caption size
+CAPTION_SECTIONS = ("beat", "tension")  # classic: captions only where the screen is not already showing the words
+STORY_CAPTION_SECTIONS = ("tension", "call")  # story: not on the hook, reveal and end cards (the screen shows it)
+MAX_CAPTION_WORDS = 9
+MAX_CAPTION_CHARS = 44  # up to two lines; the template shrinks the text to fit
 
 
 # ---------- helpers ----------
@@ -123,10 +125,10 @@ def timed_tokens(section, words):
     return out
 
 
-def build_captions(sections, words):
+def build_captions(sections, words, only=CAPTION_SECTIONS):
     groups = []
     for s in sections:
-        if not s["name"].startswith(CAPTION_SECTIONS):
+        if not s["name"].startswith(only):
             continue
         cur = []
         for tok in timed_tokens(s, words):
@@ -214,6 +216,21 @@ def build_props(topic, theme=None):
     return props_path, props
 
 
+def build_story_props(topic, theme=None):
+    """Props for the StoryReel template: line race with the leader hidden, callouts, #1 reveal."""
+    props_path, props = build_props(topic, theme)  # shared pieces: items, theme, music, sfx, badges, labels
+    out = MEDIA_DIR / topic
+    data = json.loads((out / "data.json").read_text())
+    script = json.loads((out / "script.json").read_text())
+    timing = json.loads((out / "timing.json").read_text())
+    backgrounds = {}  # the line race fills every frame; photo backgrounds are kept for other scene types
+    props["scenes"] = story.scene_plan(data, script, timing["sections"], backgrounds)
+    props["captions"] = build_captions(timing["sections"], timing["words"], only=STORY_CAPTION_SECTIONS)
+    props["duration"] = props["scenes"][-1]["end"]
+    props_path.write_text(json.dumps(props, indent=2))
+    return props_path, props
+
+
 def ensure_video_tools():
     """Installs the Remotion tools if they're missing (e.g. after replacing the video folder)."""
     if not (VIDEO_DIR / "node_modules" / "@remotion" / "cli").exists():
@@ -223,10 +240,16 @@ def ensure_video_tools():
 
 def render(topic, theme=None):
     ensure_video_tools()
-    props_path, props = build_props(topic, theme)
-    print(f"      theme: {props['theme']}, music: {props['music'] or 'none'}")
+    script = json.loads((MEDIA_DIR / topic / "script.json").read_text())
+    if script.get("template") == "story":
+        props_path, props = build_story_props(topic, theme)
+        composition = "StoryReel"
+    else:
+        props_path, props = build_props(topic, theme)
+        composition = "RankingReveal"
+    print(f"      {composition}, theme: {props['theme']}, music: {props['music'] or 'none'}")
     final = MEDIA_DIR / topic / "final.mp4"
-    cmd = ["npx", "remotion", "render", "src/index.ts", "RankingReveal", str(final),
+    cmd = ["npx", "remotion", "render", "src/index.ts", composition, str(final),
            f"--props={props_path}", "--codec=h264", "--crf=18"]
     subprocess.run(cmd, cwd=VIDEO_DIR, check=True)
     return final
@@ -239,7 +262,8 @@ if __name__ == "__main__":
     ap.add_argument("--props-only", action="store_true", help="only write props for the studio preview")
     a = ap.parse_args()
     if a.props_only:
-        path, p = build_props(a.topic, a.theme)
+        sc = json.loads((MEDIA_DIR / a.topic / "script.json").read_text())
+        path, p = (build_story_props if sc.get("template") == "story" else build_props)(a.topic, a.theme)
         print(f"Props written to {path.relative_to(ROOT)} ({len(p['items'])} items, {p['duration']:.1f}s, theme {p['theme']})")
         print("Sound effects:", ", ".join(k for k, v in p["sfx"].items() if v) or "none yet (run python -m engine.sfx)")
         print("Music:", p["music"] or "none (add .mp3 tracks to video/public/music/)")
