@@ -1,0 +1,8 @@
+{
+  "_help": "One entry per file in video/public/music. pool = which topic types use it (invest, wb, gta). start = seconds of intro to skip. credit = the line added to the YouTube description (the free license requires it).",
+  "born-to-win.mp3": {"pool": ["invest", "wb"], "start": 0, "credit": "Music track: Born to Win by Aylex\nSource: https://freetouse.com/music\nFree To Use Music for Video"},
+  "take-off.mp3": {"pool": ["invest", "wb"], "start": 0, "credit": "Music track: Take Off by Luke Bergs & Waesto\nSource: https://freetouse.com/music\nFree To Use Music for Video"},
+  "explore-your-dreams.mp3": {"pool": ["invest", "wb"], "start": 0, "credit": "Music track: Explore Your Dreams by Bluewave\nSource: https://freetouse.com/music\nFree To Use Music for Video"},
+  "headphonk.mp3": {"pool": ["gta"], "start": 0, "credit": "Music track: HEADPHONK by Walen\nSource: https://freetouse.com/music\nFree To Use Music for Video"},
+  "chaos.mp3": {"pool": ["gta"], "start": 0, "credit": "Music track: Chaos by Damtaro\nSource: https://freetouse.com/music\nFree To Use Music for Video"}
+}

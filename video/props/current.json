@@ -1,13 +1,14 @@
 {
-  "theme": "neon",
+  "theme": "money",
   "duration": 31.264,
   "audio": "voice.wav",
-  "music": null,
+  "music": "music/take-off.mp3",
+  "musicStart": 0.0,
   "sfx": {
-    "whoosh": null,
-    "impact": null,
-    "tick": null,
-    "riser": null
+    "whoosh": "sfx/whoosh.mp3",
+    "impact": "sfx/impact.mp3",
+    "tick": "sfx/tick.mp3",
+    "riser": "sfx/riser.mp3"
   },
   "hook": "Which tech giant turned $1,000 into the most money?",
   "unit": "usd0",

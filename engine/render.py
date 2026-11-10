@@ -18,11 +18,12 @@ from datetime import date
 
 import requests
 
-from config import MEDIA_DIR, ROOT
+from config import DATA_DIR, MEDIA_DIR, ROOT
 
 VIDEO_DIR = ROOT / "video"
 PUBLIC = VIDEO_DIR / "public"
 THEMES = ["neon", "money", "blood", "ice", "paper"]
+MUSIC_LIB = DATA_DIR / "music.json"
 CAPTION_SECTIONS = ("beat", "tension")  # captions only where the screen is not already showing the words
 MAX_CAPTION_WORDS = 3
 MAX_CAPTION_CHARS = 18
@@ -59,6 +60,34 @@ def cache_image(url):
             print(f"  image skipped ({e.__class__.__name__}): {url.split('?')[0]}")
             return None
     return f"img/{name}"
+
+
+def load_music_lib():
+    if not MUSIC_LIB.exists():
+        return {}
+    return {k: v for k, v in json.loads(MUSIC_LIB.read_text()).items() if not k.startswith("_")}
+
+
+def pick_music(topic, recipe):
+    """A track from data/music.json whose pool fits the topic type, the same one every render of a topic.
+    Returns (file name, seconds of intro to skip) or (None, 0) if there is no music."""
+    folder = PUBLIC / "music"
+    files = sorted(f.name for f in folder.glob("*.mp3")) if folder.exists() else []
+    if not files:
+        return None, 0
+    lib = load_music_lib()
+    fitting = [f for f in files if recipe in lib.get(f, {}).get("pool", [])] or files
+    name = fitting[sum(map(ord, topic)) % len(fitting)]
+    return name, float(lib.get(name, {}).get("start", 0))
+
+
+def music_credit(topic):
+    """The credit line for the track used in a rendered topic (for the description), or None."""
+    info = MEDIA_DIR / topic / "render.json"
+    if not info.exists():
+        return None
+    name = json.loads(info.read_text()).get("music")
+    return load_music_lib().get(name, {}).get("credit") if name else None
 
 
 # ---------- word timing from the script text ----------
@@ -147,8 +176,7 @@ def build_props(topic, theme=None):
 
     sfx = {k: (f"sfx/{k}.mp3" if (PUBLIC / "sfx" / f"{k}.mp3").exists() else None)
            for k in ("whoosh", "impact", "tick", "riser")}
-    tracks = sorted((PUBLIC / "music").glob("*.mp3")) if (PUBLIC / "music").exists() else []
-    music = f"music/{tracks[sum(map(ord, topic)) % len(tracks)].name}" if tracks else None
+    music_name, music_start = pick_music(topic, data["recipe"])
 
     facts = data["facts"]
     flip = data["recipe"] == "gta"  # for prices, the most expensive is the bad one
@@ -161,7 +189,8 @@ def build_props(topic, theme=None):
         "theme": pick_theme(topic, theme),
         "duration": timing["duration"],
         "audio": "voice.wav",
-        "music": music,
+        "music": f"music/{music_name}" if music_name else None,
+        "musicStart": music_start,
         "sfx": sfx,
         "hook": script["hook"],
         "unit": data["unit"],
@@ -181,6 +210,7 @@ def build_props(topic, theme=None):
     props_path = VIDEO_DIR / "props" / "current.json"
     props_path.write_text(json.dumps(props, indent=2))
     shutil.copy(out / "voice.wav", PUBLIC / "voice.wav")
+    (out / "render.json").write_text(json.dumps({"theme": props["theme"], "music": music_name}, indent=2))
     return props_path, props
 
 
@@ -194,7 +224,7 @@ def ensure_video_tools():
 def render(topic, theme=None):
     ensure_video_tools()
     props_path, props = build_props(topic, theme)
-    print(f"      theme: {props['theme']}")
+    print(f"      theme: {props['theme']}, music: {props['music'] or 'none'}")
     final = MEDIA_DIR / topic / "final.mp4"
     cmd = ["npx", "remotion", "render", "src/index.ts", "RankingReveal", str(final),
            f"--props={props_path}", "--codec=h264", "--crf=18"]

@@ -20,6 +20,7 @@ import requests
 from dotenv import load_dotenv
 
 from config import DATA_DIR, MEDIA_DIR
+from engine.render import music_credit
 from engine.schedule import TZ_NAME
 
 load_dotenv()
@@ -124,11 +125,15 @@ def post(topic, when=None):
     if not user:
         raise RuntimeError("UPLOAD_POST_USER missing")
 
+    description = meta["description"]
+    credit = music_credit(topic)
+    if credit:
+        description += "\n\n🎵 " + credit  # the free music license requires the credit
     fields = [
         ("user", user),
         ("platform[]", "youtube"),
         ("title", meta["title"][:100]),
-        ("description", meta["description"][:4900]),
+        ("description", description[:4900]),
         ("privacyStatus", "public"),
         ("categoryId", CATEGORY_EDUCATION),
         ("selfDeclaredMadeForKids", "false"),
