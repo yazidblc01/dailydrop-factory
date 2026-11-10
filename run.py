@@ -42,6 +42,10 @@ def telegram(text, video=None):
         print(f"Telegram failed: {e}")
 
 
+def links(urls):
+    return "\n".join(f"{p.capitalize()}: {u}" for p, u in urls.items())
+
+
 def report_live():
     """Pings the links of scheduled videos that have gone live (and any that failed)."""
     try:
@@ -49,8 +53,8 @@ def report_live():
     except Exception as e:  # a status hiccup must never stop today's video
         print(f"Live-link check skipped: {e}")
         return
-    for title, url in found:
-        telegram(f"📈 Live now: {title}\n{url}")
+    for title, urls in found:
+        telegram(f"📈 Live now: {title}\n{links(urls)}")
     for title, err in failed:
         telegram(f"❌ Scheduled post failed: {title}\n{err}")
     print(f"Live-link check: {len(found)} new live, {len(failed)} failed")
@@ -65,8 +69,11 @@ def post(topic, now=False):
         print(f"      Scheduled for {schedule.label(when)}")
         telegram(f"🗓 Scheduled for {schedule.label(when)}\n{meta['title']}", MEDIA_DIR / topic / "final.mp4")
     else:
-        print(f"      Live: {res['url']}")
-        telegram(f"✅ Posted: {meta['title']}\n{res['url']}")
+        print(f"      Live: {res['urls']}")
+        text = f"✅ Posted: {meta['title']}\n{links(res['urls'])}"
+        if res.get("errors"):
+            text += "\n⚠️ " + "\n⚠️ ".join(res["errors"])
+        telegram(text)
     return res
 
 
