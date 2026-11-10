@@ -112,5 +112,5 @@ jobs:
           for f in data/history.json data/posts.json; do [ -f "$f" ] && git add "$f"; done
           if ! git diff --cached --quiet; then
             git commit -m "state: $(date +%F) ${{ steps.m.outputs.mode }}"
-            git pull --rebase -q && git push -q
+            git pull --rebase --autostash -q && git push -q
           fi
