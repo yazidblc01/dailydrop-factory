@@ -9,8 +9,8 @@ import random
 import sys
 from datetime import date
 
-from config import DATA_DIR
-from engine import data, recipes
+from config import DATA_DIR, TEMPLATE
+from engine import data, recipes, story
 
 HISTORY = DATA_DIR / "history.json"
 MIN_INTEREST = 3.0      # below this the reveal is too flat
@@ -69,6 +69,10 @@ def pick_next():
         score = recipes.interest(payload)
         if score < MIN_INTEREST:
             print(f"  skip {topic_id}: interest {score:.1f} too low")
+            h["skipped"].append(topic_id)
+            continue
+        if TEMPLATE == "story" and not story.worth_it(payload):
+            print(f"  skip {topic_id}: the race has fewer than {story.MIN_MOMENTS} key moments")
             h["skipped"].append(topic_id)
             continue
         save_history(h)

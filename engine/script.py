@@ -31,15 +31,18 @@ COMMON_RULES = """
 """
 
 SYSTEM_STORY = """You write scripts for faceless YouTube Shorts on a data channel called The Daily Drop.
-Format: an animated line race runs from the very first second. The eventual #1 is hidden on screen as "???"
-and is only named at the reveal. Key MOMENTS of the race are shown on screen while the voice talks about them.
+Format: an animated line race runs from the very first second. One contender, the MYSTERY, is hidden on screen
+as "???" and only named at the reveal. Key MOMENTS of the race are shown on screen while the voice talks about them.
+MODE "top": the mystery is the one that ends up #1, so the hook asks who ends up on top.
+MODE "growth": the mystery is the one that GREW the most (the #1 is obvious), so the hook asks who grew the most
+and the reveal gives its GROWTH.
 
 Return ONLY valid JSON, no prose, in exactly this shape:
 {
   "hook": "a question, max 12 words, spoken in the first second",
   "race_intro": "one or two lines that set up the race and tease the mystery, max 22 words",
   "callouts": ["one line per MOMENT, in the same order, max 14 words each"],
-  "reveal": "names #1 and its final number, max 16 words",
+  "reveal": "names the mystery and its final number (MODE top) or its GROWTH (MODE growth), max 16 words",
   "twist": "one line that loops back to the hook",
   "bg_reveal": "2 to 4 word photo search for the reveal background",
   "title": "YouTube title, 40 to 60 characters",
@@ -48,7 +51,7 @@ Return ONLY valid JSON, no prose, in exactly this shape:
 }
 
 Rules:
-- Never name #1 (MYSTERY) before the reveal: not in the hook, race_intro, callouts or title. Call it MYSTERY_WORD instead.
+- Never name the MYSTERY before the reveal: not in the hook, race_intro, callouts or title. Call it MYSTERY_WORD instead.
 - "callouts" has exactly one line per MOMENT, in the same order. Each line must say what its MOMENT says (the year and who), because the screen shows that moment at the same time.
 - If there are no MOMENTS, "callouts" is an empty list and race_intro carries the suspense.
 - The race_intro can name the other contenders and tease how the mystery one behaves.
@@ -96,6 +99,7 @@ def allowed_numbers(payload):
     sources += [payload["start_label"], payload["end_label"], payload["angle"], payload.get("data_as_of", "")]
     sources += [str(v) for v in payload["facts"].values()]
     sources += [m["fact"] + " " + m["text"] for m in payload.get("moments") or []]
+    sources += [str((payload.get("mystery") or {}).get("growth_text", ""))]
     for s in sources:
         for n in numbers_in(s):
             nums.add(round(n, 2))
@@ -125,7 +129,7 @@ def check_story_shape(script, payload):
     n = len(payload.get("moments") or [])
     if len(script.get("callouts", [])) != n:
         problems.append(f"callouts must have exactly {n} lines, one per MOMENT")
-    winner = story.ranked(payload)[0]["short"].lower()
+    winner = payload["mystery"]["short"].lower()
     early = " ".join([script["hook"], script.get("race_intro", ""), *script.get("callouts", []), script["title"]]).lower()
     if re.search(rf"\b{re.escape(winner)}\b", early):
         problems.append(f"do not name {winner} before the reveal (hook, race_intro, callouts and title must call it the mystery one)")
@@ -139,8 +143,10 @@ def ask_claude(payload, template, feedback=None):
     slim["items"] = [{k: v for k, v in it.items() if k not in ("series", "image")} for it in payload["items"]]
     user = "DATA:\n" + json.dumps(slim, indent=2)
     if template == "story":
-        winner = story.ranked(payload)[0]["short"]
-        user += f"\n\nMYSTERY (the #1, hidden until the reveal): {winner}"
+        my = payload["mystery"]
+        user += f"\n\nMYSTERY (hidden until the reveal): {my['short']}\nMODE: {my['mode']}"
+        if my["mode"] == "growth":
+            user += f"\nGROWTH: {my['growth_text']} (from start to today)"
         user += f"\nMYSTERY_WORD: {story.MYSTERY_WORD.get(payload['recipe'], 'the mystery pick')}"
         moments = [{"year": int(m["t"]), "what": m["fact"]} for m in payload.get("moments") or []]
         user += "\n\nMOMENTS (in order):\n" + json.dumps(moments, indent=2)
@@ -158,8 +164,8 @@ def write_script(topic, max_tries=3, template=TEMPLATE):
     payload = json.loads(path.read_text())
     if template == "story" and not (payload.get("race") and all(i.get("series") for i in payload["items"])):
         template = "classic"  # no price history to race (e.g. GTA launch prices): use the one-chart video
-    if template == "story" and "moments" not in payload:
-        payload["moments"] = story.moments(payload)
+    if template == "story" and ("moments" not in payload or "mystery" not in payload):
+        story.prepare(payload)
         path.write_text(json.dumps(payload, indent=2))
     lo, hi = WORDS[template]
     feedback = None

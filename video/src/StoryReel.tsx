@@ -21,6 +21,7 @@ export type Scene = {
   callouts?: Callout[];   // race scene: key moments called out (overtakes)
   keys?: number[][];      // race scene: [videoTime, raceProgress] keyframes
   mystery?: string;       // line race: the item shown as ??? until the reveal
+  mysteryMode?: 'top' | 'growth';  // top: it ends #1; growth: it grew the most (the reveal shows its growth)
   flip?: boolean;         // reveal: the ??? tile flips over to the real logo
   revealAt?: number;      // line race: when ??? turns into the real logo, right on the chart
   sub?: string;           // stat scene: the line above it
@@ -412,7 +413,9 @@ const LineRaceScene: React.FC<{p: StoryProps; sc: Scene; T: Theme}> = ({p, sc, T
         <div style={{position: 'absolute', top: 560, left: X0, width: X1 - X0, display: 'flex', justifyContent: 'center'}}>
           <div style={{background: T.accent, color: T.onAccent, borderRadius: 28, padding: '10px 34px', fontFamily: ANTON, fontSize: 150, lineHeight: 1,
             transform: `scale(${2.2 - 1.2 * slam}) rotate(-4deg)`, opacity: Math.min(1, slam * 2), boxShadow: `0 0 60px ${T.accent}`}}>
-            {same ? `×${mult.toLocaleString('en-US')}` : short(items[winnerIdx].end, p.unit)}
+            {sc.mysteryMode === 'growth'
+              ? (() => { const r = items[winnerIdx].end / items[winnerIdx].start; return r >= 2 ? `×${r.toFixed(1)}` : `+${Math.round((r - 1) * 100)}%`; })()
+              : same ? `×${mult.toLocaleString('en-US')}` : short(items[winnerIdx].end, p.unit)}
           </div>
         </div>
       )}
