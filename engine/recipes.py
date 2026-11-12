@@ -110,8 +110,39 @@ INVEST_GROUPS = {
     "streaming_media": ("entertainment stocks", [("NFLX", "Netflix", "netflix.com"), ("DIS", "Disney", "disney.com"),
                                                  ("WBD", "Warner Bros", "wbd.com"), ("CMCSA", "Comcast", "comcast.com"),
                                                  ("PARA", "Paramount", "paramount.com"), ("SPOT", "Spotify", "spotify.com")]),
+    "chips": ("chip makers", [("NVDA", "Nvidia", "nvidia.com"), ("AMD", "AMD", "amd.com"),
+                              ("INTC", "Intel", "intel.com"), ("TSM", "TSMC", "tsmc.com"),
+                              ("QCOM", "Qualcomm", "qualcomm.com"), ("ASML", "ASML", "asml.com")]),
+    "airlines": ("airlines", [("DAL", "Delta", "delta.com"), ("UAL", "United", "united.com"),
+                              ("AAL", "American", "aa.com"), ("LUV", "Southwest", "southwest.com"),
+                              ("ALK", "Alaska", "alaskaair.com"), ("JBLU", "JetBlue", "jetblue.com")]),
+    "retail": ("big retailers", [("WMT", "Walmart", "walmart.com"), ("COST", "Costco", "costco.com"),
+                                 ("TGT", "Target", "target.com"), ("HD", "Home Depot", "homedepot.com"),
+                                 ("LOW", "Lowe's", "lowes.com"), ("BBY", "Best Buy", "bestbuy.com")]),
+    "energy": ("oil giants", [("XOM", "Exxon", "exxonmobil.com"), ("CVX", "Chevron", "chevron.com"),
+                              ("SHEL", "Shell", "shell.com"), ("BP", "BP", "bp.com"),
+                              ("COP", "ConocoPhillips", "conocophillips.com"), ("OXY", "Occidental", "oxy.com")]),
+    "luxury": ("luxury brands", [("LVMUY", "LVMH", "lvmh.com"), ("HESAY", "Hermès", "hermes.com"),
+                                 ("CFRUY", "Richemont", "richemont.com"), ("PPRUY", "Kering", "kering.com"),
+                                 ("TPR", "Tapestry", "tapestry.com"), ("RL", "Ralph Lauren", "ralphlauren.com")]),
+    "sportswear": ("sportswear brands", [("NKE", "Nike", "nike.com"), ("ADDYY", "Adidas", "adidas.com"),
+                                         ("LULU", "Lululemon", "lululemon.com"), ("UAA", "Under Armour", "underarmour.com"),
+                                         ("DECK", "Deckers", "deckers.com"), ("PUMSY", "Puma", "puma.com")]),
+    "pharma": ("drug makers", [("LLY", "Eli Lilly", "lilly.com"), ("NVO", "Novo Nordisk", "novonordisk.com"),
+                               ("PFE", "Pfizer", "pfizer.com"), ("JNJ", "J&J", "jnj.com"),
+                               ("MRK", "Merck", "merck.com"), ("ABBV", "AbbVie", "abbvie.com")]),
+    "apps": ("app companies", [("UBER", "Uber", "uber.com"), ("ABNB", "Airbnb", "airbnb.com"),
+                               ("SNAP", "Snapchat", "snap.com"), ("PINS", "Pinterest", "pinterest.com"),
+                               ("SPOT", "Spotify", "spotify.com"), ("DASH", "DoorDash", "doordash.com")]),
+    "crypto": ("cryptocurrencies", [("BTC-USD", "Bitcoin", "bitcoin.org"), ("ETH-USD", "Ethereum", "ethereum.org"),
+                                    ("SOL-USD", "Solana", "solana.com"), ("XRP-USD", "XRP", "xrpl.org"),
+                                    ("DOGE-USD", "Dogecoin", "dogecoin.com"), ("BNB-USD", "BNB", "bnbchain.org")]),
+    "big_funds": ("famous funds", [("SPY", "S&P 500", None), ("QQQ", "Nasdaq 100", None),
+                                   ("BRK-B", "Berkshire", "berkshirehathaway.com"), ("ARKK", "ARK Innovation", "ark-invest.com"),
+                                   ("DIA", "Dow Jones", None), ("IWM", "Small caps", None)]),
 }
-INVEST_YEARS = [2010, 2013, 2015, 2018, 2020]
+# Any group with fewer than 4 assets trading at the start of a year is skipped for that year automatically.
+INVEST_YEARS = [2005, 2008, 2010, 2012, 2013, 2015, 2018, 2020, 2021, 2022]
 
 
 def logo_url(domain):
