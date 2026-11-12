@@ -13,5 +13,17 @@
       "facebook": "https://www.facebook.com/reel/1681354243620133"
     },
     "url": "https://www.youtube.com/watch?v=XkRdU9bx0PQ"
+  },
+  "consoles__playstation": {
+    "title": "Which PlayStation Was Really the Most Expensive?",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6af6026ecd146ddaf18fa1bf",
+    "posted_at": "2026-11-12T18:16:15+00:00",
+    "when": "2026-11-12T19:00:00-05:00",
+    "slot": "gta"
   }
 }
