@@ -328,11 +328,22 @@ const LineRaceScene: React.FC<{p: StoryProps; sc: Scene; T: Theme}> = ({p, sc, T
   const slam = spring({frame: frame - (rv + 0.3) * fps, fps, config: {damping: 9, stiffness: 160}});
 
   // layout: the chart uses the whole screen between the year and the captions
-  const X0 = 90, X1 = 610, Y1 = 470, Y0 = 1350;
-  const LABEL_TOP = 440, LABEL_BOTTOM = 1380;
-  const allStart = items.map((it) => it.series![0][1]);
-  const lo = Math.log(Math.min(...allStart, ...cur) * 0.8);
-  const hi = Math.log(Math.max(...cur) * 1.12);
+  // year on top, one fixed slot under it for the callout / reveal pill, then the chart box.
+  // Axis labels sit in a gutter left of X0, so the lines can never run over them.
+  const X0 = 150, X1 = 620, Y1 = 560, Y0 = 1340;
+  const LABEL_TOP = 520, LABEL_BOTTOM = 1370;
+  // drawn lines are lightly smoothed (3-point average) so they read as lines, not noise
+  const drawn = items.map((it) => {
+    const s = it.series!.filter((q) => q[0] <= now);
+    return s.map((q, k) => {
+      const a = s[Math.max(0, k - 1)][1], b = q[1], c = s[Math.min(s.length - 1, k + 1)][1];
+      return [q[0], k === 0 ? b : Math.exp((Math.log(a) + Math.log(b) + Math.log(c)) / 3)];
+    });
+  });
+  // the scale covers everything drawn so far, so a past peak or dip never leaves the chart box
+  const seen = drawn.flatMap((d) => d.map((q) => q[1])).concat(cur);
+  const lo = Math.log(Math.min(...seen) * 0.9);
+  const hi = Math.log(Math.max(...seen) * 1.08);
   const x = (tt: number) => X0 + ((tt - t0) / (now - t0 || 1e-6)) * (X1 - X0);
   const y = (v: number) => Y0 - ((Math.log(v) - lo) / (hi - lo || 1)) * (Y0 - Y1);
 
@@ -359,16 +370,30 @@ const LineRaceScene: React.FC<{p: StoryProps; sc: Scene; T: Theme}> = ({p, sc, T
   const winnerIdx = items.findIndex(isMystery);
   const mult = winnerIdx >= 0 && items[winnerIdx].start > 0 ? Math.round(items[winnerIdx].end / items[winnerIdx].start) : 0;
   const same = items.every((i) => Math.abs(i.start - items[0].start) < 1e-6);
+  const growth = winnerIdx >= 0 ? items[winnerIdx].end / items[winnerIdx].start : 1;
+  const resultText = sc.mysteryMode === 'growth'
+    ? (growth >= 2 ? `×${growth.toFixed(1)}` : `+${Math.round((growth - 1) * 100)}%`)
+    : same ? `×${mult.toLocaleString('en-US')}` : winnerIdx >= 0 ? short(items[winnerIdx].end, p.unit) : '';
 
   return (
     <AbsoluteFill>
       <Background T={T} />
       <div style={{position: 'absolute', top: 205, width: W, textAlign: 'center'}}>
         <div style={{fontFamily: ANTON, fontSize: 150, lineHeight: 1, color: T.text, textShadow: T.shadow}}>{Math.floor(now)}</div>
+      </div>
+      {/* the pill slot: callouts during the race, the result at the reveal. Nothing else is ever drawn here. */}
+      <div style={{position: 'absolute', top: 372, left: 0, width: W, height: 110, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         {active && (
-          <div style={{display: 'inline-block', marginTop: 10, background: T.accent, color: T.onAccent, borderRadius: 999, padding: '8px 30px',
-            fontFamily: ANTON, fontSize: 56, textTransform: 'uppercase', transform: `scale(${pop}) rotate(-2deg)`, boxShadow: `0 0 ${40 * T.glow}px ${T.accent}`}}>
+          <div style={{background: T.accent, color: T.onAccent, borderRadius: 999, padding: '8px 30px', whiteSpace: 'nowrap',
+            fontFamily: ANTON, fontSize: Math.min(56, 1500 / Math.max(active.text.length, 12)), lineHeight: 1.1, textTransform: 'uppercase',
+            transform: `scale(${pop})`, boxShadow: `0 0 ${40 * T.glow}px ${T.accent}`}}>
             {active.text}
+          </div>
+        )}
+        {revealed && mult > 0 && (
+          <div style={{background: T.accent, color: T.onAccent, borderRadius: 24, padding: '4px 40px', fontFamily: ANTON, fontSize: 104, lineHeight: 1.05,
+            transform: `scale(${2 - slam})`, opacity: Math.min(1, slam * 2), boxShadow: `0 0 60px ${T.accent}`}}>
+            {resultText}
           </div>
         )}
       </div>
@@ -376,15 +401,16 @@ const LineRaceScene: React.FC<{p: StoryProps; sc: Scene; T: Theme}> = ({p, sc, T
         {niceSteps(Math.exp(lo), Math.exp(hi)).map((v) => (
           <g key={v}>
             <line x1={X0} x2={X1 + 20} y1={y(v)} y2={y(v)} stroke={T.grid} strokeWidth={3} strokeDasharray="10 10" />
-            <text x={X0} y={y(v) - 10} fill={T.dim} fontFamily={INTER} fontWeight={800} fontSize={28}>{short(v, p.unit)}</text>
+            <text x={X0 - 14} y={y(v) + 9} textAnchor="end" fill={T.dim} fontFamily={INTER} fontWeight={800} fontSize={26}>{short(v, p.unit)}</text>
           </g>
         ))}
         {items.map((it, i) => {
-          const pts = it.series!.filter((q) => q[0] <= now).map((q) => `${x(q[0]).toFixed(1)},${y(q[1]).toFixed(1)}`);
+          const pts = drawn[i].map((q) => `${x(q[0]).toFixed(1)},${y(q[1]).toFixed(1)}`);
           pts.push(`${x(now).toFixed(1)},${y(cur[i]).toFixed(1)}`);
           const hl = active && active.item === nameOf(it);
+          const dim = active ? (hl ? 1 : 0.3) : isMystery(it) ? 1 : 0.8;
           return (
-            <g key={it.short}>
+            <g key={it.short} opacity={dim}>
               {isMystery(it) && <polyline points={pts.join(' ')} fill="none" stroke={T.accent} strokeOpacity={0.3} strokeWidth={28} strokeLinejoin="round" strokeLinecap="round" />}
               <polyline points={pts.join(' ')} fill="none" stroke={color(i)} strokeWidth={isMystery(it) || hl ? 12 : 7} strokeLinejoin="round" strokeLinecap="round" />
               <line x1={x(now)} y1={y(cur[i])} x2={X1 + 46} y2={ly[i] + LABEL_H / 2} stroke={color(i)} strokeWidth={3} strokeOpacity={0.8} />
@@ -408,17 +434,7 @@ const LineRaceScene: React.FC<{p: StoryProps; sc: Scene; T: Theme}> = ({p, sc, T
           </div>
         );
       })}
-      <div style={{position: 'absolute', top: 1362, left: X0, width: X1 - X0 + 40, fontFamily: INTER, fontWeight: 600, fontSize: 19, lineHeight: 1.2, color: T.dim}}>{p.sourceLabel}</div>
-      {revealed && mult > 0 && (
-        <div style={{position: 'absolute', top: 560, left: X0, width: X1 - X0, display: 'flex', justifyContent: 'center'}}>
-          <div style={{background: T.accent, color: T.onAccent, borderRadius: 28, padding: '10px 34px', fontFamily: ANTON, fontSize: 150, lineHeight: 1,
-            transform: `scale(${2.2 - 1.2 * slam}) rotate(-4deg)`, opacity: Math.min(1, slam * 2), boxShadow: `0 0 60px ${T.accent}`}}>
-            {sc.mysteryMode === 'growth'
-              ? (() => { const r = items[winnerIdx].end / items[winnerIdx].start; return r >= 2 ? `×${r.toFixed(1)}` : `+${Math.round((r - 1) * 100)}%`; })()
-              : same ? `×${mult.toLocaleString('en-US')}` : short(items[winnerIdx].end, p.unit)}
-          </div>
-        </div>
-      )}
+      <div style={{position: 'absolute', top: 1372, left: 60, width: X1 - 20, fontFamily: INTER, fontWeight: 600, fontSize: 18, lineHeight: 1.2, color: T.dim}}>{p.sourceLabel}</div>
     </AbsoluteFill>
   );
 };
@@ -485,6 +501,7 @@ const SCENES: Record<SceneType, React.FC<{p: StoryProps; sc: Scene; T: Theme}>> 
 export const StoryReel: React.FC<StoryProps> = (p) => {
   const T = THEMES[p.theme] ?? THEMES.neon;
   const {fps} = useVideoConfig();
+  const frame = useCurrentFrame();
   const lr = p.scenes.find((s) => s.type === 'linerace' && s.revealAt);
   const reveal = p.scenes.find((s) => s.type === 'reveal') ?? (lr ? {...lr, start: lr.revealAt!} : undefined);
   const sfx = p.sfx || {};
@@ -498,7 +515,7 @@ export const StoryReel: React.FC<StoryProps> = (p) => {
       {reveal && <Flash at={reveal.start + 0.35} />}
       {/* no captions on the hook and end cards: the question is already on screen */}
       <Captions captions={p.captions.filter((c) => !p.scenes.some((sc) => (sc.type === 'hook' || sc.type === 'end' || sc.type === 'question') && c.start >= sc.start - 0.05 && c.start < sc.end))} T={T} top={1415} />
-      <LogoBadge T={T} />
+      {!p.scenes.some((sc) => sc.type === 'question' && frame / fps >= sc.start - 0.05 && frame / fps < sc.end + 0.25) && <LogoBadge T={T} />}
       <Progress duration={p.duration} T={T} />
       {p.music && <Audio src={staticFile(p.music)} volume={0.13} loop />}
       {sfx.whoosh && p.scenes.map((sc, i) => (

@@ -40,7 +40,7 @@ and the reveal gives its GROWTH.
 Return ONLY valid JSON, no prose, in exactly this shape:
 {
   "hook": "a question, max 12 words, spoken in the first second",
-  "race_intro": "one or two lines that set up the race and tease the mystery, max 22 words",
+  "race_intro": "one short line that teases the mystery, max 12 words",
   "callouts": ["one line per MOMENT, in the same order, max 14 words each"],
   "reveal": "names the mystery and its final number (MODE top) or its GROWTH (MODE growth), max 16 words",
   "twist": "one line that loops back to the hook",
@@ -54,9 +54,10 @@ Rules:
 - Never name the MYSTERY before the reveal: not in the hook, race_intro, callouts or title. Call it MYSTERY_WORD instead.
 - "callouts" has exactly one line per MOMENT, in the same order. Each line must say what its MOMENT says (the year and who), because the screen shows that moment at the same time.
 - If there are no MOMENTS, "callouts" is an empty list and race_intro carries the suspense.
-- The race_intro can name the other contenders and tease how the mystery one behaves.
+- The race_intro must NOT list the contenders (the screen shows them). It teases the mystery in one punchy line.
+- Write numbers as digits with their symbols ($13,765, 62%); a separate step turns them into spoken words.
 - The photo search describes scenery or objects only (skylines, money, highways, landscapes). Never people, faces, brands, logos or product names.
-- Total spoken words (hook + race_intro + callouts + reveal + twist) between 55 and 95.
+- Total spoken words (hook + race_intro + callouts + reveal + twist) between 45 and 85.
 """ + COMMON_RULES
 
 SYSTEM_CLASSIC = """You write scripts for faceless YouTube Shorts on a data channel called The Daily Drop.
@@ -84,7 +85,7 @@ Rules:
 
 NUM_RE = re.compile(r"\d[\d,]*(?:\.\d+)?")
 ALWAYS_OK = {1, 2, 3, 4, 5, 6, 7, 8, 10}
-WORDS = {"story": (50, 100), "classic": (60, 90)}
+WORDS = {"story": (40, 90), "classic": (60, 90)}
 
 
 def numbers_in(text):
@@ -131,6 +132,8 @@ def check_story_shape(script, payload):
         problems.append(f"callouts must have exactly {n} lines, one per MOMENT")
     winner = payload["mystery"]["short"].lower()
     early = " ".join([script["hook"], script.get("race_intro", ""), *script.get("callouts", []), script["title"]]).lower()
+    if len(script.get("race_intro", "").split()) > 16:
+        problems.append("race_intro is too long: one short line, max 12 words, and do not list the contenders")
     if re.search(rf"\b{re.escape(winner)}\b", early):
         problems.append(f"do not name {winner} before the reveal (hook, race_intro, callouts and title must call it the mystery one)")
     return problems

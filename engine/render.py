@@ -27,7 +27,6 @@ THEMES = ["neon", "money", "blood", "ice", "paper"]
 MUSIC_LIB = DATA_DIR / "music.json"
 CAPTION_SECTIONS = ("beat", "tension")  # classic: captions only where the screen is not already showing the words
 STORY_CAPTION_SECTIONS = ("tension", "call")  # story: not on the hook, reveal and end cards (the screen shows it)
-MAX_CAPTION_WORDS = 9
 MAX_CAPTION_CHARS = 44  # up to two lines; the template shrinks the text to fit
 
 
@@ -126,21 +125,29 @@ def timed_tokens(section, words):
 
 
 def build_captions(sections, words, only=CAPTION_SECTIONS):
+    """Caption groups that follow the sentences: a group ends at a sentence end, long sentences are
+    split into even parts, and a part is never a stray fragment of one or two words."""
     groups = []
     for s in sections:
         if not s["name"].startswith(only):
             continue
-        cur = []
-        for tok in timed_tokens(s, words):
-            shown = re.sub(r"[.,!?;:]+$", "", tok["w"])
-            cur.append({**tok, "w": shown})
-            chars = sum(len(c["w"]) + 1 for c in cur)
-            if len(cur) >= MAX_CAPTION_WORDS or chars >= MAX_CAPTION_CHARS or re.search(r"[.!?,;:]$", tok["w"]):
-                groups.append(cur)
-                cur = []
-        if cur:
-            groups.append(cur)
-    return [{"words": g, "start": g[0]["start"], "end": g[-1]["end"]} for g in groups]
+        sentence = []
+        toks = timed_tokens(s, words)
+        for n, tok in enumerate(toks):
+            sentence.append({**tok, "w": re.sub(r"[.,!?;:]+$", "", tok["w"])})
+            if not (re.search(r"[.!?]$", tok["w"]) or n == len(toks) - 1):
+                continue
+            chars = sum(len(c["w"]) + 1 for c in sentence)
+            parts = max(1, -(-chars // MAX_CAPTION_CHARS))
+            while parts > 1 and len(sentence) / parts < 3:
+                parts -= 1
+            size = -(-len(sentence) // parts)
+            chunks = [sentence[k:k + size] for k in range(0, len(sentence), size)]
+            if len(chunks) > 1 and len(chunks[-1]) < 3:  # no stray tail
+                chunks[-2] += chunks.pop()
+            groups += chunks
+            sentence = []
+    return [{"words": g, "start": g[0]["start"], "end": g[-1]["end"]} for g in groups if g]
 
 
 def mention_times(short, sections, words):

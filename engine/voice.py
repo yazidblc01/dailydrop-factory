@@ -78,23 +78,95 @@ SPEECH_FIXES = [
     (r"\bGTA VI\b", "GTA six"), (r"\bGTA V\b", "GTA five"), (r"\bGTA IV\b", "GTA four"),
     (r"\bGTA III\b", "GTA three"), (r"\bGTA 6\b", "GTA six"),
 ]
+ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+        "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+SCALES = [(10 ** 12, "trillion"), (10 ** 9, "billion"), (10 ** 6, "million"), (1000, "thousand")]
+
+
+def int_words(n):
+    """1234 -> 'one thousand two hundred thirty-four'."""
+    n = int(n)
+    if n < 0:
+        return "minus " + int_words(-n)
+    if n < 20:
+        return ONES[n]
+    if n < 100:
+        return TENS[n // 10] + ("-" + ONES[n % 10] if n % 10 else "")
+    if n < 1000:
+        return ONES[n // 100] + " hundred" + (" " + int_words(n % 100) if n % 100 else "")
+    for size, name in SCALES:
+        if n >= size:
+            return int_words(n // size) + " " + name + (" " + int_words(n % size) if n % size else "")
+
+
+def round_spoken(n):
+    """Big numbers are rounded the way a person would say them: 13,765 -> 13,800; 370,774 -> 371,000."""
+    n = float(n)
+    if abs(n) < 10000:
+        return int(round(n))
+    digits = len(str(int(abs(n))))
+    step = 10 ** (digits - 3)
+    return int(round(n / step) * step)
+
+
+def number_words(txt):
+    """'13,765' -> 'thirteen thousand eight hundred'; '1.2' -> 'one point two'."""
+    txt = txt.replace(",", "")
+    if "." in txt:
+        whole, frac = txt.split(".", 1)
+        frac = frac.rstrip("0")
+        if frac:
+            return int_words(int(whole or 0)) + " point " + " ".join(ONES[int(d)] for d in frac)
+        txt = whole
+    return int_words(round_spoken(txt))
+
+
+def _money(m):
+    num, scale = m.group(1), m.group(2)
+    plain = num.replace(",", "")
+    if scale:  # "$1.2 trillion"
+        return f"{number_words(num)} {scale} dollars"
+    if "." in plain and len(plain.split(".")[1]) == 2 and float(plain) < 1000:  # "$94.66"
+        d, c = plain.split(".")
+        cents = f" and {int_words(int(c))} cents" if int(c) else ""
+        return f"{int_words(int(d))} dollars{cents}"
+    return f"{number_words(num)} dollars"
+
+
+NUM = r"(\d(?:[\d,]*\d)?(?:\.\d+)?)"
 
 
 def speakable(text):
-    """Rewrites text so the AI voice says it right (e.g. roman numerals)."""
+    """Rewrites text so the AI voice says it right: numbers, money and symbols become plain words.
+    Only the voice gets this version; captions keep the digits."""
     for pat, rep in SPEECH_FIXES:
         text = re.sub(pat, rep, text)
-    return text
+    text = re.sub(r"\$" + NUM + r"(?:\s*(trillion|billion|million|thousand))?", _money, text)
+    text = re.sub(r"[+]?" + NUM + r"\s?%", lambda m: number_words(m.group(1)) + " percent", text)
+    text = re.sub(r"#\s?(\d+)", lambda m: "number " + int_words(int(m.group(1))), text)
+    text = re.sub(r"[x×]\s?" + NUM + r"\b", lambda m: number_words(m.group(1)) + " times", text)
+    text = re.sub(NUM + r"\s?[x×](?![a-z])", lambda m: number_words(m.group(1)) + " times", text)
+    # other numbers: keep years as they are (the voice reads them well), spell out the rest
+    def bare(m):
+        t = m.group(1)
+        if re.fullmatch(r"(19|20)\d\d", t):
+            return t
+        return number_words(t)
+    return re.sub(r"(?<![\w$])" + NUM + r"(?!\w)", bare, text)
 
 
-def tts(text, voice_id, dst):
-    text = speakable(text)
-    r = requests.post(
-        f"{ELEVEN}/text-to-speech/{voice_id}",
-        headers={"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"},
-        json={"text": text, "model_id": "eleven_multilingual_v2", "voice_settings": VOICE_SETTINGS},
-        timeout=120,
-    )
+def tts(text, voice_id, dst, before="", after=""):
+    """One section of voice. before/after are the neighbouring lines, so the tone carries across the joins."""
+    url = f"{ELEVEN}/text-to-speech/{voice_id}"
+    headers = {"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"}
+    body = {"text": speakable(text), "model_id": "eleven_multilingual_v2", "voice_settings": VOICE_SETTINGS}
+    r = None
+    if before or after:
+        r = requests.post(url, headers=headers, timeout=120,
+                          json={**body, "previous_text": speakable(before), "next_text": speakable(after)})
+    if r is None or r.status_code >= 400:  # no neighbours, or the option was refused: plain request
+        r = requests.post(url, headers=headers, json=body, timeout=120)
     r.raise_for_status()
     with open(dst, "wb") as f:
         f.write(r.content)
@@ -161,7 +233,9 @@ def build_ai(topic, script, out):
     secs, files, cursor, timed = sections(script), [], 0.0, []
     for i, (name, text) in enumerate(secs):
         mp3, wav = tmp / f"{i:02d}_{name}.mp3", tmp / f"{i:02d}_{name}.wav"
-        tts(text, voice_id, mp3)
+        before = secs[i - 1][1] if i else ""
+        after = secs[i + 1][1] if i < len(secs) - 1 else ""
+        tts(text, voice_id, mp3, before, after)
         to_wav(mp3, wav)
         d = duration(wav)
         timed.append({"name": name, "text": text, "start": round(cursor, 3), "end": round(cursor + d, 3)})

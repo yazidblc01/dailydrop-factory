@@ -105,7 +105,7 @@ def moments(payload, hidden=None):
                 found.append({"t": t, "kind": "lead", "item": order[0], "other": prev[0],
                               "text": f"{order[0]} takes #1", "fact": f"In {year(t)}, {order[0]} passed {prev[0]} for #1."})
             else:
-                for pos in range(1, min(4, len(order))):
+                for pos in range(1, 2):  # only a move into #2 is worth a callout
                     a = order[pos]
                     if prev.index(a) > pos:  # a moved up into this place
                         b = prev[pos]
@@ -208,11 +208,15 @@ def scene_plan(payload, script, sections, backgrounds):
     ms = payload["moments"]
     keys = [[0.3, 0.0]]
     if ms and len(calls) == len(ms):
-        for s, m in zip(calls, ms):  # each callout lands exactly when its voice line starts
-            if keys[-1][0] + 0.3 < s["start"] < finish - 0.3 and m["u"] > keys[-1][1]:
-                keys.append([s["start"], m["u"]])
-        race["callouts"] = [{"at": s["start"], "text": m["text"], "item": MYSTERY if m["item"] == hidden else m["item"]}
-                            for s, m in zip(calls, ms)]
+        for s, m in zip(calls, ms):
+            # the race reaches (about) the moment when its voice line starts, but keeps an even pace:
+            # halfway between the moment's own position and where a steady race would be by then
+            steady = (s["start"] - 0.3) / max(finish - 0.3, 1e-6)
+            u = min(0.97, 0.5 * m["u"] + 0.5 * steady)
+            if keys[-1][0] + 0.3 < s["start"] < finish - 0.3 and u > keys[-1][1] + 0.01:
+                keys.append([s["start"], round(u, 4)])
+        race["callouts"] = [{"at": s["start"], "text": f"{int(m['t'])}: {m['text']}",
+                             "item": MYSTERY if m["item"] == hidden else m["item"]} for s, m in zip(calls, ms)]
     keys.append([max(finish, keys[-1][0] + 0.3), 1.0])
     race["keys"] = keys
 
