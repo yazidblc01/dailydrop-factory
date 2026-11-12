@@ -25,5 +25,17 @@
     "posted_at": "2026-11-12T18:16:15+00:00",
     "when": "2026-11-12T19:00:00-05:00",
     "slot": "gta"
+  },
+  "invest__energy__2008": {
+    "title": "$1,000 in 2008: Which Oil Giant Made You the Most?",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6af60bc452078b325954a9cf",
+    "posted_at": "2026-11-12T18:56:06+00:00",
+    "when": "2026-11-12T16:00:00-05:00",
+    "slot": "main"
   }
 }
