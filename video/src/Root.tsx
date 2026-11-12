@@ -4,6 +4,8 @@ import {RankingReveal, RevealProps} from './RankingReveal';
 import current from '../props/current.json';
 import story from '../props/story.json';
 import {StoryReel, StoryProps} from './StoryReel';
+import {TextsFuture, TFProps} from './TextsFuture';
+import tf from '../props/tf.json';
 
 const FPS = 30;
 const TAIL_FRAMES = 6;
@@ -33,6 +35,18 @@ export const RemotionRoot: React.FC = () => {
       defaultProps={story as unknown as StoryProps}
       calculateMetadata={({props}) => ({
         durationInFrames: Math.ceil(props.duration * FPS) + TAIL_FRAMES,
+      })}
+    />
+    <Composition
+      id="TextsFuture"
+      component={TextsFuture}
+      width={1080}
+      height={1920}
+      fps={FPS}
+      durationInFrames={Math.ceil((tf as unknown as TFProps).duration * FPS)}
+      defaultProps={tf as unknown as TFProps}
+      calculateMetadata={({props}) => ({
+        durationInFrames: Math.ceil(props.duration * FPS),
       })}
     />
     </>
