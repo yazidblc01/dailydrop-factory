@@ -91,7 +91,13 @@ def pick_next(slot="main"):
             print(f"  skip {topic_id}: interest {score:.1f} too low")
             h["skipped"].append(topic_id)
             continue
-        if TEMPLATE == "story" and not story.worth_it(payload):
+        try:
+            dull = TEMPLATE == "story" and not story.worth_it(payload)
+        except Exception as e:  # odd data must never stop the daily video: try the next topic
+            print(f"  skip {topic_id}: race check failed ({e.__class__.__name__}: {e})")
+            h["skipped"].append(topic_id)
+            continue
+        if dull:
             print(f"  skip {topic_id}: the race has fewer than {story.MIN_MOMENTS} key moments")
             h["skipped"].append(topic_id)
             continue

@@ -98,6 +98,9 @@ INVEST_GROUPS = {
     "gaming": ("gaming stocks", [("TTWO", "Take-Two", "take2games.com"), ("EA", "EA", "ea.com"),
                                  ("SONY", "Sony", "sony.com"), ("NTDOY", "Nintendo", "nintendo.com"),
                                  ("MSFT", "Microsoft", "microsoft.com")]),
+    "gamer_gear": ("gamer gear stocks", [("NVDA", "Nvidia", "nvidia.com"), ("AMD", "AMD", "amd.com"),
+                                         ("INTC", "Intel", "intel.com"), ("LOGI", "Logitech", "logitech.com"),
+                                         ("GME", "GameStop", "gamestop.com"), ("HEAR", "Turtle Beach", "turtlebeach.com")]),
     "fast_food": ("fast food stocks", [("MCD", "McDonald's", "mcdonalds.com"), ("SBUX", "Starbucks", "starbucks.com"),
                                        ("CMG", "Chipotle", "chipotle.com"), ("YUM", "Yum Brands", "yum.com"),
                                        ("WEN", "Wendy's", "wendys.com"), ("DPZ", "Domino's", "dominos.com")]),
@@ -170,6 +173,7 @@ def build_invest(topic_id):
         _PRICES[key] = yf.download(tickers, start=f"{key[1]}-01-01", auto_adjust=True, progress=False)["Close"]
     px = _PRICES[key]
     px = px[px.index >= f"{year}-01-01"]
+    px = px.where(px > 0)  # Yahoo sometimes has 0 prices for old or thin stocks: treat them as missing
     last_day = px.dropna(how="all").index[-1].date()
 
     items = []
@@ -422,19 +426,33 @@ def build_ttwo_gta_days(topic_id="ttwo_gta_days"):
     })
 
 
-# GTA week (engine/schedule.py GTA_START to GTA_END): a second Short a day at 7 PM, in this order.
+# GTA month (engine/schedule.py GTA_START to GTA_END, Nov 12 to 30): a second Short a day at 7 PM, in this order.
 # The first unused topic that builds and passes the race check is made; the rest are spares.
 GTA_POOL = [
-    "gta_launch_prices",        # Mon Nov 16
-    "consoles__playstation",    # Tue
-    "ttwo_gta_days",            # Wed
-    "invest__gaming__2013",     # Thu Nov 19, launch day: gaming stocks since the year of GTA V
-    "consoles__xbox",           # Fri
-    "invest__gaming__2018",     # Sat
-    "invest__gaming__2010",     # Sun
-    "invest__gaming__2015",     # spares
+    "gta_launch_prices",        # Thu Nov 12: GTA 6 is the priciest GTA ever, a week before launch
+    "consoles__playstation",
+    "invest__gaming__2013",     # gaming stocks since the year of GTA V
+    "consoles__xbox",
+    "invest__gamer_gear__2015",
+    "invest__gaming__2018",
+    "invest__gamer_gear__2020",
+    "ttwo_gta_days",            # Thu Nov 19, launch day: $1,000 in Take-Two on each GTA launch day
+    "invest__gaming__2010",
+    "invest__gamer_gear__2010",
     "invest__gaming__2020",
+    "invest__gamer_gear__2018",
+    "invest__gaming__2015",
+    "invest__gamer_gear__2013",
     "invest__gaming__2008",
+    "invest__gamer_gear__2021",
+    "invest__gaming__2021",
+    "invest__gamer_gear__2012",
+    "invest__gaming__2022",     # Mon Nov 30
+    "invest__gaming__2012",     # spares
+    "invest__gamer_gear__2008",
+    "invest__gaming__2005",
+    "invest__gamer_gear__2022",
+    "invest__gamer_gear__2005",
 ]
 
 

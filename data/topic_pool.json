@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-12T15:47:55+00:00",
+  "checked": "2026-11-12T18:01:02+00:00",
   "topics": {
     "consoles__playstation": {
       "interest": 6.7,
@@ -403,6 +403,46 @@
     },
     "invest__fast_food__2022": {
       "interest": 9.4,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2005": {
+      "interest": 10.9,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2008": {
+      "interest": 5.8,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2010": {
+      "interest": 9.8,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2012": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2013": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2015": {
+      "interest": 10.6,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2018": {
+      "interest": 10.6,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2020": {
+      "interest": 10.1,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2021": {
+      "interest": 7.1,
+      "status": "ok"
+    },
+    "invest__gamer_gear__2022": {
+      "interest": 4.8,
       "status": "ok"
     },
     "invest__gaming__2005": {
@@ -840,6 +880,102 @@
     "wb__gdp_pc__mena__2000": {
       "interest": 5.6,
       "status": "dull"
+    },
+    "wb__internet__africa__1990": {
+      "interest": 9.9,
+      "status": "ok"
+    },
+    "wb__internet__africa__2000": {
+      "interest": 5.9,
+      "status": "ok"
+    },
+    "wb__internet__americas__1990": {
+      "interest": 12.2,
+      "status": "ok"
+    },
+    "wb__internet__americas__2000": {
+      "interest": 6.2,
+      "status": "ok"
+    },
+    "wb__internet__asia__1990": {
+      "interest": 8.5,
+      "status": "ok"
+    },
+    "wb__internet__asia__2000": {
+      "interest": 2.5,
+      "status": "flat"
+    },
+    "wb__internet__europe__1990": {
+      "interest": 8.1,
+      "status": "ok"
+    },
+    "wb__internet__europe__2000": {
+      "interest": 8.1,
+      "status": "ok"
+    },
+    "wb__internet__giants__1990": {
+      "interest": 10.5,
+      "status": "ok"
+    },
+    "wb__internet__giants__2000": {
+      "interest": 12.5,
+      "status": "ok"
+    },
+    "wb__internet__mena__1990": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "wb__internet__mena__2000": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "wb__life__africa__1990": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "wb__life__africa__2000": {
+      "interest": 6.4,
+      "status": "dull"
+    },
+    "wb__life__americas__1990": {
+      "interest": 4.1,
+      "status": "dull"
+    },
+    "wb__life__americas__2000": {
+      "interest": 2.1,
+      "status": "dull"
+    },
+    "wb__life__asia__1990": {
+      "interest": 4.2,
+      "status": "dull"
+    },
+    "wb__life__asia__2000": {
+      "interest": 4.2,
+      "status": "dull"
+    },
+    "wb__life__europe__1990": {
+      "interest": 0.1,
+      "status": "flat"
+    },
+    "wb__life__europe__2000": {
+      "interest": 4.1,
+      "status": "ok"
+    },
+    "wb__life__giants__1990": {
+      "interest": 2.2,
+      "status": "dull"
+    },
+    "wb__life__giants__2000": {
+      "interest": 2.2,
+      "status": "dull"
+    },
+    "wb__life__mena__1990": {
+      "interest": 2.2,
+      "status": "flat"
+    },
+    "wb__life__mena__2000": {
+      "interest": 2.2,
+      "status": "flat"
     },
     "wb__pop__africa__1990": {
       "interest": 6.4,

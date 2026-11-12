@@ -36,8 +36,12 @@ def check(topic_id):
         return {"status": "data", "reason": str(e)[:200]}
     except Exception as e:
         return {"status": "error", "reason": f"{e.__class__.__name__}: {e}"[:200]}
-    score = round(recipes.interest(payload), 1)
-    if TEMPLATE == "story" and not story.worth_it(payload):
+    try:
+        score = round(recipes.interest(payload), 1)
+        dull = TEMPLATE == "story" and not story.worth_it(payload)
+    except Exception as e:
+        return {"status": "data", "reason": f"race check failed: {e.__class__.__name__}: {e}"[:200]}
+    if dull:
         return {"status": "dull", "interest": score}
     if score < topics.MIN_INTEREST:
         return {"status": "flat", "interest": score}

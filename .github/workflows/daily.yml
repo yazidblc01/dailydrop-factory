@@ -1,5 +1,5 @@
 # The Daily Drop: makes one Short every morning and schedules it for today's slot (engine/schedule.py).
-# An evening run pings Telegram with the live link. GTA week (Nov 16 to 22) adds a 7 PM Short. Times are UTC; the slots themselves are Toronto time.
+# An evening run pings Telegram with the live link. GTA month (Nov 12 to 30) adds a 7 PM Short. Times are UTC; the slots themselves are Toronto time.
 name: Daily Short
 
 on:
@@ -10,10 +10,10 @@ on:
     - cron: "43 12 * * *"   # make, backup: 7:43 AM
     - cron: "13 14 * * *"   # make, backup: 9:13 AM
     - cron: "47 23 * * *"   # check: 6:47 PM Toronto in winter (7:47 in summer), after every slot
-    # GTA week (Nov 16 to 22): a second Short, made at midday, scheduled for 7 PM Toronto
-    - cron: "13 17 16-22 11 *"   # make GTA: 12:13 PM Toronto
-    - cron: "43 18 16-22 11 *"   # make GTA, backup: 1:43 PM
-    - cron: "17 1 17-23 11 *"    # check: 8:17 PM Toronto, after the 7 PM GTA post
+    # GTA month (Nov 12 to 30): a second Short, made in the afternoon, scheduled for 7 PM Toronto
+    - cron: "13 17 12-30 11 *"   # make GTA: 12:13 PM Toronto
+    - cron: "43 18 12-30 11 *"   # make GTA, backup: 1:43 PM
+    - cron: "17 1 * 11,12 *"     # check: 8:17 PM Toronto, after the 7 PM GTA post
   workflow_dispatch:
     inputs:
       mode:
@@ -26,7 +26,7 @@ on:
         description: "post immediately instead of today's slot (yes/no)"
         default: "no"
       slot:
-        description: "main (the daily Short) or gta (the GTA week 7 PM Short)"
+        description: "main (the daily Short) or gta (the GTA month 7 PM Short)"
         default: "main"
 
 permissions:
@@ -59,12 +59,12 @@ jobs:
         run: |
           S="${{ github.event.schedule }}"
           case "$S" in
-            "47 23 * * *"|"17 1 17-23 11 *") MODE=check ;;
+            "47 23 * * *"|"17 1 * 11,12 *") MODE=check ;;
             *) MODE=make ;;
           esac
           if [ "${{ inputs.mode }}" = "check" ]; then MODE=check; fi
           case "$S" in
-            "13 17 16-22 11 *"|"43 18 16-22 11 *") SLOT=gta ;;
+            "13 17 12-30 11 *"|"43 18 12-30 11 *") SLOT=gta ;;
             *) SLOT=main ;;
           esac
           if [ "${{ inputs.slot }}" = "gta" ]; then SLOT=gta; fi

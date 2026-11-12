@@ -70,7 +70,7 @@ def mystery(payload):
     mode "growth": the biggest grower (when #1 led from start to finish)"""
     top = ranked(payload)[0]
     g = _grid(payload)
-    if g:
+    if g and payload.get("growth_ok", True):  # rates (life expectancy, % online): "grew the most" reads wrong
         t0, t1, grid, vals = g
         k_early = next(k for k, t in enumerate(grid) if t >= t0 + 0.5 * min(1.0, (t1 - t0) / 4))
         early_leader = max(vals, key=lambda s: vals[s][k_early])
@@ -119,6 +119,8 @@ def moments(payload, hidden=None):
         best_up, at_up, worst, at_dn = 1.0, None, 1.0, None
         for k in range(len(grid)):
             back = [v[j] for j in range(len(grid)) if grid[k] - 1.0 <= grid[j] <= grid[k]]
+            if min(back) <= 0 or v[k] <= 0:  # a zero in the data (a % that started at 0, a bad price): no jump math
+                continue
             up, dn = v[k] / min(back), v[k] / max(back)
             if up > best_up:
                 best_up, at_up = up, k
