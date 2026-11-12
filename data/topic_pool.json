@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-12T18:01:02+00:00",
+  "checked": "2026-11-12T18:20:56+00:00",
   "topics": {
     "consoles__playstation": {
       "interest": 6.7,
@@ -780,6 +780,26 @@
     "prices__groceries__2020": {
       "interest": 12.4,
       "status": "ok"
+    },
+    "since__gamer_gear__gta5": {
+      "interest": 8.7,
+      "status": "ok"
+    },
+    "since__gamer_gear__trailer1": {
+      "interest": 7.8,
+      "status": "ok"
+    },
+    "since__gaming__gta5": {
+      "interest": 7.8,
+      "status": "ok"
+    },
+    "since__gaming__trailer1": {
+      "interest": 4.4,
+      "status": "ok"
+    },
+    "ttwo_gta6_news": {
+      "interest": 2.5,
+      "status": "flat"
     },
     "ttwo_gta_days": {
       "interest": 7.6,

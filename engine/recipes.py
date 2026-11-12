@@ -100,7 +100,7 @@ INVEST_GROUPS = {
                                  ("MSFT", "Microsoft", "microsoft.com")]),
     "gamer_gear": ("gamer gear stocks", [("NVDA", "Nvidia", "nvidia.com"), ("AMD", "AMD", "amd.com"),
                                          ("INTC", "Intel", "intel.com"), ("LOGI", "Logitech", "logitech.com"),
-                                         ("GME", "GameStop", "gamestop.com"), ("HEAR", "Turtle Beach", "turtlebeach.com")]),
+                                         ("GME", "GameStop", "gamestop.com"), ("TBCH", "Turtle Beach", "turtlebeach.com")]),
     "fast_food": ("fast food stocks", [("MCD", "McDonald's", "mcdonalds.com"), ("SBUX", "Starbucks", "starbucks.com"),
                                        ("CMG", "Chipotle", "chipotle.com"), ("YUM", "Yum Brands", "yum.com"),
                                        ("WEN", "Wendy's", "wendys.com"), ("DPZ", "Domino's", "dominos.com")]),
@@ -426,29 +426,145 @@ def build_ttwo_gta_days(topic_id="ttwo_gta_days"):
     })
 
 
+def gta6_moments():
+    with open(DATA_DIR / "gta6_moments.csv", newline="") as f:
+        return {r["key"]: r for r in csv.DictReader(f)}
+
+
+def _ttwo_close():
+    import yfinance as yf
+    if "TTWO_FULL" not in _PRICES:
+        px = yf.download("TTWO", start="2001-10-01", auto_adjust=True, progress=False)["Close"]
+        _PRICES["TTWO_FULL"] = (px["TTWO"] if hasattr(px, "columns") else px).dropna()
+    return _PRICES["TTWO_FULL"]
+
+
+def build_ttwo_gta6_news(topic_id="ttwo_gta6_news"):
+    """$1,000 of Take-Two bought on each big GTA 6 news day (trailers, delays), worth today."""
+    import pandas as pd
+    s = _ttwo_close()
+    s = s[s > 0]
+    last_day, last = s.index[-1].date(), float(s.iloc[-1])
+    items = []
+    for key, m in gta6_moments().items():
+        if key == "gta5":
+            continue
+        day = pd.Timestamp(m["buy_date"])
+        after = s[s.index >= day]
+        if after.empty or after.index[0] - day > pd.Timedelta(days=7) or after.index[0].date() >= last_day:
+            continue
+        items.append(make_item(m["label"], m["short"], 1000.0, 1000 * last / float(after.iloc[0]), "usd0",
+                               year=day.year))
+    if len(items) < 4:
+        raise ValueError(f"only {len(items)} GTA 6 news days had Take-Two prices")
+    return finish({
+        "topic": topic_id,
+        "recipe": "ttwo",
+        "music_pool": "gta",
+        "flip": False,
+        "unit": "usd0",
+        "items": items,
+        "start_label": "$1,000 in Take-Two on GTA 6 news day",
+        "end_label": "Worth today",
+        "start_order": "given",
+        "badges": {"top": "BEST DAY", "bottom": "WORST DAY"},
+        "angle": "You put $1,000 into Take-Two, the company that owns Rockstar, on each big GTA 6 news day: "
+                 "the reveal, the trailers, the delays. Which day was the best time to buy?",
+        "notes": "TTWO adjusted close on the first trading day on or after each announcement "
+                 "(the next day when news came after the 4 PM close). Not financial advice.",
+        "on_screen_source": f"Source: Yahoo Finance, TTWO adjusted close to {last_day:%b %Y}. Not financial advice.",
+        "data_as_of": last_day.isoformat(),
+    })
+
+
+SINCE_GROUPS = ("gaming", "gamer_gear")
+SINCE_MOMENTS = {"trailer1": "the day the first GTA 6 trailer dropped", "gta5": "the day GTA V came out"}
+
+
+def since_candidates():
+    return [f"since__{g}__{m}" for g in SINCE_GROUPS for m in SINCE_MOMENTS]
+
+
+def build_since(topic_id):
+    """Line race of an investing group from a GTA moment (not a Jan 1 start). Topic: since__gaming__trailer1."""
+    import pandas as pd
+    import yfinance as yf
+    _, group, moment = topic_id.split("__")
+    theme, assets = INVEST_GROUPS[group]
+    m = gta6_moments()[moment]
+    start = pd.Timestamp(m["buy_date"])
+    key = (group, min(start.year, 2005))
+    if key not in _PRICES:
+        _PRICES[key] = yf.download([a[0] for a in assets], start=f"{key[1]}-01-01", auto_adjust=True,
+                                   progress=False)["Close"]
+    px = _PRICES[key]
+    px = px[px.index >= start].where(lambda x: x > 0)
+    last_day = px.dropna(how="all").index[-1].date()
+
+    items = []
+    for ticker, name, domain in assets:
+        s = px[ticker].dropna()
+        if s.empty or s.index[0] - start > pd.Timedelta(days=7):  # did not trade then
+            continue
+        base = float(s.iloc[0])
+        end = 1000 * float(s.iloc[-1]) / base
+        weekly = s.resample("W").last().dropna() if (s.index[-1] - s.index[0]).days < 4 * 365 \
+            else s.resample("ME").last().dropna()
+        series = [[decimal_year(s.index[0]), 1000.0]]
+        series += [[decimal_year(d), round(1000 * float(v) / base, 2)] for d, v in weekly.items()]
+        series[-1] = [decimal_year(s.index[-1]), round(end, 2)]
+        items.append(make_item(name, name, 1000.0, end, "usd0", image=logo_url(domain), year=start.year,
+                               series=series))
+    if len(items) < 4:
+        raise ValueError(f"only {len(items)} assets had data on {m['buy_date']}")
+    when = SINCE_MOMENTS[moment]
+    return finish({
+        "topic": topic_id,
+        "recipe": "invest",
+        "music_pool": "gta",
+        "unit": "usd0",
+        "items": items,
+        "start_label": f"$1,000 on {m['label']}",
+        "end_label": "Worth today",
+        "start_order": "given",
+        "race": True,
+        "badges": {"top": "BEST", "bottom": "WORST"},
+        "angle": f"You put $1,000 into each of these {theme} on {when}. Which one made you the most by today?",
+        "notes": "Values include reinvested dividends (adjusted close). Not financial advice.",
+        "on_screen_source": f"Source: Yahoo Finance, adjusted close, {start:%b %-d %Y} to {last_day:%b %Y}. "
+                            "Not financial advice.",
+        "data_as_of": last_day.isoformat(),
+    })
+
+
 # GTA month (engine/schedule.py GTA_START to GTA_END, Nov 12 to 30): a second Short a day at 7 PM, in this order.
 # The first unused topic that builds and passes the race check is made; the rest are spares.
 GTA_POOL = [
     "gta_launch_prices",        # Thu Nov 12: GTA 6 is the priciest GTA ever, a week before launch
     "consoles__playstation",
-    "invest__gaming__2013",     # gaming stocks since the year of GTA V
+    "since__gaming__trailer1",  # gaming stocks since the first GTA 6 trailer
     "consoles__xbox",
+    "ttwo_gta6_news",           # Take-Two on each GTA 6 news day: reveal, trailers, delays
     "invest__gamer_gear__2015",
-    "invest__gaming__2018",
-    "invest__gamer_gear__2020",
+    "since__gaming__gta5",      # gaming stocks since GTA V launch day
     "ttwo_gta_days",            # Thu Nov 19, launch day: $1,000 in Take-Two on each GTA launch day
+    "since__gamer_gear__trailer1",
+    "invest__gaming__2018",
+    "since__gamer_gear__gta5",
+    "invest__gamer_gear__2020",
+    "invest__gaming__2013",
     "invest__gaming__2010",
     "invest__gamer_gear__2010",
     "invest__gaming__2020",
     "invest__gamer_gear__2018",
     "invest__gaming__2015",
-    "invest__gamer_gear__2013",
-    "invest__gaming__2008",
+    "invest__gamer_gear__2013",  # Mon Nov 30
+    "invest__gaming__2008",      # spares
     "invest__gamer_gear__2021",
     "invest__gaming__2021",
     "invest__gamer_gear__2012",
-    "invest__gaming__2022",     # Mon Nov 30
-    "invest__gaming__2012",     # spares
+    "invest__gaming__2022",
+    "invest__gaming__2012",
     "invest__gamer_gear__2008",
     "invest__gaming__2005",
     "invest__gamer_gear__2022",
@@ -557,6 +673,10 @@ def build(topic_id):
         return build_consoles(topic_id)
     if topic_id == "ttwo_gta_days":
         return build_ttwo_gta_days(topic_id)
+    if topic_id == "ttwo_gta6_news":
+        return build_ttwo_gta6_news(topic_id)
+    if topic_id.startswith("since__"):
+        return build_since(topic_id)
     raise KeyError(topic_id)
 
 

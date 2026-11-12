@@ -8,9 +8,11 @@
     python run.py --post-only <topic>      posts a video that's already rendered, right now
     python run.py --check                  pings Telegram with the links of scheduled posts that went live
     python run.py --once-a-day             skips if today's video already exists (used by the backup morning runs)
-    python run.py --slot gta               the GTA week Short (7 PM, GTA pool); does nothing outside GTA week
+    python run.py --slot gta               the GTA month Short (7 PM, GTA pool); does nothing outside GTA month
 
-Steps: live-link check -> topic -> data -> script -> voice -> render -> schedule on YouTube -> Telegram
+    python run.py --preflight              only tests the API keys (seconds, costs nothing)
+
+Steps: key check -> live-link check -> topic -> data -> script -> voice -> render -> schedule -> Telegram
 """
 import argparse
 import json
@@ -21,7 +23,7 @@ from datetime import datetime
 import requests
 from dotenv import load_dotenv
 
-from config import MEDIA_DIR
+from config import MEDIA_DIR, POSTER
 from engine import audit, data, render, schedule, script, topics, upload, voice
 
 load_dotenv()
@@ -92,6 +94,40 @@ def made_today(slot="main"):
     return False
 
 
+def preflight(posting=True):
+    """Tests every paid key with a free request before any credits are spent.
+    Fails only on a clear "bad key" answer, so a slow or flaky service never blocks the video."""
+    checks = [
+        ("ANTHROPIC_API_KEY", "https://api.anthropic.com/v1/models?limit=1",
+         lambda k: {"x-api-key": k, "anthropic-version": "2023-06-01"}),
+        ("ELEVENLABS_API_KEY", "https://api.elevenlabs.io/v1/models", lambda k: {"xi-api-key": k}),
+    ]
+    if posting and POSTER == "zernio":
+        checks.append(("ZERNIO_API_KEY", "https://zernio.com/api/v1/accounts",
+                       lambda k: {"Authorization": f"Bearer {k}"}))
+    bad = []
+    for name, url, hdr in checks:
+        key = os.environ.get(name, "").strip()
+        if not key:
+            bad.append(f"{name} is missing")
+            continue
+        try:
+            r = requests.get(url, headers=hdr(key), timeout=20)
+        except requests.RequestException as e:
+            print(f"      key check: {name} could not be reached ({e.__class__.__name__}), going on")
+            continue
+        text = r.text.lower()
+        if r.status_code == 401 or (r.status_code == 403 and "invalid" in text):
+            if "permission" in text and "invalid" not in text:
+                continue  # a valid key without that one permission: fine
+            bad.append(f"{name} was rejected ({r.status_code})")
+    if bad:
+        raise RuntimeError("Key check failed, nothing was made: " + "; ".join(bad) +
+                           ". Fix the GitHub secret from .env with: gh secret set NAME --body \"$(grep '^NAME=' .env "
+                           "| cut -d= -f2-)\"")
+    print("      keys OK")
+
+
 def make(topic=None, dry=False, publish=True, now=False, slot="main"):
     t0 = time.time()
     if topic:
@@ -144,13 +180,17 @@ if __name__ == "__main__":
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--once-a-day", action="store_true")
     ap.add_argument("--slot", choices=["main", "gta"], default="main")
+    ap.add_argument("--preflight", action="store_true")
     a = ap.parse_args()
     try:
-        if a.check:
+        if a.preflight:
+            preflight()
+        elif a.check:
             report_live()
         elif a.post_only:
             if not a.topic:
                 raise SystemExit("--post-only needs a topic, e.g. python run.py --post-only invest__big_tech__2015")
+            preflight()
             post(a.topic, now=True, slot=a.slot)
         elif a.slot == "gta" and not a.topic and not schedule.gta_week():
             print("Not GTA week, nothing to do.")
@@ -158,6 +198,7 @@ if __name__ == "__main__":
             print("Today's video already exists, nothing to do.")
         else:
             if not a.dry:
+                preflight(posting=not a.no_post)
                 report_live()
             make(a.topic, a.dry, publish=not a.no_post, now=a.now, slot=a.slot)
     except Exception as e:
