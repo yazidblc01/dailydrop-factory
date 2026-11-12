@@ -1,5 +1,5 @@
 # The Daily Drop: makes one Short every morning and schedules it for today's slot (engine/schedule.py).
-# An evening run pings Telegram with the live link. Times are UTC; the slots themselves are Toronto time.
+# An evening run pings Telegram with the live link. GTA week (Nov 16 to 22) adds a 7 PM Short. Times are UTC; the slots themselves are Toronto time.
 name: Daily Short
 
 on:
@@ -10,6 +10,10 @@ on:
     - cron: "43 12 * * *"   # make, backup: 7:43 AM
     - cron: "13 14 * * *"   # make, backup: 9:13 AM
     - cron: "47 23 * * *"   # check: 6:47 PM Toronto in winter (7:47 in summer), after every slot
+    # GTA week (Nov 16 to 22): a second Short, made at midday, scheduled for 7 PM Toronto
+    - cron: "13 17 16-22 11 *"   # make GTA: 12:13 PM Toronto
+    - cron: "43 18 16-22 11 *"   # make GTA, backup: 1:43 PM
+    - cron: "17 1 17-23 11 *"    # check: 8:17 PM Toronto, after the 7 PM GTA post
   workflow_dispatch:
     inputs:
       mode:
@@ -21,6 +25,9 @@ on:
       now:
         description: "post immediately instead of today's slot (yes/no)"
         default: "no"
+      slot:
+        description: "main (the daily Short) or gta (the GTA week 7 PM Short)"
+        default: "main"
 
 permissions:
   contents: write
@@ -49,11 +56,19 @@ jobs:
       - name: Pick mode
         id: m
         run: |
-          if [ "${{ github.event.schedule }}" = "47 23 * * *" ] || [ "${{ inputs.mode }}" = "check" ]; then
-            echo "mode=check" >> "$GITHUB_OUTPUT"
-          else
-            echo "mode=make" >> "$GITHUB_OUTPUT"
-          fi
+          S="${{ github.event.schedule }}"
+          case "$S" in
+            "47 23 * * *"|"17 1 17-23 11 *") MODE=check ;;
+            *) MODE=make ;;
+          esac
+          if [ "${{ inputs.mode }}" = "check" ]; then MODE=check; fi
+          case "$S" in
+            "13 17 16-22 11 *"|"43 18 16-22 11 *") SLOT=gta ;;
+            *) SLOT=main ;;
+          esac
+          if [ "${{ inputs.slot }}" = "gta" ]; then SLOT=gta; fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "slot=$SLOT" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5
         with:
@@ -98,7 +113,7 @@ jobs:
           if [ -n "${{ inputs.topic }}" ]; then ARGS="${{ inputs.topic }}"; fi
           if [ "${{ inputs.now }}" = "yes" ]; then ARGS="$ARGS --now"; fi
           if [ "${{ github.event_name }}" = "schedule" ]; then ARGS="$ARGS --once-a-day"; fi
-          python run.py $ARGS
+          python run.py $ARGS --slot ${{ steps.m.outputs.slot }}
 
       - name: Ping live links
         if: steps.m.outputs.mode == 'check'
@@ -111,6 +126,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for f in data/history.json data/posts.json data/images_used.json; do [ -f "$f" ] && git add "$f"; done
           if ! git diff --cached --quiet; then
-            git commit -m "state: $(date +%F) ${{ steps.m.outputs.mode }}"
+            git commit -m "state: $(date +%F) ${{ steps.m.outputs.mode }} ${{ steps.m.outputs.slot }}"
             git pull --rebase --autostash -q && git push -q
           fi

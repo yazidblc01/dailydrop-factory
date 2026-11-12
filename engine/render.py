@@ -185,10 +185,10 @@ def build_props(topic, theme=None):
 
     sfx = {k: (f"sfx/{k}.mp3" if (PUBLIC / "sfx" / f"{k}.mp3").exists() else None)
            for k in ("whoosh", "impact", "tick", "riser")}
-    music_name, music_start = pick_music(topic, data["recipe"])
+    music_name, music_start = pick_music(topic, data.get("music_pool", data["recipe"]))
 
     facts = data["facts"]
-    flip = data["recipe"] == "gta"  # for prices, the most expensive is the bad one
+    flip = data.get("flip", data["recipe"] == "gta")  # for prices, the most expensive is the bad one
     badges = [
         {"short": facts["top_now"], "text": data["badges"]["top"], "tone": "bad" if flip else "good"},
         {"short": facts["bottom_now"], "text": data["badges"]["bottom"], "tone": "good" if flip else "bad"},

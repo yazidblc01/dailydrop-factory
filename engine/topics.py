@@ -3,14 +3,15 @@
 Usage:
     python -m engine.topics            (shows what would be picked next, builds its data)
     python -m engine.topics --list     (counts available topics)
+    python -m engine.topics --gta      (same as the first, for the GTA week pool)
 """
 import json
 import random
 import sys
-from datetime import date
+from datetime import date, datetime
 
 from config import DATA_DIR, TEMPLATE
-from engine import data, recipes, story
+from engine import data, recipes, schedule, story
 
 HISTORY = DATA_DIR / "history.json"
 MIN_INTEREST = 3.0      # below this the reveal is too flat
@@ -38,19 +39,28 @@ def mark_done(topic_id):
     save_history(h)
 
 
-def pick_next():
-    """Returns (topic_id, payload). Builds data for candidates until one is interesting enough."""
+def pick_next(slot="main"):
+    """Returns (topic_id, payload). Builds data for candidates until one is interesting enough.
+    slot "gta": the GTA week pool, in its set order, with no interest filter (the dates matter more)."""
     h = load_history()
     used = set(h["done"]) | set(h["skipped"])
-    pool = [t for t in recipes.all_candidates() if t not in used]
-    if not pool:
-        raise RuntimeError("No topics left. Add groups or years in engine/recipes.py.")
+    gta = slot == "gta"
+    if gta:
+        preferred = [t for t in recipes.GTA_POOL if t not in used]
+        if not preferred:
+            raise RuntimeError("GTA pool is empty. Add topics to GTA_POOL in engine/recipes.py.")
+    else:
+        # the gaming topics are kept for the GTA week Shorts until the week is over
+        held = set(recipes.GTA_POOL) if datetime.now(schedule.TZ).date() <= schedule.GTA_END else set()
+        pool = [t for t in recipes.all_candidates() if t not in used and t not in held]
+        if not pool:
+            raise RuntimeError("No topics left. Add groups or years in engine/recipes.py.")
 
-    # Rotate: avoid the recipe type used last time, if another type is available
-    last_recipe = recipe_of(h["done"][-1]) if h["done"] else None
-    preferred = [t for t in pool if recipe_of(t) != last_recipe] or pool
-    rng = random.Random(date.today().isoformat())
-    rng.shuffle(preferred)
+        # Rotate: avoid the recipe type used last time, if another type is available
+        last_recipe = recipe_of(h["done"][-1]) if h["done"] else None
+        preferred = [t for t in pool if recipe_of(t) != last_recipe] or pool
+        rng = random.Random(date.today().isoformat())
+        rng.shuffle(preferred)
 
     errors = []
     for topic_id in preferred[:MAX_TRIES]:
@@ -67,7 +77,7 @@ def pick_next():
             errors.append(f"{topic_id}: {e}")
             continue
         score = recipes.interest(payload)
-        if score < MIN_INTEREST:
+        if not gta and score < MIN_INTEREST:
             print(f"  skip {topic_id}: interest {score:.1f} too low")
             h["skipped"].append(topic_id)
             continue
@@ -85,11 +95,14 @@ def pick_next():
 
 
 if __name__ == "__main__":
+    slot = "gta" if "--gta" in sys.argv else "main"
     if "--list" in sys.argv:
         h = load_history()
         allc = recipes.all_candidates()
         print(f"{len(allc)} topics total, {len(h['done'])} done, {len(h['skipped'])} skipped")
+        left = [t for t in recipes.GTA_POOL if t not in set(h["done"]) | set(h["skipped"])]
+        print(f"GTA pool: {len(left)} of {len(recipes.GTA_POOL)} left: {', '.join(left)}")
     else:
-        t, p = pick_next()
+        t, p = pick_next(slot)
         print(f"\nNext topic: {t}\n{p['angle']}")
         print(f"interest {recipes.interest(p):.1f}")

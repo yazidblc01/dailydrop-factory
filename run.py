@@ -8,6 +8,7 @@
     python run.py --post-only <topic>      posts a video that's already rendered, right now
     python run.py --check                  pings Telegram with the links of scheduled posts that went live
     python run.py --once-a-day             skips if today's video already exists (used by the backup morning runs)
+    python run.py --slot gta               the GTA week Short (7 PM, GTA pool); does nothing outside GTA week
 
 Steps: live-link check -> topic -> data -> script -> voice -> render -> schedule on YouTube -> Telegram
 """
@@ -60,41 +61,45 @@ def report_live():
     print(f"Live-link check: {len(found)} new live, {len(failed)} failed")
 
 
-def post(topic, now=False):
-    print("[6/6] Posting to YouTube")
-    when = None if now else schedule.slot_today()
+def post(topic, now=False, slot="main"):
+    print("[6/6] Posting")
+    when = None if now else schedule.slot_today(slot=slot)
     meta = json.loads((MEDIA_DIR / topic / "upload.json").read_text())
     res = upload.post(topic, when)
+    upload.save_post(topic, slot=slot)  # lets --once-a-day tell the daily Short from the GTA week one
+    tag = "🎮 GTA week. " if slot == "gta" else ""
     if res["status"] == "scheduled":
         print(f"      Scheduled for {schedule.label(when)}")
-        telegram(f"🗓 Scheduled for {schedule.label(when)}\n{meta['title']}", MEDIA_DIR / topic / "final.mp4")
+        telegram(f"🗓 {tag}Scheduled for {schedule.label(when)}\n{meta['title']}", MEDIA_DIR / topic / "final.mp4")
     else:
         print(f"      Live: {res['urls']}")
-        text = f"✅ Posted: {meta['title']}\n{links(res['urls'])}"
+        text = f"✅ {tag}Posted: {meta['title']}\n{links(res['urls'])}"
         if res.get("errors"):
             text += "\n⚠️ " + "\n⚠️ ".join(res["errors"])
         telegram(text)
     return res
 
 
-def made_today():
-    """True if a video was already posted or scheduled today (Toronto date). Used by the backup morning runs."""
+def made_today(slot="main"):
+    """True if this slot's video was already posted or scheduled today (Toronto date). Used by the backup runs."""
     today = datetime.now(schedule.TZ).date()
     for p in upload.load_posts().values():
+        if p.get("slot", "main") != slot:
+            continue
         stamp = p.get("when") or p.get("posted_at")
         if stamp and datetime.fromisoformat(stamp).astimezone(schedule.TZ).date() == today:
             return True
     return False
 
 
-def make(topic=None, dry=False, publish=True, now=False):
+def make(topic=None, dry=False, publish=True, now=False, slot="main"):
     t0 = time.time()
     if topic:
         print(f"[1/6] Data: {topic}")
         payload = data.build(topic)
     else:
-        print("[1/6] Picking the next topic...")
-        topic, payload = topics.pick_next()
+        print("[1/6] Picking the next topic..." + (" (GTA week pool)" if slot == "gta" else ""))
+        topic, payload = topics.pick_next(slot)
     print(f"      {payload['angle']}")
 
     print("[2/6] Script")
@@ -116,7 +121,7 @@ def make(topic=None, dry=False, publish=True, now=False):
     print(f"[5/6] Video done in {(time.time() - t0) / 60:.1f} min: {final}")
 
     if publish:
-        post(topic, now)
+        post(topic, now, slot)
     else:
         telegram(f"🎬 Rendered, not posted (--no-post)\n{s['title']}", final)
     return topic, final
@@ -131,6 +136,7 @@ if __name__ == "__main__":
     ap.add_argument("--post-only", action="store_true")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--once-a-day", action="store_true")
+    ap.add_argument("--slot", choices=["main", "gta"], default="main")
     a = ap.parse_args()
     try:
         if a.check:
@@ -138,13 +144,15 @@ if __name__ == "__main__":
         elif a.post_only:
             if not a.topic:
                 raise SystemExit("--post-only needs a topic, e.g. python run.py --post-only invest__big_tech__2015")
-            post(a.topic, now=True)
-        elif a.once_a_day and made_today():
+            post(a.topic, now=True, slot=a.slot)
+        elif a.slot == "gta" and not a.topic and not schedule.gta_week():
+            print("Not GTA week, nothing to do.")
+        elif a.once_a_day and made_today(a.slot):
             print("Today's video already exists, nothing to do.")
         else:
             if not a.dry:
                 report_live()
-            make(a.topic, a.dry, publish=not a.no_post, now=a.now)
+            make(a.topic, a.dry, publish=not a.no_post, now=a.now, slot=a.slot)
     except Exception as e:
         telegram(f"❌ Shorts factory failed: {e}")
         raise

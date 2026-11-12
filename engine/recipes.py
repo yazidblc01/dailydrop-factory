@@ -245,26 +245,36 @@ def build_wb(topic_id):
 
 
 # =====================================================================
-# Recipe 3: GTA launch prices adjusted for inflation (hand-verified CSV + FRED CPI)
+# Recipe 3: GTA week. Launch prices, console prices (hand-verified CSVs + FRED CPI) and Take-Two on launch days
 # =====================================================================
-def build_gta_launch_prices(topic_id="gta_launch_prices"):
+def us_cpi():
+    """Monthly US CPI-U from FRED: ({"YYYY-MM": value}, latest "YYYY-MM")."""
     r = requests.get("https://api.stlouisfed.org/fred/series/observations",
                      params={"series_id": "CPIAUCSL", "api_key": os.environ["FRED_API_KEY"],
                              "file_type": "json", "observation_start": "1995-01-01"}, timeout=30)
     r.raise_for_status()
     cpi = {o["date"][:7]: float(o["value"]) for o in r.json()["observations"] if o["value"] != "."}
-    latest = max(cpi)
+    return cpi, max(cpi)
 
-    items = []
+
+def gta_rows():
     with open(DATA_DIR / "gta_launch_prices.csv", newline="") as f:
-        for row in csv.DictReader(f):
-            ym = row["us_launch_date"][:7]
-            base = cpi.get(ym, cpi[latest])
-            price = float(row["launch_price_usd"])
-            game = row["game"]
-            short = game.split(":", 1)[1].strip() if ":" in game else game.replace("Grand Theft Auto", "GTA")
-            items.append(make_item(game, short, price, price * cpi[latest] / base, "usd2",
-                                   year=int(row["us_launch_date"][:4])))
+        return list(csv.DictReader(f))
+
+
+def gta_short(game):
+    return game.split(":", 1)[1].strip() if ":" in game else game.replace("Grand Theft Auto", "GTA")
+
+
+def build_gta_launch_prices(topic_id="gta_launch_prices"):
+    cpi, latest = us_cpi()
+    items = []
+    for row in gta_rows():
+        ym = row["us_launch_date"][:7]
+        base = cpi.get(ym, cpi[latest])
+        price = float(row["launch_price_usd"])
+        items.append(make_item(row["game"], gta_short(row["game"]), price, price * cpi[latest] / base, "usd2",
+                               year=int(row["us_launch_date"][:4])))
 
     return finish({
         "topic": topic_id,
@@ -282,6 +292,105 @@ def build_gta_launch_prices(topic_id="gta_launch_prices"):
     })
 
 
+CONSOLE_FAMILIES = {
+    "playstation": ("PlayStation", "GTA 6 only runs on PS5 and Xbox Series. Adjusted for inflation, "
+                                   "which PlayStation was the most expensive at launch?"),
+    "xbox": ("Xbox", "GTA 6 only runs on PS5 and Xbox Series. Adjusted for inflation, "
+                     "which Xbox was the most expensive at launch?"),
+}
+
+
+def build_consoles(topic_id):
+    """Launch price of each console (top model at launch) in today's dollars. Topic: consoles__playstation."""
+    family = topic_id.split("__")[1]
+    name, angle = CONSOLE_FAMILIES[family]
+    cpi, latest = us_cpi()
+    items = []
+    with open(DATA_DIR / "console_launch_prices.csv", newline="") as f:
+        for row in csv.DictReader(f):
+            if row["family"] != family:
+                continue
+            base = cpi.get(row["us_launch_date"][:7], cpi[latest])
+            price = float(row["launch_price_usd"])
+            items.append(make_item(row["console"], row["short"], price, price * cpi[latest] / base, "usd0",
+                                   year=int(row["us_launch_date"][:4])))
+    if len(items) < 4:
+        raise ValueError(f"only {len(items)} {name} consoles in the CSV")
+
+    return finish({
+        "topic": topic_id,
+        "recipe": "consoles",
+        "music_pool": "gta",
+        "flip": True,
+        "unit": "usd0",
+        "items": items,
+        "start_label": f"{name} launch prices",
+        "end_label": "In today's dollars",
+        "start_order": "given",
+        "badges": {"top": "MOST EXPENSIVE", "bottom": "CHEAPEST"},
+        "angle": angle,
+        "notes": "US launch price of the top model sold on launch day. Inflation: US CPI-U (FRED CPIAUCSL).",
+        "on_screen_source": "Sources: Sony, Microsoft, press reports; inflation: US CPI (FRED)",
+        "data_as_of": latest,
+    })
+
+
+def build_ttwo_gta_days(topic_id="ttwo_gta_days"):
+    """$1,000 of Take-Two (Rockstar's parent company) bought on the day each GTA came out, worth today."""
+    import pandas as pd
+    import yfinance as yf
+    px = yf.download("TTWO", start="2001-10-01", auto_adjust=True, progress=False)["Close"]
+    s = (px["TTWO"] if hasattr(px, "columns") else px).dropna()
+    last_day, last = s.index[-1].date(), float(s.iloc[-1])
+
+    items = []
+    for row in gta_rows():
+        launch = pd.Timestamp(row["us_launch_date"])
+        after = s[s.index >= launch]
+        if after.empty or after.index[0] - launch > pd.Timedelta(days=7):
+            continue  # not out yet (GTA VI) or no trading near that day
+        end = 1000 * last / float(after.iloc[0])
+        items.append(make_item(row["game"], gta_short(row["game"]), 1000.0, end, "usd0",
+                               year=int(row["us_launch_date"][:4])))
+    if len(items) < 4:
+        raise ValueError(f"only {len(items)} GTA launch days had Take-Two prices")
+
+    return finish({
+        "topic": topic_id,
+        "recipe": "ttwo",
+        "music_pool": "gta",
+        "flip": False,
+        "unit": "usd0",
+        "items": items,
+        "start_label": "$1,000 in Take-Two on launch day",
+        "end_label": "Worth today",
+        "start_order": "given",
+        "badges": {"top": "BEST DAY", "bottom": "WORST DAY"},
+        "angle": "You put $1,000 into Take-Two, the company that owns Rockstar, on the day each GTA came out. "
+                 "Which launch day made you the most by today?",
+        "notes": "TTWO adjusted close (splits included) on the first trading day on or after each US launch. "
+                 "Not financial advice.",
+        "on_screen_source": f"Source: Yahoo Finance, TTWO adjusted close to {last_day:%b %Y}. Not financial advice.",
+        "data_as_of": last_day.isoformat(),
+    })
+
+
+# GTA week (engine/schedule.py GTA_START to GTA_END): a second Short a day at 7 PM, in this order.
+# The first unused topic that builds and passes the race check is made; the rest are spares.
+GTA_POOL = [
+    "gta_launch_prices",        # Mon Nov 16
+    "consoles__playstation",    # Tue
+    "ttwo_gta_days",            # Wed
+    "invest__gaming__2013",     # Thu Nov 19, launch day: gaming stocks since the year of GTA V
+    "consoles__xbox",           # Fri
+    "invest__gaming__2018",     # Sat
+    "invest__gaming__2010",     # Sun
+    "invest__gaming__2015",     # spares
+    "invest__gaming__2020",
+    "invest__gaming__2008",
+]
+
+
 # ---------- registry ----------
 def all_candidates():
     return invest_candidates() + wb_candidates()
@@ -294,6 +403,10 @@ def build(topic_id):
         return build_wb(topic_id)
     if topic_id == "gta_launch_prices":
         return build_gta_launch_prices(topic_id)
+    if topic_id.startswith("consoles__"):
+        return build_consoles(topic_id)
+    if topic_id == "ttwo_gta_days":
+        return build_ttwo_gta_days(topic_id)
     raise KeyError(topic_id)
 
 

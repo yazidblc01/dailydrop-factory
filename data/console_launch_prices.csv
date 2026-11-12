@@ -1,0 +1,10 @@
+console,short,family,model,us_launch_date,launch_price_usd,source_url
+PlayStation,PS1,playstation,PlayStation,1995-09-09,299,https://kotaku.com/how-much-every-sony-nintendo-and-microsoft-console-co-1845002630
+PlayStation 2,PS2,playstation,PlayStation 2,2000-10-26,299,https://kotaku.com/how-much-every-sony-nintendo-and-microsoft-console-co-1845002630
+PlayStation 3,PS3,playstation,60GB,2006-11-17,599,https://kotaku.com/how-much-every-sony-nintendo-and-microsoft-console-co-1845002630
+PlayStation 4,PS4,playstation,500GB,2013-11-15,399,https://kotaku.com/how-much-every-sony-nintendo-and-microsoft-console-co-1845002630
+PlayStation 5,PS5,playstation,disc edition,2020-11-12,499,https://www.videogameconsolelibrary.com/?p=84
+Xbox,Xbox,xbox,Xbox,2001-11-15,299,https://www.videogameconsolelibrary.com/?p=115
+Xbox 360,Xbox 360,xbox,Premium,2005-11-22,399,https://www.videogameconsolelibrary.com/?p=115
+Xbox One,Xbox One,xbox,Xbox One,2013-11-22,499,https://kotaku.com/how-much-every-sony-nintendo-and-microsoft-console-co-1845002630
+Xbox Series X,Series X,xbox,Series X,2020-11-10,499,https://kotaku.com/how-much-every-sony-nintendo-and-microsoft-console-co-1845002630

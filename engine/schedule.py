@@ -6,7 +6,7 @@ Revisit after ~4 weeks with YouTube Studio's "When your viewers are on YouTube".
 
     python -m engine.schedule      shows today's slot
 """
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 TZ_NAME = "America/Toronto"
@@ -15,11 +15,20 @@ TZ = ZoneInfo(TZ_NAME)
 SLOTS = {0: (12, 0), 1: (16, 0), 2: (16, 0), 3: (16, 0), 4: (17, 0), 5: (11, 0), 6: (9, 0)}
 MIN_LEAD = timedelta(minutes=15)  # closer than this to the slot (or past it): post right away
 
+# GTA week: a second Short every day at 7 PM, GTA topics only (engine/recipes.py GTA_POOL). GTA 6 is out Nov 19.
+GTA_START, GTA_END = date(2026, 11, 16), date(2026, 11, 22)
+GTA_SLOT = (19, 0)
 
-def slot_today(now=None):
-    """Today's slot as a Toronto datetime, or None if it's too late (then post immediately)."""
+
+def gta_week(now=None):
+    return GTA_START <= (now or datetime.now(TZ)).date() <= GTA_END
+
+
+def slot_today(now=None, slot="main"):
+    """Today's slot as a Toronto datetime, or None if it's too late (then post immediately).
+    slot: "main" (the daily Short) or "gta" (the 7 PM GTA week Short)."""
     now = now or datetime.now(TZ)
-    h, m = SLOTS[now.weekday()]
+    h, m = GTA_SLOT if slot == "gta" else SLOTS[now.weekday()]
     slot = now.replace(hour=h, minute=m, second=0, microsecond=0)
     return slot if slot - now >= MIN_LEAD else None
 
@@ -34,4 +43,5 @@ if __name__ == "__main__":
     for d in range(7):
         day = datetime.now(TZ) + timedelta(days=d)
         h, m = SLOTS[day.weekday()]
-        print(f"  {day:%a}: {h % 12 or 12}:{m:02d} {'AM' if h < 12 else 'PM'}")
+        extra = "  + GTA 7:00 PM" if gta_week(day) else ""
+        print(f"  {day:%a %b %-d}: {h % 12 or 12}:{m:02d} {'AM' if h < 12 else 'PM'}{extra}")
