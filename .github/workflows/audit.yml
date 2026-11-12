@@ -1,0 +1,50 @@
+# Weekly topic audit: checks every unused topic and saves data/topic_pool.json, so the daily run
+# skips dead topics. Pings Telegram if fewer than 14 usable daily topics are left.
+name: Weekly topic audit
+
+on:
+  schedule:
+    - cron: "23 8 * * 0"   # Sundays, 3:23 AM Toronto in winter
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-short   # never at the same time as a daily run (both save files to the repo)
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TZ: America/Toronto
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Python packages
+        run: pip install -r requirements.txt
+
+      - name: Check every unused topic
+        run: python -m engine.audit
+
+      - name: Save the topic pool
+        if: always()
+        run: |
+          git config user.name "daily-drop-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          [ -f data/topic_pool.json ] && git add data/topic_pool.json
+          if ! git diff --cached --quiet; then
+            git commit -m "state: $(date +%F) topic audit"
+            git pull --rebase --autostash -q && git push -q
+          fi

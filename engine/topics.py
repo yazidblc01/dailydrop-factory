@@ -14,6 +14,7 @@ from config import DATA_DIR, TEMPLATE
 from engine import data, recipes, schedule, story
 
 HISTORY = DATA_DIR / "history.json"
+POOL = DATA_DIR / "topic_pool.json"     # written by engine/audit.py
 MIN_INTEREST = 3.0      # below this the reveal is too flat
 MAX_TRIES = 6
 
@@ -39,12 +40,21 @@ def mark_done(topic_id):
     save_history(h)
 
 
+def known_bad(gta=False):
+    """Topics the last audit found unusable. The GTA pool ignores "flat" (it has no interest filter)."""
+    if not POOL.exists():
+        return set()
+    bad = ("data", "dull") if gta else ("data", "flat", "dull")
+    return {t for t, r in json.loads(POOL.read_text())["topics"].items() if r["status"] in bad}
+
+
 def pick_next(slot="main"):
     """Returns (topic_id, payload). Builds data for candidates until one is interesting enough.
     slot "gta": the GTA week pool, in its set order, with no interest filter (the dates matter more)."""
     h = load_history()
     used = set(h["done"]) | set(h["skipped"])
     gta = slot == "gta"
+    used |= known_bad(gta)
     if gta:
         preferred = [t for t in recipes.GTA_POOL if t not in used]
         if not preferred:
@@ -99,7 +109,8 @@ if __name__ == "__main__":
     if "--list" in sys.argv:
         h = load_history()
         allc = recipes.all_candidates()
-        print(f"{len(allc)} topics total, {len(h['done'])} done, {len(h['skipped'])} skipped")
+        print(f"{len(allc)} topics total, {len(h['done'])} done, {len(h['skipped'])} skipped, "
+              f"{len(known_bad() - set(h['done']) - set(h['skipped']))} flagged unusable by the audit")
         left = [t for t in recipes.GTA_POOL if t not in set(h["done"]) | set(h["skipped"])]
         print(f"GTA pool: {len(left)} of {len(recipes.GTA_POOL)} left: {', '.join(left)}")
     else:

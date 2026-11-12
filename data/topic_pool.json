@@ -1,0 +1,833 @@
+{
+  "checked": "2026-11-12T15:40:52+00:00",
+  "topics": {
+    "consoles__playstation": {
+      "interest": 6.7,
+      "status": "ok"
+    },
+    "consoles__xbox": {
+      "interest": 2.3,
+      "status": "flat"
+    },
+    "gta_launch_prices": {
+      "interest": 14.2,
+      "status": "ok"
+    },
+    "invest__airlines__2005": {
+      "interest": 8.0,
+      "status": "ok"
+    },
+    "invest__airlines__2008": {
+      "interest": 11.0,
+      "status": "ok"
+    },
+    "invest__airlines__2010": {
+      "interest": 7.3,
+      "status": "ok"
+    },
+    "invest__airlines__2012": {
+      "interest": 7.7,
+      "status": "ok"
+    },
+    "invest__airlines__2013": {
+      "interest": 9.3,
+      "status": "ok"
+    },
+    "invest__airlines__2015": {
+      "interest": 6.8,
+      "status": "ok"
+    },
+    "invest__airlines__2018": {
+      "interest": 7.0,
+      "status": "ok"
+    },
+    "invest__airlines__2020": {
+      "interest": 6.6,
+      "status": "ok"
+    },
+    "invest__airlines__2021": {
+      "interest": 7.0,
+      "status": "ok"
+    },
+    "invest__airlines__2022": {
+      "interest": 8.9,
+      "status": "ok"
+    },
+    "invest__apps__2005": {
+      "reason": "only 0 assets had data for 2005",
+      "status": "data"
+    },
+    "invest__apps__2008": {
+      "reason": "only 0 assets had data for 2008",
+      "status": "data"
+    },
+    "invest__apps__2010": {
+      "reason": "only 0 assets had data for 2010",
+      "status": "data"
+    },
+    "invest__apps__2012": {
+      "reason": "only 0 assets had data for 2012",
+      "status": "data"
+    },
+    "invest__apps__2013": {
+      "reason": "only 0 assets had data for 2013",
+      "status": "data"
+    },
+    "invest__apps__2015": {
+      "reason": "only 0 assets had data for 2015",
+      "status": "data"
+    },
+    "invest__apps__2018": {
+      "reason": "only 2 assets had data for 2018",
+      "status": "data"
+    },
+    "invest__apps__2020": {
+      "interest": 13.3,
+      "status": "ok"
+    },
+    "invest__apps__2021": {
+      "interest": 15.8,
+      "status": "ok"
+    },
+    "invest__apps__2022": {
+      "interest": 18.0,
+      "status": "ok"
+    },
+    "invest__banks__2005": {
+      "interest": 12.7,
+      "status": "ok"
+    },
+    "invest__banks__2008": {
+      "interest": 12.0,
+      "status": "ok"
+    },
+    "invest__banks__2010": {
+      "interest": 13.4,
+      "status": "ok"
+    },
+    "invest__banks__2012": {
+      "interest": 13.7,
+      "status": "ok"
+    },
+    "invest__banks__2013": {
+      "interest": 13.7,
+      "status": "ok"
+    },
+    "invest__banks__2015": {
+      "interest": 11.6,
+      "status": "ok"
+    },
+    "invest__banks__2018": {
+      "interest": 17.3,
+      "status": "ok"
+    },
+    "invest__banks__2020": {
+      "interest": 17.3,
+      "status": "ok"
+    },
+    "invest__banks__2021": {
+      "interest": 14.9,
+      "status": "ok"
+    },
+    "invest__banks__2022": {
+      "interest": 15.0,
+      "status": "ok"
+    },
+    "invest__big_funds__2005": {
+      "interest": 5.6,
+      "status": "ok"
+    },
+    "invest__big_funds__2008": {
+      "interest": 3.6,
+      "status": "ok"
+    },
+    "invest__big_funds__2010": {
+      "interest": 3.5,
+      "status": "ok"
+    },
+    "invest__big_funds__2012": {
+      "interest": 3.4,
+      "status": "ok"
+    },
+    "invest__big_funds__2013": {
+      "interest": 3.4,
+      "status": "ok"
+    },
+    "invest__big_funds__2015": {
+      "interest": 5.3,
+      "status": "ok"
+    },
+    "invest__big_funds__2018": {
+      "interest": 5.1,
+      "status": "ok"
+    },
+    "invest__big_funds__2020": {
+      "interest": 9.0,
+      "status": "ok"
+    },
+    "invest__big_funds__2021": {
+      "interest": 9.9,
+      "status": "ok"
+    },
+    "invest__big_funds__2022": {
+      "interest": 9.2,
+      "status": "ok"
+    },
+    "invest__big_tech__2005": {
+      "interest": 12.5,
+      "status": "ok"
+    },
+    "invest__big_tech__2008": {
+      "interest": 9.3,
+      "status": "ok"
+    },
+    "invest__big_tech__2010": {
+      "interest": 9.9,
+      "status": "ok"
+    },
+    "invest__big_tech__2012": {
+      "interest": 12.5,
+      "status": "ok"
+    },
+    "invest__big_tech__2013": {
+      "interest": 14.6,
+      "status": "ok"
+    },
+    "invest__big_tech__2018": {
+      "interest": 8.9,
+      "status": "ok"
+    },
+    "invest__big_tech__2020": {
+      "interest": 13.0,
+      "status": "ok"
+    },
+    "invest__big_tech__2021": {
+      "interest": 14.6,
+      "status": "ok"
+    },
+    "invest__big_tech__2022": {
+      "interest": 15.6,
+      "status": "ok"
+    },
+    "invest__car_makers__2005": {
+      "reason": "only 3 assets had data for 2005",
+      "status": "data"
+    },
+    "invest__car_makers__2008": {
+      "reason": "only 3 assets had data for 2008",
+      "status": "data"
+    },
+    "invest__car_makers__2010": {
+      "interest": 8.8,
+      "status": "ok"
+    },
+    "invest__car_makers__2012": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "invest__car_makers__2013": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "invest__car_makers__2015": {
+      "interest": 13.8,
+      "status": "ok"
+    },
+    "invest__car_makers__2018": {
+      "interest": 13.5,
+      "status": "ok"
+    },
+    "invest__car_makers__2021": {
+      "interest": 14.6,
+      "status": "ok"
+    },
+    "invest__car_makers__2022": {
+      "interest": 19.0,
+      "status": "ok"
+    },
+    "invest__chips__2005": {
+      "interest": 16.9,
+      "status": "ok"
+    },
+    "invest__chips__2008": {
+      "interest": 11.2,
+      "status": "ok"
+    },
+    "invest__chips__2010": {
+      "interest": 11.8,
+      "status": "ok"
+    },
+    "invest__chips__2012": {
+      "interest": 12.5,
+      "status": "ok"
+    },
+    "invest__chips__2013": {
+      "interest": 12.5,
+      "status": "ok"
+    },
+    "invest__chips__2015": {
+      "interest": 12.6,
+      "status": "ok"
+    },
+    "invest__chips__2018": {
+      "interest": 12.6,
+      "status": "ok"
+    },
+    "invest__chips__2020": {
+      "interest": 10.2,
+      "status": "ok"
+    },
+    "invest__chips__2021": {
+      "interest": 8.9,
+      "status": "ok"
+    },
+    "invest__chips__2022": {
+      "interest": 8.1,
+      "status": "ok"
+    },
+    "invest__crypto__2005": {
+      "reason": "only 0 assets had data for 2005",
+      "status": "data"
+    },
+    "invest__crypto__2008": {
+      "reason": "only 0 assets had data for 2008",
+      "status": "data"
+    },
+    "invest__crypto__2010": {
+      "reason": "only 0 assets had data for 2010",
+      "status": "data"
+    },
+    "invest__crypto__2012": {
+      "reason": "only 0 assets had data for 2012",
+      "status": "data"
+    },
+    "invest__crypto__2013": {
+      "reason": "only 0 assets had data for 2013",
+      "status": "data"
+    },
+    "invest__crypto__2015": {
+      "reason": "only 1 assets had data for 2015",
+      "status": "data"
+    },
+    "invest__crypto__2018": {
+      "interest": 18.8,
+      "status": "ok"
+    },
+    "invest__crypto__2020": {
+      "interest": 19.6,
+      "status": "ok"
+    },
+    "invest__crypto__2021": {
+      "interest": 19.8,
+      "status": "ok"
+    },
+    "invest__crypto__2022": {
+      "interest": 11.8,
+      "status": "ok"
+    },
+    "invest__energy__2005": {
+      "interest": 11.8,
+      "status": "ok"
+    },
+    "invest__energy__2008": {
+      "interest": 9.7,
+      "status": "ok"
+    },
+    "invest__energy__2010": {
+      "interest": 10.2,
+      "status": "ok"
+    },
+    "invest__energy__2012": {
+      "interest": 9.9,
+      "status": "ok"
+    },
+    "invest__energy__2013": {
+      "interest": 9.5,
+      "status": "ok"
+    },
+    "invest__energy__2015": {
+      "interest": 7.5,
+      "status": "ok"
+    },
+    "invest__energy__2018": {
+      "interest": 9.6,
+      "status": "ok"
+    },
+    "invest__energy__2020": {
+      "interest": 7.0,
+      "status": "ok"
+    },
+    "invest__energy__2021": {
+      "interest": 12.7,
+      "status": "ok"
+    },
+    "invest__energy__2022": {
+      "interest": 6.6,
+      "status": "ok"
+    },
+    "invest__fast_food__2005": {
+      "interest": 12.7,
+      "status": "ok"
+    },
+    "invest__fast_food__2008": {
+      "interest": 13.9,
+      "status": "ok"
+    },
+    "invest__fast_food__2010": {
+      "interest": 15.7,
+      "status": "ok"
+    },
+    "invest__fast_food__2012": {
+      "interest": 12.1,
+      "status": "ok"
+    },
+    "invest__fast_food__2013": {
+      "interest": 13.5,
+      "status": "ok"
+    },
+    "invest__fast_food__2015": {
+      "interest": 13.4,
+      "status": "ok"
+    },
+    "invest__fast_food__2018": {
+      "interest": 14.8,
+      "status": "ok"
+    },
+    "invest__fast_food__2020": {
+      "interest": 11.9,
+      "status": "ok"
+    },
+    "invest__fast_food__2021": {
+      "interest": 9.6,
+      "status": "ok"
+    },
+    "invest__fast_food__2022": {
+      "interest": 9.4,
+      "status": "ok"
+    },
+    "invest__gaming__2005": {
+      "interest": 8.5,
+      "status": "ok"
+    },
+    "invest__gaming__2008": {
+      "interest": 10.1,
+      "status": "ok"
+    },
+    "invest__gaming__2010": {
+      "interest": 9.1,
+      "status": "ok"
+    },
+    "invest__gaming__2012": {
+      "interest": 8.5,
+      "status": "ok"
+    },
+    "invest__gaming__2013": {
+      "interest": 8.0,
+      "status": "ok"
+    },
+    "invest__gaming__2015": {
+      "interest": 7.2,
+      "status": "ok"
+    },
+    "invest__gaming__2018": {
+      "interest": 8.0,
+      "status": "ok"
+    },
+    "invest__gaming__2020": {
+      "interest": 7.3,
+      "status": "ok"
+    },
+    "invest__gaming__2021": {
+      "interest": 7.4,
+      "status": "ok"
+    },
+    "invest__gaming__2022": {
+      "interest": 6.5,
+      "status": "ok"
+    },
+    "invest__luxury__2005": {
+      "reason": "only 2 assets had data for 2005",
+      "status": "data"
+    },
+    "invest__luxury__2008": {
+      "reason": "only 3 assets had data for 2008",
+      "status": "data"
+    },
+    "invest__luxury__2010": {
+      "interest": 6.5,
+      "status": "ok"
+    },
+    "invest__luxury__2012": {
+      "interest": 9.2,
+      "status": "ok"
+    },
+    "invest__luxury__2013": {
+      "interest": 11.6,
+      "status": "ok"
+    },
+    "invest__luxury__2015": {
+      "interest": 11.6,
+      "status": "ok"
+    },
+    "invest__luxury__2018": {
+      "interest": 18.6,
+      "status": "ok"
+    },
+    "invest__luxury__2020": {
+      "interest": 19.6,
+      "status": "ok"
+    },
+    "invest__luxury__2021": {
+      "interest": 19.4,
+      "status": "ok"
+    },
+    "invest__luxury__2022": {
+      "interest": 19.3,
+      "status": "ok"
+    },
+    "invest__money_assets__2005": {
+      "interest": 7.1,
+      "status": "ok"
+    },
+    "invest__money_assets__2008": {
+      "interest": 7.1,
+      "status": "ok"
+    },
+    "invest__money_assets__2010": {
+      "interest": 7.2,
+      "status": "ok"
+    },
+    "invest__money_assets__2012": {
+      "interest": 7.4,
+      "status": "ok"
+    },
+    "invest__money_assets__2013": {
+      "interest": 7.2,
+      "status": "ok"
+    },
+    "invest__money_assets__2015": {
+      "interest": 11.2,
+      "status": "ok"
+    },
+    "invest__money_assets__2018": {
+      "interest": 6.4,
+      "status": "ok"
+    },
+    "invest__money_assets__2020": {
+      "interest": 11.4,
+      "status": "ok"
+    },
+    "invest__money_assets__2021": {
+      "interest": 5.8,
+      "status": "ok"
+    },
+    "invest__money_assets__2022": {
+      "interest": 11.5,
+      "status": "ok"
+    },
+    "invest__pharma__2005": {
+      "interest": 7.6,
+      "status": "ok"
+    },
+    "invest__pharma__2008": {
+      "interest": 7.5,
+      "status": "ok"
+    },
+    "invest__pharma__2010": {
+      "interest": 7.8,
+      "status": "ok"
+    },
+    "invest__pharma__2012": {
+      "interest": 11.8,
+      "status": "ok"
+    },
+    "invest__pharma__2013": {
+      "interest": 15.8,
+      "status": "ok"
+    },
+    "invest__pharma__2015": {
+      "interest": 15.5,
+      "status": "ok"
+    },
+    "invest__pharma__2018": {
+      "interest": 15.5,
+      "status": "ok"
+    },
+    "invest__pharma__2020": {
+      "interest": 15.1,
+      "status": "ok"
+    },
+    "invest__pharma__2021": {
+      "interest": 14.8,
+      "status": "ok"
+    },
+    "invest__pharma__2022": {
+      "interest": 14.7,
+      "status": "ok"
+    },
+    "invest__retail__2005": {
+      "interest": 12.5,
+      "status": "ok"
+    },
+    "invest__retail__2008": {
+      "interest": 12.4,
+      "status": "ok"
+    },
+    "invest__retail__2010": {
+      "interest": 12.3,
+      "status": "ok"
+    },
+    "invest__retail__2012": {
+      "interest": 13.7,
+      "status": "ok"
+    },
+    "invest__retail__2013": {
+      "interest": 15.6,
+      "status": "ok"
+    },
+    "invest__retail__2015": {
+      "interest": 9.5,
+      "status": "ok"
+    },
+    "invest__retail__2018": {
+      "interest": 5.5,
+      "status": "ok"
+    },
+    "invest__retail__2020": {
+      "interest": 7.3,
+      "status": "ok"
+    },
+    "invest__retail__2021": {
+      "interest": 9.4,
+      "status": "ok"
+    },
+    "invest__retail__2022": {
+      "interest": 9.6,
+      "status": "ok"
+    },
+    "invest__sportswear__2005": {
+      "reason": "only 3 assets had data for 2005",
+      "status": "data"
+    },
+    "invest__sportswear__2008": {
+      "interest": 13.2,
+      "status": "ok"
+    },
+    "invest__sportswear__2010": {
+      "interest": 13.1,
+      "status": "ok"
+    },
+    "invest__sportswear__2012": {
+      "interest": 11.3,
+      "status": "ok"
+    },
+    "invest__sportswear__2013": {
+      "interest": 12.5,
+      "status": "ok"
+    },
+    "invest__sportswear__2015": {
+      "interest": 12.8,
+      "status": "ok"
+    },
+    "invest__sportswear__2018": {
+      "interest": 17.9,
+      "status": "ok"
+    },
+    "invest__sportswear__2020": {
+      "interest": 15.4,
+      "status": "ok"
+    },
+    "invest__sportswear__2021": {
+      "interest": 10.4,
+      "status": "ok"
+    },
+    "invest__sportswear__2022": {
+      "interest": 12.3,
+      "status": "ok"
+    },
+    "invest__streaming_media__2005": {
+      "reason": "only 3 assets had data for 2005",
+      "status": "data"
+    },
+    "invest__streaming_media__2008": {
+      "reason": "only 3 assets had data for 2008",
+      "status": "data"
+    },
+    "invest__streaming_media__2010": {
+      "reason": "only 3 assets had data for 2010",
+      "status": "data"
+    },
+    "invest__streaming_media__2012": {
+      "reason": "only 3 assets had data for 2012",
+      "status": "data"
+    },
+    "invest__streaming_media__2013": {
+      "reason": "only 3 assets had data for 2013",
+      "status": "data"
+    },
+    "invest__streaming_media__2015": {
+      "reason": "only 3 assets had data for 2015",
+      "status": "data"
+    },
+    "invest__streaming_media__2018": {
+      "interest": 8.1,
+      "status": "ok"
+    },
+    "invest__streaming_media__2020": {
+      "interest": 8.2,
+      "status": "ok"
+    },
+    "invest__streaming_media__2021": {
+      "interest": 22.6,
+      "status": "ok"
+    },
+    "invest__streaming_media__2022": {
+      "interest": 22.9,
+      "status": "ok"
+    },
+    "ttwo_gta_days": {
+      "interest": 7.6,
+      "status": "ok"
+    },
+    "wb__gdp__africa__1990": {
+      "interest": 5.6,
+      "status": "ok"
+    },
+    "wb__gdp__africa__2000": {
+      "interest": 1.6,
+      "status": "flat"
+    },
+    "wb__gdp__americas__1990": {
+      "interest": 5.8,
+      "status": "ok"
+    },
+    "wb__gdp__americas__2000": {
+      "interest": 7.8,
+      "status": "ok"
+    },
+    "wb__gdp__asia__1990": {
+      "interest": 6.5,
+      "status": "ok"
+    },
+    "wb__gdp__asia__2000": {
+      "interest": 8.5,
+      "status": "ok"
+    },
+    "wb__gdp__europe__1990": {
+      "interest": 6.1,
+      "status": "dull"
+    },
+    "wb__gdp__europe__2000": {
+      "interest": 2.1,
+      "status": "dull"
+    },
+    "wb__gdp__giants__1990": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    },
+    "wb__gdp__giants__2000": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    },
+    "wb__gdp__mena__1990": {
+      "interest": 4.8,
+      "status": "ok"
+    },
+    "wb__gdp__mena__2000": {
+      "interest": 4.8,
+      "status": "ok"
+    },
+    "wb__gdp_pc__africa__1990": {
+      "interest": 4.5,
+      "status": "ok"
+    },
+    "wb__gdp_pc__africa__2000": {
+      "interest": 4.5,
+      "status": "ok"
+    },
+    "wb__gdp_pc__americas__1990": {
+      "interest": 8.8,
+      "status": "ok"
+    },
+    "wb__gdp_pc__americas__2000": {
+      "interest": 6.8,
+      "status": "ok"
+    },
+    "wb__gdp_pc__asia__1990": {
+      "interest": 12.7,
+      "status": "ok"
+    },
+    "wb__gdp_pc__asia__2000": {
+      "interest": 8.7,
+      "status": "ok"
+    },
+    "wb__gdp_pc__europe__1990": {
+      "interest": 5.0,
+      "status": "ok"
+    },
+    "wb__gdp_pc__europe__2000": {
+      "interest": 3.0,
+      "status": "ok"
+    },
+    "wb__gdp_pc__giants__1990": {
+      "interest": 16.6,
+      "status": "ok"
+    },
+    "wb__gdp_pc__giants__2000": {
+      "interest": 14.6,
+      "status": "ok"
+    },
+    "wb__gdp_pc__mena__1990": {
+      "interest": 5.6,
+      "status": "dull"
+    },
+    "wb__gdp_pc__mena__2000": {
+      "interest": 5.6,
+      "status": "dull"
+    },
+    "wb__pop__africa__1990": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    },
+    "wb__pop__africa__2000": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    },
+    "wb__pop__americas__1990": {
+      "interest": 3.7,
+      "status": "dull"
+    },
+    "wb__pop__asia__1990": {
+      "interest": 9.1,
+      "status": "dull"
+    },
+    "wb__pop__asia__2000": {
+      "interest": 9.1,
+      "status": "dull"
+    },
+    "wb__pop__europe__1990": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    },
+    "wb__pop__europe__2000": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    },
+    "wb__pop__giants__1990": {
+      "interest": 8.0,
+      "status": "dull"
+    },
+    "wb__pop__giants__2000": {
+      "interest": 8.0,
+      "status": "dull"
+    },
+    "wb__pop__mena__1990": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    },
+    "wb__pop__mena__2000": {
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
+    }
+  }
+}

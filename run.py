@@ -22,7 +22,7 @@ import requests
 from dotenv import load_dotenv
 
 from config import MEDIA_DIR
-from engine import data, render, schedule, script, topics, upload, voice
+from engine import audit, data, render, schedule, script, topics, upload, voice
 
 load_dotenv()
 
@@ -115,6 +115,13 @@ def make(topic=None, dry=False, publish=True, now=False, slot="main"):
     final = render.render(topic)
 
     topics.mark_done(topic)
+    if slot == "main":
+        try:
+            left = audit.usable_count()
+            if left < audit.LOW_STOCK:
+                telegram(f"⚠️ Only {left} usable daily topics left (about {left} days). Time to add topics.")
+        except Exception as e:  # the stock check must never stop today's video
+            print(f"Stock check skipped: {e}")
     meta = {"topic": topic, "title": s["title"], "description": s["description"],
             "pinned_comment": s["pinned_comment"], "file": str(final)}
     (MEDIA_DIR / topic / "upload.json").write_text(json.dumps(meta, indent=2))

@@ -142,6 +142,7 @@ INVEST_GROUPS = {
                                    ("DIA", "Dow Jones", None), ("IWM", "Small caps", None)]),
 }
 # Any group with fewer than 4 assets trading at the start of a year is skipped for that year automatically.
+_PRICES = {}   # (group, first year) -> price table, cached for this run only
 INVEST_YEARS = [2005, 2008, 2010, 2012, 2013, 2015, 2018, 2020, 2021, 2022]
 
 
@@ -163,7 +164,12 @@ def build_invest(topic_id):
     year = int(year)
     theme, assets = INVEST_GROUPS[group]
     tickers = [a[0] for a in assets]
-    px = yf.download(tickers, start=f"{year}-01-01", auto_adjust=True, progress=False)["Close"]
+    # one download per group, shared by every start year (the audit checks many years in a row)
+    key = (group, min(year, 2005))
+    if key not in _PRICES:
+        _PRICES[key] = yf.download(tickers, start=f"{key[1]}-01-01", auto_adjust=True, progress=False)["Close"]
+    px = _PRICES[key]
+    px = px[px.index >= f"{year}-01-01"]
     last_day = px.dropna(how="all").index[-1].date()
 
     items = []
@@ -216,6 +222,7 @@ WB_GROUPS = {
     "africa": ("African countries", ["NGA", "EGY", "ZAF", "MAR", "KEN", "ETH"]),
 }
 WB_START_YEARS = [1990, 2000]
+_WB = {}   # World Bank answers, cached for this run only
 
 
 def wb_candidates():
@@ -229,7 +236,16 @@ def build_wb(topic_id):
     theme, countries = WB_GROUPS[grp]
     url = (f"https://api.worldbank.org/v2/country/{';'.join(countries)}/indicator/{code}"
            f"?date={start_year}:{THIS_YEAR}&format=json&per_page=5000")
-    rows = requests.get(url, timeout=60).json()[1]
+    # A slow or broken answer from the World Bank is a hiccup (try again later), not bad data
+    url = url.replace(f"date={start_year}:", "date=1990:")  # one download per indicator and group, cached
+    if url not in _WB:
+        r = requests.get(url, timeout=40)
+        r.raise_for_status()
+        try:
+            _WB[url] = r.json()[1]
+        except (ValueError, IndexError, TypeError) as e:
+            raise RuntimeError(f"World Bank sent an unreadable answer: {e}") from None
+    rows = [x for x in (_WB[url] or []) if int(x["date"]) >= start_year]
 
     series = {}
     for r in rows:
