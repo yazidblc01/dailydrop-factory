@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-12T15:40:52+00:00",
+  "checked": "2026-11-12T15:47:55+00:00",
   "topics": {
     "consoles__playstation": {
       "interest": 6.7,
@@ -685,6 +685,62 @@
       "interest": 22.9,
       "status": "ok"
     },
+    "prices__basket__1990": {
+      "interest": 10.8,
+      "status": "ok"
+    },
+    "prices__basket__1995": {
+      "interest": 7.4,
+      "status": "ok"
+    },
+    "prices__basket__2000": {
+      "interest": 11.4,
+      "status": "ok"
+    },
+    "prices__basket__2005": {
+      "interest": 13.1,
+      "status": "ok"
+    },
+    "prices__basket__2010": {
+      "interest": 13.1,
+      "status": "ok"
+    },
+    "prices__basket__2015": {
+      "interest": 13.0,
+      "status": "ok"
+    },
+    "prices__basket__2020": {
+      "interest": 10.7,
+      "status": "ok"
+    },
+    "prices__groceries__1990": {
+      "interest": 11.0,
+      "status": "ok"
+    },
+    "prices__groceries__1995": {
+      "interest": 15.2,
+      "status": "ok"
+    },
+    "prices__groceries__2000": {
+      "interest": 10.7,
+      "status": "ok"
+    },
+    "prices__groceries__2005": {
+      "interest": 16.6,
+      "status": "ok"
+    },
+    "prices__groceries__2010": {
+      "interest": 14.5,
+      "status": "ok"
+    },
+    "prices__groceries__2015": {
+      "interest": 14.5,
+      "status": "ok"
+    },
+    "prices__groceries__2020": {
+      "interest": 12.4,
+      "status": "ok"
+    },
     "ttwo_gta_days": {
       "interest": 7.6,
       "status": "ok"
@@ -722,12 +778,12 @@
       "status": "dull"
     },
     "wb__gdp__giants__1990": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 17.4,
+      "status": "ok"
     },
     "wb__gdp__giants__2000": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 15.4,
+      "status": "ok"
     },
     "wb__gdp__mena__1990": {
       "interest": 4.8,
@@ -786,12 +842,12 @@
       "status": "dull"
     },
     "wb__pop__africa__1990": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 6.4,
+      "status": "dull"
     },
     "wb__pop__africa__2000": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 4.4,
+      "status": "dull"
     },
     "wb__pop__americas__1990": {
       "interest": 3.7,
@@ -806,12 +862,12 @@
       "status": "dull"
     },
     "wb__pop__europe__1990": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 3.1,
+      "status": "dull"
     },
     "wb__pop__europe__2000": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 3.1,
+      "status": "dull"
     },
     "wb__pop__giants__1990": {
       "interest": 8.0,
@@ -822,12 +878,12 @@
       "status": "dull"
     },
     "wb__pop__mena__1990": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 5.2,
+      "status": "dull"
     },
     "wb__pop__mena__2000": {
-      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
-      "status": "error"
+      "interest": 5.2,
+      "status": "dull"
     }
   }
 }

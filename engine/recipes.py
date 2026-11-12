@@ -438,9 +438,92 @@ GTA_POOL = [
 ]
 
 
+# =====================================================================
+# Recipe 4: grocery and gas prices, "$100 of X in YEAR costs how much today?" (FRED, BLS average prices)
+# =====================================================================
+PRICE_GROUPS = {
+    "basket": ("everyday prices", [("APU0000708111", "Eggs", "a dozen eggs"),
+                                   ("APU000074714", "Gas", "a gallon of gas"),
+                                   ("APU0000702111", "Bread", "a pound of white bread"),
+                                   ("APU0000703112", "Ground beef", "a pound of ground beef"),
+                                   ("APU0000717311", "Coffee", "a pound of ground coffee"),
+                                   ("APU0000709112", "Milk", "a gallon of milk")]),
+    "groceries": ("grocery staples", [("APU0000706111", "Chicken", "a pound of whole chicken"),
+                                      ("APU0000711211", "Bananas", "a pound of bananas"),
+                                      ("APU0000712311", "Tomatoes", "a pound of tomatoes"),
+                                      ("APU0000704111", "Bacon", "a pound of bacon"),
+                                      ("APU0000710212", "Cheddar", "a pound of cheddar"),
+                                      ("APU0000701312", "Rice", "a pound of white rice")]),
+}
+PRICE_YEARS = [1990, 1995, 2000, 2005, 2010, 2015, 2020]
+_FRED = {}   # FRED series, cached for this run only
+
+
+def fred_monthly(series_id):
+    """{"YYYY-MM": value} for one FRED series. Months with no data (like the 2025 shutdown gap) are left out."""
+    if series_id not in _FRED:
+        r = requests.get("https://api.stlouisfed.org/fred/series/observations",
+                         params={"series_id": series_id, "api_key": os.environ["FRED_API_KEY"],
+                                 "file_type": "json", "observation_start": "1980-01-01"}, timeout=30)
+        r.raise_for_status()
+        _FRED[series_id] = {o["date"][:7]: float(o["value"]) for o in r.json()["observations"] if o["value"] != "."}
+    return _FRED[series_id]
+
+
+def price_candidates():
+    return [f"prices__{g}__{y}" for g in PRICE_GROUPS for y in PRICE_YEARS]
+
+
+def build_prices(topic_id):
+    """$100 of each item in a start year, and what the same amount costs at the latest price."""
+    _, group, year = topic_id.split("__")
+    year = int(year)
+    theme, things = PRICE_GROUPS[group]
+    latest_month = None
+    items, details = [], []
+    for series_id, name, what in things:
+        m = fred_monthly(series_id)
+        start = [v for k, v in m.items() if k.startswith(f"{year}-")]
+        if len(start) < 6:  # not tracked that year
+            continue
+        base = sum(start) / len(start)                 # that year's average price
+        last = max(m)
+        latest_month = max(latest_month or last, last)
+        end = 100 * m[last] / base
+        series = [[round(int(k[:4]) + (int(k[5:]) - 1) / 12, 3), round(100 * v / base, 2)]
+                  for k, v in sorted(m.items()) if int(k[:4]) >= year]
+        series[0][1] = 100.0
+        items.append(make_item(name, name, 100.0, end, "usd0", year=year, series=series))
+        details.append({"item": name, "what": what, "price_then": f"${base:.2f}", "price_now": f"${m[last]:.2f}"})
+    if len(items) < 4:
+        raise ValueError(f"only {len(items)} items were tracked in {year}")
+
+    payload = finish({
+        "topic": topic_id,
+        "recipe": "prices",
+        "music_pool": "invest",
+        "flip": True,   # the one that went up the most is the bad news
+        "unit": "usd0",
+        "items": items,
+        "start_label": f"$100 worth in {year}",
+        "end_label": "Costs today",
+        "start_order": "given",
+        "race": True,
+        "badges": {"top": "UP THE MOST", "bottom": "UP THE LEAST"},
+        "angle": f"$100 of each of these {theme} in {year}. How much does the same amount cost today, "
+                 f"and which one got the most expensive?",
+        "notes": "US city average prices, Bureau of Labor Statistics (via FRED). Start = that year's average price.",
+        "on_screen_source": f"Source: US BLS average prices (FRED), {year} vs "
+                            f"{date.fromisoformat(latest_month + '-01'):%b %Y}",
+        "data_as_of": latest_month,
+    })
+    payload["facts"]["prices"] = details
+    return payload
+
+
 # ---------- registry ----------
 def all_candidates():
-    return invest_candidates() + wb_candidates()
+    return invest_candidates() + wb_candidates() + price_candidates()
 
 
 def build(topic_id):
@@ -448,6 +531,8 @@ def build(topic_id):
         return build_invest(topic_id)
     if topic_id.startswith("wb__"):
         return build_wb(topic_id)
+    if topic_id.startswith("prices__"):
+        return build_prices(topic_id)
     if topic_id == "gta_launch_prices":
         return build_gta_launch_prices(topic_id)
     if topic_id.startswith("consoles__"):
