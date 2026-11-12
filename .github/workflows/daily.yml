@@ -47,6 +47,7 @@ jobs:
       LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
       UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
       UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
       TZ: America/Toronto

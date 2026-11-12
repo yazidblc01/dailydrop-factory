@@ -1,16 +1,17 @@
-"""Posts a finished video through Upload-Post to every platform in config.PLATFORMS
-(YouTube, Facebook, and later TikTok and Instagram). Upload-Post is already approved by each platform.
+"""Posts a finished video to every platform in config.PLATFORMS (YouTube, Facebook, later TikTok and Instagram).
 
-Needs in .env (or GitHub secrets):
-    UPLOAD_POST_API_KEY=...
-    UPLOAD_POST_USER=dailydrop
+Two posting services, picked by config.POSTER:
+    "zernio"       free for 2 accounts with unlimited posts (needs ZERNIO_API_KEY, account IDs in config.py)
+    "upload_post"  the old one, kept as a backup (needs UPLOAD_POST_API_KEY and UPLOAD_POST_USER)
+Both are already approved by each platform, so videos go public (a home-made YouTube app would be stuck private).
 
 Every post is recorded in data/posts.json (kept in the repo) so a later run can find the live links
-of a scheduled post.
+of a scheduled post. Old Upload-Post records keep being checked after the switch.
 
     python -m engine.upload <topic>                        post a rendered video right now, everywhere
-    python -m engine.upload <topic> --only facebook        post it only there (e.g. catch up a video that
-                                                           is already on YouTube); not recorded in posts.json
+    python -m engine.upload <topic> --only facebook        post it only there (a catch-up); not recorded in posts.json
+    python -m engine.upload --draft [topic]                test: sends the newest rendered video to Zernio as a
+                                                           draft (nothing gets published); not recorded
     python -m engine.upload --check                        look up live links of scheduled posts
 """
 import json
@@ -22,12 +23,13 @@ from datetime import datetime, timezone
 import requests
 from dotenv import load_dotenv
 
-from config import AI_LABEL, DATA_DIR, MEDIA_DIR, PLATFORMS
+from config import AI_LABEL, DATA_DIR, MEDIA_DIR, PLATFORMS, POSTER, ZERNIO_ACCOUNTS
 from engine.render import music_credit
 from engine.schedule import TZ_NAME
 
 load_dotenv()
 API = "https://api.upload-post.com/api"
+ZAPI = "https://zernio.com/api/v1"
 POSTS = DATA_DIR / "posts.json"
 CATEGORY_EDUCATION = "27"
 POLL_EVERY, POLL_MAX = 15, 900  # seconds
@@ -37,6 +39,7 @@ TAGS = {
     "invest": ["investing", "stocks", "stock market", "finance", "money", "data"],
     "gta": ["gta 6", "gta vi", "gta", "grand theft auto", "gaming", "rockstar"],
     "wb": ["economy", "countries", "world", "gdp", "data", "geography"],
+    "prices": ["inflation", "prices", "groceries", "cost of living", "money", "data"],
 }
 DOMAINS = {"youtube": ("youtu",), "facebook": ("facebook.com", "fb.watch"),
            "instagram": ("instagram.com",), "tiktok": ("tiktok.com",)}
@@ -44,11 +47,18 @@ DOMAINS = {"youtube": ("youtu",), "facebook": ("facebook.com", "fb.watch"),
 
 # ---------- small helpers ----------
 def recipe_of(topic):
-    if topic.startswith("invest__"):
-        return "invest"
-    if topic.startswith("wb__"):
-        return "wb"
+    for prefix in ("invest", "wb", "prices"):
+        if topic.startswith(prefix + "__"):
+            return prefix
     return "gta"
+
+
+def description_of(topic, meta):
+    description = meta["description"]
+    credit = music_credit(topic)
+    if credit:
+        description += "\n\n🎵 " + credit  # the free music license requires the credit
+    return description[:4900]
 
 
 def headers(topic=None, suffix=""):
@@ -116,10 +126,7 @@ def status(**params):
 # ---------- what each platform gets ----------
 def build_fields(topic, meta, user, when, platforms):
     title = meta["title"][:100]
-    description = meta["description"]
-    credit = music_credit(topic)
-    if credit:
-        description += "\n\n🎵 " + credit  # the free music license requires the credit
+    description = description_of(topic, meta)
     caption = f"{meta['title']}\n\n{description}"  # TikTok and Instagram have one text field
 
     fields = [("user", user), ("title", title), ("description", description[:4900]), ("external_id", topic)]
@@ -152,8 +159,8 @@ def build_fields(topic, meta, user, when, platforms):
     return fields
 
 
-# ---------- posting ----------
-def post(topic, when=None, only=None):
+# ---------- posting through Upload-Post (backup) ----------
+def up_post(topic, when=None, only=None):
     """Uploads media/<topic>/final.mp4 to every platform in PLATFORMS.
 
     when: a Toronto datetime to publish at (Upload-Post holds it until then), or None to publish now.
@@ -218,30 +225,215 @@ def post(topic, when=None, only=None):
     return {"status": "live", "url": urls[primary], "urls": urls, "errors": errors}
 
 
+def up_check(topic, p, found, failed):
+    """Status of one Upload-Post record (also used for posts made before the switch to Zernio)."""
+    try:
+        s = status(job_id=p["job_id"]) if p.get("job_id") else status(request_id=p["request_id"])
+    except (requests.RequestException, ValueError) as e:
+        print(f"  status check failed for {topic}: {e}")
+        return
+    urls = find_urls(s)
+    if urls.get(PRIMARY):
+        save_post(topic, urls=urls)
+        found.append((p.get("title", topic), urls))
+        return
+    errors = find_errors(s)
+    if errors and overdue(p):
+        save_post(topic, failed=" | ".join(errors))
+        failed.append((p.get("title", topic), " | ".join(errors)))
+
+
+def overdue(p, grace_minutes=30):
+    when = p.get("when")
+    if not when:
+        return True
+    return datetime.fromisoformat(when).timestamp() + grace_minutes * 60 < time.time()
+
+
+# ---------- posting through Zernio (main) ----------
+def zheaders():
+    key = os.environ.get("ZERNIO_API_KEY")
+    if not key:
+        raise RuntimeError("ZERNIO_API_KEY missing")
+    return {"Authorization": f"Bearer {key}"}
+
+
+def zjson(r, what):
+    body = r.json() if r.headers.get("content-type", "").startswith("application/json") else {"raw": r.text[:500]}
+    if r.status_code >= 400:
+        raise RuntimeError(f"Zernio refused the {what} ({r.status_code}): {body}")
+    return body
+
+
+def zernio_links(post_obj):
+    """({platform: url}, [errors]) from a Zernio post."""
+    urls, errors = {}, []
+    for t in post_obj.get("platforms", []):
+        name = t.get("platform")
+        if t.get("platformPostUrl"):
+            urls[name] = t["platformPostUrl"]
+        elif t.get("status") == "failed":
+            errors.append(f"{name}: {t.get('errorMessage') or t.get('error') or 'failed'}")
+    return urls, errors
+
+
+def zget(post_id):
+    r = requests.get(f"{ZAPI}/posts/{post_id}", headers=zheaders(), timeout=60)
+    body = zjson(r, "status check")
+    return body.get("post", body)
+
+
+def zernio_body(topic, meta, media_url, when, platforms, draft):
+    title = meta["title"][:100]
+    description = description_of(topic, meta)
+    targets, missing = [], []
+    for p in platforms:
+        account = ZERNIO_ACCOUNTS.get(p)
+        if not account:
+            missing.append(p)
+            continue
+        data = {}
+        if p == "youtube":
+            data = {"title": title, "visibility": "public", "categoryId": CATEGORY_EDUCATION,
+                    "madeForKids": False, "containsSyntheticMedia": False}
+        elif p == "facebook":
+            data = {"contentType": "reel", "title": title}
+        elif p == "instagram":
+            data = {"isAiGenerated": bool(AI_LABEL)}
+        elif p == "tiktok":
+            data = {"videoMadeWithAi": bool(AI_LABEL), "content_preview_confirmed": True,
+                    "express_consent_given": True}
+        if meta.get("pinned_comment") and p in ("youtube", "facebook", "instagram"):
+            data["firstComment"] = meta["pinned_comment"]
+        targets.append({"platform": p, "accountId": account, "platformSpecificData": data})
+    if missing:
+        print(f"      no Zernio account for {', '.join(missing)} (add its ID to ZERNIO_ACCOUNTS in config.py)")
+    if not targets:
+        raise RuntimeError("No Zernio account set for any platform in PLATFORMS")
+
+    body = {"content": description, "tags": TAGS[recipe_of(topic)],
+            "mediaItems": [{"type": "video", "url": media_url}], "platforms": targets}
+    if draft:
+        body["isDraft"] = True
+    elif when:
+        body["scheduledFor"] = when.strftime("%Y-%m-%dT%H:%M:%S")
+        body["timezone"] = TZ_NAME
+    else:
+        body["publishNow"] = True
+    return body
+
+
+def z_post(topic, when=None, only=None, draft=False):
+    out = MEDIA_DIR / topic
+    meta = json.loads((out / "upload.json").read_text())
+    platforms = only or PLATFORMS
+    primary = PRIMARY if PRIMARY in platforms else platforms[0]
+    record = not only and not draft
+    known = load_posts().get(topic, {}) if record else {}
+    if known.get("url"):
+        print(f"Already posted: {known['url']}")
+        return {"status": "live", "url": known["url"], "urls": known.get("urls", {}), "errors": []}
+    if known.get("zernio_id") or known.get("job_id"):
+        print(f"Already scheduled for {known.get('when')}")
+        return {"status": "scheduled", "job_id": known.get("zernio_id") or known.get("job_id"), "when": known.get("when")}
+
+    # 1. upload the video file to Zernio's storage
+    r = requests.post(f"{ZAPI}/media/presign", headers=zheaders(), timeout=60,
+                      json={"filename": f"{topic}.mp4", "contentType": "video/mp4"})
+    pre = zjson(r, "upload link")
+    with open(out / "final.mp4", "rb") as f:
+        up = requests.put(pre["uploadUrl"], data=f, headers={"Content-Type": "video/mp4"}, timeout=600)
+    if up.status_code >= 400:
+        raise RuntimeError(f"Video upload to Zernio failed ({up.status_code}): {up.text[:300]}")
+
+    # 2. create the post
+    r = requests.post(f"{ZAPI}/posts", headers=zheaders(), timeout=120,
+                      json=zernio_body(topic, meta, pre["publicUrl"], when, platforms, draft))
+    created = zjson(r, "post")
+    p = created.get("post", created)
+    post_id = p.get("_id") or p.get("id")
+    if draft:
+        return {"status": "draft", "id": post_id, "post_status": p.get("status")}
+
+    base = {"title": meta["title"], "platforms": platforms, "service": "zernio", "zernio_id": post_id,
+            "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    if when:
+        if record:
+            save_post(topic, **base, when=when.isoformat())
+        return {"status": "scheduled", "job_id": post_id, "when": when.isoformat()}
+
+    # 3. posting now: wait for the links
+    urls, errors = zernio_links(p)
+    if record:
+        save_post(topic, **base, urls=urls)
+    waited = 0
+    while waited < POLL_MAX and not all(x in urls for x in platforms):
+        missing = [x for x in platforms if x not in urls]
+        if primary in urls and len(errors) >= len(missing):
+            break  # the main platform is live and the rest reported an error
+        if errors and primary not in urls and len(errors) >= len(platforms):
+            raise RuntimeError("Upload failed: " + " | ".join(errors))
+        time.sleep(POLL_EVERY)
+        waited += POLL_EVERY
+        try:
+            urls, errors = zernio_links(zget(post_id))
+        except (requests.RequestException, RuntimeError) as e:
+            print(f"      status check hiccup: {e}")
+        print(f"      waiting for the platforms... {waited}s ({', '.join(x for x in platforms if x not in urls)})")
+    if primary not in urls:
+        raise RuntimeError(f"No {primary} link after {waited}s (Zernio post {post_id}). {' | '.join(errors)}")
+    if record:
+        save_post(topic, urls=urls)
+    return {"status": "live", "url": urls[primary], "urls": urls, "errors": errors}
+
+
+def z_check(topic, p, found, failed):
+    try:
+        post_obj = zget(p["zernio_id"])
+    except (requests.RequestException, RuntimeError, ValueError) as e:
+        print(f"  status check failed for {topic}: {e}")
+        return
+    urls, errors = zernio_links(post_obj)
+    if urls.get(PRIMARY):
+        save_post(topic, urls=urls)
+        found.append((p.get("title", topic), urls))
+    elif (errors or post_obj.get("status") == "failed") and overdue(p):
+        msg = " | ".join(errors) or "failed"
+        save_post(topic, failed=msg)
+        failed.append((p.get("title", topic), msg))
+
+
+# ---------- what run.py calls ----------
+def post(topic, when=None, only=None):
+    """Uploads media/<topic>/final.mp4 to every platform in PLATFORMS, through config.POSTER.
+    when: a Toronto datetime to publish at, or None to publish now.
+    Returns {"status": "live", "url": ..., "urls": {...}, "errors": [...]}
+         or {"status": "scheduled", "job_id": ..., "when": ...}."""
+    if POSTER == "upload_post":
+        return up_post(topic, when, only)
+    return z_post(topic, when, only)
+
+
 def check_live():
     """Looks up scheduled posts that have gone live since.
     Returns ([(title, {platform: url})] newly live, [(title, error)] failed)."""
     found, failed = [], []
     for topic, p in load_posts().items():
-        if p.get("url") or p.get("failed") or not (p.get("job_id") or p.get("request_id")):
+        if p.get("url") or p.get("failed"):
             continue
-        try:
-            s = status(job_id=p["job_id"]) if p.get("job_id") else status(request_id=p["request_id"])
-        except (requests.RequestException, ValueError) as e:
-            print(f"  status check failed for {topic}: {e}")
-            continue
-        urls = find_urls(s)
-        if urls.get(PRIMARY):
-            save_post(topic, urls=urls)
-            found.append((p.get("title", topic), urls))
-            continue
-        errors = find_errors(s)
-        when = p.get("when")
-        overdue = when and datetime.fromisoformat(when) < datetime.now(timezone.utc).astimezone()
-        if errors and overdue:
-            save_post(topic, failed=" | ".join(errors))
-            failed.append((p.get("title", topic), " | ".join(errors)))
+        if p.get("zernio_id"):
+            z_check(topic, p, found, failed)
+        elif p.get("job_id") or p.get("request_id"):
+            up_check(topic, p, found, failed)
     return found, failed
+
+
+def newest_rendered():
+    videos = sorted(MEDIA_DIR.glob("*/final.mp4"), key=lambda f: f.stat().st_mtime, reverse=True)
+    videos = [v for v in videos if (v.parent / "upload.json").exists()]
+    if not videos:
+        raise SystemExit("No rendered video with an upload.json in media/")
+    return videos[0].parent.name
 
 
 if __name__ == "__main__":
@@ -249,6 +441,11 @@ if __name__ == "__main__":
         f, x = check_live()
         print("Live:", f or "none new")
         print("Failed:", x or "none")
+    elif len(sys.argv) > 1 and sys.argv[1] == "--draft":
+        t = sys.argv[2] if len(sys.argv) > 2 else newest_rendered()
+        print(f"Sending {t} to Zernio as a draft (nothing gets published)...")
+        print(z_post(t, draft=True))
+        print("Open the Zernio dashboard to see the draft, then delete it there.")
     else:
         args = sys.argv[1:]
         only = None
