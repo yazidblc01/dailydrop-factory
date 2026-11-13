@@ -24,7 +24,12 @@
     "zernio_id": "6af6026ecd146ddaf18fa1bf",
     "posted_at": "2026-11-12T18:16:15+00:00",
     "when": "2026-11-12T19:00:00-05:00",
-    "slot": "gta"
+    "slot": "gta",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=G47uLuZFnLA",
+      "facebook": "https://www.facebook.com/reel/1888025532374847"
+    },
+    "url": "https://www.youtube.com/watch?v=G47uLuZFnLA"
   },
   "invest__energy__2008": {
     "title": "$1,000 in 2008: Which Oil Giant Made You the Most?",
@@ -36,7 +41,12 @@
     "zernio_id": "6af60bc452078b325954a9cf",
     "posted_at": "2026-11-12T18:56:06+00:00",
     "when": "2026-11-12T16:00:00-05:00",
-    "slot": "main"
+    "slot": "main",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=K6c8jPMqTvs",
+      "facebook": "https://www.facebook.com/reel/998023446115510"
+    },
+    "url": "https://www.youtube.com/watch?v=K6c8jPMqTvs"
   },
   "texts__gta5_launch": {
     "title": "I texted myself at the GTA V midnight launch \ud83d\udc80",
