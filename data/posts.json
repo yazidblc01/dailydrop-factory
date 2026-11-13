@@ -59,5 +59,17 @@
     "posted_at": "2026-11-12T20:39:40+00:00",
     "when": "2026-11-13T19:00:00-05:00",
     "slot": "gta"
+  },
+  "texts__ps4_nvidia": {
+    "title": "I texted my 2013 self about a $399 PS4 \ud83c\udfae",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6af757acb1a21504ee728e8d",
+    "posted_at": "2026-11-13T18:32:13+00:00",
+    "when": "2026-11-13T17:00:00-05:00",
+    "slot": "main"
   }
 }
