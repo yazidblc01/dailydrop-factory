@@ -54,9 +54,12 @@ def bad_invest():
     return {t for t, r in json.loads(POOL.read_text())["topics"].items() if r["status"] == "data"}
 
 
-def candidates():
+GAMING_GROUPS = ["gamer_gear", "gaming"]
+
+
+def candidates(groups=None):
     for year in YEAR_ORDER:
-        for group in recipes.INVEST_GROUPS:
+        for group in groups or recipes.INVEST_GROUPS:
             yield group, year
 
 
@@ -104,12 +107,12 @@ def build(group, year):
     return topic, props, meta
 
 
-def pick():
+def pick(groups=None, recent=RECENT):
     """The next qualifying video: not made before, and not the same hero as the last few."""
     done = done_list()
-    recent_heroes = {t.split("__")[1] for t in done[-RECENT:]}
+    recent_heroes = {t.split("__")[1] for t in done[-recent:]} if recent else set()
     skip = bad_invest()
-    for group, year in candidates():
+    for group, year in candidates(groups):
         if f"invest__{group}__{year}" in skip:
             continue
         try:
@@ -137,14 +140,14 @@ def pick_music(topic):
     return name, float(lib.get(name, {}).get("start", 0))
 
 
-def make(group=None, year=None, dry=False):
-    """Builds one video. Returns (topic, final path), like run.make."""
+def make(group=None, year=None, dry=False, gaming=False):
+    """Builds one video. Returns (topic, final path), like run.make. gaming=True: the GTA slot (gaming groups only)."""
     if group:
         got = build(group, int(year))
         if not got:
             raise RuntimeError(f"{group} {year} is not tall enough (needs {MIN_CM} cm)")
     else:
-        got = pick()
+        got = pick(GAMING_GROUPS, recent=1) if gaming else pick()
     topic, props, meta = got
     out = MEDIA_DIR / topic
     out.mkdir(parents=True, exist_ok=True)

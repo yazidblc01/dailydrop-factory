@@ -139,15 +139,26 @@ def todays_format(day=None):
     return "scale" if (n // 3) % 2 == 0 else "data"
 
 
+GTA_LAUNCH = "ttwo_gta_days"
+GTA6_LAUNCH_DAY = date(2026, 11, 19)  # GTA 6 launch day (Nov 19): $1,000 in Take-Two on each GTA launch day
+
+
+def gta_formats(day=None):
+    """The 7 PM GTA slot: gaming texts, with a gaming money-to-scale every third day (other days than the main slot's)."""
+    n = (day or datetime.now(schedule.TZ).date()).toordinal()
+    return ["scale", "texts"] if n % 3 == 1 else ["texts", "scale"]
+
+
 def make_quick(kind, dry=False, publish=True, now=False, slot="main", arg=None):
     """Texts and money-to-scale videos: no voice step, the module builds and renders everything."""
     t0 = time.time()
+    gaming = slot == "gta"
     if kind == "texts":
-        print("[1/3] Texts from the future: facts + chat")
-        topic, final = texts.make(arg, dry)
+        print("[1/3] Texts from the future: facts + chat" + (" (gaming)" if gaming else ""))
+        topic, final = texts.make(arg, dry, "gaming" if gaming else "main")
     else:
-        print("[1/3] Money to scale: data + props")
-        topic, final = moneyscale.make(*(arg or (None, None)), dry=dry)
+        print("[1/3] Money to scale: data + props" + (" (gaming)" if gaming else ""))
+        topic, final = moneyscale.make(*(arg or (None, None)), dry=dry, gaming=gaming)
     if dry:
         return topic, None
     topics.mark_done(topic)
@@ -180,6 +191,19 @@ def make(topic=None, dry=False, publish=True, now=False, slot="main", fmt="auto"
                     raise
                 print(f"{kind} video failed, making a data reel instead: {e}")
                 telegram(f"⚠️ {kind} video failed, posting a data reel today instead.\n{e}")
+    if not topic and slot == "gta" and fmt == "auto":
+        today = datetime.now(schedule.TZ).date()
+        if today == GTA6_LAUNCH_DAY and GTA_LAUNCH not in topics.load_history()["done"]:
+            topic = GTA_LAUNCH  # launch day keeps its own reel
+        else:
+            errors = []
+            for kind in gta_formats(today):
+                try:
+                    return make_quick(kind, dry, publish, now, slot)
+                except Exception as e:  # try the other format, then the GTA data pool
+                    errors.append(f"{kind}: {e}")
+                    print(f"GTA {kind} video failed: {e}")
+            telegram("⚠️ GTA slot: texts and money-to-scale both failed, posting a GTA data reel instead.\n" + "\n".join(errors))
     t0 = time.time()
     if topic:
         print(f"[1/6] Data: {topic}")

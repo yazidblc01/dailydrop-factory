@@ -539,11 +539,8 @@ def build_since(topic_id):
 
 # GTA month (engine/schedule.py GTA_START to GTA_END, Nov 12 to 30): a second Short a day at 7 PM, in this order.
 # The first unused topic that builds and passes the race check is made; the rest are spares.
-GTA_POOL = [
-    "gta_launch_prices",        # Thu Nov 12: GTA 6 is the priciest GTA ever, a week before launch
-    "consoles__playstation",
+GTA_POOL = [  # fallback for the 7 PM GTA slot when no texts or money-to-scale video can be made
     "since__gaming__trailer1",  # gaming stocks since the first GTA 6 trailer
-    "consoles__xbox",
     "ttwo_gta6_news",           # Take-Two on each GTA 6 news day: reveal, trailers, delays
     "invest__gamer_gear__2015",
     "since__gaming__gta5",      # gaming stocks since GTA V launch day

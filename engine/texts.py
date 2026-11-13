@@ -25,6 +25,9 @@ from engine.script import numbers_in
 STORIES = DATA_DIR / "text_stories.csv"
 PREFIX = "texts__"
 LOW_STOCK = 6
+# gaming stories, in the order the 7 PM GTA slot uses them; the main slot leaves them alone during GTA month
+GAMING = ["ps4_nvidia", "gta6_trailer_ttwo", "switch_2017", "rdr2_ttwo", "ps5_amd", "xbox360_2005", "gtx1080_2016",
+          "ps3_2006", "minecraft_2014", "steamdeck_amd", "wii_2006", "pokemon_go_2016", "gme_tradein_2019", "gme_moon"]
 MAX_DURATION = 26.0
 ALWAYS_OK = set(range(0, 13)) | {20, 24, 50, 100}  # "2 years", "24/7", "100%"... harmless small numbers
 
@@ -45,6 +48,17 @@ def used_ids():
 def left_count():
     used = used_ids()
     return sum(1 for s in load_stories() if s["id"] not in used)
+
+
+def queue(pool="main"):
+    """Unused stories in the order they will be used. pool "gaming" = the GTA slot."""
+    from engine import schedule
+    used = used_ids()
+    stories = {s["id"]: s for s in load_stories()}
+    if pool == "gaming":
+        return [stories[i] for i in GAMING if i in stories and i not in used]
+    hold = set(GAMING) if schedule.gta_week() else set()
+    return [s for s in stories.values() if s["id"] not in used and s["id"] not in hold]
 
 
 def pairs(field):
@@ -270,16 +284,15 @@ def write(story, max_tries=3):
     raise RuntimeError(f"no good chat for {story['id']}: {feedback}")
 
 
-def make(story_id=None, dry=False):
+def make(story_id=None, dry=False, pool="main"):
     """Builds one texts video. Returns (topic, final path) like run.make does. Raises if nothing is left."""
     stories = {s["id"]: s for s in load_stories()}
     if story_id:
         order = [stories[story_id]]
     else:
-        used = used_ids()
-        order = [s for s in stories.values() if s["id"] not in used]
+        order = queue(pool)
         if not order:
-            raise RuntimeError("no texts stories left")
+            raise RuntimeError(f"no {pool} texts stories left")
     last_err = None
     for story in order:
         try:
@@ -327,13 +340,14 @@ if __name__ == "__main__":
     ap.add_argument("story", nargs="?")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--gaming", action="store_true", help="the GTA slot's gaming stories")
     a = ap.parse_args()
     if a.list:
-        used = used_ids()
-        for s in load_stories():
-            print(("  used  " if s["id"] in used else "  ready ") + s["id"])
-        print(f"{left_count()} ready")
+        q = queue("gaming" if a.gaming else "main")
+        for n, s in enumerate(q, 1):
+            print(f"  {n:>2}. {s['id']}")
+        print(f"{len(q)} ready ({'gaming, GTA slot' if a.gaming else 'main slot'})")
         sys.exit()
-    topic, final = make(a.story, a.dry)
+    topic, final = make(a.story, a.dry, "gaming" if a.gaming else "main")
     if final:
         print(f"\nRendered {final}")
