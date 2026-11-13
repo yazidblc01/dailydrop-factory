@@ -10,6 +10,7 @@
     python run.py --once-a-day             skips if today's video already exists (used by the backup morning runs)
     python run.py --slot gta               the GTA month Short (7 PM, GTA pool); does nothing outside GTA month
     python run.py --format texts           force a texts-from-the-future video (default: texts 2 days out of 3)
+    python run.py --format scale           force a money-to-scale video (the third day alternates scale / data reel)
     python run.py texts__doge_snl          a specific texts story (ids in data/text_stories.csv)
 
     python run.py --preflight              only tests the API keys (seconds, costs nothing)
@@ -26,7 +27,7 @@ import requests
 from dotenv import load_dotenv
 
 from config import MEDIA_DIR, POSTER
-from engine import audit, data, render, schedule, script, texts, topics, upload, voice
+from engine import audit, data, moneyscale, render, schedule, script, texts, topics, upload, voice
 
 load_dotenv()
 
@@ -130,24 +131,33 @@ def preflight(posting=True):
     print("      keys OK")
 
 
-def texts_day(day=None):
-    """The daily slot rotates texts, texts, data reel."""
-    return (day or datetime.now(schedule.TZ).date()).toordinal() % 3 != 0
+def todays_format(day=None):
+    """The daily slot rotates texts, texts, then money-to-scale and the data reel taking turns."""
+    n = (day or datetime.now(schedule.TZ).date()).toordinal()
+    if n % 3:
+        return "texts"
+    return "scale" if (n // 3) % 2 == 0 else "data"
 
 
-def make_texts(story_id=None, dry=False, publish=True, now=False, slot="main"):
+def make_quick(kind, dry=False, publish=True, now=False, slot="main", arg=None):
+    """Texts and money-to-scale videos: no voice step, the module builds and renders everything."""
     t0 = time.time()
-    print("[1/3] Texts from the future: facts + chat")
-    topic, final = texts.make(story_id, dry)
+    if kind == "texts":
+        print("[1/3] Texts from the future: facts + chat")
+        topic, final = texts.make(arg, dry)
+    else:
+        print("[1/3] Money to scale: data + props")
+        topic, final = moneyscale.make(*(arg or (None, None)), dry=dry)
     if dry:
         return topic, None
     topics.mark_done(topic)
-    try:
-        left = texts.left_count()
-        if left < texts.LOW_STOCK:
-            telegram(f"⚠️ Only {left} texts stories left. Time to add more to data/text_stories.csv.")
-    except Exception as e:  # the stock check must never stop today's video
-        print(f"Stock check skipped: {e}")
+    if kind == "texts":
+        try:
+            left = texts.left_count()
+            if left < texts.LOW_STOCK:
+                telegram(f"⚠️ Only {left} texts stories left. Time to add more to data/text_stories.csv.")
+        except Exception as e:  # the stock check must never stop today's video
+            print(f"Stock check skipped: {e}")
     print(f"[2/3] Video done in {(time.time() - t0) / 60:.1f} min: {final}")
     if publish:
         post(topic, now, slot)
@@ -159,15 +169,17 @@ def make_texts(story_id=None, dry=False, publish=True, now=False, slot="main"):
 
 def make(topic=None, dry=False, publish=True, now=False, slot="main", fmt="auto"):
     if topic and topic.startswith(texts.PREFIX):
-        return make_texts(topic[len(texts.PREFIX):], dry, publish, now, slot)
-    if not topic and slot == "main" and (fmt == "texts" or (fmt == "auto" and texts_day())):
-        try:
-            return make_texts(None, dry, publish, now, slot)
-        except Exception as e:  # no story left or a hiccup: today becomes a data reel, the day never breaks
-            if fmt == "texts":
-                raise
-            print(f"Texts video failed, making a data reel instead: {e}")
-            telegram(f"⚠️ Texts video failed, posting a data reel today instead.\n{e}")
+        return make_quick("texts", dry, publish, now, slot, topic[len(texts.PREFIX):])
+    if not topic and slot == "main":
+        kind = todays_format() if fmt == "auto" else fmt
+        if kind in ("texts", "scale"):
+            try:
+                return make_quick(kind, dry, publish, now, slot)
+            except Exception as e:  # nothing left or a hiccup: today becomes a data reel, the day never breaks
+                if fmt != "auto":
+                    raise
+                print(f"{kind} video failed, making a data reel instead: {e}")
+                telegram(f"⚠️ {kind} video failed, posting a data reel today instead.\n{e}")
     t0 = time.time()
     if topic:
         print(f"[1/6] Data: {topic}")
@@ -220,7 +232,7 @@ if __name__ == "__main__":
     ap.add_argument("--once-a-day", action="store_true")
     ap.add_argument("--slot", choices=["main", "gta"], default="main")
     ap.add_argument("--preflight", action="store_true")
-    ap.add_argument("--format", choices=["auto", "texts", "data"], default="auto")
+    ap.add_argument("--format", choices=["auto", "texts", "scale", "data"], default="auto")
     a = ap.parse_args()
     try:
         if a.preflight:

@@ -1,0 +1,14 @@
+{
+  "theme": "money",
+  "duration": 22.5,
+  "kicker": "$10,000 IN NVIDIA IN 2015",
+  "question": "How tall is it now, in $100 bills?",
+  "hero": {"label": "Nvidia", "value": 3605230},
+  "loser": {"label": "Intel", "value": 22400},
+  "years": [2015, 2026],
+  "series": [[0,10000],[0.1,16000],[0.2,29000],[0.3,65000],[0.4,80000],[0.5,140000],[0.6,220000],[0.7,180000],[0.8,600000],[0.9,1900000],[1,3605230]],
+  "sourceLabel": "Source: Yahoo Finance, adjusted close, 2015 to Nov 2026. A $100 bill is 0.109 mm thick.",
+  "growStart": 2.6,
+  "growEnd": 17,
+  "compareAt": 18.2
+}

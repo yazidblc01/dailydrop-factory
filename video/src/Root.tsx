@@ -5,6 +5,8 @@ import current from '../props/current.json';
 import story from '../props/story.json';
 import {StoryReel, StoryProps} from './StoryReel';
 import {TextsFuture, TFProps} from './TextsFuture';
+import {MoneyScale, MSProps} from './MoneyScale';
+import ms from '../props/ms.json';
 import tf from '../props/tf.json';
 
 const FPS = 30;
@@ -45,6 +47,18 @@ export const RemotionRoot: React.FC = () => {
       fps={FPS}
       durationInFrames={Math.ceil((tf as unknown as TFProps).duration * FPS)}
       defaultProps={tf as unknown as TFProps}
+      calculateMetadata={({props}) => ({
+        durationInFrames: Math.ceil(props.duration * FPS),
+      })}
+    />
+    <Composition
+      id="MoneyScale"
+      component={MoneyScale}
+      width={1080}
+      height={1920}
+      fps={FPS}
+      durationInFrames={Math.ceil((ms as unknown as MSProps).duration * FPS)}
+      defaultProps={ms as unknown as MSProps}
       calculateMetadata={({props}) => ({
         durationInFrames: Math.ceil(props.duration * FPS),
       })}
