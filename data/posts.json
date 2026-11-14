@@ -58,7 +58,12 @@
     "zernio_id": "6af6240c72e4d6c09be3856c",
     "posted_at": "2026-11-12T20:39:40+00:00",
     "when": "2026-11-13T19:00:00-05:00",
-    "slot": "gta"
+    "slot": "gta",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=KEi--c-g2fo",
+      "facebook": "https://www.facebook.com/reel/1766024074495286"
+    },
+    "url": "https://www.youtube.com/watch?v=KEi--c-g2fo"
   },
   "texts__ps4_nvidia": {
     "title": "I texted my 2013 self about a $399 PS4 \ud83c\udfae",
@@ -70,6 +75,11 @@
     "zernio_id": "6af757acb1a21504ee728e8d",
     "posted_at": "2026-11-13T18:32:13+00:00",
     "when": "2026-11-13T17:00:00-05:00",
-    "slot": "main"
+    "slot": "main",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=gvxN90FT2TA",
+      "facebook": "https://www.facebook.com/reel/2361366788039613"
+    },
+    "url": "https://www.youtube.com/watch?v=gvxN90FT2TA"
   }
 }
