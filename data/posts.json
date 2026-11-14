@@ -97,5 +97,17 @@
     "posted_at": "2026-11-14T17:04:10+00:00",
     "url": "https://www.youtube.com/watch?v=ot37-ib97r4",
     "slot": "main"
+  },
+  "texts__gta6_trailer_ttwo": {
+    "title": "I texted my past self about GTA 6 stock \ud83d\udc80",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6af8d361a654d73f8b42e367",
+    "posted_at": "2026-11-14T21:32:18+00:00",
+    "when": "2026-11-14T19:00:00-05:00",
+    "slot": "gta"
   }
 }
