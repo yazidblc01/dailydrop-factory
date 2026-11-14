@@ -81,5 +81,21 @@
       "facebook": "https://www.facebook.com/reel/2361366788039613"
     },
     "url": "https://www.youtube.com/watch?v=gvxN90FT2TA"
+  },
+  "texts__ipod_2001": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=ot37-ib97r4",
+      "facebook": "https://www.facebook.com/reel/1520831963206580"
+    },
+    "title": "I texted myself about the $399 iPod \ud83d\ude2d",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6af8947c36770c3dccc6206c",
+    "posted_at": "2026-11-14T17:04:10+00:00",
+    "url": "https://www.youtube.com/watch?v=ot37-ib97r4",
+    "slot": "main"
   }
 }
