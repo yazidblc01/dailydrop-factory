@@ -11,6 +11,7 @@ the numbers and the text are all built here, so a video costs nothing.
 import argparse
 import json
 import subprocess
+import sys
 from datetime import date
 
 from config import DATA_DIR, MEDIA_DIR
@@ -93,6 +94,12 @@ def build(group, year):
         "growStart": grow_start,
         "growEnd": round(grow_end, 2),
         "compareAt": round(compare_at, 2),
+        # editorial design (EdScale 3D, EdScaleFlat backup); the fields above feed the old MoneyScale last resort
+        "pal": "paper",
+        "label": "MONEY TO SCALE",
+        "hookA": f"$10,000 of {hero['label']}, bought in {year}.",
+        "hookB": "Stacked in $100 bills, how tall is it now?",
+        "edDuration": round(grow_end + 7.6, 2),
     }
     h, l = hero["label"], loser["label"]
     meta = {
@@ -140,7 +147,7 @@ def pick_music(topic):
     return name, float(lib.get(name, {}).get("start", 0))
 
 
-def make(group=None, year=None, dry=False, gaming=False):
+def make(group=None, year=None, dry=False, gaming=False, flat_only=False):
     """Builds one video. Returns (topic, final path), like run.make. gaming=True: the GTA slot (gaming groups only)."""
     if group:
         got = build(group, int(year))
@@ -162,10 +169,30 @@ def make(group=None, year=None, dry=False, gaming=False):
     print(f"      {props['hero']['label']} {money(props['hero']['value'])} vs {props['loser']['label']} {money(props['loser']['value'])}")
     if dry:
         return topic, None
-    cmd = ["npx", "remotion", "render", "src/index.ts", "MoneyScale", str(final),
-           f"--props={out / 'props.json'}", "--codec=h264", "--crf=18"]
-    subprocess.run(cmd, cwd=VIDEO_DIR, check=True)
+    render(out, final, flat_only)
     return topic, final
+
+
+def render(out, final, flat_only=False):
+    """3D design first; if that fails, the same design drawn flat; if even that fails, the old design. The day never breaks."""
+    from engine.texts import warn
+    props = json.loads((out / "props.json").read_text())
+    (out / "props_ed.json").write_text(json.dumps({**props, "duration": props["edDuration"]}, indent=2))
+    gl = "angle" if sys.platform == "darwin" else "swangle"   # GitHub has no graphics card: software 3D
+    base = ["npx", "remotion", "render", "src/index.ts"]
+    ed = [f"--props={out / 'props_ed.json'}", "--codec=h264", "--crf=18"]
+    if not flat_only:
+        if subprocess.run(base + ["EdScale", str(final)] + ed + [f"--gl={gl}"], cwd=VIDEO_DIR).returncode == 0:
+            return "3d"
+        print("      3D render failed, rendering the flat version instead")
+    if subprocess.run(base + ["EdScaleFlat", str(final)] + ed, cwd=VIDEO_DIR).returncode == 0:
+        if not flat_only:
+            warn(f"⚠️ 3D render failed for {out.name}, the flat version of the design was used instead.")
+        return "flat"
+    print("      flat render failed too, rendering the old design")
+    warn(f"⚠️ 3D and flat renders both failed for {out.name}, the old dark design was used instead.")
+    subprocess.run(base + ["MoneyScale", str(final), f"--props={out / 'props.json'}", "--codec=h264", "--crf=18"], cwd=VIDEO_DIR, check=True)
+    return "old"
 
 
 if __name__ == "__main__":
@@ -176,6 +203,7 @@ if __name__ == "__main__":
     ap.add_argument("year", nargs="?")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--flat", action="store_true", help="flat version only (no 3D)")
     a = ap.parse_args()
     if a.list:
         done, n = set(done_list()), 0
@@ -190,6 +218,6 @@ if __name__ == "__main__":
                 print(f"  {'used ' if got[0] in done else 'ready'}  {got[0]:<20} {g} {y}: {got[1]['hero']['label']} {money(got[1]['hero']['value'])}")
         print(f"{n} qualify")
     else:
-        topic, final = make(a.group, a.year, a.dry)
+        topic, final = make(a.group, a.year, a.dry, flat_only=a.flat)
         if final:
             print(f"\nRendered {final}")

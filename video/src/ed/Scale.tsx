@@ -6,6 +6,7 @@ import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
 import {Backdrop, Cam, Em, Grain, Head, MONO, Masthead, PAL, Pal, PalName, ProgressRule, Sil3D, Studio, Tag, V3, clamp01, lerp, outBack, projector, rnd, smooth, useEdFonts} from './kit';
 
+export {THINGS, cmOf, height, money};
 export type EdScaleProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string;
   hero: {label: string; value: number}; loser: {label: string; value: number}; years: [number, number]; growStart: number; growEnd: number; music?: string | null};
 
@@ -289,7 +290,7 @@ export const EdScale: React.FC<EdScaleProps> = (p) => {
             <div style={{fontFamily: P.display, fontWeight: P.dWeight, fontSize: P.dItalic ? 190 : 160, lineHeight: 1, letterSpacing: P.dTrack + 'em', color: P.accent}}>{height(loserCm)}</div>
             <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 30, color: P.ink}}>{money(p.loser.value)}</div>
           </div>
-          <div style={{fontFamily: P.display, fontStyle: P.dItalic ? 'italic' : 'normal', fontWeight: P.dWeight, fontSize: P.dItalic ? 62 : 52, color: P.ink, letterSpacing: P.dTrack + 'em'}}>Shorter than a soda can.</div>
+          <div style={{fontFamily: P.display, fontStyle: P.dItalic ? 'italic' : 'normal', fontWeight: P.dWeight, fontSize: P.dItalic ? 62 : 52, color: P.ink, letterSpacing: P.dTrack + 'em'}}>Shorter than {(THINGS.find((o) => o.h > loserCm) ?? THINGS[THINGS.length - 1]).name}.</div>
         </div>
       )}
       {endK > 0.02 && (() => {

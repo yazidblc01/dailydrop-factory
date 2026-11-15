@@ -9,6 +9,7 @@ import {EdTexts} from './ed/Texts';
 import {EdTextsFlat} from './ed/TextsFlat';
 import edtexts from '../props/edtexts.json';
 import {EdScale} from './ed/Scale';
+import {EdScaleFlat} from './ed/ScaleFlat';
 import edscale from '../props/edscale.json';
 import {EdBars} from './ed/Bars';
 import edbars from '../props/edbars.json';
@@ -83,6 +84,8 @@ export const RemotionRoot: React.FC = () => {
     <Composition id="EdTextsFlat" component={EdTextsFlat as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edtexts as any).duration * FPS)}
       defaultProps={edtexts as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdScale" component={EdScale as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edscale as any).duration * FPS)}
+      defaultProps={edscale as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdScaleFlat" component={EdScaleFlat as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edscale as any).duration * FPS)}
       defaultProps={edscale as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdBars" component={EdBars as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edbars as any).duration * FPS)}
       defaultProps={edbars as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
