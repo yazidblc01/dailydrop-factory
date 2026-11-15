@@ -152,6 +152,10 @@ export const Sync: React.FC<{ready: boolean}> = ({ready}) => {
   return null;
 };
 export const Studio: React.FC<{ready: boolean; P: Pal; floorY?: number; span?: number; key3?: V3; soft?: number; lights?: number; env?: number; fill?: number; power?: number; floor?: boolean}> = ({ready, P, floorY = 0, span = 6, key3 = [3.2, 7, 5], soft = 0.9, lights = 5, env, fill, power, floor = true}) => {
+  // on GitHub there is no graphics card, so REMOTION_ED_FAST=1 uses fewer shadow lights and smaller shadow maps
+  const FAST = process.env.REMOTION_ED_FAST === '1';
+  if (FAST) lights = Math.min(lights, 3);
+  const MAP = FAST ? 1024 : 1536;
   const total = power ?? (P.dark ? 2.6 : 2.3);
   return (
     <>
@@ -161,7 +165,7 @@ export const Studio: React.FC<{ready: boolean; P: Pal; floorY?: number; span?: n
       {Array.from({length: lights}, (_, i) => {
         const a = (i / lights) * Math.PI * 2, r = i === 0 ? 0 : soft;
         return <directionalLight key={i} position={[key3[0] + Math.cos(a) * r, key3[1], key3[2] + Math.sin(a) * r]} intensity={total / lights} castShadow
-          shadow-mapSize={[1536, 1536]} shadow-camera-left={-span} shadow-camera-right={span} shadow-camera-top={span} shadow-camera-bottom={-span} shadow-camera-near={0.5} shadow-camera-far={40} shadow-bias={-0.0006} shadow-normalBias={0.02} />;
+          shadow-mapSize={[MAP, MAP]} shadow-camera-left={-span} shadow-camera-right={span} shadow-camera-top={span} shadow-camera-bottom={-span} shadow-camera-near={0.5} shadow-camera-far={40} shadow-bias={-0.0006} shadow-normalBias={0.02} />;
       })}
       {floor && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, floorY, 0]} receiveShadow>
