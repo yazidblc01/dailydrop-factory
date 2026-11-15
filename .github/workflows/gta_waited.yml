@@ -1,0 +1,86 @@
+# "While we waited for GTA 6": 5 Shorts a day, each made and posted right away (engine/waited.py).
+# Times are UTC; in Toronto (winter) that's about 9 AM, noon, 3 PM, 6 PM and 9 PM. Run it by hand any time with:
+#   gh workflow run gta_waited.yml
+name: GTA waited
+
+on:
+  schedule:
+    - cron: "7 14 * * *"
+    - cron: "7 17 * * *"
+    - cron: "7 20 * * *"
+    - cron: "7 23 * * *"
+    - cron: "7 2 * * *"
+  workflow_dispatch:
+    inputs:
+      flat:
+        description: "flat finale only, no 3D (yes/no)"
+        default: "no"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gta-waited
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+      UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+      UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
+      TZ: America/Toronto
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Python packages
+        run: pip install -r requirements.txt
+
+      - name: System packages (ffmpeg, Chrome libraries)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libnss3 libatk-bridge2.0-0 libcups2 libxcomposite1 libxdamage1 \
+            libxrandr2 libgbm1 libxkbcommon0 libpango-1.0-0 libcairo2 libasound2t64
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: video/package-lock.json
+
+      - name: Video tools
+        working-directory: video
+        run: npm ci --no-audit --no-fund
+
+      - name: Cache Chrome
+        uses: actions/cache@v4
+        with:
+          path: video/node_modules/.remotion
+          key: chrome-v1
+
+      - name: Make and post
+        run: |
+          ARGS="--post"
+          if [ "${{ inputs.flat }}" = "yes" ]; then ARGS="$ARGS --flat"; fi
+          python -m engine.waited $ARGS
+
+      - name: Save state and post records
+        if: always()
+        run: |
+          git config user.name "daily-drop-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for f in data/waited.json data/posts.json; do [ -f "$f" ] && git add "$f"; done
+          if ! git diff --cached --quiet; then
+            git commit -m "state: $(date +%F) gta waited"
+            git pull --rebase --autostash -q && git push -q
+          fi

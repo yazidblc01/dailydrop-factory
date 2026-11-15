@@ -121,7 +121,7 @@ export const EdHL: React.FC<EdHLProps> = (p) => {
               <mesh position={[0, 0, 0.0362]}><planeGeometry args={[CWID - 0.03, CHT - 0.03]} /><meshStandardMaterial map={cards.fronts[i]} roughness={0.85} /></mesh>
               <mesh position={[0, 0, -0.0362]} rotation={[Math.PI, 0, 0]}><planeGeometry args={[CWID - 0.03, CHT - 0.03]} /><meshStandardMaterial map={cards.backs[i]} roughness={0.85} /></mesh>
               {st.stamp > 0 && (
-                <mesh position={[-0.5, -0.24, 0.05]} scale={lerp(2.2, 1, outBack(sk, 1.1))}>
+                <mesh position={[0.9, 0.44, 0.05]} rotation={[0, 0, 0.1]} scale={lerp(2.0, 0.82, outBack(sk, 1.1))}>
                   <planeGeometry args={[1.25, 0.54]} />
                   <meshBasicMaterial map={higher ? cards.higher : cards.lower} transparent opacity={Math.min(1, sk * 3)} depthWrite={false} toneMapped={false} />
                 </mesh>

@@ -68,7 +68,7 @@ export const EdCoins: React.FC<EdCoinsProps> = (p) => {
           const pos: V3 = [h[0] + dir * e * (1.2 + rnd(i, 2)), h[1] + Math.sin(k * Math.PI) * 1.1 + e * 0.6, h[2] + e * (rnd(i, 3) - 0.3) * 1.5];
           const drop = outCubic(clamp01((t - 0.25 - i * 0.012) / 0.45));
           return (
-            <mesh key={i} position={[pos[0], pos[1] + (1 - drop) * 3.5, pos[2]]} rotation={[k * 5 * dir, 0, k * 3]} scale={(1 - k * k) * (drop > 0 ? 1 : 0.001)} castShadow receiveShadow>
+            <mesh key={i} position={[pos[0], pos[1] + (1 - drop) * 0.8, pos[2]]} rotation={[k * 5 * dir, 0, k * 3]} scale={(1 - k * k) * (drop > 0 ? 1 : 0.001)} castShadow receiveShadow>
               <cylinderGeometry args={[R, R, H, 36]} />
               <meshStandardMaterial color={brass} metalness={0.85} roughness={0.32} />
             </mesh>

@@ -1,0 +1,81 @@
+{
+ "pal": "vice",
+ "duration": 23.1,
+ "label": "WHILE WE WAITED · GTA 6",
+ "badge": "GTA 6 IN 4 DAYS",
+ "hookA": "GTA V came out in 2013.",
+ "hookB": "Here's what 13 years of waiting did to prices.",
+ "teaser": "THE LAST ONE IS INSANE",
+ "rounds": [
+  {
+   "name": "Min wage",
+   "head": "The federal minimum wage.",
+   "what": "MINIMUM WAGE / HR",
+   "then": "$7.25",
+   "now": "$7.25",
+   "thenDate": "SEP 2013",
+   "nowDate": "OCT 2026",
+   "stamp": "SAME",
+   "r": 1.0
+  },
+  {
+   "name": "Bacon",
+   "head": "A pound of bacon.",
+   "what": "A POUND OF BACON",
+   "then": "$3.00",
+   "now": "$4.20",
+   "thenDate": "SEP 2013",
+   "nowDate": "OCT 2026",
+   "stamp": "+40%",
+   "r": 1.3994008138430987
+  },
+  {
+   "name": "Bread",
+   "head": "A loaf of bread.",
+   "what": "A POUND OF BREAD",
+   "then": "$3.00",
+   "now": "$4.20",
+   "thenDate": "SEP 2013",
+   "nowDate": "OCT 2026",
+   "stamp": "+40%",
+   "r": 1.3994008138430987
+  },
+  {
+   "name": "McDonald's",
+   "head": "$1,000 in McDonald's.",
+   "what": "$1,000 IN MCDONALD'S",
+   "then": "$1,000",
+   "now": "$2,977",
+   "thenDate": "SEP 17, 2013",
+   "nowDate": "NOV 16, 2026",
+   "stamp": "×3.0",
+   "r": 2.976880945734888
+  },
+  {
+   "name": "Costco",
+   "head": "$1,000 in Costco.",
+   "what": "$1,000 IN COSTCO",
+   "then": "$1,000",
+   "now": "$4,814",
+   "thenDate": "SEP 17, 2013",
+   "nowDate": "NOV 16, 2026",
+   "stamp": "×4.8",
+   "r": 4.813668772457524
+  },
+  {
+   "name": "AMD",
+   "head": "$1,000 in AMD.",
+   "what": "$1,000 IN AMD",
+   "then": "$1,000",
+   "now": "$79,492",
+   "thenDate": "SEP 17, 2013",
+   "nowDate": "NOV 16, 2026",
+   "stamp": "×79.5",
+   "r": 79.49193403684465
+  }
+ ],
+ "hook": 2.3,
+ "round": 2.6,
+ "flat": false,
+ "music": "music/headphonk.mp3"
+}

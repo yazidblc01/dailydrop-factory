@@ -135,7 +135,7 @@ export const EdReceipt: React.FC<EdReceiptProps> = (p) => {
           <meshStandardMaterial map={tex} roughness={0.9} side={THREE.DoubleSide} />
         </mesh>
         {stamped && (
-          <mesh position={[0.34, BOT + L * 0.4, 0.04]} scale={lerp(2.4, 1, outBack(sk, 1.1))}>
+          <mesh position={[0.5, BOT + L * 0.86, 0.04]} scale={lerp(2.0, 0.7, outBack(sk, 1.1))}>
             <planeGeometry args={[1.0, 1.0]} />
             <meshBasicMaterial map={stampTex} transparent opacity={Math.min(1, sk * 3)} depthWrite={false} toneMapped={false} />
           </mesh>
