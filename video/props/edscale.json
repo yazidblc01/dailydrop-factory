@@ -1,0 +1,6 @@
+{
+  "pal": "paper", "duration": 24.0, "label": "MONEY TO SCALE",
+  "hookA": "$10,000 of Nvidia, bought in 2015.", "hookB": "Stacked in $100 bills, how tall is it now?",
+  "hero": {"label": "Nvidia", "value": 3448757}, "loser": {"label": "Meta", "value": 80253},
+  "years": [2015, 2026], "growStart": 3.0, "growEnd": 16.4
+}

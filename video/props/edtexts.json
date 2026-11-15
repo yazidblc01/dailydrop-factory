@@ -1,0 +1,101 @@
+{
+  "pal": "paper",
+  "duration": 23.0,
+  "label": "TEXTS FROM 2026",
+  "contact": "Me (2026)",
+  "clock": "10:24",
+  "date": "Friday, November 15",
+  "stamp": "Fri, Nov 15, 2013 at 10:24 PM",
+  "openAt": 2.8,
+  "notifications": [
+    {
+      "at": 0.2,
+      "text": "don't buy the PS4 tomorrow"
+    },
+    {
+      "at": 1.25,
+      "text": "it's you. from 2026"
+    }
+  ],
+  "messages": [
+    {
+      "from": "them",
+      "text": "don't buy the PS4 tomorrow",
+      "at": 0
+    },
+    {
+      "from": "them",
+      "text": "it's you. from 2026",
+      "at": 0
+    },
+    {
+      "from": "me",
+      "text": "who is this",
+      "at": 3.7
+    },
+    {
+      "from": "me",
+      "text": "how do you know about the PS4",
+      "at": 4.7
+    },
+    {
+      "from": "them",
+      "text": "because i bought it",
+      "at": 6.3
+    },
+    {
+      "from": "them",
+      "text": "put the $399 in Nvidia instead",
+      "at": 7.4
+    },
+    {
+      "from": "me",
+      "text": "the graphics card company??",
+      "at": 8.9
+    },
+    {
+      "from": "me",
+      "text": "i just want to play games",
+      "at": 9.9
+    },
+    {
+      "from": "them",
+      "text": "that $399 turns into",
+      "at": 11.5
+    },
+    {
+      "from": "them",
+      "text": "$174,123",
+      "at": 12.7,
+      "big": true
+    },
+    {
+      "from": "me",
+      "text": "bro what",
+      "at": 17.2
+    },
+    {
+      "from": "me",
+      "text": "ok and the PS4??",
+      "at": 18.3
+    },
+    {
+      "from": "them",
+      "text": "it's in a closet",
+      "at": 19.8
+    },
+    {
+      "from": "me",
+      "text": "💀",
+      "at": 21.0
+    }
+  ],
+  "reveal": {
+    "small": "$399",
+    "big": "$174,123",
+    "smallTag": "A PS4 · NOV 2013",
+    "bigTag": "IN NVIDIA · NOV 2026",
+    "line": "The $399 you spent on a PS4",
+    "em": "would be this."
+  }
+}

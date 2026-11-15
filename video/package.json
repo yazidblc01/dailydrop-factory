@@ -6,11 +6,16 @@
     "render": "remotion render src/index.ts"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.8.2",
     "@remotion/cli": "4.0.542",
     "@remotion/fonts": "4.0.542",
+    "@remotion/three": "^4.0.542",
+    "@types/three": "^0.170.0",
+    "opentype.js": "^1.3.4",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "remotion": "4.0.542"
+    "remotion": "4.0.542",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",

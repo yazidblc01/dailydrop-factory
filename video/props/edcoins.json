@@ -1,0 +1,7 @@
+{
+  "pal": "paper", "duration": 19, "label": "THE SHRINKING $100",
+  "hookA": "$100 in the year 2000.", "hookB": "Watch what it still buys.",
+  "endA": "A 2000 hundred now buys", "endB": "$52 of stuff.",
+  "start": 2.6, "end": 14.0,
+  "cpi": [[2000, 172.2], [2005, 195.3], [2010, 218.1], [2015, 237.0], [2020, 258.8], [2022, 292.7], [2024, 313.7], [2026, 331.0]]
+}

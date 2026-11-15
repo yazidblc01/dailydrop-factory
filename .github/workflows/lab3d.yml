@@ -1,0 +1,50 @@
+# Timing test for the new 3D formats. Runs only when the lab3d branch is pushed. Posts nothing, touches nothing on main.
+name: lab3d timing test
+
+on:
+  push:
+    branches: [lab3d]
+
+jobs:
+  time-render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: System packages (ffmpeg, Chrome libraries)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libnss3 libatk-bridge2.0-0 libcups2 libxcomposite1 libxdamage1 \
+            libxrandr2 libgbm1 libxkbcommon0 libpango-1.0-0 libcairo2 libasound2t64
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: video/package-lock.json
+
+      - name: Install
+        working-directory: video
+        run: npm ci --no-audit --no-fund
+
+      - name: Render the texts reel and time it
+        working-directory: video
+        run: |
+          nproc
+          start=$(date +%s)
+          npx remotion render src/index.ts EdTexts out_texts3d.mp4 --gl=angle
+          echo "TEXTS_SECONDS=$(( $(date +%s) - start ))"
+
+      - name: Render the board and time it
+        working-directory: video
+        run: |
+          start=$(date +%s)
+          npx remotion render src/index.ts EdFlap out_board.mp4 --gl=angle
+          echo "BOARD_SECONDS=$(( $(date +%s) - start ))"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lab3d-videos
+          path: video/out_*.mp4
+          retention-days: 3

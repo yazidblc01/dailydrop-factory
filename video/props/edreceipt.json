@@ -1,0 +1,15 @@
+{
+  "pal": "paper", "duration": 21, "label": "THE RECEIPT",
+  "hookA": "The same grocery run,", "hookB": "20 years apart.",
+  "endA": "Same cart.", "endB": "More than double.",
+  "store": "DAILY DROP MARKET", "sub": "SAME CART · 20 YEARS APART", "colA": "2006", "colB": "2026",
+  "items": [
+    {"name": "EGGS, DOZEN", "a": 1.31, "b": 3.48},
+    {"name": "MILK, GALLON", "a": 3.23, "b": 4.12},
+    {"name": "BREAD, LOAF", "a": 1.08, "b": 1.94},
+    {"name": "GROUND BEEF, LB", "a": 2.26, "b": 6.02},
+    {"name": "COFFEE, LB", "a": 3.21, "b": 8.87},
+    {"name": "GAS, GALLON", "a": 2.59, "b": 3.21}
+  ],
+  "printStart": 2.6, "printEnd": 12.5
+}

@@ -1,0 +1,14 @@
+{
+  "pal": "paper", "duration": 22, "label": "$1,000 EACH · 2015 → 2026",
+  "hookA": "$1,000 in each tech giant in 2015.", "hookB": "Which one wins?",
+  "endA": "Nvidia turned $1,000 into $344,876.", "endB": "Not even close.",
+  "years": [2015, 2026], "raceStart": 3.0, "raceEnd": 16.0,
+  "items": [
+    {"label": "Apple", "end": 11240, "k": 1.0, "dip": 0.08},
+    {"label": "Microsoft", "end": 12480, "k": 0.95, "dip": 0.06},
+    {"label": "Nvidia", "end": 344876, "k": 1.55, "dip": 0.1},
+    {"label": "Amazon", "end": 14120, "k": 0.6, "dip": 0.16},
+    {"label": "Google", "end": 10890, "k": 1.05, "dip": 0.07},
+    {"label": "Meta", "end": 8025, "k": 0.75, "dip": 0.34}
+  ]
+}
