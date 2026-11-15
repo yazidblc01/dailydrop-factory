@@ -1,0 +1,14 @@
+{
+  "pal": "paper", "duration": 21, "label": "THE BOARD",
+  "hookA": "What a gallon of gas", "hookB": "has cost you.",
+  "endA": "It hit $5.02 once.", "endB": "It never went back to $1.",
+  "header": "YEAR    PRICE",
+  "rows": [
+    {"text": "1998   $1.06", "at": 2.6},
+    {"text": "2008   $4.11", "at": 5.0, "hot": true},
+    {"text": "2016   $2.14", "at": 7.4},
+    {"text": "2020   $1.77", "at": 9.8},
+    {"text": "2022   $5.02", "at": 12.2, "hot": true},
+    {"text": "TODAY  $3.19", "at": 14.8}
+  ]
+}

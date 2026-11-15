@@ -1,0 +1,14 @@
+{
+  "pal": "paper", "duration": 20, "label": "HIGHER OR LOWER",
+  "hookA": "Console launch prices.", "hookB": "Higher or lower?",
+  "endA": "The priciest launch was the PS3,", "endB": "back in 2006.",
+  "unit": "LAUNCH PRICE",
+  "items": [
+    {"name": "PlayStation", "sub": "1995", "value": 299},
+    {"name": "PlayStation 3", "sub": "2006", "value": 599},
+    {"name": "PlayStation 4", "sub": "2013", "value": 399},
+    {"name": "PlayStation 5", "sub": "2020", "value": 499},
+    {"name": "Nintendo Switch", "sub": "2017", "value": 299.99}
+  ],
+  "start": 2.2, "round": 3.7
+}
