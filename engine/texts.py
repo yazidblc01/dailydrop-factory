@@ -437,6 +437,18 @@ def make(story_id=None, dry=False, pool="main", flat_only=False):
     return topic, final
 
 
+def warn(text):
+    """A Telegram line straight from here (never stops the video if Telegram is down)."""
+    import requests
+    tok, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
+    if not tok or not chat:
+        return
+    try:
+        requests.post(f"https://api.telegram.org/bot{tok}/sendMessage", data={"chat_id": chat, "text": text}, timeout=15)
+    except Exception as e:
+        print(f"      Telegram warning not sent: {e}")
+
+
 def render(out, final, flat_only=False):
     """3D design first; if that fails for any reason, the flat design, so the day never breaks."""
     gl = "angle" if sys.platform == "darwin" else "swangle"   # GitHub has no graphics card: software 3D
@@ -446,6 +458,7 @@ def render(out, final, flat_only=False):
         if subprocess.run(cmd, cwd=VIDEO_DIR).returncode == 0:
             return "3d"
         print("      3D render failed, rendering the flat design instead")
+        warn(f"⚠️ 3D render failed for {out.name}, the flat design was used instead.")
     cmd = ["npx", "remotion", "render", "src/index.ts", "TextsFuture", str(final), f"--props={out / 'props_flat.json'}",
            "--codec=h264", "--crf=18"]
     subprocess.run(cmd, cwd=VIDEO_DIR, check=True)
