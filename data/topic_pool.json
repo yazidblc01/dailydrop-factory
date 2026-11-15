@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-12T18:20:56+00:00",
+  "checked": "2026-11-15T15:51:32+00:00",
   "topics": {
     "consoles__playstation": {
       "interest": 6.7,
@@ -18,11 +18,11 @@
       "status": "ok"
     },
     "invest__airlines__2008": {
-      "interest": 11.0,
+      "interest": 11.1,
       "status": "ok"
     },
     "invest__airlines__2010": {
-      "interest": 7.3,
+      "interest": 7.4,
       "status": "ok"
     },
     "invest__airlines__2012": {
@@ -42,7 +42,7 @@
       "status": "ok"
     },
     "invest__airlines__2020": {
-      "interest": 6.6,
+      "interest": 6.7,
       "status": "ok"
     },
     "invest__airlines__2021": {
@@ -142,7 +142,7 @@
       "status": "ok"
     },
     "invest__big_funds__2010": {
-      "interest": 3.5,
+      "interest": 5.5,
       "status": "ok"
     },
     "invest__big_funds__2012": {
@@ -174,39 +174,39 @@
       "status": "ok"
     },
     "invest__big_tech__2005": {
-      "interest": 12.5,
+      "interest": 7.4,
       "status": "ok"
     },
     "invest__big_tech__2008": {
-      "interest": 9.3,
+      "interest": 3.6,
       "status": "ok"
     },
     "invest__big_tech__2010": {
-      "interest": 9.9,
+      "interest": 3.4,
       "status": "ok"
     },
     "invest__big_tech__2012": {
-      "interest": 12.5,
+      "interest": 4.7,
       "status": "ok"
     },
     "invest__big_tech__2013": {
-      "interest": 14.6,
+      "interest": 8.5,
       "status": "ok"
     },
     "invest__big_tech__2018": {
-      "interest": 8.9,
+      "interest": 3.2,
       "status": "ok"
     },
     "invest__big_tech__2020": {
-      "interest": 13.0,
+      "interest": 6.7,
       "status": "ok"
     },
     "invest__big_tech__2021": {
-      "interest": 14.6,
+      "interest": 8.9,
       "status": "ok"
     },
     "invest__big_tech__2022": {
-      "interest": 15.6,
+      "interest": 10.4,
       "status": "ok"
     },
     "invest__car_makers__2005": {
@@ -218,7 +218,7 @@
       "status": "data"
     },
     "invest__car_makers__2010": {
-      "interest": 8.8,
+      "interest": 8.7,
       "status": "ok"
     },
     "invest__car_makers__2012": {
@@ -238,7 +238,7 @@
       "status": "ok"
     },
     "invest__car_makers__2021": {
-      "interest": 14.6,
+      "interest": 14.5,
       "status": "ok"
     },
     "invest__car_makers__2022": {
@@ -254,7 +254,7 @@
       "status": "ok"
     },
     "invest__chips__2010": {
-      "interest": 11.8,
+      "interest": 13.8,
       "status": "ok"
     },
     "invest__chips__2012": {
@@ -270,7 +270,7 @@
       "status": "ok"
     },
     "invest__chips__2018": {
-      "interest": 12.6,
+      "interest": 12.5,
       "status": "ok"
     },
     "invest__chips__2020": {
@@ -282,7 +282,7 @@
       "status": "ok"
     },
     "invest__chips__2022": {
-      "interest": 8.1,
+      "interest": 8.2,
       "status": "ok"
     },
     "invest__crypto__2005": {
@@ -310,15 +310,15 @@
       "status": "data"
     },
     "invest__crypto__2018": {
-      "interest": 18.8,
+      "interest": 18.7,
       "status": "ok"
     },
     "invest__crypto__2020": {
-      "interest": 19.6,
+      "interest": 19.5,
       "status": "ok"
     },
     "invest__crypto__2021": {
-      "interest": 19.8,
+      "interest": 19.7,
       "status": "ok"
     },
     "invest__crypto__2022": {
@@ -346,7 +346,7 @@
       "status": "ok"
     },
     "invest__energy__2015": {
-      "interest": 7.5,
+      "interest": 9.5,
       "status": "ok"
     },
     "invest__energy__2018": {
@@ -378,15 +378,15 @@
       "status": "ok"
     },
     "invest__fast_food__2012": {
-      "interest": 12.1,
+      "interest": 12.2,
       "status": "ok"
     },
     "invest__fast_food__2013": {
-      "interest": 13.5,
+      "interest": 13.6,
       "status": "ok"
     },
     "invest__fast_food__2015": {
-      "interest": 13.4,
+      "interest": 13.5,
       "status": "ok"
     },
     "invest__fast_food__2018": {
@@ -410,39 +410,39 @@
       "status": "ok"
     },
     "invest__gamer_gear__2008": {
-      "interest": 5.8,
+      "interest": 7.8,
       "status": "ok"
     },
     "invest__gamer_gear__2010": {
-      "interest": 9.8,
+      "interest": 10.7,
       "status": "ok"
     },
     "invest__gamer_gear__2012": {
-      "interest": 10.4,
+      "interest": 12.1,
       "status": "ok"
     },
     "invest__gamer_gear__2013": {
-      "interest": 10.4,
+      "interest": 13.0,
       "status": "ok"
     },
     "invest__gamer_gear__2015": {
-      "interest": 10.6,
+      "interest": 11.3,
       "status": "ok"
     },
     "invest__gamer_gear__2018": {
-      "interest": 10.6,
+      "interest": 14.5,
       "status": "ok"
     },
     "invest__gamer_gear__2020": {
-      "interest": 10.1,
+      "interest": 12.2,
       "status": "ok"
     },
     "invest__gamer_gear__2021": {
-      "interest": 7.1,
+      "interest": 9.6,
       "status": "ok"
     },
     "invest__gamer_gear__2022": {
-      "interest": 4.8,
+      "interest": 6.7,
       "status": "ok"
     },
     "invest__gaming__2005": {
@@ -450,15 +450,15 @@
       "status": "ok"
     },
     "invest__gaming__2008": {
-      "interest": 10.1,
+      "interest": 10.0,
       "status": "ok"
     },
     "invest__gaming__2010": {
-      "interest": 9.1,
+      "interest": 9.0,
       "status": "ok"
     },
     "invest__gaming__2012": {
-      "interest": 8.5,
+      "interest": 8.4,
       "status": "ok"
     },
     "invest__gaming__2013": {
@@ -470,11 +470,11 @@
       "status": "ok"
     },
     "invest__gaming__2018": {
-      "interest": 8.0,
+      "interest": 7.9,
       "status": "ok"
     },
     "invest__gaming__2020": {
-      "interest": 7.3,
+      "interest": 7.2,
       "status": "ok"
     },
     "invest__gaming__2021": {
@@ -546,19 +546,19 @@
       "status": "ok"
     },
     "invest__money_assets__2015": {
-      "interest": 11.2,
+      "interest": 11.1,
       "status": "ok"
     },
     "invest__money_assets__2018": {
-      "interest": 6.4,
+      "interest": 6.3,
       "status": "ok"
     },
     "invest__money_assets__2020": {
-      "interest": 11.4,
+      "interest": 11.3,
       "status": "ok"
     },
     "invest__money_assets__2021": {
-      "interest": 5.8,
+      "interest": 9.7,
       "status": "ok"
     },
     "invest__money_assets__2022": {
@@ -586,7 +586,7 @@
       "status": "ok"
     },
     "invest__pharma__2015": {
-      "interest": 15.5,
+      "interest": 15.6,
       "status": "ok"
     },
     "invest__pharma__2018": {
@@ -602,7 +602,7 @@
       "status": "ok"
     },
     "invest__pharma__2022": {
-      "interest": 14.7,
+      "interest": 14.8,
       "status": "ok"
     },
     "invest__retail__2005": {
@@ -634,7 +634,7 @@
       "status": "ok"
     },
     "invest__retail__2020": {
-      "interest": 7.3,
+      "interest": 9.3,
       "status": "ok"
     },
     "invest__retail__2021": {
@@ -662,7 +662,7 @@
       "status": "ok"
     },
     "invest__sportswear__2013": {
-      "interest": 12.5,
+      "interest": 12.6,
       "status": "ok"
     },
     "invest__sportswear__2015": {
@@ -674,15 +674,15 @@
       "status": "ok"
     },
     "invest__sportswear__2020": {
-      "interest": 15.4,
+      "interest": 13.4,
       "status": "ok"
     },
     "invest__sportswear__2021": {
-      "interest": 10.4,
+      "interest": 10.5,
       "status": "ok"
     },
     "invest__sportswear__2022": {
-      "interest": 12.3,
+      "interest": 12.4,
       "status": "ok"
     },
     "invest__streaming_media__2005": {
@@ -718,11 +718,11 @@
       "status": "ok"
     },
     "invest__streaming_media__2021": {
-      "interest": 22.6,
+      "interest": 22.5,
       "status": "ok"
     },
     "invest__streaming_media__2022": {
-      "interest": 22.9,
+      "interest": 22.7,
       "status": "ok"
     },
     "prices__basket__1990": {
@@ -782,11 +782,11 @@
       "status": "ok"
     },
     "since__gamer_gear__gta5": {
-      "interest": 8.7,
+      "interest": 11.4,
       "status": "ok"
     },
     "since__gamer_gear__trailer1": {
-      "interest": 7.8,
+      "interest": 11.7,
       "status": "ok"
     },
     "since__gaming__gta5": {
@@ -806,20 +806,20 @@
       "status": "ok"
     },
     "wb__gdp__africa__1990": {
-      "interest": 5.6,
-      "status": "ok"
+      "reason": "HTTPError: 502 Server Error: Bad Gateway for url: https://api.worldbank.org/v2/country/NGA;EGY;ZAF;MAR;KEN;ETH/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp__africa__2000": {
-      "interest": 1.6,
-      "status": "flat"
+      "reason": "HTTPError: 502 Server Error: Bad Gateway for url: https://api.worldbank.org/v2/country/NGA;EGY;ZAF;MAR;KEN;ETH/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp__americas__1990": {
-      "interest": 5.8,
-      "status": "ok"
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
     },
     "wb__gdp__americas__2000": {
-      "interest": 7.8,
-      "status": "ok"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/USA;CAN;MEX;BRA;ARG;CHL/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp__asia__1990": {
       "interest": 6.5,
@@ -830,28 +830,28 @@
       "status": "ok"
     },
     "wb__gdp__europe__1990": {
-      "interest": 6.1,
-      "status": "dull"
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
     },
     "wb__gdp__europe__2000": {
-      "interest": 2.1,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/DEU;GBR;FRA;ITA;ESP;POL/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp__giants__1990": {
-      "interest": 17.4,
-      "status": "ok"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/USA;CHN;JPN;DEU;IND;GBR;FRA;BRA/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp__giants__2000": {
-      "interest": 15.4,
-      "status": "ok"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/USA;CHN;JPN;DEU;IND;GBR;FRA;BRA/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp__mena__1990": {
-      "interest": 4.8,
-      "status": "ok"
+      "reason": "HTTPError: 502 Server Error: Bad Gateway for url: https://api.worldbank.org/v2/country/SAU;ARE;TUR;EGY;MAR;ISR/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp__mena__2000": {
-      "interest": 4.8,
-      "status": "ok"
+      "reason": "HTTPError: 502 Server Error: Bad Gateway for url: https://api.worldbank.org/v2/country/SAU;ARE;TUR;EGY;MAR;ISR/indicator/NY.GDP.MKTP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp_pc__africa__1990": {
       "interest": 4.5,
@@ -862,24 +862,24 @@
       "status": "ok"
     },
     "wb__gdp_pc__americas__1990": {
-      "interest": 8.8,
-      "status": "ok"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/USA;CAN;MEX;BRA;ARG;CHL/indicator/NY.GDP.PCAP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp_pc__americas__2000": {
       "interest": 6.8,
       "status": "ok"
     },
     "wb__gdp_pc__asia__1990": {
-      "interest": 12.7,
-      "status": "ok"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/CHN;JPN;KOR;IND;IDN;SGP/indicator/NY.GDP.PCAP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp_pc__asia__2000": {
-      "interest": 8.7,
-      "status": "ok"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/CHN;JPN;KOR;IND;IDN;SGP/indicator/NY.GDP.PCAP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp_pc__europe__1990": {
-      "interest": 5.0,
-      "status": "ok"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/DEU;GBR;FRA;ITA;ESP;POL/indicator/NY.GDP.PCAP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__gdp_pc__europe__2000": {
       "interest": 3.0,
@@ -894,12 +894,12 @@
       "status": "ok"
     },
     "wb__gdp_pc__mena__1990": {
-      "interest": 5.6,
-      "status": "dull"
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
     },
     "wb__gdp_pc__mena__2000": {
-      "interest": 5.6,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/SAU;ARE;TUR;EGY;MAR;ISR/indicator/NY.GDP.PCAP.CD?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__internet__africa__1990": {
       "interest": 9.9,
@@ -998,40 +998,40 @@
       "status": "flat"
     },
     "wb__pop__africa__1990": {
-      "interest": 6.4,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/NGA;EGY;ZAF;MAR;KEN;ETH/indicator/SP.POP.TOTL?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__pop__africa__2000": {
-      "interest": 4.4,
-      "status": "dull"
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
     },
     "wb__pop__americas__1990": {
-      "interest": 3.7,
-      "status": "dull"
+      "reason": "ReadTimeout: HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=40)",
+      "status": "error"
     },
     "wb__pop__asia__1990": {
-      "interest": 9.1,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/CHN;JPN;KOR;IND;IDN;SGP/indicator/SP.POP.TOTL?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__pop__asia__2000": {
-      "interest": 9.1,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/CHN;JPN;KOR;IND;IDN;SGP/indicator/SP.POP.TOTL?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__pop__europe__1990": {
-      "interest": 3.1,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/DEU;GBR;FRA;ITA;ESP;POL/indicator/SP.POP.TOTL?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__pop__europe__2000": {
       "interest": 3.1,
       "status": "dull"
     },
     "wb__pop__giants__1990": {
-      "interest": 8.0,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/USA;CHN;JPN;DEU;IND;GBR;FRA;BRA/indicator/SP.POP.TOTL?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__pop__giants__2000": {
-      "interest": 8.0,
-      "status": "dull"
+      "reason": "HTTPError: 503 Server Error: Service Unavailable for url: https://api.worldbank.org/v2/country/USA;CHN;JPN;DEU;IND;GBR;FRA;BRA/indicator/SP.POP.TOTL?date=1990:2026&format=json&per_page=5000",
+      "status": "error"
     },
     "wb__pop__mena__1990": {
       "interest": 5.2,
