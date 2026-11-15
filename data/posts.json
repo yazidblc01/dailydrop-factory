@@ -130,5 +130,17 @@
     "zernio_id": "6af9efd17b58e9af1fee6ce2",
     "posted_at": "2026-11-15T17:46:40+00:00",
     "slot": "main"
+  },
+  "texts__switch_2017": {
+    "title": "I texted myself in a Switch line: $300 became $20,175 \ud83d\udc80",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afa298f414a72e52f320f5d",
+    "posted_at": "2026-11-15T21:52:16+00:00",
+    "when": "2026-11-15T19:00:00-05:00",
+    "slot": "gta"
   }
 }
