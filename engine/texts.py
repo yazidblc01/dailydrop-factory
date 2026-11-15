@@ -10,7 +10,7 @@ them. Any number in the chat that is not in the facts gets the chat rejected and
     python -m engine.texts <id> --flat          render with the old flat design (the automatic backup)
 
 The video is the 3D editorial design (video/src/ed/Texts.tsx). If that render fails, the old flat design
-(TextsFuture) is rendered instead, so the day never breaks.
+(EdTextsFlat, same look without WebGL) is rendered instead, then the old TextsFuture as a last resort.
 """
 import argparse
 import csv
@@ -450,19 +450,21 @@ def warn(text):
 
 
 def render(out, final, flat_only=False):
-    """3D design first; if that fails for any reason, the flat design, so the day never breaks."""
+    """3D design first; if that fails, the same design drawn flat; if even that fails, the old dark design. The day never breaks."""
     gl = "angle" if sys.platform == "darwin" else "swangle"   # GitHub has no graphics card: software 3D
+    base = ["npx", "remotion", "render", "src/index.ts"]
     if not flat_only:
-        cmd = ["npx", "remotion", "render", "src/index.ts", "EdTexts", str(final), f"--props={out / 'props.json'}",
-               "--codec=h264", "--crf=18", f"--gl={gl}"]
-        if subprocess.run(cmd, cwd=VIDEO_DIR).returncode == 0:
+        if subprocess.run(base + ["EdTexts", str(final), f"--props={out / 'props.json'}", "--codec=h264", "--crf=18", f"--gl={gl}"], cwd=VIDEO_DIR).returncode == 0:
             return "3d"
-        print("      3D render failed, rendering the flat design instead")
-        warn(f"⚠️ 3D render failed for {out.name}, the flat design was used instead.")
-    cmd = ["npx", "remotion", "render", "src/index.ts", "TextsFuture", str(final), f"--props={out / 'props_flat.json'}",
-           "--codec=h264", "--crf=18"]
-    subprocess.run(cmd, cwd=VIDEO_DIR, check=True)
-    return "flat"
+        print("      3D render failed, rendering the flat version instead")
+    if subprocess.run(base + ["EdTextsFlat", str(final), f"--props={out / 'props.json'}", "--codec=h264", "--crf=18"], cwd=VIDEO_DIR).returncode == 0:
+        if not flat_only:
+            warn(f"⚠️ 3D render failed for {out.name}, the flat version of the design was used instead.")
+        return "flat"
+    print("      flat render failed too, rendering the old design")
+    warn(f"⚠️ 3D and flat renders both failed for {out.name}, the old dark design was used instead.")
+    subprocess.run(base + ["TextsFuture", str(final), f"--props={out / 'props_flat.json'}", "--codec=h264", "--crf=18"], cwd=VIDEO_DIR, check=True)
+    return "old"
 
 
 if __name__ == "__main__":
@@ -473,7 +475,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--gaming", action="store_true", help="the GTA slot's gaming stories")
-    ap.add_argument("--flat", action="store_true", help="old flat design")
+    ap.add_argument("--flat", action="store_true", help="flat version only (no 3D)")
     a = ap.parse_args()
     if a.list:
         q = queue("gaming" if a.gaming else "main")
