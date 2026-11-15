@@ -7,12 +7,17 @@ them. Any number in the chat that is not in the facts gets the chat rejected and
     python -m engine.texts --list               stories and which ones are used
     python -m engine.texts <id> --dry           facts + chat, no render
     python -m engine.texts <id>                 full render to media/texts__<id>/final.mp4
+    python -m engine.texts <id> --flat          render with the old flat design (the automatic backup)
+
+The video is the 3D editorial design (video/src/ed/Texts.tsx). If that render fails, the old flat design
+(TextsFuture) is rendered instead, so the day never breaks.
 """
 import argparse
 import csv
 import json
 import os
 import re
+import copy
 import subprocess
 import sys
 from datetime import date, datetime, timedelta
@@ -28,7 +33,9 @@ LOW_STOCK = 6
 # gaming stories, in the order the 7 PM GTA slot uses them; the main slot leaves them alone during GTA month
 GAMING = ["ps4_nvidia", "gta6_trailer_ttwo", "switch_2017", "rdr2_ttwo", "ps5_amd", "xbox360_2005", "gtx1080_2016",
           "ps3_2006", "minecraft_2014", "steamdeck_amd", "wii_2006", "pokemon_go_2016", "gme_tradein_2019", "gme_moon"]
-MAX_DURATION = 26.0
+MAX_DURATION = 30.0
+REVEAL_GAP = 4.5        # seconds the 3D number reveal holds before the next text
+PALETTE = "paper"
 ALWAYS_OK = set(range(0, 13)) | {20, 24, 50, 100}  # "2 years", "24/7", "100%"... harmless small numbers
 
 
@@ -152,12 +159,17 @@ Past me texts with future me (it is 2026 for future me). It must feel like a rea
 casual, funny, believable. Mostly lowercase, light slang, no hashtags.
 
 RULES
-- 12 to 16 messages. Each message under 55 characters. The first message is from "me" (past me).
+- 12 to 16 messages. Each message under 55 characters.
+- The FIRST TWO messages are from "them" (future me). They pop up on past me's lock screen as notifications,
+  so they are the hook of the video: short, intriguing, and they must make sense on their own
+  (for example: "don't buy the PS4 tomorrow" then "it's you. from 2026"). Each of these two is under 32 characters.
+  Past me replies after that.
 - "me" = past me, inside the SETTING. "them" = future me, who knows how it turns out.
 - Shape: past me is in the moment (1 to 3 msgs) -> future me drops the tip -> past me doubts it ->
   the real number lands as its own short message -> a twist or callback -> end on a short funny line from "me"
   (an emoji alone like 💀 or 😭 is great as the last message).
-- The big number lands ALONE in its own message, then past me reacts. Never explain the math after it,
+- The big number lands ALONE in its own message from "them", written exactly as in FACTS (like "$174,123"),
+  and it is the ONLY message that is just a dollar amount. Then past me reacts. Never explain the math after it,
   never say "that's where it is in <month>", never add a second "you'd have been richer" number.
   Only mention peak_value if the story is about a crash (it fell a lot from the peak).
 - The last 3 messages are the punchline: a callback to the SETTING (the thing past me was worried about).
@@ -168,23 +180,50 @@ RULES
 - At most 3 emojis in the whole chat (an emoji-only message counts as 1).
 - Never name any real person except ones in SETTING or FACTS.
 
-Return ONLY JSON:
+Fill in the write_chat tool with:
 {"hookTop": "max 22 chars, the setup, CAPS", "hookBottom": "max 24 chars, CAPS",
+ "revealLine": "max 40 chars, the headline shown when the big number appears, e.g. The $399 you spent on a PS4",
+ "revealEm": "max 22 chars, the end of that headline, e.g. would be this.",
+ "captionLead": "max 38 chars, first person, sets the scene under the phone, e.g. The night before I bought a PS4,",
+ "captionEm": "max 28 chars, the twist half of that caption, highlighted, e.g. 2026 me started texting.",
  "messages": [{"from": "me" | "them", "text": "..."}],
  "title": "YouTube title under 70 chars, curiosity, max 1 emoji, numbers only from FACTS",
  "description": "2 sentences with the real numbers and dates from FACTS, then: Not financial advice.",
  "pinned_comment": "a short question that makes people comment"}"""
 
 
+CHAT_TOOL = {
+    "name": "write_chat",
+    "description": "Return the finished chat and its texts.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "hookTop": {"type": "string"}, "hookBottom": {"type": "string"},
+            "revealLine": {"type": "string"}, "revealEm": {"type": "string"},
+            "captionLead": {"type": "string"}, "captionEm": {"type": "string"},
+            "messages": {"type": "array", "items": {"type": "object", "properties": {
+                "from": {"type": "string", "enum": ["me", "them"]}, "text": {"type": "string"}}, "required": ["from", "text"]}},
+            "title": {"type": "string"}, "description": {"type": "string"}, "pinned_comment": {"type": "string"},
+        },
+        "required": ["hookTop", "hookBottom", "revealLine", "revealEm", "captionLead", "captionEm", "messages", "title", "description", "pinned_comment"],
+    },
+}
+
+
 def ask_claude(story, facts, feedback=None):
+    """Claude fills in a tool call, so the reply is always valid JSON (no stray quotes breaking it)."""
     import anthropic
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     user = (f"DATE OF THE CHAT (past me): {story['stamp']}\nSETTING: {story['setting']}\n"
             f"FACTS:\n{json.dumps(facts, indent=2, ensure_ascii=False)}")
     if feedback:
         user += f"\n\nYour previous chat was rejected: {feedback} Fix it."
-    msg = client.messages.create(model=CLAUDE_MODEL, max_tokens=2000, system=SYSTEM,
-                                 messages=[{"role": "user", "content": user}])
+    # this model can't be forced to use the tool, so it is asked to; a plain JSON reply is still accepted as a backup
+    msg = client.messages.create(model=CLAUDE_MODEL, max_tokens=3000, system=SYSTEM + "\n\nAlways answer by calling the write_chat tool.",
+                                 tools=[CHAT_TOOL], messages=[{"role": "user", "content": user}])
+    for b in msg.content:
+        if b.type == "tool_use":
+            return dict(b.input)
     text = "".join(b.text for b in msg.content if b.type == "text")
     return json.loads(text[text.find("{"): text.rfind("}") + 1])
 
@@ -208,21 +247,23 @@ def check_chat(chat, story, facts):
     msgs = chat.get("messages") or []
     if not 10 <= len(msgs) <= 18:
         bad.append(f"{len(msgs)} messages, need 12 to 16.")
-    if msgs and msgs[0].get("from") != "me":
-        bad.append("The first message must be from me.")
+    if len(msgs) < 3 or msgs[0].get("from") != "them" or msgs[1].get("from") != "them" or msgs[2].get("from") != "me":
+        bad.append('The first two messages must be from "them" (the lock screen notifications), the third from "me".')
+    if len(big_messages(msgs)) != 1:
+        bad.append('Exactly one message from "them" must be just the big dollar amount, alone.')
     if any(m.get("from") not in ("me", "them") for m in msgs):
         bad.append('Every message needs "from": "me" or "them".')
-    long = [m["text"] for m in msgs if len(m.get("text", "")) > 62]
+    long = [m["text"] for m in msgs if len(m.get("text", "")) > 62] + [m["text"] for m in msgs[:2] if len(m.get("text", "")) > 36]
     if long:
         bad.append(f"Too long: {long[0]!r}.")
     if sum(len(EMOJI.findall(m.get("text", ""))) for m in msgs) > 4:
         bad.append("Too many emojis.")
     ok = allowed_numbers(story, facts)
-    text = " ".join(m.get("text", "") for m in msgs) + " " + chat.get("title", "") + " " + chat.get("description", "")
+    text = " ".join(m.get("text", "") for m in msgs) + " " + " ".join(chat.get(k, "") for k in ("title", "description", "revealLine", "revealEm", "captionLead", "captionEm"))
     wrong = sorted({str(n) for n in numbers_in(text) if round(n, 2) not in ok and round(n) not in ok})
     if wrong:
         bad.append(f"These numbers are not in FACTS: {', '.join(wrong)}.")
-    for k, cap in (("hookTop", 26), ("hookBottom", 28), ("title", 90)):
+    for k, cap in (("hookTop", 26), ("hookBottom", 28), ("title", 90), ("revealLine", 44), ("revealEm", 26), ("captionLead", 42), ("captionEm", 32)):
         if not chat.get(k) or len(chat[k]) > cap:
             bad.append(f"{k} missing or too long.")
     return bad
@@ -231,6 +272,42 @@ def check_chat(chat, story, facts):
 # ---------- timing: when each bubble and typing indicator appears ----------
 def plain(text):
     return EMOJI.sub("", text).strip()
+
+
+MONEY_ONLY = re.compile(r"^\$[\d,]+(\.\d+)?$")
+
+
+def big_messages(msgs):
+    return [i for i, m in enumerate(msgs) if m.get("from") == "them" and MONEY_ONLY.match(m.get("text", "").strip())]
+
+
+def timeline3d(msgs):
+    """3D design: the first two texts are lock-screen notifications, then the chat opens.
+    Returns (messages with "at", notifications, open time, duration)."""
+    notes = [{"at": 0.2, "text": msgs[0]["text"]}, {"at": 1.25, "text": msgs[1]["text"]}]
+    open_at = 2.8
+    out = [dict(msgs[0], at=0), dict(msgs[1], at=0)]
+    t, prev = 3.7, None
+    big = big_messages(msgs)[0]
+    for i, m in enumerate(msgs[2:], start=2):
+        n = len(plain(m["text"])) or 2
+        if prev is None:
+            pass
+        elif prev.get("big"):
+            t += REVEAL_GAP
+        elif m["from"] == "me":
+            t += (0.75 + 0.01 * len(prev["text"])) if prev["from"] == "me" else (0.6 + 0.025 * len(prev["text"]))
+        elif prev["from"] == "me":
+            t += 1.6 + min(0.6, 0.008 * n)         # leaves room for the typing dots
+        else:
+            t += 0.6 + 0.016 * n
+        mm = dict(m, at=round(t, 2))
+        if i == big:
+            mm["big"] = True
+        out.append(mm)
+        prev = mm
+    end = t + (REVEAL_GAP if prev and prev.get("big") else 0) + 2.4
+    return out, notes, open_at, round(end, 2)
 
 
 def timeline(msgs):
@@ -268,23 +345,28 @@ def pick_music(story):
 
 
 # ---------- the whole thing ----------
-def write(story, max_tries=3):
+def write(story, max_tries=4):
     facts = build_facts(story)
     feedback = None
     for n in range(max_tries):
-        chat = ask_claude(story, facts, feedback)
+        try:
+            chat = ask_claude(story, facts, feedback)
+        except json.JSONDecodeError as e:   # Claude sometimes breaks the JSON (a stray quote): ask again
+            feedback = f"Your reply was not valid JSON ({e}). Return only valid JSON, escape any double quotes inside text."
+            print(f"      chat rejected ({n + 1}/{max_tries}): bad JSON")
+            continue
         bad = check_chat(chat, story, facts)
         if not bad:
-            typing, duration = timeline(chat["messages"])
+            *_, duration = timeline3d(chat["messages"])
             if duration <= MAX_DURATION:
-                return facts, chat, typing, duration
+                return facts, chat, duration
             bad = [f"The chat runs {duration:.0f}s, keep it under {MAX_DURATION:.0f}s: fewer or shorter messages."]
         feedback = " ".join(bad)
         print(f"      chat rejected ({n + 1}/{max_tries}): {feedback}")
     raise RuntimeError(f"no good chat for {story['id']}: {feedback}")
 
 
-def make(story_id=None, dry=False, pool="main"):
+def make(story_id=None, dry=False, pool="main", flat_only=False):
     """Builds one texts video. Returns (topic, final path) like run.make does. Raises if nothing is left."""
     stories = {s["id"]: s for s in load_stories()}
     if story_id:
@@ -296,7 +378,7 @@ def make(story_id=None, dry=False, pool="main"):
     last_err = None
     for story in order:
         try:
-            facts, chat, typing, duration = write(story)
+            facts, chat, duration = write(story)
             break
         except Exception as e:  # a data hiccup or a bad chat skips to the next story, it never stops the day
             last_err = e
@@ -308,13 +390,37 @@ def make(story_id=None, dry=False, pool="main"):
     out = MEDIA_DIR / topic
     out.mkdir(parents=True, exist_ok=True)
     music, music_start = pick_music(story)
+    year = date.today().year
+    msgs3d, notes, open_at, duration = timeline3d(chat["messages"])
+    stamp_day = datetime.strptime(story["stamp"].split(" at ")[0], "%a, %b %d, %Y")
+    d0 = facts["data"][0]
+    big_text = msgs3d[big_messages(msgs3d)[0]]["text"]
+    if story["kind"] == "stock":
+        small, small_tag = d0["amount"], f"{story['item'].upper()} · {stamp_day:%b %Y}".upper()
+        big_tag = f"IN {d0['name'].upper()} · {d0['as_of'].upper()}"
+    else:
+        small, small_tag = d0["then"], f"{d0['name'].upper()} · {d0['then_month'].upper()}"
+        big_tag = f"{d0['name'].upper()} · {d0['as_of'].upper()}"
     props = {
-        "duration": duration, "hookTop": chat["hookTop"].upper(), "hookBottom": chat["hookBottom"].upper(),
-        "contact": f"Me ({date.today().year})", "stamp": story["stamp"], "clock": story["clock"],
-        "messages": chat["messages"], "typing": typing,
-        "sourceLabel": source_label(story, facts),
+        "pal": PALETTE, "duration": duration, "label": f"TEXTS FROM {year}",
+        "contact": f"Me ({year})", "clock": story["clock"], "date": f"{stamp_day:%A, %B} {stamp_day.day}", "stamp": story["stamp"],
+        "openAt": open_at, "notifications": notes, "messages": msgs3d,
+        "reveal": {"small": small, "big": big_text, "smallTag": small_tag, "bigTag": big_tag,
+                   "line": chat["revealLine"], "em": chat["revealEm"]},
+        "caption": {"kicker": f"{stamp_day:%a, %b} {stamp_day.day}, {stamp_day:%Y} · {story['stamp'].split(' at ')[1]}".upper(),
+                    "lead": chat["captionLead"], "em": chat["captionEm"]},
+        "capStyle": "marker",
+        "music": f"music/{music}" if music else None,
+    }
+    flat_msgs = copy.deepcopy(chat["messages"])
+    typing, flat_dur = timeline(flat_msgs)
+    flat = {
+        "duration": flat_dur, "hookTop": chat["hookTop"].upper(), "hookBottom": chat["hookBottom"].upper(),
+        "contact": f"Me ({year})", "stamp": story["stamp"], "clock": story["clock"],
+        "messages": flat_msgs, "typing": typing, "sourceLabel": source_label(story, facts),
         "music": f"music/{music}" if music else None, "musicStart": music_start,
     }
+    (out / "props_flat.json").write_text(json.dumps(flat, indent=2, ensure_ascii=False))
     (out / "data.json").write_text(json.dumps({"story": story, **facts}, indent=2, ensure_ascii=False))
     (out / "props.json").write_text(json.dumps(props, indent=2, ensure_ascii=False))
     (out / "render.json").write_text(json.dumps({"music": music}, indent=2))
@@ -323,14 +429,27 @@ def make(story_id=None, dry=False, pool="main"):
             "pinned_comment": chat["pinned_comment"], "file": str(final)}
     (out / "upload.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False))
     print(f"      {topic}: {chat['title']} ({duration:.1f}s, {len(chat['messages'])} texts, music {music})")
-    for m in chat["messages"]:
-        print(f"        {m['at']:5.1f} {'ME  ' if m['from'] == 'me' else 'THEM'} {m['text']}")
+    for m in msgs3d:
+        print(f"        {m['at']:5.1f} {'ME  ' if m['from'] == 'me' else 'THEM'} {m['text']}{'   <- 3D reveal' if m.get('big') else ''}")
     if dry:
         return topic, None
-    cmd = ["npx", "remotion", "render", "src/index.ts", "TextsFuture", str(final),
-           f"--props={out / 'props.json'}", "--codec=h264", "--crf=18"]
-    subprocess.run(cmd, cwd=VIDEO_DIR, check=True)
+    render(out, final, flat_only)
     return topic, final
+
+
+def render(out, final, flat_only=False):
+    """3D design first; if that fails for any reason, the flat design, so the day never breaks."""
+    gl = "angle" if sys.platform == "darwin" else "swangle"   # GitHub has no graphics card: software 3D
+    if not flat_only:
+        cmd = ["npx", "remotion", "render", "src/index.ts", "EdTexts", str(final), f"--props={out / 'props.json'}",
+               "--codec=h264", "--crf=18", f"--gl={gl}"]
+        if subprocess.run(cmd, cwd=VIDEO_DIR).returncode == 0:
+            return "3d"
+        print("      3D render failed, rendering the flat design instead")
+    cmd = ["npx", "remotion", "render", "src/index.ts", "TextsFuture", str(final), f"--props={out / 'props_flat.json'}",
+           "--codec=h264", "--crf=18"]
+    subprocess.run(cmd, cwd=VIDEO_DIR, check=True)
+    return "flat"
 
 
 if __name__ == "__main__":
@@ -341,6 +460,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--gaming", action="store_true", help="the GTA slot's gaming stories")
+    ap.add_argument("--flat", action="store_true", help="old flat design")
     a = ap.parse_args()
     if a.list:
         q = queue("gaming" if a.gaming else "main")
@@ -348,6 +468,6 @@ if __name__ == "__main__":
             print(f"  {n:>2}. {s['id']}")
         print(f"{len(q)} ready ({'gaming, GTA slot' if a.gaming else 'main slot'})")
         sys.exit()
-    topic, final = make(a.story, a.dry, "gaming" if a.gaming else "main")
+    topic, final = make(a.story, a.dry, "gaming" if a.gaming else "main", a.flat)
     if final:
         print(f"\nRendered {final}")

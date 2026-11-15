@@ -46,12 +46,24 @@ const drawLock = (x: CanvasRenderingContext2D, t: number, p: ChatProps, wall: [s
   x.textAlign = 'center'; x.textBaseline = 'alphabetic';
   x.fillStyle = 'rgba(255,255,255,0.9)'; x.font = F(600, 48); x.fillText(p.date, SW / 2, 235);
   x.fillStyle = '#fff'; x.font = F(800, 250); x.fillText(p.clock, SW / 2, 470);
+  // notifications wrap to 2 lines like iOS, with "..." if longer; newer ones push older ones up
   const shown = p.notifications.filter((n) => t >= n.at);
-  shown.forEach((n, i) => {
+  const MAXW = SW - 72 - 188 - 40;
+  x.font = F(600, 40);
+  const lay = shown.map((n) => {
+    let lines = wrap(x, n.text, MAXW);
+    if (lines.length > 2) {
+      let l2 = lines.slice(1).join(' ');
+      while (x.measureText(l2 + '…').width > MAXW && l2.length > 1) l2 = l2.slice(0, -1);
+      lines = [lines[0], l2.trimEnd() + '…'];
+    }
+    return {n, lines, h: lines.length > 1 ? 246 : 200};
+  });
+  lay.forEach(({n, lines, h}, i) => {
     const a = outBack((t - n.at) / 0.45, 1.1);
-    const newer = shown.slice(i + 1).reduce((s, m) => s + outCubic((t - m.at) / 0.4), 0);
-    const tap = i === shown.length - 1 ? smooth(p.openAt - 0.3, p.openAt - 0.1, t) : 0;
-    const y = 1130 - newer * 222 + (1 - a) * 160, h = 200, s = 1 - tap * 0.04;
+    const newer = lay.slice(i + 1).reduce((s, m) => s + outCubic((t - m.n.at) / 0.4) * (m.h + 22), 0);
+    const tap = i === lay.length - 1 ? smooth(p.openAt - 0.3, p.openAt - 0.1, t) : 0;
+    const y = 1330 - h - newer + (1 - a) * 160, s = 1 - tap * 0.04;
     x.save();
     x.globalAlpha = clamp01((t - n.at) / 0.2);
     x.translate(SW / 2, y + h / 2); x.scale(s, s); x.translate(-SW / 2, -(y + h / 2));
@@ -64,8 +76,9 @@ const drawLock = (x: CanvasRenderingContext2D, t: number, p: ChatProps, wall: [s
     x.fillStyle = ig; x.beginPath(); x.roundRect(64, y + 52, 96, 96, 24); x.fill();
     x.fillStyle = '#fff'; x.beginPath(); x.ellipse(112, y + 96, 30, 25, 0, 0, 7); x.fill();
     x.beginPath(); x.moveTo(92, y + 112); x.lineTo(86, y + 128); x.lineTo(108, y + 118); x.fill();
-    x.textAlign = 'left'; x.fillStyle = INK; x.font = F(800, 38); x.fillText(p.contact, 188, y + 86);
-    x.font = F(600, 42); x.fillText(n.text, 188, y + 146);
+    x.textAlign = 'left'; x.textBaseline = 'alphabetic'; x.fillStyle = INK; x.font = F(800, 38); x.fillText(p.contact, 188, y + 86);
+    x.font = F(600, 40);
+    lines.forEach((l, k) => x.fillText(l, 188, y + 142 + k * 48));
     x.textAlign = 'right'; x.font = F(600, 30); x.fillStyle = 'rgba(0,0,0,0.45)'; x.fillText('now', SW - 70, y + 82);
     x.restore();
   });
@@ -203,7 +216,7 @@ const panel = (w: number, h: number, r: number) => {
 };
 export const PW = 2.1, PH = 3.92, PD = 0.19, PR = 0.34;
 // origin at the middle of the bottom edge, so it can stand on a surface and tip back
-export const Phone3D: React.FC<{tex: THREE.Texture; position?: V3; rotation?: V3; body?: string; scale?: number}> = ({tex, body = '#2a2b2e', ...rest}) => {
+export const Phone3D: React.FC<{tex: THREE.Texture; position?: V3; rotation?: V3; body?: string; scale?: number; shadow?: boolean}> = ({tex, body = '#2a2b2e', shadow = false, ...rest}) => {
   const geo = useMemo(() => {
     const b = new THREE.ExtrudeGeometry(rounded(PW, PH, PR), {depth: PD, bevelEnabled: true, bevelThickness: 0.035, bevelSize: 0.035, bevelSegments: 6, curveSegments: 24});
     b.translate(0, 0, -PD / 2);
@@ -213,7 +226,7 @@ export const Phone3D: React.FC<{tex: THREE.Texture; position?: V3; rotation?: V3
   return (
     <group {...(rest as any)}>
       <group position={[0, PH / 2 + 0.035, 0]}>
-        <mesh geometry={geo.body} castShadow><meshStandardMaterial color={body} metalness={0.9} roughness={0.32} /></mesh>
+        <mesh geometry={geo.body} castShadow={shadow}><meshStandardMaterial color={body} metalness={0.9} roughness={0.32} /></mesh>
         <mesh geometry={geo.screen} position={[0, 0, z + 0.03]}><meshBasicMaterial map={tex} toneMapped={false} polygonOffset polygonOffsetFactor={-4} polygonOffsetUnits={-8} /></mesh>
         <mesh geometry={geo.screen} position={[0, 0, z + 0.045]}><meshStandardMaterial color="#ffffff" metalness={1} roughness={0.03} transparent opacity={0.05} depthWrite={false} /></mesh>
         <mesh geometry={geo.glass} position={[0, 0, -z]} rotation={[0, Math.PI, 0]}><meshStandardMaterial color={body} metalness={0.6} roughness={0.4} /></mesh>
@@ -221,3 +234,21 @@ export const Phone3D: React.FC<{tex: THREE.Texture; position?: V3; rotation?: V3
     </group>
   );
 };
+
+// soft contact shadow: a blurred ellipse lying on the floor under the phone (a light-cast shadow of a thin slab looks broken)
+export const useSoftShadow = () => useMemo(() => {
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 256;
+  const x = c.getContext('2d')!;
+  const g = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+  g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.35, 'rgba(0,0,0,0.55)'); g.addColorStop(0.7, 'rgba(0,0,0,0.14)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+  x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+  const t = new THREE.CanvasTexture(c);
+  return t;
+}, []);
+export const SoftShadow: React.FC<{tex: THREE.Texture; position: V3; size: [number, number]; opacity: number; rotation?: number}> = ({tex, position, size, opacity, rotation = 0}) => (
+  <mesh position={position} rotation={[-Math.PI / 2, 0, rotation]} renderOrder={-1}>
+    <planeGeometry args={size} />
+    <meshBasicMaterial map={tex} transparent opacity={opacity} depthWrite={false} toneMapped={false} color="#000" />
+  </mesh>
+);
