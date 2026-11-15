@@ -108,6 +108,11 @@
     "zernio_id": "6af8d361a654d73f8b42e367",
     "posted_at": "2026-11-14T21:32:18+00:00",
     "when": "2026-11-14T19:00:00-05:00",
-    "slot": "gta"
+    "slot": "gta",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=Ct_UAQS_5-4",
+      "facebook": "https://www.facebook.com/reel/1108984018571015"
+    },
+    "url": "https://www.youtube.com/watch?v=Ct_UAQS_5-4"
   }
 }
