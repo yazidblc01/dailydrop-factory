@@ -8,6 +8,8 @@ on:
 jobs:
   time-render:
     runs-on: ubuntu-24.04
+    env:
+      REMOTION_ED_FAST: "1"
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +34,7 @@ jobs:
         working-directory: video
         run: |
           nproc
-          for gl in swangle angle-egl swiftshader; do
+          for gl in swangle; do
             start=$(date +%s)
             if npx remotion render src/index.ts EdTexts out_texts3d.mp4 --gl=$gl; then
               echo "TEXTS_SECONDS=$(( $(date +%s) - start )) GL_MODE=$gl"
