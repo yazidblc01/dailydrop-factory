@@ -4,6 +4,7 @@ import {RankingReveal, RevealProps} from './RankingReveal';
 import current from '../props/current.json';
 import story from '../props/story.json';
 import {StoryReel, StoryProps} from './StoryReel';
+import {EdStory} from './ed/Story';
 import {TextsFuture, TFProps} from './TextsFuture';
 import {EdTexts} from './ed/Texts';
 import {EdTextsFlat} from './ed/TextsFlat';
@@ -79,6 +80,8 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames: Math.ceil(props.duration * FPS),
       })}
     />
+    <Composition id="EdStory" component={EdStory as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((story as any).duration * FPS) + TAIL_FRAMES}
+      defaultProps={story as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS) + TAIL_FRAMES})} />
     <Composition id="EdTexts" component={EdTexts as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edtexts as any).duration * FPS)}
       defaultProps={edtexts as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdTextsFlat" component={EdTextsFlat as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edtexts as any).duration * FPS)}

@@ -58,6 +58,14 @@ Rules:
 - Write numbers as digits with their symbols ($13,765, 62%); a separate step turns them into spoken words.
 - The photo search describes scenery or objects only (skylines, money, highways, landscapes). Never people, faces, brands, logos or product names.
 - Total spoken words (hook + race_intro + callouts + reveal + twist) between 45 and 85.
+
+How it must SOUND (it is read in one take by one voice):
+- Like one person telling a friend a story out loud, not a news ticker. Every line follows from the one before it.
+- Link the lines with small words: "then", "but", "meanwhile", "by", "and", "still". Use contractions (it's, didn't, that's).
+- Never start two lines the same way. At most ONE line may start with "In <year>"; put the year inside the sentence instead ("by 2008", "a year later").
+- One number per line at most, except the reveal. No lists of names.
+- Say MYSTERY_WORD at most twice in the whole script; after that call it "it".
+- Read it out loud in your head before answering: if any line sounds like a label or a log entry, rewrite it.
 """ + COMMON_RULES
 
 SYSTEM_CLASSIC = """You write scripts for faceless YouTube Shorts on a data channel called The Daily Drop.
@@ -134,6 +142,9 @@ def check_story_shape(script, payload):
     early = " ".join([script["hook"], script.get("race_intro", ""), *script.get("callouts", []), script["title"]]).lower()
     if len(script.get("race_intro", "").split()) > 16:
         problems.append("race_intro is too long: one short line, max 12 words, and do not list the contenders")
+    lines = [script.get("race_intro", ""), *script.get("callouts", []), script["reveal"], script["twist"]]
+    if sum(bool(re.match(r"\s*in \d{4}\b", x, re.I)) for x in lines) > 1:
+        problems.append('more than one line starts with "In <year>": it sounds like a list. Put the year inside the sentence and link the lines like a story')
     if re.search(rf"\b{re.escape(winner)}\b", early):
         problems.append(f"do not name {winner} before the reveal (hook, race_intro, callouts and title must call it the mystery one)")
     return problems

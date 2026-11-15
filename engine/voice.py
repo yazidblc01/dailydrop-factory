@@ -11,6 +11,7 @@ Outputs in media/<topic>/:
     timing.json  every word with start/end times, plus each script section's start/end
 """
 import argparse
+import base64
 import difflib
 import json
 import os
@@ -26,7 +27,7 @@ load_dotenv()
 
 ELEVEN = "https://api.elevenlabs.io/v1"
 VOICE_PREFS = ["Brian", "Adam", "Daniel", "Bill", "George", "Liam"]  # first match in your account wins
-VOICE_SETTINGS = {"stability": 0.4, "similarity_boost": 0.8, "style": 0.45, "use_speaker_boost": True, "speed": 1.12}
+VOICE_SETTINGS = {"stability": 0.5, "similarity_boost": 0.8, "style": 0.3, "use_speaker_boost": True, "speed": 1.06}
 GAP = 0.06           # seconds of silence between sections
 PRE_REVEAL_GAP = 0.3  # longer pause right before the reveal
 
@@ -223,8 +224,56 @@ def align_sections(secs, words, total):
 
 
 def build_ai(topic, script, out):
+    """The whole script in ONE take, so it sounds like one person telling one story (no restarts between lines).
+    ElevenLabs returns when each letter is spoken, which gives every section its exact start and end.
+    If that fails for any reason, the old line-by-line recording is used."""
     voice_id, voice_name = pick_voice()
     print(f"Voice: {voice_name}")
+    try:
+        return build_one_take(script, voice_id, out), voice_name
+    except Exception as e:
+        print(f"  one-take voice failed ({e}), recording line by line instead")
+    return build_lines(script, voice_id, out), voice_name
+
+
+def build_one_take(script, voice_id, out):
+    secs = sections(script)
+    parts, spans, pos = [], [], 0
+    for i, (name, text) in enumerate(secs):
+        sep = "" if i == 0 else ("\n\n" if name == "reveal" else " ")   # a paragraph break: a beat before the reveal
+        said = speakable(text)
+        pos += len(sep)
+        spans.append((pos, pos + len(said)))
+        parts.append(sep + said)
+        pos += len(said)
+    text = "".join(parts)
+    url = f"{ELEVEN}/text-to-speech/{voice_id}/with-timestamps"
+    headers = {"xi-api-key": os.environ["ELEVENLABS_API_KEY"], "Content-Type": "application/json"}
+    r = requests.post(url, headers=headers, timeout=180, json={"text": text, "model_id": "eleven_multilingual_v2", "voice_settings": VOICE_SETTINGS})
+    r.raise_for_status()
+    j = r.json()
+    al = j.get("normalized_alignment") or j["alignment"]
+    if "".join(al["characters"]) != text:
+        al = j["alignment"]
+    starts, ends = al["character_start_times_seconds"], al["character_end_times_seconds"]
+    if len(starts) != len(text):
+        raise RuntimeError("timings do not match the text")
+    tmp = out / "parts"
+    tmp.mkdir(exist_ok=True)
+    (tmp / "take.mp3").write_bytes(base64.b64decode(j["audio_base64"]))
+    to_wav(tmp / "take.mp3", out / "voice.wav")
+    total = duration(out / "voice.wav")
+    timed = []
+    for i, ((name, text_i), (a, b)) in enumerate(zip(secs, spans)):
+        st = starts[a]
+        en = starts[spans[i + 1][0]] if i + 1 < len(secs) else total
+        timed.append({"name": name, "text": text_i, "start": round(st, 3), "end": round(min(en, total), 3)})
+        print(f"  {name:<8} {ends[b - 1] - st:5.2f}s")
+    (tmp / "take.json").write_text(json.dumps(timed, indent=2))
+    return timed
+
+
+def build_lines(script, voice_id, out):
     tmp = out / "parts"
     tmp.mkdir(exist_ok=True)
     silence(tmp / "gap.wav", GAP)
@@ -250,7 +299,7 @@ def build_ai(topic, script, out):
     lst = tmp / "concat.txt"
     lst.write_text("".join(f"file '{f.resolve()}'\n" for f in files))
     run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(out / "voice.wav")])
-    return timed, voice_name
+    return timed
 
 
 def build(topic, file=None):
@@ -284,12 +333,15 @@ def retime(topic):
     with open(out / "script.json") as f:
         script = json.load(f)
     secs, cursor, timed = sections(script), 0.0, []
-    for i, (name, text) in enumerate(secs):
+    take = out / "parts" / "take.json"
+    for i, (name, text) in enumerate(secs if not take.exists() else []):
         d = duration(out / "parts" / f"{i:02d}_{name}.wav")
         timed.append({"name": name, "text": text, "start": round(cursor, 3), "end": round(cursor + d, 3)})
         cursor += d
         if i < len(secs) - 1:
             cursor += PRE_REVEAL_GAP if secs[i + 1][0] == "reveal" else GAP
+    if take.exists():
+        timed = json.loads(take.read_text())
     total = duration(out / "voice.wav")
     print("Transcribing for word timings...")
     words = transcribe_words(out / "voice.wav")

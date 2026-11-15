@@ -256,6 +256,14 @@ def render(topic, theme=None):
         composition = "RankingReveal"
     print(f"      {composition}, theme: {props['theme']}, music: {props['music'] or 'none'}")
     final = MEDIA_DIR / topic / "final.mp4"
+    if composition == "StoryReel":
+        # the editorial design first; the old dark design only if it fails, so the day never breaks
+        cmd = ["npx", "remotion", "render", "src/index.ts", "EdStory", str(final), f"--props={props_path}", "--codec=h264", "--crf=18"]
+        if subprocess.run(cmd, cwd=VIDEO_DIR).returncode == 0:
+            return final
+        print("      editorial render failed, rendering the old design")
+        from engine.texts import warn
+        warn(f"⚠️ The new design failed for {topic}, the old dark design was used instead.")
     cmd = ["npx", "remotion", "render", "src/index.ts", composition, str(final),
            f"--props={props_path}", "--codec=h264", "--crf=18"]
     subprocess.run(cmd, cwd=VIDEO_DIR, check=True)
