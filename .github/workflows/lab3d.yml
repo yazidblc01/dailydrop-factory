@@ -28,19 +28,26 @@ jobs:
         working-directory: video
         run: npm ci --no-audit --no-fund
 
-      - name: Render the texts reel and time it
+      - name: Render the texts reel and time it (tries each graphics mode until one works)
         working-directory: video
         run: |
           nproc
-          start=$(date +%s)
-          npx remotion render src/index.ts EdTexts out_texts3d.mp4 --gl=angle
-          echo "TEXTS_SECONDS=$(( $(date +%s) - start ))"
+          for gl in swangle angle-egl swiftshader; do
+            start=$(date +%s)
+            if npx remotion render src/index.ts EdTexts out_texts3d.mp4 --gl=$gl; then
+              echo "TEXTS_SECONDS=$(( $(date +%s) - start )) GL_MODE=$gl"
+              echo "GL=$gl" >> $GITHUB_ENV
+              exit 0
+            fi
+            echo "GL_FAILED=$gl"
+          done
+          exit 1
 
       - name: Render the board and time it
         working-directory: video
         run: |
           start=$(date +%s)
-          npx remotion render src/index.ts EdFlap out_board.mp4 --gl=angle
+          npx remotion render src/index.ts EdFlap out_board.mp4 --gl=$GL
           echo "BOARD_SECONDS=$(( $(date +%s) - start ))"
 
       - uses: actions/upload-artifact@v4
