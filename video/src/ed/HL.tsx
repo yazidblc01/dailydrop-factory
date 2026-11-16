@@ -30,7 +30,7 @@ const useCards = (P: Pal, p: EdHLProps, ready: boolean) => useMemo(() => {
     x.font = '400 92px "Instrument Serif", serif'; x.fillText(it.name, 54, 126);
     x.font = '500 30px "JetBrains Mono", monospace'; x.globalAlpha = 0.6; x.fillText(`${it.sub} · ${p.unit}`, 56, 178); x.globalAlpha = 1;
     x.fillRect(54, 208, TW - 108, 3);
-    x.textAlign = 'right'; x.font = '400 226px "Instrument Serif", serif'; x.fillStyle = P.name === 'paper' ? P.accent : ink; x.fillText(usd(it.value), TW - 50, 398);
+    x.textAlign = 'right'; x.font = '400 226px "Instrument Serif", serif'; x.fillStyle = P.name === 'paper' || P.name === 'vice' ? P.accent : ink; x.fillText(usd(it.value), TW - 50, 398);
     x.textAlign = 'left'; x.font = '700 26px "JetBrains Mono", monospace'; x.fillStyle = ink; x.globalAlpha = 0.5; x.fillText(`NO. ${String(i + 1).padStart(2, '0')}`, 56, 392);
   }));
   const backs = p.items.map((it) => tex((x) => {
@@ -51,7 +51,7 @@ const useCards = (P: Pal, p: EdHLProps, ready: boolean) => useMemo(() => {
     x.lineWidth = 4; x.beginPath(); x.roundRect(-232, -66, 464, 132, 12); x.stroke();
     x.font = '800 104px "Bricolage Grotesque", sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(word, 0, 6);
   }, 600, 260);
-  return {fronts, backs, higher: stamp('HIGHER', P.accent), lower: stamp('LOWER', P.name === 'paper' ? '#1f5fd1' : P.accent)};
+  return {fronts, backs, higher: stamp('HIGHER', P.accent), lower: stamp('LOWER', P.name === 'paper' || P.name === 'vice' ? '#1f5fd1' : P.accent)};
 }, [P.name, ready, p.items]);
 
 export const EdHL: React.FC<EdHLProps> = (p) => {

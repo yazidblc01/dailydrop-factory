@@ -31,7 +31,8 @@ STORIES = DATA_DIR / "text_stories.csv"
 PREFIX = "texts__"
 LOW_STOCK = 6
 # gaming stories, in the order the 7 PM GTA slot uses them; the main slot leaves them alone during GTA month
-GAMING = ["ps4_nvidia", "gta6_trailer_ttwo", "switch_2017", "rdr2_ttwo", "ps5_amd", "xbox360_2005", "gtx1080_2016",
+GAMING = ["gta6_announced", "gta6_delay1_hold", "gta5_launch", "gta6_trailer2_gpu", "gtaiv_apple", "gta6_delay2_dip", "gtav_pc_nvidia", "gtav_ps5_amd",
+          "ps4_nvidia", "gta6_trailer_ttwo", "switch_2017", "rdr2_ttwo", "ps5_amd", "xbox360_2005", "gtx1080_2016",
           "ps3_2006", "minecraft_2014", "steamdeck_amd", "wii_2006", "pokemon_go_2016", "gme_tradein_2019", "gme_moon"]
 MAX_DURATION = 30.0
 REVEAL_GAP = 4.5        # seconds the 3D number reveal holds before the next text
@@ -402,7 +403,7 @@ def make(story_id=None, dry=False, pool="main", flat_only=False):
         small, small_tag = d0["then"], f"{d0['name'].upper()} · {d0['then_month'].upper()}"
         big_tag = f"{d0['name'].upper()} · {d0['as_of'].upper()}"
     props = {
-        "pal": PALETTE, "duration": duration, "label": f"TEXTS FROM {year}",
+        "pal": "vice" if pool == "gaming" or story.get("music") == "gta" else PALETTE, "duration": duration, "label": f"TEXTS FROM {year}",
         "contact": f"Me ({year})", "clock": story["clock"], "date": f"{stamp_day:%A, %B} {stamp_day.day}", "stamp": story["stamp"],
         "openAt": open_at, "notifications": notes, "messages": msgs3d,
         "reveal": {"small": small, "big": big_text, "smallTag": small_tag, "bigTag": big_tag,

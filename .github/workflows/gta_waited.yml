@@ -1,7 +1,7 @@
-# "While we waited for GTA 6": 5 Shorts a day, each made and posted right away (engine/waited.py).
+# GTA wave: 5 Shorts a day, rotating "while we waited", boards, receipts, higher or lower and the shrinking $100 (engine/waited.py).
 # Times are UTC; in Toronto (winter) that's about 9 AM, noon, 3 PM, 6 PM and 9 PM. Run it by hand any time with:
 #   gh workflow run gta_waited.yml
-name: GTA waited
+name: GTA wave
 
 on:
   schedule:

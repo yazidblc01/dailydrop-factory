@@ -17,7 +17,7 @@ export const EdTexts: React.FC<EdTextsProps> = (p) => {
   const P = PAL[p.pal];
   const {canvas, tex} = usePhoneScreen();
   const shadowTex = useSoftShadow();
-  const wall: [string, string, string] = P.name === 'paper' ? ['#E3412A', '#F08A4B', '#F6C56B'] : P.name === 'green' ? ['#0E3B2E', '#1F7A5C', '#E8B84A'] : ['#16161c', '#3a3f1a', '#C9FF3B'];
+  const wall: [string, string, string] = P.name === 'paper' ? ['#E3412A', '#F08A4B', '#F6C56B'] : P.name === 'vice' ? ['#3D1460', '#FF4FA0', '#FFC46B'] : P.name === 'green' ? ['#0E3B2E', '#1F7A5C', '#E8B84A'] : ['#16161c', '#3a3f1a', '#C9FF3B'];
   if (ready) { drawPhoneScreen(canvas, t, p, wall); tex.needsUpdate = true; }
 
   const big = p.messages.find((m) => m.big)!;

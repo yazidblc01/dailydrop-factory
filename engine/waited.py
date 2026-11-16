@@ -51,6 +51,11 @@ HOOKS = [("GTA V came out in 2013.", "Here's what 13 years of waiting did to pri
          ("We've waited 13 years for GTA 6.", "Look what happened in the meantime."),
          ("GTA V release day vs GTA 6 release day.", "Same wait. Wildly different results."),
          ("13 years between GTA V and GTA 6.", "Here's what that wait cost you.")]
+THEMES = ["mixed", "stocks", "prices", "gamer"]
+GAMER = {"TTWO", "SONY", "NTDOY", "AMD", "NVDA", "GME", "MSFT"}
+GAME_PRICE = {"key": "GTA", "name": "GTA itself", "kind": "price", "head": "The game itself.", "what": "NEW GTA AT LAUNCH",
+              "then": "$59.99", "now": "$79.99", "r": 79.99 / 59.99, "thenDate": "SEP 17, 2013", "nowDate": "NOV 19, 2026",
+              "fact": "A new GTA at launch: $59.99 (GTA V, 2013) vs $79.99 (GTA 6, 2026)"}
 TITLES = ["Everything that changed while we waited for GTA 6 💀", "13 years waiting for GTA 6: {fin} went {mult} 🤯",
           "GTA V day vs GTA 6 day: what changed 💸", "What 13 years of waiting for GTA 6 did to prices 😭"]
 
@@ -114,13 +119,17 @@ def load_state():
 
 
 def build(today=None, seed=None):
-    """Six pairs: 2 everyday prices, 1 cost-of-life number, 2 stocks, and a big-multiple stock saved for last."""
+    """Six pairs, then the finale. The mix rotates by theme:
+    mixed: 2 everyday prices, 1 cost-of-life number, 2 stocks; stocks: 5 stocks; prices: 5 prices; gamer: gaming stocks and the game's own price.
+    The last round is always the stock with the biggest multiple (not used as the finale in the last 4 videos)."""
     today = today or datetime.now().date()
     st = load_state()
     n = st["count"] if seed is None else seed
+    theme = THEMES[(n // 2) % len(THEMES)]
     rnd = random.Random(1000 + n)
+    stock_pool = [x for x in STOCKS if x[0] in GAMER] if theme == "gamer" else STOCKS
     got_s, got_p, got_l = [], [], []
-    for t, nm in rnd.sample(STOCKS, len(STOCKS)):
+    for t, nm in rnd.sample(stock_pool, len(stock_pool)):
         try:
             got_s.append(stock_pair(t, nm, today))
         except Exception as e:  # one ticker failing never stops the video
@@ -141,8 +150,12 @@ def build(today=None, seed=None):
     recent = set(st["finales"][-4:])
     big = sorted(got_s, key=lambda x: -x["r"])
     fin = next((x for x in big if x["key"] not in recent), big[0])
-    others = [x for x in got_s if x is not fin][:2]
-    rest = (got_p[:2] + got_l[:1] + got_p[2:] + got_l[1:])[:ROUNDS - 1 - len(others)]
+    k_st = {"mixed": 2, "stocks": 4, "prices": 1, "gamer": 3}[theme]
+    others = [x for x in got_s if x is not fin][:k_st]
+    extra = [GAME_PRICE] if theme == "gamer" or (theme == "mixed" and n % 3 == 0) else []
+    rest = (extra + got_p[:2] + got_l[:1] + got_p[2:] + got_l[1:])[:ROUNDS - 1 - len(others)]
+    if len(rest) + len(others) < ROUNDS - 1:  # not enough of one kind: top up with the other
+        others = [x for x in got_s if x is not fin][:ROUNDS - 1 - len(rest)]
     mid = sorted(rest + others, key=lambda x: x["r"])
     opener = max((x for x in mid if x["kind"] == "price"), key=lambda x: x["r"], default=None)  # open on a shock everyone feels
     rounds = ([opener] if opener else []) + [x for x in mid if x is not opener] + [fin]
@@ -166,6 +179,121 @@ def build(today=None, seed=None):
     return topic, props, meta, fin["key"]
 
 
+# ---------- the other GTA formats (same sunset look) ----------
+RELEASES = [(2001, 10, "III"), (2002, 10, "VICE CITY"), (2004, 10, "SAN ANDREAS"), (2008, 4, "IV"), (2013, 9, "V")]
+BOARDS = [("gaps", None), ("gas", ("APU000074714", "A gallon of gas", "GAS, GALLON")), ("game", None),
+          ("eggs", ("APU0000708111", "A dozen eggs", "EGGS, DOZEN")), ("wage", ("FEDMINNFRWG", "The minimum wage", "MIN WAGE")),
+          ("milk", ("APU0000709112", "A gallon of milk", "MILK, GALLON"))]
+RECEIPT_ITEMS = [("APU0000708111", "EGGS, DOZEN"), ("APU0000709112", "MILK, GALLON"), ("APU0000702111", "BREAD, LB"),
+                 ("APU0000703112", "GROUND BEEF, LB"), ("APU0000717311", "COFFEE, LB"), ("APU000074714", "GAS, GALLON")]
+SOURCE = "Sources: US Bureau of Labor Statistics and FRED."
+
+
+def latest_key(m, today):
+    return max(k for k in m if k <= f"{gta6_side(today):%Y-%m}")
+
+
+def board(n, today):
+    kind, spec = BOARDS[n % len(BOARDS)]
+    year6 = 2026
+    rows, at = [], lambda i: round(2.6 + 2.2 * i, 2)
+    if kind == "gaps":
+        names = ["III", "VC", "SA", "IV", "V", "VI"]
+        years = [2001, 2002, 2004, 2008, 2013, 2026]
+        for i, (nm, y) in enumerate(zip(names, years)):
+            gap = "" if i == 0 else f"{y - years[i - 1]}Y"
+            rows.append({"text": f"{nm:<4}{y}{gap:>4}", "at": at(i), "hot": nm == "VI"})
+        hook, end = ("Every GTA release.", "Count the years between them."), ("13 years between V and VI.", "The longest wait ever.")
+        title, facts = "The wait between every GTA game 😭", "GTA III 2001, Vice City 2002, San Andreas 2004, GTA IV 2008, GTA V 2013, GTA 6 2026."
+    elif kind == "game":
+        import csv
+        with open(DATA_DIR / "gta_launch_prices.csv", newline="") as f:
+            g = list(csv.DictReader(f))
+        for i, r in enumerate(g):
+            rows.append({"text": f"{r['us_launch_date'][:4]}{'$' + r['launch_price_usd']:>8}", "at": at(i), "hot": r is g[-1]})
+        hook, end = ("What a new GTA cost", "on launch day."), (f"${g[0]['launch_price_usd']} to ${g[-1]['launch_price_usd']}.", "Over 25 years.")
+        title, facts = "What every GTA cost on launch day 💸", " ".join(f"{r['game']}: ${r['launch_price_usd']} ({r['us_launch_date'][:4]})." for r in g)
+    else:
+        sid, what, _ = spec
+        m = recipes.fred_monthly(sid)
+        vals = []
+        for y, mo, nm in RELEASES:
+            k = f"{y}-{mo:02d}"
+            if k in m:
+                vals.append((str(y), m[k], nm))
+        k6 = latest_key(m, today)
+        vals.append((k6[:4] if today >= GTA6 else "NOW", m[k6], "6"))
+        top = max(v for _, v, _ in vals)
+        for i, (lab, v, nm) in enumerate(vals):
+            rows.append({"text": f"{lab:<4}{'$' + format(v, '.2f'):>8}", "at": at(i), "hot": v == top or nm == "6"})
+        hook = (f"{what},", "on every GTA release day.")
+        end = (f"GTA III: ${vals[0][1]:.2f}.", f"GTA 6: ${vals[-1][1]:.2f}.")
+        title = f"{what} on every GTA release day ⛽" if kind == "gas" else f"{what} on every GTA release day 💸"
+        facts = " ".join(f"GTA {nm}: ${v:.2f} ({lab})." for lab, v, nm in vals) + " " + SOURCE
+    dur = rows[-1]["at"] + 6.2
+    props = {"pal": "vice", "duration": round(dur, 2), "label": "THE BOARD · GTA", "hookA": hook[0], "hookB": hook[1],
+             "endA": end[0], "endB": end[1], "header": "", "rows": rows}
+    meta = {"title": title, "description": f"{facts}\nGTA 6 comes out November 19, 2026.\n#gta6 #gta #gtav",
+            "pinned_comment": "Which GTA did you play first? 👇"}
+    return "EdFlap", f"board_{kind}", props, meta
+
+
+def receipt(n, today):
+    items, k_end = [], None
+    for sid, name in RECEIPT_ITEMS:
+        try:
+            m = recipes.fred_monthly(sid)
+            k_end = latest_key(m, today)
+            items.append({"name": name, "a": round(m["2013-09"], 2), "b": round(m[k_end], 2)})
+        except Exception as e:
+            print(f"      skipped {name}: {e}")
+    if len(items) < 4:
+        raise RuntimeError("not enough grocery prices")
+    ta, tb = sum(i["a"] for i in items), sum(i["b"] for i in items)
+    pct = round((tb / ta - 1) * 100)
+    props = {"pal": "vice", "duration": 21, "label": "THE RECEIPT · GTA", "hookA": "Same grocery run.", "hookB": "GTA V day vs GTA 6 day.",
+             "endA": "Same cart.", "endB": f"+{pct}% since GTA V.", "store": "DAILY DROP MARKET", "sub": "GTA V DAY VS GTA 6 DAY",
+             "colA": "2013", "colB": k_end[:4], "items": items, "printStart": 2.6, "printEnd": 12.5}
+    lines = "\n".join(f"• {i['name'].title()}: ${i['a']:.2f} (Sep 2013) vs ${i['b']:.2f} ({k_end})" for i in items)
+    meta = {"title": "The same grocery cart, GTA V day vs GTA 6 day 🧾",
+            "description": f"Average US prices when GTA V came out (Sep 2013) vs now:\n{lines}\nTotal: ${ta:.2f} vs ${tb:.2f} (+{pct}%).\n{SOURCE}\n#gta6 #gtav #inflation",
+            "pinned_comment": "Which one hurts the most? 👇"}
+    return "EdReceipt", "receipt", props, meta
+
+
+def coins(n, today):
+    m = recipes.fred_monthly("CPIAUCSL")
+    k_end = latest_key(m, today)
+    pts = [[2013, m["2013-09"]]] + [[y, m[f"{y}-09"]] for y in range(2015, int(k_end[:4])) if f"{y}-09" in m] + [[int(k_end[:4]), m[k_end]]]
+    buys = round(100 * m["2013-09"] / m[k_end])
+    props = {"pal": "vice", "duration": 19, "label": "THE SHRINKING $100 · GTA", "hookA": "$100 on GTA V release day.", "hookB": "Watch what it buys now.",
+             "endA": "That GTA V-day $100 now buys", "endB": f"${buys} of stuff.", "start": 2.6, "end": 14.0, "cpi": pts}
+    meta = {"title": f"$100 from GTA V day is now worth ${buys} 😬",
+            "description": f"$100 on the day GTA V came out (Sep 2013) buys about ${buys} worth of stuff today (US CPI, {k_end}).\n{SOURCE}\n#gta6 #gtav #inflation",
+            "pinned_comment": "What did $100 get you in 2013? 👇"}
+    return "EdCoins", "coins", props, meta
+
+
+def consoles(n, today):
+    import csv
+    with open(DATA_DIR / "console_launch_prices.csv", newline="") as f:
+        rows = list(csv.DictReader(f))
+    pick = random.Random(77 + n).sample(rows, 5)
+    items = [{"name": r["console"], "sub": r["us_launch_date"][:4], "value": float(r["launch_price_usd"])} for r in pick]
+    top = max(items, key=lambda x: x["value"])
+    props = {"pal": "vice", "duration": 20, "label": "HIGHER OR LOWER · GTA", "hookA": "Console launch prices.", "hookB": "Higher or lower?",
+             "endA": f"The priciest one here: the {top['name']},", "endB": f"back in {top['sub']}.", "unit": "LAUNCH PRICE", "items": items,
+             "start": 2.2, "round": 3.7}
+    meta = {"title": "Console launch prices: higher or lower? 🎮",
+            "description": "US launch prices: " + ", ".join(f"{i['name']} ${i['value']:g} ({i['sub']})" for i in items) + ".\nGTA 6 comes out November 19, 2026 on PS5 and Xbox Series X and S.\n#gta6 #playstation #xbox",
+            "pinned_comment": "How many did you get right? 👇"}
+    return "EdHL", "consoles", props, meta
+
+
+FORMATS = ["waited", "board", "waited", "receipt", "board", "waited", "consoles", "coins"]
+OTHER = {"board": board, "receipt": receipt, "coins": coins, "consoles": consoles}
+
+
 # ---------- video ----------
 def pick_music(topic):
     files = sorted(f.name for f in (PUBLIC / "music").glob("*.mp3")) if (PUBLIC / "music").exists() else []
@@ -187,6 +315,51 @@ def render(out, final, flat_only=False):
     (out / "props_flat.json").write_text(json.dumps({**props, "flat": True}, indent=2, ensure_ascii=False))
     subprocess.run(base + [f"--props={out / 'props_flat.json'}"], cwd=VIDEO_DIR, check=True)
     return "flat"
+
+
+def make_other(kind, dry=False, today=None):
+    from engine.texts import warn
+    today = today or datetime.now().date()
+    st = load_state()
+    comp, sub, props, meta = OTHER[kind](st.get("other", {}).get(kind, 0), today)
+    topic = f"gta_{sub}__{today:%Y%m%d}__{st['count']}"
+    out = MEDIA_DIR / topic
+    out.mkdir(parents=True, exist_ok=True)
+    music = pick_music(topic)
+    props["music"] = f"music/{music}" if music else None
+    final = out / "final.mp4"
+    (out / "props.json").write_text(json.dumps(props, indent=2, ensure_ascii=False))
+    (out / "render.json").write_text(json.dumps({"music": music}, indent=2))
+    (out / "upload.json").write_text(json.dumps({"topic": topic, **meta, "file": str(final)}, indent=2, ensure_ascii=False))
+    print(f"      {topic}: {meta['title']} ({props['duration']}s, {comp}, music {music})")
+    if dry:
+        return topic, None
+    gl = "angle" if sys.platform == "darwin" else "swangle"
+    subprocess.run(["npx", "remotion", "render", "src/index.ts", comp, str(final), f"--props={out / 'props.json'}",
+                    "--codec=h264", "--crf=18", f"--gl={gl}"], cwd=VIDEO_DIR, check=True)
+    st = load_state()
+    st["count"] += 1
+    st.setdefault("other", {})[kind] = st.get("other", {}).get(kind, 0) + 1
+    st["made"] = (st["made"] + [topic])[-200:]
+    STATE.write_text(json.dumps(st, indent=2))
+    return topic, final
+
+
+def make_next(dry=False, flat_only=False, today=None, kind=None):
+    """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
+    kind = kind or FORMATS[load_state()["count"] % len(FORMATS)]
+    if kind != "waited":
+        try:
+            return make_other(kind, dry, today)
+        except Exception as e:
+            from engine.texts import warn
+            print(f"      {kind} failed ({e}), making a waited reel instead")
+            warn(f"⚠️ GTA {kind} reel failed, posted a waited reel instead.\n{e}")
+            if not dry:
+                st = load_state()
+                st["count"] += 1     # move past it next time
+                STATE.write_text(json.dumps(st, indent=2))
+    return make(dry, flat_only, today)
 
 
 def make(dry=False, flat_only=False, today=None):
@@ -220,10 +393,11 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles"], help="force one format")
     a = ap.parse_args()
     import run
     try:
-        topic, final = make(a.dry, a.flat)
+        topic, final = make_next(a.dry, a.flat, kind=a.format)
         if final and a.post:
             run.post(topic, now=True, slot="waited")
         elif final:

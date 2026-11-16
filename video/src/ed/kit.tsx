@@ -22,7 +22,7 @@ export const rnd = (i: number, salt = 0) => { const s = Math.sin(i * 127.1 + sal
 export const SAFE = {top: 270, bottom: 1440, left: 84, right: 996, rightLow: 912, lowFrom: 980};
 
 // ===== palettes =====
-export type PalName = 'paper' | 'green' | 'night';
+export type PalName = 'paper' | 'green' | 'night' | 'vice';
 export type Pal = {name: PalName; bg: string; bg2: string; ink: string; mute: string; rule: string; accent: string; onAccent: string; money: string; card: string; cardInk: string;
   display: string; dWeight: number; dItalic: boolean; dTrack: number; font3d: string; shadow: number; grain: number; blend: string; dark: boolean};
 export const PAL: Record<PalName, Pal> = {
@@ -32,6 +32,9 @@ export const PAL: Record<PalName, Pal> = {
     card: '#F3EBDA', cardInk: '#0C261E', display: 'Fraunces', dWeight: 500, dItalic: true, dTrack: -0.035, font3d: 'fraunces', shadow: 0.42, grain: 0.3, blend: 'overlay', dark: true},
   night: {name: 'night', bg: '#0B0B0D', bg2: '#1D1D25', ink: '#F4F4EF', mute: 'rgba(244,244,239,0.56)', rule: 'rgba(244,244,239,0.18)', accent: '#C9FF3B', onAccent: '#0B0B0D', money: '#C9FF3B',
     card: '#F4F4EF', cardInk: '#0B0B0D', display: 'Bricolage Grotesque', dWeight: 800, dItalic: false, dTrack: -0.045, font3d: 'brico', shadow: 0.55, grain: 0.28, blend: 'overlay', dark: true},
+  // the GTA look: a sunset sky with palms (Backdrop draws it), cream type, hot pink accent
+  vice: {name: 'vice', bg: '#2A1046', bg2: '#FF5E8A', ink: '#FFF3EA', mute: 'rgba(255,243,234,0.75)', rule: 'rgba(255,243,234,0.35)', accent: '#FF4FA0', onAccent: '#fff', money: '#7FE0B0',
+    card: '#FFF3EA', cardInk: '#2A1046', display: 'Instrument Serif', dWeight: 400, dItalic: true, dTrack: -0.02, font3d: 'serif', shadow: 0.45, grain: 0.22, blend: 'overlay', dark: true},
 };
 export const MONO = 'JetBrains Mono', SANS = 'Inter';
 
@@ -194,7 +197,26 @@ export const projector = (pos: V3, target: V3, fov: number, w = 1080, h = 1920) 
 };
 
 // ===== print-style overlays =====
-export const Backdrop: React.FC<{P: Pal; horizon?: number}> = ({P, horizon = 0.42}) => (
+export const SunsetSky: React.FC = () => (
+  <AbsoluteFill>
+    <AbsoluteFill style={{background: 'linear-gradient(180deg, #1B0B33 0%, #3D1460 28%, #9B2A7E 52%, #FF5E7A 70%, #FF9A4D 84%, #FFC46B 100%)'}} />
+    <svg width={1080} height={1920} style={{position: 'absolute'}}>
+      <defs>
+        <linearGradient id="ksun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#FFE07A" /><stop offset="1" stopColor="#FF4F8A" /></linearGradient>
+        <clipPath id="kcut">{Array.from({length: 9}, (_, i) => <rect key={i} x={0} y={1390 + i * 26 + i * i * 0.6} width={1080} height={22 - i * 1.6} />)}<rect x={0} y={0} width={1080} height={1390} /></clipPath>
+      </defs>
+      <circle cx={540} cy={1440} r={300} fill="url(#ksun)" opacity={0.85} clipPath="url(#kcut)" />
+      {[[-40, 1700, 1], [990, 1640, -1], [880, 1760, -0.7]].map(([x, y, s], i) => (
+        <g key={i} transform={`translate(${x},${y}) scale(${s},${Math.abs(s)})`} fill="#1B0B26">
+          <path d="M60 0 C64 -160 72 -320 96 -470 L108 -470 C90 -320 86 -160 84 0 Z" />
+          {[-1, 1].map((d) => [0, 1, 2].map((q) => <path key={`${d}${q}`} d={`M102 -470 q ${d * (90 + q * 40)} ${-40 + q * 30} ${d * (190 + q * 50)} ${40 + q * 50} q ${-d * (90 + q * 20)} ${-40} ${-d * (190 + q * 50)} ${-30 - q * 40}`} />))}
+        </g>
+      ))}
+    </svg>
+    <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(20,6,40,0.55) 0%, rgba(20,6,40,0.15) 40%, rgba(0,0,0,0) 60%)'}} />
+  </AbsoluteFill>
+);
+export const Backdrop: React.FC<{P: Pal; horizon?: number}> = ({P, horizon = 0.42}) => P.name === 'vice' ? <SunsetSky /> : (
   <AbsoluteFill style={{background: P.bg}}>
     <AbsoluteFill style={{background: `radial-gradient(95% 60% at 50% ${horizon * 100}%, ${P.bg2}, transparent 78%)`}} />
   </AbsoluteFill>
