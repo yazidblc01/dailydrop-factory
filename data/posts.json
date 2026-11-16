@@ -195,5 +195,17 @@
     "posted_at": "2026-11-16T17:16:00+00:00",
     "url": "https://www.youtube.com/watch?v=nAk_zWPs_ec",
     "slot": "waited"
+  },
+  "ms__NVDA__2015": {
+    "title": "$10,000 in Nvidia in 2015, stacked in $100 bills \ud83d\udcb5",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afb3ec9527ccc4f02ba25d9",
+    "posted_at": "2026-11-16T17:35:07+00:00",
+    "when": "2026-11-16T19:00:00-05:00",
+    "slot": "gta"
   }
 }
