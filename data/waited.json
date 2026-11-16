@@ -1,11 +1,13 @@
 {
-  "count": 2,
+  "count": 3,
   "finales": [
-    "AMD"
+    "AMD",
+    "AAPL"
   ],
   "made": [
     "waited__20261115__0",
-    "gta_board_gaps__20261116__1"
+    "gta_board_gaps__20261116__1",
+    "waited__20261116__2"
   ],
   "other": {
     "board": 1

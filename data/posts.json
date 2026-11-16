@@ -179,5 +179,21 @@
     "zernio_id": "6afad02896342b7897e1569c",
     "posted_at": "2026-11-16T09:43:28+00:00",
     "slot": "waited"
+  },
+  "waited__20261116__2": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=nAk_zWPs_ec",
+      "facebook": "https://www.facebook.com/reel/4686991164917031"
+    },
+    "title": "GTA V day vs GTA 6 day: what changed \ud83d\udcb8",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afb3a3a6444cfd85d8b41c6",
+    "posted_at": "2026-11-16T17:16:00+00:00",
+    "url": "https://www.youtube.com/watch?v=nAk_zWPs_ec",
+    "slot": "waited"
   }
 }
