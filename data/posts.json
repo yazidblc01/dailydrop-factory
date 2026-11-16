@@ -207,5 +207,21 @@
     "posted_at": "2026-11-16T17:35:07+00:00",
     "when": "2026-11-16T19:00:00-05:00",
     "slot": "gta"
+  },
+  "gta_receipt__20261116__3": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=zY81s7xDN2g",
+      "facebook": "https://www.facebook.com/reel/1141379582187656"
+    },
+    "title": "The same grocery cart, GTA V day vs GTA 6 day \ud83e\uddfe",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afb663199ce8eb040bd59b9",
+    "posted_at": "2026-11-16T20:23:35+00:00",
+    "url": "https://www.youtube.com/watch?v=zY81s7xDN2g",
+    "slot": "waited"
   }
 }
