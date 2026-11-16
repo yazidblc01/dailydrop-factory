@@ -223,5 +223,21 @@
     "posted_at": "2026-11-16T20:23:35+00:00",
     "url": "https://www.youtube.com/watch?v=zY81s7xDN2g",
     "slot": "waited"
+  },
+  "texts__costco_hotdog": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=_wgbrPTIeyw",
+      "facebook": "https://www.facebook.com/reel/1534933265190542"
+    },
+    "title": "I texted myself about Costco stock and the hot dog \ud83c\udf2d",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afb702ae9f07c4dd94690af",
+    "posted_at": "2026-11-16T21:06:07+00:00",
+    "url": "https://www.youtube.com/watch?v=_wgbrPTIeyw",
+    "slot": "main"
   }
 }
