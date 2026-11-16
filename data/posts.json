@@ -239,5 +239,21 @@
     "posted_at": "2026-11-16T21:06:07+00:00",
     "url": "https://www.youtube.com/watch?v=_wgbrPTIeyw",
     "slot": "main"
+  },
+  "gta_bestsellers__20261116__4": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=mA5uEpdBDYE",
+      "facebook": "https://www.facebook.com/reel/28752041364499011"
+    },
+    "url": "https://www.youtube.com/watch?v=mA5uEpdBDYE",
+    "title": "Best-selling games ever: higher or lower? \ud83c\udfae",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afb8fff604e65386a803b6f",
+    "posted_at": "2026-11-16T23:21:53+00:00",
+    "slot": "waited"
   }
 }

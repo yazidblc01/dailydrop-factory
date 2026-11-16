@@ -1,5 +1,5 @@
 {
-  "count": 4,
+  "count": 5,
   "finales": [
     "AMD",
     "AAPL"
@@ -8,10 +8,12 @@
     "waited__20261115__0",
     "gta_board_gaps__20261116__1",
     "waited__20261116__2",
-    "gta_receipt__20261116__3"
+    "gta_receipt__20261116__3",
+    "gta_bestsellers__20261116__4"
   ],
   "other": {
     "board": 1,
-    "receipt": 1
+    "receipt": 1,
+    "bestsellers": 1
   }
 }
