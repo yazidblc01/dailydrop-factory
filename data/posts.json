@@ -163,5 +163,21 @@
     "posted_at": "2026-11-16T00:03:08+00:00",
     "url": "https://www.youtube.com/watch?v=IpiZjYzBc5o",
     "slot": "waited"
+  },
+  "gta_board_gaps__20261116__1": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=agBCKjjw_ag",
+      "facebook": "https://www.facebook.com/reel/1017816180581554"
+    },
+    "url": "https://www.youtube.com/watch?v=agBCKjjw_ag",
+    "title": "The wait between every GTA game \ud83d\ude2d",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afad02896342b7897e1569c",
+    "posted_at": "2026-11-16T09:43:28+00:00",
+    "slot": "waited"
   }
 }
