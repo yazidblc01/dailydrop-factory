@@ -290,8 +290,29 @@ def consoles(n, today):
     return "EdHL", "consoles", props, meta
 
 
-FORMATS = ["waited", "board", "waited", "receipt", "board", "waited", "consoles", "coins"]
-OTHER = {"board": board, "receipt": receipt, "coins": coins, "consoles": consoles}
+def bestsellers(n, today):
+    """Best-selling games ever (publisher-reported copies, data/best_selling_games.csv), GTA V always in."""
+    import csv
+    with open(DATA_DIR / "best_selling_games.csv", newline="") as f:
+        rows = list(csv.DictReader(f))
+    rnd = random.Random(55 + n)
+    gta = next(r for r in rows if r["game"] == "GTA V")
+    pick = rnd.sample([r for r in rows if r is not gta], 4) + [gta]
+    rnd.shuffle(pick)
+    items = [{"name": r["game"], "sub": r["year"], "value": float(r["million_copies"])} for r in pick]
+    top = max(items, key=lambda x: x["value"])
+    props = {"pal": "vice", "duration": 20, "label": "HIGHER OR LOWER · GTA", "hookA": "Best-selling games ever.", "hookB": "Higher or lower?",
+             "endA": f"The top seller here: {top['name']},", "endB": f"{top['value']:g} million copies.", "unit": "COPIES SOLD", "fmt": "millions",
+             "items": items, "start": 2.2, "round": 3.7}
+    meta = {"title": "Best-selling games ever: higher or lower? 🎮",
+            "description": "Copies sold, as reported by the publishers: " + ", ".join(f"{r['game']} {float(r['million_copies']):g}M ({r['as_of']})" for r in pick)
+                           + ".\nGTA V alone has sold over 230 million copies. GTA 6 comes out November 19, 2026.\n#gta6 #gtav #gaming",
+            "pinned_comment": "How many did you get right? 👇"}
+    return "EdHL", "bestsellers", props, meta
+
+
+FORMATS = ["waited", "board", "waited", "receipt", "bestsellers", "waited", "board", "consoles", "waited", "coins"]
+OTHER = {"board": board, "receipt": receipt, "coins": coins, "consoles": consoles, "bestsellers": bestsellers}
 
 
 # ---------- video ----------
@@ -393,7 +414,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers"], help="force one format")
     a = ap.parse_args()
     import run
     try:

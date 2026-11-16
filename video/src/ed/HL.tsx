@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import {Backdrop, Cam, Em, Grain, Head, Masthead, PAL, Pal, PalName, ProgressRule, RBox, Studio, V3, clamp01, lerp, outBack, outCubic, smooth, useEdFonts} from './kit';
 
 type Item = {name: string; sub: string; value: number};
-export type EdHLProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; unit: string; items: Item[]; start: number; round: number; music?: string | null};
+export type EdHLProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; unit: string; items: Item[]; start: number; round: number; music?: string | null; fmt?: 'usd' | 'millions'};
 
 const TW = 920, TH = 440, CWID = 2.36, CHT = (CWID * TH) / TW;
 const usd = (v: number) => '$' + (Number.isInteger(v) ? v.toLocaleString('en-US') : v.toFixed(2));
@@ -30,7 +30,7 @@ const useCards = (P: Pal, p: EdHLProps, ready: boolean) => useMemo(() => {
     x.font = '400 92px "Instrument Serif", serif'; x.fillText(it.name, 54, 126);
     x.font = '500 30px "JetBrains Mono", monospace'; x.globalAlpha = 0.6; x.fillText(`${it.sub} · ${p.unit}`, 56, 178); x.globalAlpha = 1;
     x.fillRect(54, 208, TW - 108, 3);
-    x.textAlign = 'right'; x.font = '400 226px "Instrument Serif", serif'; x.fillStyle = P.name === 'paper' || P.name === 'vice' ? P.accent : ink; x.fillText(usd(it.value), TW - 50, 398);
+    x.textAlign = 'right'; x.font = '400 226px "Instrument Serif", serif'; x.fillStyle = P.name === 'paper' || P.name === 'vice' ? P.accent : ink; x.fillText(p.fmt === 'millions' ? `${+it.value.toFixed(1)}M` : usd(it.value), TW - 50, 398);
     x.textAlign = 'left'; x.font = '700 26px "JetBrains Mono", monospace'; x.fillStyle = ink; x.globalAlpha = 0.5; x.fillText(`NO. ${String(i + 1).padStart(2, '0')}`, 56, 392);
   }));
   const backs = p.items.map((it) => tex((x) => {
@@ -41,7 +41,7 @@ const useCards = (P: Pal, p: EdHLProps, ready: boolean) => useMemo(() => {
     x.font = '400 92px "Instrument Serif", serif'; x.fillText(it.name, 54, 126);
     x.font = '500 30px "JetBrains Mono", monospace'; x.globalAlpha = 0.65; x.fillText(`${it.sub} · ${p.unit}`, 56, 178); x.globalAlpha = 1;
     x.fillRect(54, 208, TW - 108, 3);
-    x.textAlign = 'right'; x.font = 'italic 400 226px "Instrument Serif", serif'; x.fillStyle = P.accent; x.fillText('$ ? ? ?', TW - 50, 398);
+    x.textAlign = 'right'; x.font = 'italic 400 226px "Instrument Serif", serif'; x.fillStyle = P.accent; x.fillText(p.fmt === 'millions' ? '? ? ? M' : '$ ? ? ?', TW - 50, 398);
   }));
   const stamp = (word: string, col: string) => tex((x) => {
     if (!ready) return;
