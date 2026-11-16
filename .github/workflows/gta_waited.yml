@@ -1,15 +1,10 @@
 # GTA wave: 5 Shorts a day, rotating "while we waited", boards, receipts, higher or lower and the shrinking $100 (engine/waited.py).
-# Times are UTC; in Toronto (winter) that's about 9 AM, noon, 3 PM, 6 PM and 9 PM. Run it by hand any time with:
+# Run it by hand any time with:
 #   gh workflow run gta_waited.yml
 name: GTA wave
 
 on:
-  schedule:
-    - cron: "7 14 * * *"
-    - cron: "7 17 * * *"
-    - cron: "7 20 * * *"
-    - cron: "7 23 * * *"
-    - cron: "7 2 * * *"
+  # started by the Clock workflow at 9:07 AM, 12:07, 3:07, 6:07 and 9:07 PM Toronto (.github/scripts/clock.py)
   workflow_dispatch:
     inputs:
       flat:

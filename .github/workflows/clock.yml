@@ -1,0 +1,31 @@
+# The clock: starts the Daily Short and GTA wave runs at their exact times (.github/scripts/clock.py).
+# GitHub's own scheduler can be hours late or skip runs; a run started by another workflow starts right away.
+# Each clock lives about 5.5 hours and then starts the next one. The hourly schedule below only restarts it if the chain ever breaks.
+name: Clock
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 * * * *"
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: clock
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+      - name: Keep time
+        run: python3 .github/scripts/clock.py
