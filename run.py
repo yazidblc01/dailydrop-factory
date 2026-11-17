@@ -131,8 +131,16 @@ def preflight(posting=True):
     print("      keys OK")
 
 
+def gta_hype(day=None):
+    """The days before GTA 6 comes out (Nov 12 to launch day): the morning daily is a GTA texts reel too."""
+    d = day or datetime.now(schedule.TZ).date()
+    return schedule.GTA_START <= d <= GTA6_LAUNCH_DAY
+
+
 def todays_format(day=None):
-    """The daily slot rotates texts, texts, then money-to-scale and the data reel taking turns."""
+    """The daily slot rotates texts, texts, then money-to-scale and the data reel taking turns (GTA texts every day until GTA 6 is out)."""
+    if gta_hype(day):
+        return "texts"
     n = (day or datetime.now(schedule.TZ).date()).toordinal()
     if n % 3:
         return "texts"
@@ -152,7 +160,7 @@ def gta_formats(day=None):
 def make_quick(kind, dry=False, publish=True, now=False, slot="main", arg=None):
     """Texts and money-to-scale videos: no voice step, the module builds and renders everything."""
     t0 = time.time()
-    gaming = slot == "gta"
+    gaming = slot == "gta" or (kind == "texts" and gta_hype())
     if kind == "texts":
         print("[1/3] Texts from the future: facts + chat" + (" (gaming)" if gaming else ""))
         topic, final = texts.make(arg, dry, "gaming" if gaming else "main")

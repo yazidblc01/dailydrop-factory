@@ -3,11 +3,11 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
-import {Backdrop, Cam, Em, Grain, Head, MONO, Masthead, PAL, Pal, ProgressRule, RBox, Studio, Tag, Text3D, V3, clamp01, outBack, outCubic, projector, smooth, useEdFonts} from './kit';
+import {Backdrop, Cam, Em, lerp, Grain, Head, MONO, Masthead, PAL, Pal, ProgressRule, RBox, Studio, Tag, Text3D, V3, clamp01, outBack, outCubic, projector, smooth, useEdFonts, FollowCard, Follow} from './kit';
 
 type Round = {name: string; head: string; what: string; then: string; now: string; thenDate: string; nowDate: string; stamp: string; r: number};
 export type EdWaitedProps = {pal: 'vice' | 'paper'; duration: number; label: string; badge: string; hookA: string; hookB: string; teaser: string;
-  rounds: Round[]; hook: number; round: number; flat?: boolean; music?: string | null};
+  rounds: Round[]; hook: number; round: number; flat?: boolean; hookStyle?: 'classic' | 'payoff'; music?: string | null; follow?: Follow};
 
 export const VICE: Pal = {...PAL.night, bg: '#2A1046', bg2: '#FF5E8A', ink: '#FFF3EA', mute: 'rgba(255,243,234,0.75)', rule: 'rgba(255,243,234,0.35)',
   accent: '#FF4FA0', onAccent: '#fff', card: '#FFF3EA', cardInk: '#2A1046', display: 'Instrument Serif', dWeight: 400, dItalic: true, dTrack: -0.02, font3d: 'serif',
@@ -110,7 +110,7 @@ export const EdWaited: React.FC<EdWaitedProps> = (p) => {
   const {fps} = useVideoConfig();
   const t = frame / fps;
   const ready = useEdFonts();
-  const P = p.pal === 'vice' ? VICE : PAL.paper;
+  const P = p.pal === 'vice' ? PAL.vice : PAL.paper;
   const vice = isVice(P);
   const n = p.rounds.length, F = p.hook + n * p.round;
   const i = Math.min(n - 1, Math.floor((t - p.hook) / p.round));
@@ -120,8 +120,10 @@ export const EdWaited: React.FC<EdWaitedProps> = (p) => {
   const fin = p.rounds[n - 1];
   const pk = (j: number) => outBack(clamp01((t - F - 0.5 - j * 0.32) / 0.55), 1.15);
 
-  // hook: question, two face-down tickets, the teaser
+  // hook: question, two face-down tickets, the teaser (classic), or the finale's flip already landing (payoff)
   const hookK = 1 - smooth(p.hook - 0.35, p.hook, t);
+  const payoff = p.hookStyle === 'payoff';
+  const pf = outBack(clamp01(t / 0.35), 1.3), pStamp = clamp01((t - 0.45) / 0.16);
   // a round: ticket A slides in, ticket B drops face down, flips, gets stamped; both leave at the end
   const inA = outCubic(clamp01(a / 0.3)), inB = outBack(clamp01((a - 0.2) / 0.35), 1.2);
   const flip = 180 * (1 - smooth(0.85, 1.2, a));
@@ -133,6 +135,8 @@ export const EdWaited: React.FC<EdWaitedProps> = (p) => {
     <AbsoluteFill>
       {vice ? <Sunset t={t} /> : <Backdrop P={P} horizon={0.5} />}
       {p.music && <Audio src={staticFile(p.music)} volume={0.3} loop />}
+      {payoff && <Sequence from={Math.round(0.08 * fps)} durationInFrames={10}><Audio src={staticFile('sfx/flap.wav')} volume={0.9} /></Sequence>}
+      {payoff && <Sequence from={Math.round(0.45 * fps)} durationInFrames={16}><Audio src={staticFile('sfx/stamp.wav')} volume={1} /></Sequence>}
       {p.rounds.map((_, j) => {
         const bj = p.hook + j * p.round;
         return (
@@ -145,7 +149,24 @@ export const EdWaited: React.FC<EdWaitedProps> = (p) => {
         );
       })}
 
-      {hookK > 0.01 && (
+      {payoff && hookK > 0.01 && (
+        <div style={{opacity: hookK}}>
+          <Head P={P} top={360} size={P.dItalic ? 96 : 80}>{fin.head.replace(/\.$/, '')} on GTA V day <Em P={P}>is now this.</Em></Head>
+          <div style={{position: 'absolute', left: 150, top: 700, width: W, height: H, perspective: 1600, transform: `scale(${1.28 - 0.06 * smooth(0.3, p.hook, t)})`}}>
+            <div style={{position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d', transform: `rotate(-3deg) rotateY(${lerp(180, -14, pf)}deg)`}}>
+              <Face P={P} game="GTA 6" date={fin.nowDate} what={fin.what} price={fin.now} hot />
+              <BackFace P={P} flipped />
+            </div>
+          </div>
+          {pStamp > 0 && (
+            <div style={{position: 'absolute', left: 430, top: 1250, opacity: Math.min(1, pStamp * 3), transform: `rotate(-12deg) scale(${2.4 - 1.4 * pStamp})`, border: `9px solid ${vice ? GOLD : P.accent}`, borderRadius: 16,
+              padding: '4px 26px', fontFamily: P.display, fontSize: 150, lineHeight: 1, color: vice ? GOLD : P.accent, background: vice ? 'rgba(42,16,70,0.6)' : 'rgba(255,253,248,0.7)',
+              boxShadow: vice ? '0 0 40px rgba(255,224,122,0.45)' : 'none', whiteSpace: 'nowrap'}}>{fin.stamp}</div>
+          )}
+          <Tag P={P} x={540} y={1420} solid size={22} opacity={smooth(0.8, 1.0, t)}>+ {n - 1} MORE THINGS THAT CHANGED</Tag>
+        </div>
+      )}
+      {!payoff && hookK > 0.01 && (
         <div style={{opacity: hookK}}>
           <Head P={P} top={372} size={P.dItalic ? 100 : 84} style={{transform: `translateY(${(1 - smooth(0, 0.3, t)) * 16}px)`}}>{p.hookA} <Em P={P}>{p.hookB}</Em></Head>
           {[0, 1].map((k) => (
@@ -189,6 +210,7 @@ export const EdWaited: React.FC<EdWaitedProps> = (p) => {
       <div style={{position: 'absolute', top: 236, right: 84}}>
         <span style={{fontFamily: MONO, fontWeight: 700, fontSize: 20, letterSpacing: '0.1em', padding: '6px 12px', borderRadius: 6, color: '#fff', background: P.accent}}>{p.badge}</span>
       </div>
+      {p.follow && <FollowCard P={P} t={t} f={p.follow} />}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
     </AbsoluteFill>

@@ -3,11 +3,11 @@ import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
-import {Backdrop, Cam, Em, Grain, Head, Masthead, PAL, PalName, ProgressRule, RBox, Studio, V3, clamp01, lerp, outBack, smooth, useEdFonts} from './kit';
+import {Backdrop, Cam, Em, Grain, Head, Masthead, PAL, PalName, ProgressRule, RBox, Studio, V3, clamp01, lerp, outBack, smooth, useEdFonts, FollowCard, Follow} from './kit';
 
 type Item = {name: string; a: number; b: number};
 export type EdReceiptProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; store: string; sub: string; colA: string; colB: string;
-  items: Item[]; printStart: number; printEnd: number; music?: string | null};
+  items: Item[]; printStart: number; printEnd: number; music?: string | null; follow?: Follow};
 
 const CW = 720, CH = 850;
 const usd = (v: number) => '$' + v.toFixed(2);
@@ -145,6 +145,7 @@ export const EdReceipt: React.FC<EdReceiptProps> = (p) => {
       <Masthead P={P} label={p.label} />
       {hookK > 0.01 && <Head P={P} top={372} size={P.dItalic ? 96 : 80} style={{opacity: hookK}}>{p.hookA} <Em P={P}>{p.hookB}</Em></Head>}
       {endK > 0.01 && <Head P={P} top={372} size={P.dItalic ? 96 : 80} style={{opacity: endK}}>{p.endA} <Em P={P}>{p.endB}</Em></Head>}
+      {p.follow && <FollowCard P={P} t={t} f={p.follow} />}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
     </AbsoluteFill>

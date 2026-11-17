@@ -252,3 +252,29 @@ export const SoftShadow: React.FC<{tex: THREE.Texture; position: V3; size: [numb
     <meshBasicMaterial map={tex} transparent opacity={opacity} depthWrite={false} toneMapped={false} color="#000" />
   </mesh>
 );
+
+
+// the hook of a texts reel: the lock-screen notifications shown big over the scene for the first ~2.5 s
+export const BigNotes: React.FC<{p: ChatProps; t: number; dark: boolean; accent: string}> = ({p, t, dark, accent}) => {
+  const out = 1 - Math.min(1, Math.max(0, (t - (p.openAt - 0.5)) / 0.4));
+  const shown = p.notifications.filter((n) => t >= n.at);
+  if (out <= 0 || !shown.length) return null;
+  return (
+    <div style={{position: 'absolute', left: 84, right: 84, top: 560, display: 'flex', flexDirection: 'column-reverse', gap: 22, opacity: out}}>
+      {shown.map((n, i) => {
+        const k = Math.min(1, (t - n.at) / 0.22);
+        return (
+          <div key={i} style={{borderRadius: 40, background: dark ? 'rgba(255,243,234,0.94)' : 'rgba(255,255,255,0.96)', padding: '30px 38px', boxShadow: '0 30px 60px rgba(20,0,40,0.35)',
+            transform: `scale(${0.85 + 0.15 * k}) translateY(${(1 - k) * 30}px)`, opacity: k}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
+              <div style={{width: 64, height: 64, borderRadius: 15, background: 'linear-gradient(#5CF777,#0FC23B)'}} />
+              <div style={{fontFamily: 'Inter', fontWeight: 700, fontSize: 32, color: '#1b1430'}}>{p.contact}</div>
+              <div style={{marginLeft: 'auto', fontFamily: 'Inter', fontSize: 26, color: '#6b5a7e'}}>now</div>
+            </div>
+            <div style={{fontFamily: 'Inter', fontSize: 50, fontWeight: 600, color: '#1b1430', marginTop: 14, lineHeight: 1.15}}>{n.text}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};

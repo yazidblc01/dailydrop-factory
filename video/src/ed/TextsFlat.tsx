@@ -2,8 +2,8 @@
 // The automatic backup when the 3D render fails. Same props as EdTexts. ----------
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
-import {Backdrop, Em, Grain, Head, MONO, Masthead, PAL, ProgressRule, Tag, lerp, outBack, outCubic, smooth, useEdFonts} from './kit';
-import {SH, SW, drawPhoneScreen} from './phone';
+import {Backdrop, Em, Grain, Head, MONO, Masthead, PAL, ProgressRule, Tag, lerp, outBack, outCubic, smooth, useEdFonts, FollowCard, Follow} from './kit';
+import {SH, SW, drawPhoneScreen, BigNotes} from './phone';
 import {EdTextsProps} from './Texts';
 
 const Shadow: React.FC<{x: number; y: number; w: number; h: number; o: number}> = ({x, y, w, h, o}) => (
@@ -106,6 +106,8 @@ export const EdTextsFlat: React.FC<EdTextsProps> = (p) => {
           <Tag P={P} x={540} y={floorY + 50 + 124} opacity={tagK}>{p.reveal.smallTag}</Tag>
         </>
       )}
+      {p.bigHook && <BigNotes p={p} t={t} dark={P.dark} accent={P.accent} />}
+      {p.follow && <FollowCard P={P} t={t} f={p.follow} />}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
     </AbsoluteFill>

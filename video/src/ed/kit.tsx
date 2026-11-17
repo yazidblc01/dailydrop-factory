@@ -265,3 +265,29 @@ export const Tag: React.FC<{P: Pal; x: number; y: number; children: React.ReactN
 export const ProgressRule: React.FC<{P: Pal; k: number}> = ({P, k}) => (
   <div style={{position: 'absolute', top: 0, left: 0, height: 7, width: `${k * 100}%`, background: P.accent}} />
 );
+
+// ---------- the last 1.5 s of a GTA-season reel: a reason to follow, tied to the GTA 6 countdown ----------
+export type Follow = {at: number; kicker: string; big: string; line: string; em: string};
+export const FollowCard: React.FC<{P: Pal; t: number; f: Follow}> = ({P, t, f}) => {
+  const k = smooth(f.at, f.at + 0.3, t);
+  if (k <= 0) return null;
+  const pop = outBack(clamp01((t - f.at - 0.15) / 0.4), 1.6);
+  const ser = (s: number): React.CSSProperties => ({fontFamily: P.display, fontWeight: P.dWeight, fontSize: s, lineHeight: 1, letterSpacing: P.dTrack + 'em'});
+  const gold = P.name === 'vice' ? '#FFE07A' : P.accent;
+  return (
+    <AbsoluteFill style={{opacity: k}}>
+      <Backdrop P={P} horizon={0.5} />
+      <div style={{position: 'absolute', left: 0, right: 0, top: 520, textAlign: 'center'}}>
+        <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 28, letterSpacing: '0.16em', color: gold}}>{f.kicker}</div>
+        <div style={{...ser(f.big.length > 3 ? 260 : 420), color: P.ink, marginTop: 10, transform: `scale(${0.6 + 0.4 * pop})`}}>{f.big}</div>
+        <div style={{...ser(P.dItalic ? 92 : 76), color: P.ink, marginTop: -6, padding: '0 70px'}}>{f.line} <Em P={P}>{f.em}</Em></div>
+      </div>
+      <div style={{position: 'absolute', left: 290, top: 1250, width: 500, height: 110, borderRadius: 60, background: P.name === 'vice' ? '#FFF3EA' : P.ink, color: P.name === 'vice' ? '#2A1046' : P.bg,
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 18, fontFamily: SANS, fontWeight: 800, fontSize: 44, boxShadow: '0 20px 40px rgba(20,0,40,0.4)',
+        transform: `translateY(${(1 - pop) * 40}px)`}}>
+        <span style={{width: 44, height: 44, borderRadius: '50%', background: P.accent, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 34}}>+</span> Follow
+      </div>
+      <Masthead P={P} label="THE DAILY DROP" />
+    </AbsoluteFill>
+  );
+};

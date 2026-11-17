@@ -2,9 +2,9 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
-import {Backdrop, Cam, Em, Grain, Head, MONO, Masthead, PAL, PalName, ProgressRule, Studio, Text3D, V3, clamp01, lerp, outCubic, rnd, smooth, useEdFonts} from './kit';
+import {Backdrop, Cam, Em, Grain, Head, MONO, Masthead, PAL, PalName, ProgressRule, Studio, Text3D, V3, clamp01, lerp, outCubic, rnd, smooth, useEdFonts, FollowCard, Follow} from './kit';
 
-export type EdCoinsProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; start: number; end: number; cpi: [number, number][]; music?: string | null};
+export type EdCoinsProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; start: number; end: number; cpi: [number, number][]; music?: string | null; follow?: Follow};
 
 const R = 0.2, H = 0.055, PER = 10, COLS = 5, ROWS = 2, SPX = 0.52, SPZ = 0.56;
 
@@ -90,6 +90,7 @@ export const EdCoins: React.FC<EdCoinsProps> = (p) => {
         </div>
       )}
       {endK > 0.01 && <Head P={P} top={372} size={P.dItalic ? 96 : 80} style={{opacity: endK}}>{p.endA} <Em P={P}>{p.endB}</Em></Head>}
+      {p.follow && <FollowCard P={P} t={t} f={p.follow} />}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
     </AbsoluteFill>

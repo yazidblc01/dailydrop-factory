@@ -74,8 +74,4 @@ jobs:
         run: |
           git config user.name "daily-drop-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in data/waited.json data/posts.json; do [ -f "$f" ] && git add "$f"; done
-          if ! git diff --cached --quiet; then
-            git commit -m "state: $(date +%F) gta waited"
-            git pull --rebase --autostash -q && git push -q
-          fi
+          python3 .github/scripts/save_state.py "state: $(date +%F) gta waited" data/waited.json data/posts.json

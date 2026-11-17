@@ -25,8 +25,8 @@ from engine.render import PUBLIC, VIDEO_DIR
 GTA5 = date(2013, 9, 17)
 GTA6 = date(2026, 11, 19)
 STATE = DATA_DIR / "waited.json"
-ROUNDS = 6
-HOOK, ROUND, FINALE = 2.3, 2.6, 5.2
+ROUNDS = 5                                   # 4 quick rounds + the big one (was 6: shorter Shorts get finished and replayed more)
+HOOK, ROUND, FINALE, FOLLOW = 2.0, 2.3, 3.4, 1.6
 
 # (ticker, name) -> "$1,000 in <name>"
 STOCKS = [("NVDA", "Nvidia"), ("TSLA", "Tesla"), ("NFLX", "Netflix"), ("AMD", "AMD"), ("AAPL", "Apple"),
@@ -77,6 +77,20 @@ def mult_text(r):
     if r >= 2:
         return f"×{r:,.1f}" if r < 100 else f"×{r:,.0f}"
     return f"+{(r - 1) * 100:.0f}%" if r > 1 else f"-{(1 - r) * 100:.0f}%"
+
+
+def follow_card(today, at):
+    """The last 1.6 s of a GTA-season reel: a reason to follow, tied to the GTA 6 countdown."""
+    days = (GTA6 - today).days
+    if days > 1:
+        f = {"kicker": "GTA 6 IN", "big": str(days), "line": "days.", "em": "One a day till then."}
+    elif days == 1:
+        f = {"kicker": "GTA 6 IN", "big": "1", "line": "day.", "em": "Follow for launch day."}
+    elif days == 0:
+        f = {"kicker": "GTA 6 IS", "big": "OUT", "line": "today.", "em": "One a day all launch week."}
+    else:
+        f = {"kicker": "GTA 6 · DAY", "big": str(1 - days), "line": "Follow for", "em": "one a day."}
+    return {"at": round(at, 2), **f}
 
 
 def gta6_side(today):
@@ -164,10 +178,12 @@ def build(today=None, seed=None):
         x["stamp"] = mult_text(x["r"])
     days = (GTA6 - today).days
     badge = f"GTA 6 IN {days} DAYS" if days > 1 else "GTA 6 IS OUT TOMORROW" if days == 1 else "GTA 6 IS OUT TODAY" if days == 0 else "GTA 6 IS OUT"
-    duration = round(HOOK + ROUNDS * ROUND + FINALE, 2)
+    end = HOOK + len(rounds) * ROUND + FINALE
+    duration = round(end + FOLLOW, 2)
     props = {"pal": "vice", "duration": duration, "label": "WHILE WE WAITED · GTA 6", "badge": badge, "hookA": hookA, "hookB": hookB,
              "teaser": "THE LAST ONE IS INSANE", "rounds": [{k: x[k] for k in ("name", "head", "what", "then", "now", "thenDate", "nowDate", "stamp", "r")} for x in rounds],
-             "hook": HOOK, "round": ROUND, "flat": False}
+             "hook": HOOK, "round": ROUND, "flat": False,
+             "hookStyle": "payoff", "follow": follow_card(today, end)}
     title = TITLES[n % len(TITLES)].format(fin=fin["name"].replace("the ", ""), mult=fin["stamp"].replace("×", "x"))
     lines = "\n".join(f"• {x['fact']}" for x in rounds)
     meta = {"title": title,
@@ -203,7 +219,8 @@ def board(n, today):
         for i, (nm, y) in enumerate(zip(names, years)):
             gap = "" if i == 0 else f"{y - years[i - 1]}Y"
             rows.append({"text": f"{nm:<4}{y}{gap:>4}", "at": at(i), "hot": nm == "VI"})
-        hook, end = ("Every GTA release.", "Count the years between them."), ("13 years between V and VI.", "The longest wait ever.")
+        hook, end = ("The longest wait", "in GTA history."), ("13 years between V and VI.", "The longest wait ever.")
+        teaser = {"text": rows[-1]["text"], "line": "V to VI:", "em": "13 years. The rest? Watch."}
         title, facts = "The wait between every GTA game 😭", "GTA III 2001, Vice City 2002, San Andreas 2004, GTA IV 2008, GTA V 2013, GTA 6 2026."
     elif kind == "game":
         import csv
@@ -212,6 +229,7 @@ def board(n, today):
         for i, r in enumerate(g):
             rows.append({"text": f"{r['us_launch_date'][:4]}{'$' + r['launch_price_usd']:>8}", "at": at(i), "hot": r is g[-1]})
         hook, end = ("What a new GTA cost", "on launch day."), (f"${g[0]['launch_price_usd']} to ${g[-1]['launch_price_usd']}.", "Over 25 years.")
+        teaser = {"text": rows[-1]["text"], "line": "GTA 6:", "em": f"${g[-1]['launch_price_usd']}. Now the rest."}
         title, facts = "What every GTA cost on launch day 💸", " ".join(f"{r['game']}: ${r['launch_price_usd']} ({r['us_launch_date'][:4]})." for r in g)
     else:
         sid, what, _ = spec
@@ -227,12 +245,13 @@ def board(n, today):
         for i, (lab, v, nm) in enumerate(vals):
             rows.append({"text": f"{lab:<4}{'$' + format(v, '.2f'):>8}", "at": at(i), "hot": v == top or nm == "6"})
         hook = (f"{what},", "on every GTA release day.")
+        teaser = {"text": rows[-1]["text"], "line": f"{what} now.", "em": f"Back in GTA III: ${vals[0][1]:.2f}."}
         end = (f"GTA III: ${vals[0][1]:.2f}.", f"GTA 6: ${vals[-1][1]:.2f}.")
         title = f"{what} on every GTA release day ⛽" if kind == "gas" else f"{what} on every GTA release day 💸"
         facts = " ".join(f"GTA {nm}: ${v:.2f} ({lab})." for lab, v, nm in vals) + " " + SOURCE
     dur = rows[-1]["at"] + 6.2
-    props = {"pal": "vice", "duration": round(dur, 2), "label": "THE BOARD · GTA", "hookA": hook[0], "hookB": hook[1],
-             "endA": end[0], "endB": end[1], "header": "", "rows": rows}
+    props = {"pal": "vice", "duration": round(dur + FOLLOW, 2), "label": "THE BOARD · GTA", "hookA": hook[0], "hookB": hook[1],
+             "endA": end[0], "endB": end[1], "header": "", "rows": rows, "teaser": teaser, "follow": follow_card(today, dur)}
     meta = {"title": title, "description": f"{facts}\nGTA 6 comes out November 19, 2026.\n#gta6 #gta #gtav",
             "pinned_comment": "Which GTA did you play first? 👇"}
     return "EdFlap", f"board_{kind}", props, meta
@@ -251,7 +270,7 @@ def receipt(n, today):
         raise RuntimeError("not enough grocery prices")
     ta, tb = sum(i["a"] for i in items), sum(i["b"] for i in items)
     pct = round((tb / ta - 1) * 100)
-    props = {"pal": "vice", "duration": 21, "label": "THE RECEIPT · GTA", "hookA": "Same grocery run.", "hookB": "GTA V day vs GTA 6 day.",
+    props = {"pal": "vice", "duration": 21 + FOLLOW, "follow": follow_card(today, 21), "label": "THE RECEIPT · GTA", "hookA": "Same grocery run.", "hookB": "GTA V day vs GTA 6 day.",
              "endA": "Same cart.", "endB": f"+{pct}% since GTA V.", "store": "DAILY DROP MARKET", "sub": "GTA V DAY VS GTA 6 DAY",
              "colA": "2013", "colB": k_end[:4], "items": items, "printStart": 2.6, "printEnd": 12.5}
     lines = "\n".join(f"• {i['name'].title()}: ${i['a']:.2f} (Sep 2013) vs ${i['b']:.2f} ({k_end})" for i in items)
@@ -266,7 +285,7 @@ def coins(n, today):
     k_end = latest_key(m, today)
     pts = [[2013, m["2013-09"]]] + [[y, m[f"{y}-09"]] for y in range(2015, int(k_end[:4])) if f"{y}-09" in m] + [[int(k_end[:4]), m[k_end]]]
     buys = round(100 * m["2013-09"] / m[k_end])
-    props = {"pal": "vice", "duration": 19, "label": "THE SHRINKING $100 · GTA", "hookA": "$100 on GTA V release day.", "hookB": "Watch what it buys now.",
+    props = {"pal": "vice", "duration": 19 + FOLLOW, "follow": follow_card(today, 19), "label": "THE SHRINKING $100 · GTA", "hookA": "$100 on GTA V release day.", "hookB": "Watch what it buys now.",
              "endA": "That GTA V-day $100 now buys", "endB": f"${buys} of stuff.", "start": 2.6, "end": 14.0, "cpi": pts}
     meta = {"title": f"$100 from GTA V day is now worth ${buys} 😬",
             "description": f"$100 on the day GTA V came out (Sep 2013) buys about ${buys} worth of stuff today (US CPI, {k_end}).\n{SOURCE}\n#gta6 #gtav #inflation",
@@ -281,7 +300,7 @@ def consoles(n, today):
     pick = random.Random(77 + n).sample(rows, 5)
     items = [{"name": r["console"], "sub": r["us_launch_date"][:4], "value": float(r["launch_price_usd"])} for r in pick]
     top = max(items, key=lambda x: x["value"])
-    props = {"pal": "vice", "duration": 20, "label": "HIGHER OR LOWER · GTA", "hookA": "Console launch prices.", "hookB": "Higher or lower?",
+    props = {"pal": "vice", "duration": 20 + FOLLOW, "follow": follow_card(today, 20), "label": "HIGHER OR LOWER · GTA", "hookA": "Console launch prices.", "hookB": "Higher or lower?",
              "endA": f"The priciest one here: the {top['name']},", "endB": f"back in {top['sub']}.", "unit": "LAUNCH PRICE", "items": items,
              "start": 2.2, "round": 3.7}
     meta = {"title": "Console launch prices: higher or lower? 🎮",
@@ -301,7 +320,7 @@ def bestsellers(n, today):
     rnd.shuffle(pick)
     items = [{"name": r["game"], "sub": r["year"], "value": float(r["million_copies"])} for r in pick]
     top = max(items, key=lambda x: x["value"])
-    props = {"pal": "vice", "duration": 20, "label": "HIGHER OR LOWER · GTA", "hookA": "Best-selling games ever.", "hookB": "Higher or lower?",
+    props = {"pal": "vice", "duration": 20 + FOLLOW, "follow": follow_card(today, 20), "label": "HIGHER OR LOWER · GTA", "hookA": "Best-selling games ever.", "hookB": "Higher or lower?",
              "endA": f"The top seller here: {top['name']},", "endB": f"{top['value']:g} million copies.", "unit": "COPIES SOLD", "fmt": "millions",
              "items": items, "start": 2.2, "round": 3.7}
     meta = {"title": "Best-selling games ever: higher or lower? 🎮",

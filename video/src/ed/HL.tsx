@@ -3,10 +3,10 @@ import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
-import {Backdrop, Cam, Em, Grain, Head, Masthead, PAL, Pal, PalName, ProgressRule, RBox, Studio, V3, clamp01, lerp, outBack, outCubic, smooth, useEdFonts} from './kit';
+import {Backdrop, Cam, Em, Grain, Head, Masthead, PAL, Pal, PalName, ProgressRule, RBox, Studio, V3, clamp01, lerp, outBack, outCubic, smooth, useEdFonts, FollowCard, Follow} from './kit';
 
 type Item = {name: string; sub: string; value: number};
-export type EdHLProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; unit: string; items: Item[]; start: number; round: number; music?: string | null; fmt?: 'usd' | 'millions'};
+export type EdHLProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; unit: string; items: Item[]; start: number; round: number; music?: string | null; follow?: Follow; fmt?: 'usd' | 'millions'};
 
 const TW = 920, TH = 440, CWID = 2.36, CHT = (CWID * TH) / TW;
 const usd = (v: number) => '$' + (Number.isInteger(v) ? v.toLocaleString('en-US') : v.toFixed(2));
@@ -134,6 +134,7 @@ export const EdHL: React.FC<EdHLProps> = (p) => {
       <Masthead P={P} label={p.label} />
       {hookK > 0.01 && <Head P={P} top={372} size={P.dItalic ? 96 : 80} style={{opacity: hookK}}>{p.hookA} <Em P={P}>{p.hookB}</Em></Head>}
       {endK > 0.01 && <Head P={P} top={372} size={P.dItalic ? 92 : 76} style={{opacity: endK}}>{p.endA} <Em P={P}>{p.endB}</Em></Head>}
+      {p.follow && <FollowCard P={P} t={t} f={p.follow} />}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
     </AbsoluteFill>

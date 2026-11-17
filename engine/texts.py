@@ -23,6 +23,7 @@ import sys
 from datetime import date, datetime, timedelta
 
 from config import CLAUDE_MODEL, DATA_DIR, MEDIA_DIR
+from engine import schedule
 from engine import topics
 from engine.render import VIDEO_DIR, load_music_lib, PUBLIC
 from engine.script import numbers_in
@@ -411,8 +412,13 @@ def make(story_id=None, dry=False, pool="main", flat_only=False):
         "caption": {"kicker": f"{stamp_day:%a, %b} {stamp_day.day}, {stamp_day:%Y} · {story['stamp'].split(' at ')[1]}".upper(),
                     "lead": chat["captionLead"], "em": chat["captionEm"]},
         "capStyle": "marker",
+        "bigHook": True,      # the first notifications shown big over the scene: the first second already says the story
         "music": f"music/{music}" if music else None,
     }
+    if props["pal"] == "vice" and schedule.gta_week():   # GTA season: end on the follow card (GTA 6 countdown)
+        from engine.waited import FOLLOW, follow_card
+        props["follow"] = follow_card(datetime.now(schedule.TZ).date(), duration)
+        props["duration"] = round(duration + FOLLOW, 2)
     flat_msgs = copy.deepcopy(chat["messages"])
     typing, flat_dur = timeline(flat_msgs)
     flat = {

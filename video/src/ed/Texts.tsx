@@ -3,10 +3,10 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
-import {Backdrop, Cam, Em, MONO, Grain, Head, Masthead, PAL, PalName, ProgressRule, Studio, Tag, Text3D, V3, lerp, outBack, outCubic, outElastic, projector, smooth, textWidth, useEdFonts} from './kit';
-import {ChatProps, PH, Phone3D, SoftShadow, drawPhoneScreen, usePhoneScreen, useSoftShadow} from './phone';
+import {Backdrop, Cam, Em, MONO, Grain, Head, Masthead, PAL, PalName, ProgressRule, Studio, Tag, Text3D, V3, lerp, outBack, outCubic, outElastic, projector, smooth, textWidth, useEdFonts, FollowCard, Follow} from './kit';
+import {ChatProps, PH, Phone3D, SoftShadow, drawPhoneScreen, usePhoneScreen, useSoftShadow, BigNotes} from './phone';
 
-export type EdTextsProps = ChatProps & {pal: PalName; duration: number; label: string; music?: string | null; caption?: {kicker: string; lead: string; em: string}; capStyle?: 'center' | 'left';
+export type EdTextsProps = ChatProps & {pal: PalName; duration: number; label: string; music?: string | null; follow?: Follow; caption?: {kicker: string; lead: string; em: string}; capStyle?: 'center' | 'left'; bigHook?: boolean;
   reveal: {small: string; big: string; smallTag: string; bigTag: string; line: string; em: string}};
 
 export const EdTexts: React.FC<EdTextsProps> = (p) => {
@@ -152,6 +152,8 @@ export const EdTexts: React.FC<EdTextsProps> = (p) => {
           <Tag P={P} x={Math.min(790, Math.max(250, ts.x))} y={ts.y + 16} opacity={tagK}>{p.reveal.smallTag}</Tag>
         </>
       )}
+      {p.bigHook && <BigNotes p={p} t={t} dark={P.dark} accent={P.accent} />}
+      {p.follow && <FollowCard P={P} t={t} f={p.follow} />}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
     </AbsoluteFill>

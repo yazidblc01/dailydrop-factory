@@ -3,10 +3,10 @@ import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
-import {Backdrop, Cam, Em, Grain, Head, Masthead, PAL, Pal, PalName, ProgressRule, RBox, Studio, V3, lerp, rnd, smooth, useEdFonts} from './kit';
+import {Backdrop, Cam, Em, clamp01, Grain, Head, Masthead, PAL, Pal, PalName, ProgressRule, RBox, Studio, V3, lerp, rnd, smooth, useEdFonts, FollowCard, Follow} from './kit';
 
 type Row = {text: string; at: number; hot?: boolean};
-export type EdFlapProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; header: string; rows: Row[]; music?: string | null};
+export type EdFlapProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string; endA: string; endB: string; header: string; rows: Row[]; teaser?: {text: string; line: string; em: string}; music?: string | null; follow?: Follow};
 
 const CHARS = ' 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$.,%';
 const COLS = 12, CW = 0.172, CHH = 0.285, GAP = 0.02, ROWGAP = 0.065, FLIP = 0.075;
@@ -119,9 +119,31 @@ export const EdFlap: React.FC<EdFlapProps> = (p) => {
         }))}
       </ThreeCanvas>
 
+      {p.teaser && t < p.rows[0].at + 0.2 && (() => {
+        // the punchline row first: it flips in big before the board fills, so the first second already says the point
+        const k = 1 - smooth(p.rows[0].at - 0.5, p.rows[0].at, t);
+        const cells = p.teaser.text.padEnd(COLS, ' ').slice(0, COLS).split('');
+        return (
+          <div style={{position: 'absolute', left: 0, right: 0, top: 690, opacity: k, transform: `translateY(${(1 - k) * -40}px)`}}>
+            <div style={{margin: '0 auto', width: 872, padding: 24, borderRadius: 22, background: frameCol, boxShadow: '0 40px 70px rgba(20,0,40,0.45)', display: 'flex', gap: 8, boxSizing: 'border-box'}}>
+              {cells.map((c, i) => {
+                const flipK = clamp01((t - 0.1 - i * 0.04) / 0.22);
+                return (
+                  <div key={i} style={{flex: 1, height: 120, borderRadius: 7, background: P.accent, color: '#fff', fontFamily: 'Inter', fontWeight: 800, fontSize: 78, lineHeight: '120px', textAlign: 'center',
+                    position: 'relative', transform: `perspective(400px) rotateX(${(1 - flipK) * 90}deg)`, transformOrigin: 'top'}}>
+                    {c.trim()}<div style={{position: 'absolute', left: 0, right: 0, top: 59, height: 2, background: 'rgba(0,0,0,0.3)'}} />
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{textAlign: 'center', marginTop: 34, opacity: smooth(0.6, 0.9, t)}}><span style={{display: 'inline-block', padding: '14px 30px', borderRadius: 18, background: P.dark ? 'rgba(27,11,51,0.88)' : 'rgba(255,253,248,0.92)', fontFamily: P.display, fontWeight: P.dWeight, fontSize: P.dItalic ? 62 : 52, color: P.ink, boxShadow: '0 18px 36px rgba(0,0,0,0.25)'}}>{p.teaser.line} <Em P={P}>{p.teaser.em}</Em></span></div>
+          </div>
+        );
+      })()}
       <Masthead P={P} label={p.label} />
       {hookK > 0.01 && <Head P={P} top={372} size={P.dItalic ? 96 : 80} style={{opacity: hookK}}>{p.hookA} <Em P={P}>{p.hookB}</Em></Head>}
       {endK > 0.01 && <Head P={P} top={372} size={P.dItalic ? 92 : 76} style={{opacity: endK}}>{p.endA} <Em P={P}>{p.endB}</Em></Head>}
+      {p.follow && <FollowCard P={P} t={t} f={p.follow} />}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
     </AbsoluteFill>
