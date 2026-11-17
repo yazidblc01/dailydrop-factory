@@ -278,14 +278,16 @@
     "slot": "waited"
   },
   "texts__gta6_announced": {
-    "title": "I texted myself about GTA 6 stock 🎮",
+    "title": "GTA 6: I texted myself the night GTA 6 was confirmed 💀",
     "platforms": [
       "youtube",
-      "facebook"
+      "facebook",
+      "tiktok",
+      "instagram"
     ],
     "service": "zernio",
-    "zernio_id": "6afc39ad4300736e052560f1",
-    "posted_at": "2026-11-17T11:25:34+00:00",
+    "zernio_id": "6afc8c8000664903042a1963",
+    "posted_at": "2026-11-17T17:18:58+00:00",
     "when": "2026-11-17T16:00:00-05:00",
     "slot": "main"
   },
