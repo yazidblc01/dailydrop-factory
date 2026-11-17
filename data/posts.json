@@ -276,5 +276,17 @@
     "posted_at": "2026-11-17T02:12:14+00:00",
     "url": "https://www.youtube.com/watch?v=IlI-GGcm2mY",
     "slot": "waited"
+  },
+  "texts__gta6_announced": {
+    "title": "I texted myself about GTA 6 stock 🎮",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afc39ad4300736e052560f1",
+    "posted_at": "2026-11-17T11:25:34+00:00",
+    "when": "2026-11-17T16:00:00-05:00",
+    "slot": "main"
   }
 }
