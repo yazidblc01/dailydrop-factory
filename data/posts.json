@@ -326,5 +326,19 @@
     "zernio_id": "6afc8d43f413860c640385c8",
     "posted_at": "2026-11-17T17:22:35+00:00",
     "slot": "waited"
+  },
+  "texts__gta6_delay1_hold": {
+    "title": "GTA 6: I tried to sell Take-Two out of spite 💀",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afc8e9d57b16cb810ba9f30",
+    "posted_at": "2026-11-17T17:27:58+00:00",
+    "when": "2026-11-17T19:00:00-05:00",
+    "slot": "gta"
   }
 }
