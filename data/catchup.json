@@ -1,7 +1,8 @@
 {
   "done": [
     "invest__car_makers__2020",
-    "consoles__playstation"
+    "consoles__playstation",
+    "invest__energy__2008"
   ],
   "made": {
     "invest__car_makers__2020": {
@@ -19,6 +20,14 @@
         "instagram": "https://www.instagram.com/reel/Df2nRK6gnr7/"
       },
       "at": "2026-11-17T13:51"
+    },
+    "invest__energy__2008": {
+      "topic": "invest__energy__2008",
+      "urls": {
+        "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709258497417809159",
+        "instagram": "https://www.instagram.com/reel/Df26y5QFTJT/"
+      },
+      "at": "2026-11-17T16:41"
     }
   },
   "skipped": {}
