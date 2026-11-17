@@ -1,6 +1,7 @@
 {
   "done": [
-    "invest__car_makers__2020"
+    "invest__car_makers__2020",
+    "consoles__playstation"
   ],
   "made": {
     "invest__car_makers__2020": {
@@ -10,6 +11,14 @@
         "instagram": "https://www.instagram.com/reel/Df2azVAin5q/"
       },
       "at": "2026-11-17T12:01"
+    },
+    "consoles__playstation": {
+      "topic": "gta_consoles__20261117__8",
+      "urls": {
+        "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709214416947907860",
+        "instagram": "https://www.instagram.com/reel/Df2nRK6gnr7/"
+      },
+      "at": "2026-11-17T13:51"
     }
   },
   "skipped": {}
