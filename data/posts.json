@@ -260,5 +260,21 @@
     "zernio_id": "6afb8fff604e65386a803b6f",
     "posted_at": "2026-11-16T23:21:53+00:00",
     "slot": "waited"
+  },
+  "waited__20261116__5": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=IlI-GGcm2mY",
+      "facebook": "https://www.facebook.com/reel/29091960090453459"
+    },
+    "title": "13 years waiting for GTA 6: Amazon went x17.5 \ud83e\udd2f",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afbb7ec9b88185d073323b4",
+    "posted_at": "2026-11-17T02:12:14+00:00",
+    "url": "https://www.youtube.com/watch?v=IlI-GGcm2mY",
+    "slot": "waited"
   }
 }
