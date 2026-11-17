@@ -288,5 +288,21 @@
     "posted_at": "2026-11-17T11:25:34+00:00",
     "when": "2026-11-17T16:00:00-05:00",
     "slot": "main"
+  },
+  "gta_board_gas__20261117__6": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=ua7EdfFTL40",
+      "facebook": "https://www.facebook.com/reel/1049625964301215"
+    },
+    "title": "A gallon of gas on every GTA release day ⛽",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afc6314dcd1a73b35d74851",
+    "posted_at": "2026-11-17T14:22:31+00:00",
+    "url": "https://www.youtube.com/watch?v=ua7EdfFTL40",
+    "slot": "waited"
   }
 }
