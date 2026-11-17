@@ -340,5 +340,25 @@
     "posted_at": "2026-11-17T17:27:58+00:00",
     "when": "2026-11-17T19:00:00-05:00",
     "slot": "gta"
+  },
+  "gtamath__20261117__0": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=q3R4LKhb3gs",
+      "facebook": "https://www.facebook.com/reel/2827589437624642",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709235416561421586",
+      "instagram": "https://www.instagram.com/reel/Df2wokqDnd3/"
+    },
+    "title": "GTA 6 when your boss is the lobby kid who flamed you",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afcb4cd46410c06893fd242",
+    "posted_at": "2026-11-17T20:11:21+00:00",
+    "url": "https://www.youtube.com/watch?v=q3R4LKhb3gs",
+    "slot": "waited"
   }
 }
