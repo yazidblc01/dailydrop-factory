@@ -360,5 +360,25 @@
     "posted_at": "2026-11-17T20:11:21+00:00",
     "url": "https://www.youtube.com/watch?v=q3R4LKhb3gs",
     "slot": "waited"
+  },
+  "waited__20261117__8": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=bwd_O5i-a0I",
+      "facebook": "https://www.facebook.com/reel/1192976056455692",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709283737200102708",
+      "instagram": "https://www.instagram.com/reel/Df3Gh9ECgHM/"
+    },
+    "title": "GTA 6: Everything that changed while we waited for GTA 6 💀",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afce1d9f2d93e8d84153d11",
+    "posted_at": "2026-11-17T23:23:24+00:00",
+    "url": "https://www.youtube.com/watch?v=bwd_O5i-a0I",
+    "slot": "waited"
   }
 }
