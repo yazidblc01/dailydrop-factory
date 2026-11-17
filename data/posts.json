@@ -278,7 +278,7 @@
     "slot": "waited"
   },
   "texts__gta6_announced": {
-    "title": "GTA 6: I texted myself the night GTA 6 was confirmed 💀",
+    "title": "I texted myself about GTA 6 stock 🎮",
     "platforms": [
       "youtube",
       "facebook",
@@ -286,8 +286,8 @@
       "instagram"
     ],
     "service": "zernio",
-    "zernio_id": "6afc8c8000664903042a1963",
-    "posted_at": "2026-11-17T17:18:58+00:00",
+    "zernio_id": "6afc39ad4300736e052560f1",
+    "posted_at": "2026-11-17T11:25:34+00:00",
     "when": "2026-11-17T16:00:00-05:00",
     "slot": "main"
   },
@@ -305,6 +305,26 @@
     "zernio_id": "6afc6314dcd1a73b35d74851",
     "posted_at": "2026-11-17T14:22:31+00:00",
     "url": "https://www.youtube.com/watch?v=ua7EdfFTL40",
+    "slot": "waited"
+  },
+  "gta_consoles__20261117__7": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=z8l_a2ZhbyI",
+      "facebook": "https://www.facebook.com/reel/1672769327888055",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709191988985253127",
+      "instagram": "https://www.instagram.com/reel/Df2dOhvClvz/"
+    },
+    "url": "https://www.youtube.com/watch?v=z8l_a2ZhbyI",
+    "title": "GTA 6: Console launch prices: higher or lower? 🎮",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afc8d43f413860c640385c8",
+    "posted_at": "2026-11-17T17:22:35+00:00",
     "slot": "waited"
   }
 }
