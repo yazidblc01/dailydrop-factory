@@ -184,7 +184,7 @@ const Caption: React.FC<{l: Line; t: number; top: number}> = ({l, t, top}) => (
 
 const Head: React.FC<{a: string; b: string; t: number; top?: number}> = ({a, b, t, top = 380}) => (
   <div style={{position: 'absolute', top, left: 60, right: 60, textAlign: 'center', ...ser(a.length + b.length > 34 ? 78 : 92), color: CREAM,
-    opacity: smooth(0, 0.25, t), transform: `translateY(${(1 - smooth(0, 0.35, t)) * 30}px)`, textShadow: '0 6px 30px rgba(20,6,40,0.6)'}}>
+    textShadow: '0 6px 30px rgba(20,6,40,0.6)'}}>
     {a} <i style={{color: PINK}}>{b}</i>
   </div>
 );

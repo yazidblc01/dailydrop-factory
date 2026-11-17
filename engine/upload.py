@@ -205,7 +205,7 @@ def build_fields(topic, meta, user, when, platforms):
                    ("instagram_title", caption[:2200]), ("audio_name", "The Daily Drop")]
     if "tiktok" in platforms:
         fields += [("tiktok_title", caption[:2200]), ("privacy_level", "PUBLIC_TO_EVERYONE"),
-                   ("post_mode", "DIRECT_POST"), ("cover_timestamp", "0")]  # frame 0 is the full poster
+                   ("post_mode", "DIRECT_POST"), ("cover_timestamp", "1000")]  # 1 s in: the hook is fully on screen
         if AI_LABEL:
             fields.append(("is_aigc", "true"))
     return fields
@@ -335,7 +335,7 @@ def zget(post_id):
     return body.get("post", body)
 
 
-def zernio_body(topic, meta, media_url, when, platforms, draft):
+def zernio_body(topic, meta, media_url, when, platforms, draft, cover_url=None, cover_ms=1000):
     title = meta["title"][:100]
     description = description_of(topic, meta)
     targets, missing = [], []
@@ -352,14 +352,18 @@ def zernio_body(topic, meta, media_url, when, platforms, draft):
             data = {"contentType": "reel", "title": title}
         elif p == "instagram":
             data = {"isAiGenerated": bool(AI_LABEL)}
+            if cover_url:
+                data["instagramThumbnail"] = cover_url
         elif p == "tiktok":
             tt = {"privacy_level": "PUBLIC_TO_EVERYONE", "allow_comment": True, "allow_duet": True, "allow_stitch": True,
                   "content_preview_confirmed": True, "express_consent_given": True, "video_made_with_ai": bool(AI_LABEL)}
             data = {"videoMadeWithAi": bool(AI_LABEL), "content_preview_confirmed": True,
-                    "express_consent_given": True, "tiktokSettings": tt}
+                    "express_consent_given": True, "tiktokSettings": tt, "videoCoverTimestampMs": int(cover_ms)}
         if meta.get("pinned_comment") and p in ("youtube", "facebook", "instagram"):
             data["firstComment"] = meta["pinned_comment"]
         entry = {"platform": p, "accountId": account, "platformSpecificData": data}
+        if p == "facebook" and cover_url:   # Facebook takes the cover on the video itself
+            entry["customMedia"] = [{"type": "video", "url": media_url, "thumbnail": cover_url}]
         if p in ("tiktok", "instagram"):   # one text field there: the title leads the caption (TikTok drops line breaks)
             sep = " " if p == "tiktok" else "\n\n"
             entry["customContent"] = f"{title}{sep}{description}"[:2200]
@@ -404,9 +408,25 @@ def z_post(topic, when=None, only=None, draft=False):
     if up.status_code >= 400:
         raise RuntimeError(f"Video upload to Zernio failed ({up.status_code}): {up.text[:300]}")
 
-    # 2. create the post
+    # 2. the cover (Instagram and Facebook use the image, TikTok a frame time); never blocks the post
+    cover_url, cover_ms = None, 1000
+    try:
+        from engine import cover
+        img, cover_ms = cover.make(out)
+        if img:
+            r = requests.post(f"{ZAPI}/media/presign", headers=zheaders(), timeout=60,
+                              json={"filename": f"{topic}_cover.jpg", "contentType": "image/jpeg"})
+            cp = zjson(r, "cover upload link")
+            with open(img, "rb") as f:
+                up = requests.put(cp["uploadUrl"], data=f, headers={"Content-Type": "image/jpeg"}, timeout=120)
+            if up.status_code < 400:
+                cover_url = cp["publicUrl"]
+    except Exception as e:
+        print(f"      cover not used ({e})")
+
+    # 3. create the post
     r = requests.post(f"{ZAPI}/posts", headers=zheaders(), timeout=120,
-                      json=zernio_body(topic, meta, pre["publicUrl"], when, platforms, draft))
+                      json=zernio_body(topic, meta, pre["publicUrl"], when, platforms, draft, cover_url, cover_ms))
     created = zjson(r, "post")
     p = created.get("post", created)
     post_id = p.get("_id") or p.get("id")
@@ -420,7 +440,7 @@ def z_post(topic, when=None, only=None, draft=False):
             save_post(topic, **base, when=when.isoformat())
         return {"status": "scheduled", "job_id": post_id, "when": when.isoformat()}
 
-    # 3. posting now: wait for the links
+    # 4. posting now: wait for the links
     urls, errors = zernio_links(p)
     if record:
         save_post(topic, **base, urls=urls)
