@@ -105,7 +105,7 @@ SKIT_TOOL = {
                 "kick": {"type": "integer"}, "kickLine": {"type": "string"}, "scene": {"type": "string", "enum": ["bank", "car", "couch", "beach"]},
                 "notif": {"type": "string"}}, "required": ["who", "say"]}},
             "tag": {"type": "string"},
-            "title": {"type": "string", "description": "YouTube title, under 60 characters, no hashtags"},
+            "title": {"type": "string", "description": "YouTube title that starts with 'GTA 6' (what people search) and says GTA 6 only once, under 60 characters, no hashtags, e.g. 'GTA 6 when mom walks in at 4 AM'"},
             "description": {"type": "string"}, "pinned_comment": {"type": "string", "description": "a question that baits replies"},
         },
         "required": ["headA", "headB", "lines", "tag", "title", "description", "pinned_comment"],

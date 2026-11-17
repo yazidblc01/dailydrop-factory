@@ -16,6 +16,8 @@ of a scheduled post. Old Upload-Post records keep being checked after the switch
 """
 import json
 import os
+import re
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -37,7 +39,8 @@ PRIMARY = "youtube"  # a post counts as live once this one has a link
 
 TAGS = {
     "invest": ["investing", "stocks", "stock market", "finance", "money", "data"],
-    "gta": ["gta 6", "gta vi", "gta", "grand theft auto", "gaming", "rockstar"],
+    "gta": ["gta 6", "gta vi", "gta 6 release", "gta 6 launch", "gta 6 funny", "gta 6 memes", "gta 6 trailer", "lucia",
+            "gta online", "gta", "grand theft auto", "gaming", "rockstar"],
     "wb": ["economy", "countries", "world", "gdp", "data", "geography"],
     "prices": ["inflation", "prices", "groceries", "cost of living", "money", "data"],
 }
@@ -51,6 +54,55 @@ def recipe_of(topic):
         if topic.startswith(prefix + "__"):
             return prefix
     return "gta"
+
+
+def is_gta(meta):
+    return bool(re.search(r"\bgta\b|grand theft|lucia|rockstar|vice city", f"{meta.get('title', '')} {meta.get('description', '')}", re.I))
+
+
+GTA_HASHTAGS = "#GTA6 #GTAVI #GTA6Trailer #GTAOnline #Gaming #Shorts"
+
+
+def seo(meta):
+    """Launch week: GTA reels lead with "GTA 6" in the title (what people search) and carry the searched hashtags."""
+    if not is_gta(meta):
+        return meta
+    m = dict(meta)
+    title = m["title"].strip()
+    if not re.match(r"gta ?(6|vi)\b", title, re.I):
+        title = f"GTA 6: {title}"
+    m["title"] = title[:100]
+    tags = GTA_HASHTAGS + (" #Lucia" if re.search(r"lucia", f"{meta['title']} {meta['description']}", re.I) else "")
+    body = re.sub(r"(\s*#\w+)+\s*$", "", m["description"]).rstrip()   # drop the old hashtag line
+    m["description"] = f"{body}\n\n{tags}"
+    return m
+
+
+def tags_for(topic, meta):
+    return TAGS["gta"] if is_gta(meta) else TAGS[recipe_of(topic)]
+
+
+def looped(out):
+    """The video with its last 0.4 s fading into the first frame, so the replay looks seamless (replays count as
+    watch time). Any problem: the original file."""
+    src, dst = out / "final.mp4", out / "final_loop.mp4"
+    try:
+        dur = lambda f: float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(f)],
+                                             capture_output=True, text=True, check=True).stdout)
+        d, x = dur(src), 0.4
+        fc = (f"[0:v]fps=30,format=yuv420p,settb=AVTB[a0];"
+              f"[1:v]trim=end_frame=1,loop=loop=30:size=1:start=0,fps=30,format=yuv420p,setpts=N/30/TB,settb=AVTB[f];"
+              f"[a0][f]xfade=transition=fade:duration={x}:offset={d - x - 0.05:.3f}[v];"
+              f"[0:a]afade=t=out:st={d - x:.3f}:d={x}[a]")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(src), "-i", str(src), "-filter_complex", fc, "-map", "[v]", "-map", "[a]",
+                        "-c:v", "libx264", "-crf", "18", "-preset", "veryfast", "-c:a", "aac", "-shortest", str(dst)],
+                       check=True, capture_output=True, timeout=300)
+        if abs(dur(dst) - d) > 0.5:
+            raise RuntimeError("length changed")
+        return dst
+    except Exception as e:
+        print(f"      loop ending skipped ({e})")
+        return src
 
 
 def description_of(topic, meta):
@@ -142,7 +194,7 @@ def build_fields(topic, meta, user, when, platforms):
         fields += [("privacyStatus", "public"), ("categoryId", CATEGORY_EDUCATION),
                    ("selfDeclaredMadeForKids", "false"), ("containsSyntheticMedia", "false"),
                    ("defaultLanguage", "en"), ("defaultAudioLanguage", "en-US")]
-        fields += [("tags[]", t) for t in TAGS[recipe_of(topic)]]
+        fields += [("tags[]", t) for t in tags_for(topic, meta)]
     if "facebook" in platforms:
         fields += [("facebook_media_type", "REELS"), ("facebook_title", title),
                    ("facebook_description", description[:4900])]
@@ -169,7 +221,7 @@ def up_post(topic, when=None, only=None):
          or {"status": "scheduled", "job_id": ..., "when": ...}.
     """
     out = MEDIA_DIR / topic
-    meta = json.loads((out / "upload.json").read_text())
+    meta = seo(json.loads((out / "upload.json").read_text()))
     platforms = only or PLATFORMS
     primary = PRIMARY if PRIMARY in platforms else platforms[0]
     record = not only
@@ -185,7 +237,7 @@ def up_post(topic, when=None, only=None):
     if not user:
         raise RuntimeError("UPLOAD_POST_USER missing")
 
-    with open(out / "final.mp4", "rb") as f:
+    with open(looped(out), "rb") as f:
         suffix = "" if record else "-" + "-".join(platforms)
         r = requests.post(f"{API}/upload", headers=headers(topic, suffix), data=build_fields(topic, meta, user, when, platforms),
                           files={"video": ("final.mp4", f, "video/mp4")}, timeout=600)
@@ -311,7 +363,7 @@ def zernio_body(topic, meta, media_url, when, platforms, draft):
     if not targets:
         raise RuntimeError("No Zernio account set for any platform in PLATFORMS")
 
-    body = {"content": description, "tags": TAGS[recipe_of(topic)],
+    body = {"content": description, "tags": tags_for(topic, meta),
             "mediaItems": [{"type": "video", "url": media_url}], "platforms": targets}
     if draft:
         body["isDraft"] = True
@@ -325,7 +377,7 @@ def zernio_body(topic, meta, media_url, when, platforms, draft):
 
 def z_post(topic, when=None, only=None, draft=False):
     out = MEDIA_DIR / topic
-    meta = json.loads((out / "upload.json").read_text())
+    meta = seo(json.loads((out / "upload.json").read_text()))
     platforms = only or PLATFORMS
     primary = PRIMARY if PRIMARY in platforms else platforms[0]
     record = not only and not draft
@@ -341,7 +393,7 @@ def z_post(topic, when=None, only=None, draft=False):
     r = requests.post(f"{ZAPI}/media/presign", headers=zheaders(), timeout=60,
                       json={"filename": f"{topic}.mp4", "contentType": "video/mp4"})
     pre = zjson(r, "upload link")
-    with open(out / "final.mp4", "rb") as f:
+    with open(looped(out), "rb") as f:
         up = requests.put(pre["uploadUrl"], data=f, headers={"Content-Type": "video/mp4"}, timeout=600)
     if up.status_code >= 400:
         raise RuntimeError(f"Video upload to Zernio failed ({up.status_code}): {up.text[:300]}")
