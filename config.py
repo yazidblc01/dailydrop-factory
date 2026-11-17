@@ -10,7 +10,7 @@ CHANNEL_NAME = "The Daily Drop"
 
 # Where every video gets posted (through Upload-Post). Each one must be connected to the
 # Upload-Post profile first. Add "tiktok" and "instagram" here once they're connected.
-PLATFORMS = ["youtube", "facebook"]
+PLATFORMS = ["youtube", "facebook", "tiktok", "instagram"]
 
 # Posting service: "zernio" (free for 2 accounts, unlimited posts) or "upload_post" (old one, 10 a month free).
 POSTER = "zernio"
@@ -18,6 +18,8 @@ POSTER = "zernio"
 ZERNIO_ACCOUNTS = {
     "youtube": "6af5e6eebe4aba17eca15bc4",
     "facebook": "6af5e73c4b972afe8c844638",
+    "instagram": "6afc859ae8f483c2e81caa40",
+    "tiktok": "6afc85d0bf4af8a317fd5151",
 }
 
 # Label the videos as AI-made on platforms that ask for it (the voice is AI). Protects the accounts.

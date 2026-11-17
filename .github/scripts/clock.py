@@ -11,9 +11,12 @@ TZ = ZoneInfo("America/Toronto")
 # (Toronto time, workflow, inputs)
 SLOTS = [("06:13", "daily.yml", {"once": "yes"}),
          ("09:07", "gta_waited.yml", {}),
+         ("10:37", "catchup.yml", {}),
          ("12:07", "gta_waited.yml", {}),
          ("12:13", "daily.yml", {"slot": "gta", "once": "yes"}),
+         ("13:37", "catchup.yml", {}),
          ("15:07", "gta_waited.yml", {"format": "gtamath"}),
+         ("16:37", "catchup.yml", {}),
          ("18:07", "gta_waited.yml", {}),
          ("18:47", "daily.yml", {"mode": "check"}),
          ("20:17", "daily.yml", {"mode": "check", "slot": "gta"}),

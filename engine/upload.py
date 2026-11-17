@@ -353,11 +353,17 @@ def zernio_body(topic, meta, media_url, when, platforms, draft):
         elif p == "instagram":
             data = {"isAiGenerated": bool(AI_LABEL)}
         elif p == "tiktok":
+            tt = {"privacy_level": "PUBLIC_TO_EVERYONE", "allow_comment": True, "allow_duet": True, "allow_stitch": True,
+                  "content_preview_confirmed": True, "express_consent_given": True, "video_made_with_ai": bool(AI_LABEL)}
             data = {"videoMadeWithAi": bool(AI_LABEL), "content_preview_confirmed": True,
-                    "express_consent_given": True}
+                    "express_consent_given": True, "tiktokSettings": tt}
         if meta.get("pinned_comment") and p in ("youtube", "facebook", "instagram"):
             data["firstComment"] = meta["pinned_comment"]
-        targets.append({"platform": p, "accountId": account, "platformSpecificData": data})
+        entry = {"platform": p, "accountId": account, "platformSpecificData": data}
+        if p in ("tiktok", "instagram"):   # one text field there: the title leads the caption (TikTok drops line breaks)
+            sep = " " if p == "tiktok" else "\n\n"
+            entry["customContent"] = f"{title}{sep}{description}"[:2200]
+        targets.append(entry)
     if missing:
         print(f"      no Zernio account for {', '.join(missing)} (add its ID to ZERNIO_ACCOUNTS in config.py)")
     if not targets:
@@ -423,6 +429,8 @@ def z_post(topic, when=None, only=None, draft=False):
         missing = [x for x in platforms if x not in urls]
         if primary in urls and len(errors) >= len(missing):
             break  # the main platform is live and the rest reported an error
+        if primary in urls and waited >= 240:
+            break  # the main platform is live; the slower ones (TikTok, Instagram) finish on their own
         if errors and primary not in urls and len(errors) >= len(platforms):
             raise RuntimeError("Upload failed: " + " | ".join(errors))
         time.sleep(POLL_EVERY)

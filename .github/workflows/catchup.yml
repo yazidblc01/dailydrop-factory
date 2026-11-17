@@ -1,0 +1,75 @@
+# Catch-up: the reels posted before TikTok and Instagram were connected, made again in today's design and posted
+# there only, one per run, oldest first (engine/catchup.py). Run it by hand any time with:
+#   gh workflow run catchup.yml
+name: Catch-up
+
+on:
+  # started by the Clock workflow at 10:37 AM, 1:37 and 4:37 PM Toronto (.github/scripts/clock.py)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catchup
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+      UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+      UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
+      TZ: America/Toronto
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Python packages
+        run: pip install -r requirements.txt
+
+      - name: System packages (ffmpeg, Chrome libraries)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libnss3 libatk-bridge2.0-0 libcups2 libxcomposite1 libxdamage1 \
+            libxrandr2 libgbm1 libxkbcommon0 libpango-1.0-0 libcairo2 libasound2t64
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: video/package-lock.json
+
+      - name: Video tools
+        working-directory: video
+        run: npm ci --no-audit --no-fund
+
+      - name: Cache Chrome and the speech model (GTA Math captions)
+        uses: actions/cache@v4
+        with:
+          path: |
+            video/node_modules/.remotion
+            ~/.cache/huggingface
+          key: chrome-models-v1
+
+      - name: Make one old reel again and post it to TikTok and Instagram
+        run: python -m engine.catchup
+
+      - name: Save state and post records
+        if: always()
+        run: |
+          git config user.name "daily-drop-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 .github/scripts/save_state.py "state: $(date +%F) catch-up" data/catchup.json
