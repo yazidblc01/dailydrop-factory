@@ -10,6 +10,9 @@ on:
       flat:
         description: "flat finale only, no 3D (yes/no)"
         default: "no"
+      format:
+        description: "force one format (waited, board, receipt, coins, consoles, bestsellers, gtamath); empty = the rotation"
+        default: ""
 
 permissions:
   contents: write
@@ -23,6 +26,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -57,16 +62,19 @@ jobs:
         working-directory: video
         run: npm ci --no-audit --no-fund
 
-      - name: Cache Chrome
+      - name: Cache Chrome and the speech model (GTA Math captions)
         uses: actions/cache@v4
         with:
-          path: video/node_modules/.remotion
-          key: chrome-v1
+          path: |
+            video/node_modules/.remotion
+            ~/.cache/huggingface
+          key: chrome-models-v1
 
       - name: Make and post
         run: |
           ARGS="--post"
           if [ "${{ inputs.flat }}" = "yes" ]; then ARGS="$ARGS --flat"; fi
+          if [ -n "${{ inputs.format }}" ]; then ARGS="$ARGS --format ${{ inputs.format }}"; fi
           python -m engine.waited $ARGS
 
       - name: Save state and post records
@@ -74,4 +82,4 @@ jobs:
         run: |
           git config user.name "daily-drop-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          python3 .github/scripts/save_state.py "state: $(date +%F) gta waited" data/waited.json data/posts.json
+          python3 .github/scripts/save_state.py "state: $(date +%F) gta waited" data/waited.json data/gtamath.json data/posts.json

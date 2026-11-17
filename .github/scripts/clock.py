@@ -13,11 +13,11 @@ SLOTS = [("06:13", "daily.yml", {"once": "yes"}),
          ("09:07", "gta_waited.yml", {}),
          ("12:07", "gta_waited.yml", {}),
          ("12:13", "daily.yml", {"slot": "gta", "once": "yes"}),
-         ("15:07", "gta_waited.yml", {}),
+         ("15:07", "gta_waited.yml", {"format": "gtamath"}),
          ("18:07", "gta_waited.yml", {}),
          ("18:47", "daily.yml", {"mode": "check"}),
          ("20:17", "daily.yml", {"mode": "check", "slot": "gta"}),
-         ("21:07", "gta_waited.yml", {})]
+         ("21:07", "gta_waited.yml", {"format": "gtamath"})]
 LATE_OK = timedelta(minutes=90)
 LIFE = timedelta(hours=5, minutes=30)
 

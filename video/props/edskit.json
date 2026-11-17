@@ -1,0 +1,328 @@
+{
+ "pal": "vice",
+ "style": "couch",
+ "duration": 18.6,
+ "label": "GTA MATH",
+ "badge": "GTA 6 IN 2 DAYS",
+ "headA": "Mom walks in at",
+ "headB": "4 AM on launch night",
+ "other": {
+  "look": "mom",
+  "role": "MOM"
+ },
+ "sender": "The Boys \ud83c\udfae",
+ "left": {
+  "name": "My Girl \u2764\ufe0f",
+  "sub": "iMessage"
+ },
+ "right": {
+  "name": "Lucia \ud83c\udf34",
+  "sub": "Vice City",
+  "dark": true
+ },
+ "lines": [
+  {
+   "who": "narrator",
+   "show": "POV: it's launch night and Mom walks in.",
+   "start": 0.2,
+   "end": 2.6,
+   "words": [
+    {
+     "w": "POV:",
+     "start": 0.2,
+     "end": 0.5
+    },
+    {
+     "w": "it's",
+     "start": 0.5,
+     "end": 0.8
+    },
+    {
+     "w": "launch",
+     "start": 0.8,
+     "end": 1.1
+    },
+    {
+     "w": "night",
+     "start": 1.1,
+     "end": 1.4
+    },
+    {
+     "w": "and",
+     "start": 1.4,
+     "end": 1.7
+    },
+    {
+     "w": "Mom",
+     "start": 1.7,
+     "end": 2.0
+    },
+    {
+     "w": "walks",
+     "start": 2.0,
+     "end": 2.3
+    },
+    {
+     "w": "in.",
+     "start": 2.3,
+     "end": 2.6
+    }
+   ]
+  },
+  {
+   "who": "other",
+   "show": "Do you know what time it is?",
+   "start": 2.8,
+   "end": 4.6,
+   "words": [
+    {
+     "w": "Do",
+     "start": 2.8,
+     "end": 3.06
+    },
+    {
+     "w": "you",
+     "start": 3.06,
+     "end": 3.31
+    },
+    {
+     "w": "know",
+     "start": 3.31,
+     "end": 3.57
+    },
+    {
+     "w": "what",
+     "start": 3.57,
+     "end": 3.83
+    },
+    {
+     "w": "time",
+     "start": 3.83,
+     "end": 4.09
+    },
+    {
+     "w": "it",
+     "start": 4.09,
+     "end": 4.34
+    },
+    {
+     "w": "is?",
+     "start": 4.34,
+     "end": 4.6
+    }
+   ],
+   "herMood": "mad"
+  },
+  {
+   "who": "you",
+   "show": "GTA 6 time.",
+   "start": 4.8,
+   "end": 5.8,
+   "words": [
+    {
+     "w": "GTA",
+     "start": 4.8,
+     "end": 5.13
+    },
+    {
+     "w": "6",
+     "start": 5.13,
+     "end": 5.47
+    },
+    {
+     "w": "time.",
+     "start": 5.47,
+     "end": 5.8
+    }
+   ],
+   "youMood": "smug"
+  },
+  {
+   "who": "other",
+   "show": "You have school in 3 hours!",
+   "start": 6.0,
+   "end": 7.8,
+   "words": [
+    {
+     "w": "You",
+     "start": 6.0,
+     "end": 6.3
+    },
+    {
+     "w": "have",
+     "start": 6.3,
+     "end": 6.6
+    },
+    {
+     "w": "school",
+     "start": 6.6,
+     "end": 6.9
+    },
+    {
+     "w": "in",
+     "start": 6.9,
+     "end": 7.2
+    },
+    {
+     "w": "3",
+     "start": 7.2,
+     "end": 7.5
+    },
+    {
+     "w": "hours!",
+     "start": 7.5,
+     "end": 7.8
+    }
+   ],
+   "herMood": "fury"
+  },
+  {
+   "who": "text",
+   "show": "bro the heist starts in 3 minutes \ud83d\udcb0",
+   "start": 8.1,
+   "end": 10.2,
+   "words": [
+    {
+     "w": "bro",
+     "start": 8.1,
+     "end": 8.36
+    },
+    {
+     "w": "the",
+     "start": 8.36,
+     "end": 8.62
+    },
+    {
+     "w": "heist",
+     "start": 8.62,
+     "end": 8.89
+    },
+    {
+     "w": "starts",
+     "start": 8.89,
+     "end": 9.15
+    },
+    {
+     "w": "in",
+     "start": 9.15,
+     "end": 9.41
+    },
+    {
+     "w": "3",
+     "start": 9.41,
+     "end": 9.67
+    },
+    {
+     "w": "minutes",
+     "start": 9.67,
+     "end": 9.94
+    },
+    {
+     "w": "\ud83d\udcb0",
+     "start": 9.94,
+     "end": 10.2
+    }
+   ],
+   "youMood": "shock"
+  },
+  {
+   "who": "you",
+   "show": "Mom. I have a heist in 3 minutes.",
+   "start": 10.4,
+   "end": 12.6,
+   "words": [
+    {
+     "w": "Mom.",
+     "start": 10.4,
+     "end": 10.68
+    },
+    {
+     "w": "I",
+     "start": 10.68,
+     "end": 10.95
+    },
+    {
+     "w": "have",
+     "start": 10.95,
+     "end": 11.22
+    },
+    {
+     "w": "a",
+     "start": 11.22,
+     "end": 11.5
+    },
+    {
+     "w": "heist",
+     "start": 11.5,
+     "end": 11.78
+    },
+    {
+     "w": "in",
+     "start": 11.78,
+     "end": 12.05
+    },
+    {
+     "w": "3",
+     "start": 12.05,
+     "end": 12.32
+    },
+    {
+     "w": "minutes.",
+     "start": 12.32,
+     "end": 12.6
+    }
+   ],
+   "youMood": "sweat"
+  },
+  {
+   "who": "other",
+   "show": "...Is your father in this heist?",
+   "start": 12.9,
+   "end": 15.0,
+   "words": [
+    {
+     "w": "...Is",
+     "start": 12.9,
+     "end": 13.25
+    },
+    {
+     "w": "your",
+     "start": 13.25,
+     "end": 13.6
+    },
+    {
+     "w": "father",
+     "start": 13.6,
+     "end": 13.95
+    },
+    {
+     "w": "in",
+     "start": 13.95,
+     "end": 14.3
+    },
+    {
+     "w": "this",
+     "start": 14.3,
+     "end": 14.65
+    },
+    {
+     "w": "heist?",
+     "start": 14.65,
+     "end": 15.0
+    }
+   ],
+   "herMood": "sus"
+  }
+ ],
+ "tag": "Dad's been 'getting milk' since 2013",
+ "tagAt": 15.2,
+ "audio": null,
+ "music": null,
+ "follow": {
+  "at": 17.0,
+  "kicker": "GTA 6 IN 2 DAYS",
+  "big": "Follow",
+  "line": "for the countdown",
+  "em": "daily"
+ }
+}

@@ -7,6 +7,10 @@ import {StoryReel, StoryProps} from './StoryReel';
 import {EdStory} from './ed/Story';
 import {TextsFuture, TFProps} from './TextsFuture';
 import {EdTexts} from './ed/Texts';
+import {EdMath} from './ed/Math';
+import {EdSkit} from './ed/Skit';
+import edskit from '../props/edskit.json';
+import edmath from '../props/edmath.json';
 import {EdWaited} from './ed/Waited';
 import edwaited from '../props/edwaited.json';
 import {EdTextsFlat} from './ed/TextsFlat';
@@ -86,6 +90,10 @@ export const RemotionRoot: React.FC = () => {
       defaultProps={story as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS) + TAIL_FRAMES})} />
     <Composition id="EdWaited" component={EdWaited as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edwaited as any).duration * FPS)}
       defaultProps={edwaited as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdSkit" component={EdSkit as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edskit as any).duration * FPS)}
+      defaultProps={edskit as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdMath" component={EdMath as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edmath as any).duration * FPS)}
+      defaultProps={edmath as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdTexts" component={EdTexts as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edtexts as any).duration * FPS)}
       defaultProps={edtexts as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdTextsFlat" component={EdTextsFlat as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edtexts as any).duration * FPS)}

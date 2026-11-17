@@ -1,0 +1,463 @@
+{
+ "pal": "vice",
+ "label": "GTA MATH",
+ "badge": "GTA 6 IN 2 DAYS",
+ "hookA": "3 reasons GTA 6 is",
+ "hookB": "the perfect girlfriend.",
+ "reasons": [
+  {
+   "punch": "She waited 13 years.",
+   "scene": {
+    "type": "stats",
+    "cast": "gamer",
+    "title": "Relationship stats",
+    "rows": [
+     [
+      "Years waited",
+      "13",
+      1
+     ],
+     [
+      "Times she asked where you were",
+      "0",
+      0.04
+     ],
+     [
+      "Loyalty",
+      "100%",
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "punch": "Cheaper than one date.",
+   "scene": {
+    "type": "receipt",
+    "cast": "duo",
+    "her": "YOUR GIRL",
+    "title": "Receipt",
+    "rows": [
+     [
+      "Dinner date",
+      "$$$"
+     ],
+     [
+      "Movie",
+      "$$"
+     ],
+     [
+      "Her mood after",
+      "PRICELESS"
+     ]
+    ],
+    "total": [
+     "GTA 6",
+     "$79.99"
+    ]
+   }
+  },
+  {
+   "punch": "She wants you inside.",
+   "scene": {
+    "type": "cast",
+    "cast": "duo",
+    "her": "YOUR GIRL",
+    "tags": [
+     "Stay in all weekend?",
+     "FINALLY",
+     "Touch grass? Never"
+    ]
+   }
+  }
+ ],
+ "closerBig": "Commitment.",
+ "closerSmall": "13 years. That's called",
+ "sections": [
+  {
+   "name": "hook",
+   "start": 0,
+   "end": 2.6,
+   "text": "Three reasons GTA 6 is the perfect girlfriend."
+  },
+  {
+   "name": "beat1",
+   "start": 2.6,
+   "end": 7.4,
+   "text": "Number 3. She waited 13 years for you and never once asked where you were."
+  },
+  {
+   "name": "beat2",
+   "start": 7.4,
+   "end": 12.0,
+   "text": "Number 2. One dinner date costs more than her. She's $79.99, once. Forever."
+  },
+  {
+   "name": "tension",
+   "start": 12.0,
+   "end": 13.3,
+   "text": "And number one?"
+  },
+  {
+   "name": "reveal",
+   "start": 13.3,
+   "end": 18.2,
+   "text": "Number 1. When you tell her you're staying in all weekend, she says: finally."
+  },
+  {
+   "name": "twist",
+   "start": 18.2,
+   "end": 20.6,
+   "text": "Thirteen years. That's not a game. That's commitment."
+  }
+ ],
+ "captions": [
+  {
+   "words": [
+    {
+     "w": "Number",
+     "start": 2.6,
+     "end": 2.9
+    },
+    {
+     "w": "3",
+     "start": 2.9,
+     "end": 3.2
+    },
+    {
+     "w": "She",
+     "start": 3.2,
+     "end": 3.5
+    },
+    {
+     "w": "waited",
+     "start": 3.5,
+     "end": 3.8
+    },
+    {
+     "w": "13",
+     "start": 3.8,
+     "end": 4.1
+    },
+    {
+     "w": "years",
+     "start": 4.1,
+     "end": 4.4
+    }
+   ],
+   "start": 2.6,
+   "end": 4.4
+  },
+  {
+   "words": [
+    {
+     "w": "for",
+     "start": 4.4,
+     "end": 4.7
+    },
+    {
+     "w": "you",
+     "start": 4.7,
+     "end": 5.0
+    },
+    {
+     "w": "and",
+     "start": 5.0,
+     "end": 5.3
+    },
+    {
+     "w": "never",
+     "start": 5.3,
+     "end": 5.6
+    },
+    {
+     "w": "once",
+     "start": 5.6,
+     "end": 5.9
+    },
+    {
+     "w": "asked",
+     "start": 5.9,
+     "end": 6.2
+    }
+   ],
+   "start": 4.4,
+   "end": 6.2
+  },
+  {
+   "words": [
+    {
+     "w": "where",
+     "start": 6.2,
+     "end": 6.5
+    },
+    {
+     "w": "you",
+     "start": 6.5,
+     "end": 6.8
+    },
+    {
+     "w": "were",
+     "start": 6.8,
+     "end": 7.1
+    }
+   ],
+   "start": 6.2,
+   "end": 7.1
+  },
+  {
+   "words": [
+    {
+     "w": "Number",
+     "start": 7.4,
+     "end": 7.73
+    },
+    {
+     "w": "2",
+     "start": 7.73,
+     "end": 8.06
+    },
+    {
+     "w": "One",
+     "start": 8.06,
+     "end": 8.39
+    },
+    {
+     "w": "dinner",
+     "start": 8.39,
+     "end": 8.72
+    },
+    {
+     "w": "date",
+     "start": 8.72,
+     "end": 9.05
+    },
+    {
+     "w": "costs",
+     "start": 9.05,
+     "end": 9.38
+    }
+   ],
+   "start": 7.4,
+   "end": 9.38
+  },
+  {
+   "words": [
+    {
+     "w": "more",
+     "start": 9.38,
+     "end": 9.72
+    },
+    {
+     "w": "than",
+     "start": 9.72,
+     "end": 10.05
+    },
+    {
+     "w": "her",
+     "start": 10.05,
+     "end": 10.38
+    },
+    {
+     "w": "She's",
+     "start": 10.38,
+     "end": 10.71
+    },
+    {
+     "w": "$79.99",
+     "start": 10.71,
+     "end": 11.04
+    },
+    {
+     "w": "once",
+     "start": 11.04,
+     "end": 11.37
+    }
+   ],
+   "start": 9.38,
+   "end": 11.37
+  },
+  {
+   "words": [
+    {
+     "w": "Forever",
+     "start": 11.37,
+     "end": 11.7
+    }
+   ],
+   "start": 11.37,
+   "end": 11.7
+  },
+  {
+   "words": [
+    {
+     "w": "And",
+     "start": 12.0,
+     "end": 12.33
+    },
+    {
+     "w": "number",
+     "start": 12.33,
+     "end": 12.67
+    },
+    {
+     "w": "one",
+     "start": 12.67,
+     "end": 13.0
+    }
+   ],
+   "start": 12.0,
+   "end": 13.0
+  },
+  {
+   "words": [
+    {
+     "w": "Number",
+     "start": 13.3,
+     "end": 13.63
+    },
+    {
+     "w": "1",
+     "start": 13.63,
+     "end": 13.96
+    },
+    {
+     "w": "When",
+     "start": 13.96,
+     "end": 14.29
+    },
+    {
+     "w": "you",
+     "start": 14.29,
+     "end": 14.61
+    },
+    {
+     "w": "tell",
+     "start": 14.61,
+     "end": 14.94
+    },
+    {
+     "w": "her",
+     "start": 14.94,
+     "end": 15.27
+    }
+   ],
+   "start": 13.3,
+   "end": 15.27
+  },
+  {
+   "words": [
+    {
+     "w": "you're",
+     "start": 15.27,
+     "end": 15.6
+    },
+    {
+     "w": "staying",
+     "start": 15.6,
+     "end": 15.93
+    },
+    {
+     "w": "in",
+     "start": 15.93,
+     "end": 16.26
+    },
+    {
+     "w": "all",
+     "start": 16.26,
+     "end": 16.59
+    },
+    {
+     "w": "weekend",
+     "start": 16.59,
+     "end": 16.91
+    },
+    {
+     "w": "she",
+     "start": 16.91,
+     "end": 17.24
+    }
+   ],
+   "start": 15.27,
+   "end": 17.24
+  },
+  {
+   "words": [
+    {
+     "w": "says",
+     "start": 17.24,
+     "end": 17.57
+    },
+    {
+     "w": "finally",
+     "start": 17.57,
+     "end": 17.9
+    }
+   ],
+   "start": 17.24,
+   "end": 17.9
+  },
+  {
+   "words": [
+    {
+     "w": "Thirteen",
+     "start": 18.2,
+     "end": 18.46
+    },
+    {
+     "w": "years",
+     "start": 18.46,
+     "end": 18.73
+    },
+    {
+     "w": "That's",
+     "start": 18.73,
+     "end": 18.99
+    },
+    {
+     "w": "not",
+     "start": 18.99,
+     "end": 19.25
+    },
+    {
+     "w": "a",
+     "start": 19.25,
+     "end": 19.51
+    },
+    {
+     "w": "game",
+     "start": 19.51,
+     "end": 19.78
+    }
+   ],
+   "start": 18.2,
+   "end": 19.78
+  },
+  {
+   "words": [
+    {
+     "w": "That's",
+     "start": 19.78,
+     "end": 20.04
+    },
+    {
+     "w": "commitment",
+     "start": 20.04,
+     "end": 20.3
+    }
+   ],
+   "start": 19.78,
+   "end": 20.3
+  }
+ ],
+ "audio": null,
+ "music": null,
+ "follow": {
+  "at": 21.1,
+  "kicker": "GTA 6 IN",
+  "big": "2",
+  "line": "days.",
+  "em": "One a day till then."
+ },
+ "duration": 22.7
+}

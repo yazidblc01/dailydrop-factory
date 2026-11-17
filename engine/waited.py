@@ -388,6 +388,15 @@ def make_other(kind, dry=False, today=None):
 def make_next(dry=False, flat_only=False, today=None, kind=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
     kind = kind or FORMATS[load_state()["count"] % len(FORMATS)]
+    if kind == "gtamath":   # the voiced comedy countdown (3:07 and 9:07 PM slots); a waited reel if it fails
+        try:
+            from engine import gtamath
+            return gtamath.make(dry, today)
+        except Exception as e:
+            from engine.texts import warn
+            print(f"      gtamath failed ({e}), making a waited reel instead")
+            warn(f"⚠️ GTA Math reel failed, posted a waited reel instead.\n{e}")
+            return make(dry, flat_only, today)
     if kind != "waited":
         try:
             return make_other(kind, dry, today)
@@ -433,7 +442,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath"], help="force one format")
     a = ap.parse_args()
     import run
     try:
