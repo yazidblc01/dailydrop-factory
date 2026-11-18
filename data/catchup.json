@@ -3,7 +3,8 @@
     "invest__car_makers__2020",
     "consoles__playstation",
     "invest__energy__2008",
-    "texts__gta5_launch"
+    "texts__gta5_launch",
+    "texts__ps4_nvidia"
   ],
   "made": {
     "invest__car_makers__2020": {
@@ -37,6 +38,14 @@
         "instagram": "https://www.instagram.com/reel/Df46AMYADXQ/"
       },
       "at": "2026-11-18T11:13"
+    },
+    "texts__ps4_nvidia": {
+      "topic": "texts__ps4_nvidia",
+      "urls": {
+        "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709585706787589428",
+        "instagram": "https://www.instagram.com/reel/Df5MF_kkmCb/"
+      },
+      "at": "2026-11-18T13:51"
     }
   },
   "skipped": {}
