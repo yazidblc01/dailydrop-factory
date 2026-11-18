@@ -514,5 +514,25 @@
     "service": "zernio",
     "zernio_id": "6afe084081a14ff0693a8f35",
     "posted_at": "2026-11-18T20:20:31+00:00"
+  },
+  "clip__20261118__ThankfulSoftKoupreyOMGSc": {
+    "urls": {
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709620682249866503",
+      "youtube": "https://www.youtube.com/watch?v=xOnMthl9W-8",
+      "facebook": "https://www.facebook.com/reel/1756220076062126",
+      "instagram": "https://www.instagram.com/reel/Df5bnjNCmrQ/"
+    },
+    "title": "GTA 6: ohnePixel Yells \"Jackpot!\" Then Crashes",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afe13231d273b572210cf5e",
+    "posted_at": "2026-11-18T21:06:47+00:00",
+    "url": "https://www.youtube.com/watch?v=xOnMthl9W-8",
+    "slot": "waited"
   }
 }

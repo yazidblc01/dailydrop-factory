@@ -2,9 +2,13 @@
   "used": [
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs",
     "WiseBusyStapleNononoCat--XYNEyYmRlr4KoEY",
-    "WealthyNimbleHamsterDansGame-yrU7UShZomelh1Ke"
+    "WealthyNimbleHamsterDansGame-yrU7UShZomelh1Ke",
+    "UnusualMoistSharkBIRB-Wlz2wmgaTOQAniKu",
+    "TrustworthyCarefulJalapenoKAPOW--CPhZdDJiBW-X0-C",
+    "AwkwardColdbloodedBunnyKappaWealth-jwq_HEi8HgaRlves",
+    "ThankfulSoftKoupreyOMGScoots-8rWxvM1hXbQ2r_nz"
   ],
-  "count": 2,
+  "count": 3,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -86,6 +90,115 @@
       "end": 54.4,
       "peak": 52.75,
       "posted": true
+    },
+    "UnusualMoistSharkBIRB-Wlz2wmgaTOQAniKu": {
+      "at": "2026-11-18T20:57:29.110835+00:00",
+      "login": "clix",
+      "name": "Clix",
+      "url": "https://www.twitch.tv/clix/clip/UnusualMoistSharkBIRB-Wlz2wmgaTOQAniKu",
+      "title": "Wtf",
+      "use": false,
+      "why": "Frames show nude characters on screen, including exposed bodies in the street and at the poolside, which hits the nudity rule. The reaction about a \"monster\" and the Holy s*** lines don't offset that.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "nude NPCs at poolside",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.18,
+        "h": 0.23
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 20.0,
+      "end": 30.0,
+      "peak": 28.25
+    },
+    "TrustworthyCarefulJalapenoKAPOW--CPhZdDJiBW-X0-C": {
+      "at": "2026-11-18T20:57:59.038016+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/TrustworthyCarefulJalapenoKAPOW--CPhZdDJiBW-X0-C",
+      "title": "XQC gets called a f****** P**** right after he said so to an NPC in GTA 6",
+      "use": false,
+      "why": "The streamer directs a gendered slur (\"p****\") at an NPC and the title centers on it, which falls under the slurs rule. Not usable for the channel even though the gameplay itself is fine.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "Swing first, NPC road rage",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.93,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.46,
+        "w": 1.0,
+        "h": 0.54
+      },
+      "start": 0.0,
+      "end": 17.6,
+      "peak": 6.0
+    },
+    "AwkwardColdbloodedBunnyKappaWealth-jwq_HEi8HgaRlves": {
+      "at": "2026-11-18T20:58:58.882218+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/AwkwardColdbloodedBunnyKappaWealth-jwq_HEi8HgaRlves",
+      "title": "horny ohne!",
+      "use": false,
+      "why": "Rejected: the clip shows nudity and sexual content on screen (topless character in a private room scene), which the apps restrict.",
+      "score": 1,
+      "star": "reaction",
+      "moment": "private room lap dance scene",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.72,
+        "w": 0.22,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 15.75
+    },
+    "ThankfulSoftKoupreyOMGScoots-8rWxvM1hXbQ2r_nz": {
+      "at": "2026-11-18T21:00:05.498831+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/ThankfulSoftKoupreyOMGScoots-8rWxvM1hXbQ2r_nz",
+      "title": "ohnePixel gets into a high-speed chase",
+      "use": true,
+      "why": "Streamer's reaction carries the clip: he yells \"Jackpot!\" after downing someone, then gets a laugh-out-loud moment over a scooter crash with \"Ow, my hip!\" No nudity, no major spoiler, no song lyrics, no slurs, and no dead air.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "jackpot takedown and scooter crash",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.74,
+        "w": 0.31,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 9.0,
+      "end": 24.0,
+      "peak": 22.25,
+      "posted": true
     }
   },
   "posted": [
@@ -101,6 +214,14 @@
       "topic": "clip__20261118__WealthyNimbleHamsterDans",
       "logins": [
         "xqc"
+      ],
+      "star": "reaction",
+      "date": "2026-11-18"
+    },
+    {
+      "topic": "clip__20261118__ThankfulSoftKoupreyOMGSc",
+      "logins": [
+        "ohnepixel"
       ],
       "star": "reaction",
       "date": "2026-11-18"
