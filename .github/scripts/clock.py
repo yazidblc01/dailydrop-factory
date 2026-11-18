@@ -51,7 +51,9 @@ def due(now):
             h, m = map(int, hm.split(":"))
             at = datetime(day.year, day.month, day.day, h, m, tzinfo=TZ)
             if hm in PAUSED and at < PAUSE_UNTIL:
-                continue
+                if hm == "06:13":
+                    continue
+                wf, inputs = "gta_waited.yml", {"format": "streamclip"}   # the paused original's slot becomes a clip
             if at <= now < at + LATE_OK:
                 yield at, wf, inputs
 
