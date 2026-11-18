@@ -553,5 +553,25 @@
     "zernio_id": "6afe171eb18aad1cc80e2ad9",
     "posted_at": "2026-11-18T21:23:12+00:00",
     "url": "https://www.youtube.com/watch?v=wueC9TSKYFo"
+  },
+  "clip__20261118__UnusualConsiderateLionGi": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=_qby_ja7YNg",
+      "facebook": "https://www.facebook.com/reel/2054950508498105",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709631461363649793",
+      "instagram": "https://www.instagram.com/reel/Df5gZQEjE8E/"
+    },
+    "url": "https://www.youtube.com/watch?v=_qby_ja7YNg",
+    "title": "GTA 6: Kai Cenat Loses It Over Jason's Girlfriend Drama",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afe1cf21fabdd731d260513",
+    "posted_at": "2026-11-18T21:48:25+00:00",
+    "slot": "waited"
   }
 }
