@@ -78,6 +78,19 @@ def seo(meta):
     return m
 
 
+def few_tags(text, n):
+    """At most n hashtags (Instagram allows 5), and no #Shorts, which only means something on YouTube."""
+    kept = []
+
+    def one(m):
+        tag = m.group(1)
+        if tag.lower() == "#shorts" or tag.lower() in kept or len(kept) >= n:
+            return ""
+        kept.append(tag.lower())
+        return m.group(0)
+    return re.sub(r"[ \t]*(#\w+)", one, text).strip()
+
+
 def tags_for(topic, meta):
     return TAGS["gta"] if is_gta(meta) else TAGS[recipe_of(topic)]
 
@@ -95,7 +108,7 @@ def looped(out):
               f"[a0][f]xfade=transition=fade:duration={x}:offset={d - x - 0.05:.3f}[v];"
               f"[0:a]afade=t=out:st={d - x:.3f}:d={x}[a]")
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(src), "-i", str(src), "-filter_complex", fc, "-map", "[v]", "-map", "[a]",
-                        "-c:v", "libx264", "-crf", "18", "-preset", "veryfast", "-c:a", "aac", "-shortest", str(dst)],
+                        "-c:v", "libx264", "-crf", "16", "-preset", "veryfast", "-c:a", "aac", "-shortest", str(dst)],
                        check=True, capture_output=True, timeout=300)
         if abs(dur(dst) - d) > 0.5:
             raise RuntimeError("length changed")
@@ -366,7 +379,7 @@ def zernio_body(topic, meta, media_url, when, platforms, draft, cover_url=None, 
             entry["customMedia"] = [{"type": "video", "url": media_url, "thumbnail": cover_url}]
         if p in ("tiktok", "instagram"):   # one text field there: the title leads the caption (TikTok drops line breaks)
             sep = " " if p == "tiktok" else "\n\n"
-            entry["customContent"] = f"{title}{sep}{description}"[:2200]
+            entry["customContent"] = f"{title}{sep}{few_tags(description, 5)}"[:2200]
         targets.append(entry)
     if missing:
         print(f"      no Zernio account for {', '.join(missing)} (add its ID to ZERNIO_ACCOUNTS in config.py)")

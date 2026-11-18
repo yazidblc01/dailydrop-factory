@@ -49,8 +49,8 @@ const groups = (words: Word[]) => {   // 1 to 4 words per caption, broken at pau
 // one segment, laid out (t = seconds into the segment)
 const Shot: React.FC<{s: Seg; t: number; hook: string; badge: string; showHook: boolean}> = ({s, t, hook, badge, showHook}) => {
   const cam = s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
-  // when the reaction is the star, the streamer gets half the screen; otherwise the gameplay gets two thirds
-  const camH = s.star === 'reaction' ? 940 : 680;
+  // the game gets most of the screen: the streamer keeps a strip on top (a bit more when the reaction is the star)
+  const camH = s.star === 'reaction' ? 660 : 540;
   const gameTop = cam ? camH : 360, gameH = cam ? 1920 - camH : 1200;
   // the part of the frame that is the game (streamers' layouts add chat boxes, bars and borders around it)
   const gb: Box = s.gamebox && s.gamebox.w > 0.2 && s.gamebox.h > 0.2 ? s.gamebox : {x: 0, y: 0, w: 1, h: 1};

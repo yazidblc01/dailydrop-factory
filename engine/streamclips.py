@@ -49,7 +49,9 @@ MIN_S, MAX_S = 10, 60            # Twitch clips we look at
 CUT_MIN, CUT_MAX = 8, 30         # what we keep of them
 PER_STREAMER_DAY = 2
 SWEARS = re.compile(r"^(f+u+c+k\w*|motherf\w*|s+h+i+t\w*|bitch\w*|asshole\w*|dick\w*|pussy\w*|bastard\w*|cunt\w*)([.,!?]*)$", re.I)
-LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k"]
+# the clip at the same loudness as every other, its picture lightly sharpened (it gets enlarged in the vertical) and kept near-lossless
+LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-vf", "unsharp=5:5:0.6:5:5:0.0", "-c:v", "libx264", "-crf", "12", "-preset", "veryfast",
+         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k"]
 
 
 # ---------- state ----------
@@ -149,7 +151,8 @@ def candidates(st, hours=36):
 def download(url, out):
     dst = out / "source.mp4"
     if not dst.exists():
-        subprocess.run(["yt-dlp", "-q", "--no-warnings", "-f", "b", "-o", str(dst), url], check=True, timeout=300)
+        # the sharpest version Twitch has (1080p60 when the streamer streams in it)
+        subprocess.run(["yt-dlp", "-q", "--no-warnings", "-S", "res,fps,br", "-f", "b", "-o", str(dst), url], check=True, timeout=300)
     lvl = out / "level.mp4"                        # every clip at the same loudness
     if not lvl.exists():
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(dst), *LEVEL, str(lvl)], check=True, capture_output=True, timeout=300)
@@ -353,8 +356,10 @@ def render_reel(segs, hook, out, today):
     (out / "props.json").write_text(json.dumps(props, indent=2, ensure_ascii=False))
     final = out / "final.mp4"
     try:
+        # rendered in 4K (2160x3840): text and edges stay crisp, and YouTube gives 4K uploads a much higher bitrate,
+        # so the stream footage survives its re-encode far better even on 1080p phones. Frames as PNG, not JPEG.
         subprocess.run(["npx", "remotion", "render", "src/index.ts", "EdClip", str(final), f"--props={out / 'props.json'}",
-                        "--codec=h264", "--crf=18"], cwd=VIDEO_DIR, check=True)
+                        "--codec=h264", "--crf=16", "--scale=2", "--image-format=png", "--x264-preset=slow"], cwd=VIDEO_DIR, check=True)
     finally:
         for s in segs:
             (render.PUBLIC / s["src"]).unlink(missing_ok=True)
