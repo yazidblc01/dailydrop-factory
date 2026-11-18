@@ -20,6 +20,9 @@ SLOTS = [("06:13", "daily.yml", {"once": "yes"}),                            # o
          ("18:47", "daily.yml", {"mode": "check"}),
          ("20:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
          ("21:07", "gta_waited.yml", {"format": "gtamath"})]                 # original: the GTA Math skit
+# Clips only for a week: the original reels (daily reel, catch-up, GTA Math) are paused until this time.
+PAUSE_UNTIL = datetime(2026, 11, 25, 15, 12, tzinfo=TZ)
+PAUSED = {"06:13", "10:37", "13:37", "16:37", "21:07"}
 LATE_OK = timedelta(minutes=90)
 LIFE = timedelta(hours=5, minutes=30)
 
@@ -47,6 +50,8 @@ def due(now):
         for hm, wf, inputs in SLOTS:
             h, m = map(int, hm.split(":"))
             at = datetime(day.year, day.month, day.day, h, m, tzinfo=TZ)
+            if hm in PAUSED and at < PAUSE_UNTIL:
+                continue
             if at <= now < at + LATE_OK:
                 yield at, wf, inputs
 

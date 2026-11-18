@@ -64,6 +64,9 @@ jobs:
             *) MODE=make ;;
           esac
           if [ "${{ inputs.mode }}" = "check" ]; then MODE=check; fi
+          # clips only for a week: automatic daily reels paused until Nov 25, 3:12 PM Toronto (a manual run still works)
+          if [ "$MODE" = "make" ] && { [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.once }}" = "yes" ]; } \
+             && [ "$(TZ=America/Toronto date +%Y%m%d%H%M)" -lt 202611251512 ]; then MODE=paused; echo "Paused: clips only until Nov 25"; fi
           case "$S" in
             "13 17 * 11,12 *"|"43 18 * 11,12 *") SLOT=gta ;;
             *) SLOT=main ;;

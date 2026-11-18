@@ -433,7 +433,7 @@ def free_checks(final, dur):
 
 def gauntlet(final, dur, out):
     """Free checks first. Claude (the cheap model) only looks when one of them finds something."""
-    faults = free_checks(final, dur)
+    faults = free_checks(final, dur + FOLLOW)   # the reel plus the follow card at the end
     if not faults:
         return {"pass": True, "faults": "free checks clean"}
     print(f"        free checks flagged: {'; '.join(faults)}, asking Claude")

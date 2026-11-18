@@ -1,9 +1,10 @@
 {
   "used": [
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs",
-    "WiseBusyStapleNononoCat--XYNEyYmRlr4KoEY"
+    "WiseBusyStapleNononoCat--XYNEyYmRlr4KoEY",
+    "WealthyNimbleHamsterDansGame-yrU7UShZomelh1Ke"
   ],
-  "count": 1,
+  "count": 2,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -57,6 +58,34 @@
       "end": 16.4,
       "peak": 11.3,
       "posted": true
+    },
+    "WealthyNimbleHamsterDansGame-yrU7UShZomelh1Ke": {
+      "at": "2026-11-18T20:11:53.152804+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/WealthyNimbleHamsterDansGame-yrU7UShZomelh1Ke",
+      "title": "xQc commits Grand Theft Auto for the first time in GTA 6",
+      "use": true,
+      "why": "Funny chase-and-excuse payoff: xQc runs from cops, hops a fence, then talks his way out with a weak \"I ran, I mean I'm with the cops\" line. Clear reaction and gameplay, no spoilers, no nudity, no lyrics, no dead air.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "first run from the cops",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.19,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 25.0,
+      "end": 54.4,
+      "peak": 52.75,
+      "posted": true
     }
   },
   "posted": [
@@ -66,6 +95,14 @@
         "ohnepixel"
       ],
       "star": "gameplay",
+      "date": "2026-11-18"
+    },
+    {
+      "topic": "clip__20261118__WealthyNimbleHamsterDans",
+      "logins": [
+        "xqc"
+      ],
+      "star": "reaction",
       "date": "2026-11-18"
     }
   ],
