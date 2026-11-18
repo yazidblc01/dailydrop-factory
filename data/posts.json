@@ -584,5 +584,25 @@
     "zernio_id": "6afe1cf21fabdd731d260513",
     "posted_at": "2026-11-18T21:48:25+00:00",
     "slot": "waited"
+  },
+  "clip__20261118__react_PeppyWittyJaguar": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=4uw484sN0EE",
+      "facebook": "https://www.facebook.com/reel/4655372268052750",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709662680432266514",
+      "instagram": "https://www.instagram.com/reel/Df5uQ8Koevw/"
+    },
+    "title": "GTA 6: Streamers Watch The Launch Countdown",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afe395e6d0754c8403b87b5",
+    "posted_at": "2026-11-18T23:49:23+00:00",
+    "url": "https://www.youtube.com/watch?v=4uw484sN0EE",
+    "slot": "waited"
   }
 }

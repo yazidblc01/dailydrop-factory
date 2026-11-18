@@ -25,9 +25,15 @@
     "AgreeableHyperCockroachCeilingCat-_dmoVo8X--AU1Sq7",
     "HumbleOpenPassionfruitPrimeMe-kw5lcvoycKcFD4j5",
     "TalentedSteamyHumanHassaanChop-DL8PqlPqix6JV1lU",
-    "UnusualConsiderateLionGingerPower-oJF7Ao2MX9omrH0x"
+    "UnusualConsiderateLionGingerPower-oJF7Ao2MX9omrH0x",
+    "PerfectCrypticChinchillaKappaClaus-nCPM8sJuQmLth2l4",
+    "ModernClumsyBobaFloof-6H36OkNrTo9oo_Er",
+    "MoralGracefulBorkGingerPower-vJkaq2y2EEZXfAiB",
+    "EnergeticVastTofuTheRinger-Mi3gDMWyJsLZwDUy",
+    "ProductiveBraveNikudonDeIlluminati-qNMmyjkr7j_nq38Z",
+    "TiredCrepuscularLettuceTebowing-_ckSEJKNEXXBWDj1"
   ],
-  "count": 4,
+  "count": 5,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -469,7 +475,8 @@
       },
       "start": 1.0,
       "end": 30.1,
-      "peak": 25.25
+      "peak": 25.25,
+      "posted": true
     },
     "FitAmazingRedpandaTBTacoLeft-ibIvB_HUTHVEr57b": {
       "at": "2026-11-18T21:13:30.203968+00:00",
@@ -525,7 +532,8 @@
       },
       "start": 40.0,
       "end": 60.0,
-      "peak": 58.75
+      "peak": 58.75,
+      "posted": true
     },
     "SpikyAlertCookieDuDudu-o9wrV5cBrwlNKB_5": {
       "at": "2026-11-18T21:14:53.337538+00:00",
@@ -695,6 +703,169 @@
       "end": 54.4,
       "peak": 53.25,
       "posted": true
+    },
+    "PerfectCrypticChinchillaKappaClaus-nCPM8sJuQmLth2l4": {
+      "at": "2026-11-18T23:39:37.381525+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/PerfectCrypticChinchillaKappaClaus-nCPM8sJuQmLth2l4",
+      "title": "Reset",
+      "use": true,
+      "why": "Streamer is visibly losing it over a prologue moment (\"There's no way, right?\") and ends by reloading the autosave, with chat reacting \"WHAT HAPPENED\". Reaction is the hook. No nudity, spoilers, gore, lyrical music, or dead air in the trimmed window.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "prologue window reset",
+      "action": "none",
+      "facecam": {
+        "x": 0.777,
+        "y": 0.447,
+        "w": 0.223,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.055,
+        "w": 1.0,
+        "h": 0.89
+      },
+      "start": 28.6,
+      "end": 58.6,
+      "peak": 51.0
+    },
+    "ModernClumsyBobaFloof-6H36OkNrTo9oo_Er": {
+      "at": "2026-11-18T23:40:11.186507+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/ModernClumsyBobaFloof-6H36OkNrTo9oo_Er",
+      "title": "moments before disaster",
+      "use": true,
+      "why": "The streamer's facecam reaction is the draw: he says his PS5 got turned off mid-session, then \"No Signal\" appears and he comes back saying \"I'm back.\" The chat says he may have lost his progress. The speech is spoken, not music, with no nudity, spoilers, or gore, and it isn't dead air.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "PS5 turned off mid-session",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "gamebox": null,
+      "start": 0.0,
+      "end": 20.3,
+      "peak": 8.5
+    },
+    "MoralGracefulBorkGingerPower-vJkaq2y2EEZXfAiB": {
+      "at": "2026-11-18T23:40:51.807432+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/MoralGracefulBorkGingerPower-vJkaq2y2EEZXfAiB",
+      "title": "freaky kai",
+      "use": false,
+      "why": "The game shows a fully nude character in the shower, with buttocks visible, and the audio is sexual innuendo. That breaks the nudity and sexual content rule.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "shower scene with nudity",
+      "action": null,
+      "facecam": {
+        "x": 0.28,
+        "y": 0.1,
+        "w": 0.6,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.47,
+        "w": 1.0,
+        "h": 0.53
+      },
+      "start": 8.0,
+      "end": 30.0,
+      "peak": 9.0
+    },
+    "EnergeticVastTofuTheRinger-Mi3gDMWyJsLZwDUy": {
+      "at": "2026-11-18T23:41:29.284035+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/EnergeticVastTofuTheRinger-Mi3gDMWyJsLZwDUy",
+      "title": "mandy",
+      "use": false,
+      "why": "On-screen character is in a skimpy bikini that is barely covering her chest in the first frame, and the third frame shows her with bare chest and near-nude framing. This falls under the nudity/sexual content rule, so the clip is rejected.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "Mandy's stalking phone app scene",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.26,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.1,
+      "end": 30.1,
+      "peak": 20.5
+    },
+    "ProductiveBraveNikudonDeIlluminati-qNMmyjkr7j_nq38Z": {
+      "at": "2026-11-18T23:42:38.593850+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/ProductiveBraveNikudonDeIlluminati-qNMmyjkr7j_nq38Z",
+      "title": "WOAH Jason stepbro",
+      "use": false,
+      "why": "Rejected for nudity. The game footage shows a woman with her breasts exposed through a barely-there bikini top (frame at 8.4s), and a shirtless man appears in the 'Ugh' scene. Nudity rules apply regardless of the streamer's reaction.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "Snapmatic scrolling and stalking joke",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.46
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.54,
+        "w": 1.0,
+        "h": 0.46
+      },
+      "start": 26.0,
+      "end": 56.0,
+      "peak": 47.2
+    },
+    "TiredCrepuscularLettuceTebowing-_ckSEJKNEXXBWDj1": {
+      "at": "2026-11-18T23:43:25.033897+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/TiredCrepuscularLettuceTebowing-_ckSEJKNEXXBWDj1",
+      "title": "Damn bro",
+      "use": true,
+      "why": "Lacy is shouting and reacting loudly through a MoneyShift robbery, with a takedown and a crowd of NPCs. The streamer's yelling carries the clip, and the chat is hyped. Nothing is sexual, gory, or a spoiler, and no lyrics play.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "MoneyShift robbery fight",
+      "action": "robbery",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.26,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.26,
+        "y": 0.0,
+        "w": 0.74,
+        "h": 1.0
+      },
+      "start": 8.0,
+      "end": 29.0,
+      "peak": 25.5
     }
   },
   "posted": [
@@ -736,6 +907,15 @@
         "kaicenat"
       ],
       "star": "reaction",
+      "date": "2026-11-18"
+    },
+    {
+      "topic": "clip__20261118__react_PeppyWittyJaguar",
+      "logins": [
+        "ishowspeed",
+        "lacy"
+      ],
+      "star": "react",
       "date": "2026-11-18"
     }
   ],
