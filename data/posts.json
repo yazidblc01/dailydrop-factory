@@ -420,7 +420,14 @@
     "zernio_id": "6afd8b3a98d79d58c8417faf",
     "posted_at": "2026-11-18T11:25:48+00:00",
     "when": "2026-11-18T16:00:00-05:00",
-    "slot": "main"
+    "slot": "main",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=W9ZGIkCijaI",
+      "facebook": "https://www.facebook.com/reel/1163445722790626",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709620423972900097",
+      "instagram": "https://www.instagram.com/reel/Df5bfs1mXwY/"
+    },
+    "url": "https://www.youtube.com/watch?v=W9ZGIkCijaI"
   },
   "gta_coins__20261118__9": {
     "urls": {
@@ -474,7 +481,11 @@
     "zernio_id": "6afde2a5ab7b0187980c5831",
     "posted_at": "2026-11-18T17:38:46+00:00",
     "when": "2026-11-18T19:00:00-05:00",
-    "slot": "gta"
+    "slot": "gta",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=N8PD56nwMcA"
+    },
+    "url": "https://www.youtube.com/watch?v=N8PD56nwMcA"
   },
   "clip__20261118__WiseBusyStapleNononoCat_": {
     "urls": {
