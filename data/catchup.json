@@ -2,7 +2,8 @@
   "done": [
     "invest__car_makers__2020",
     "consoles__playstation",
-    "invest__energy__2008"
+    "invest__energy__2008",
+    "texts__gta5_launch"
   ],
   "made": {
     "invest__car_makers__2020": {
@@ -28,6 +29,14 @@
         "instagram": "https://www.instagram.com/reel/Df26y5QFTJT/"
       },
       "at": "2026-11-17T16:41"
+    },
+    "texts__gta5_launch": {
+      "topic": "texts__gta5_launch",
+      "urls": {
+        "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709544999880363271",
+        "instagram": "https://www.instagram.com/reel/Df46AMYADXQ/"
+      },
+      "at": "2026-11-18T11:13"
     }
   },
   "skipped": {}
