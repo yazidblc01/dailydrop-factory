@@ -461,5 +461,19 @@
     "posted_at": "2026-11-18T17:12:25+00:00",
     "url": "https://www.youtube.com/watch?v=H47Y4hwbkCw",
     "slot": "waited"
+  },
+  "texts__gtaiv_apple": {
+    "title": "GTA 6: I texted myself in line for GTA IV 😭",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afde2a5ab7b0187980c5831",
+    "posted_at": "2026-11-18T17:38:46+00:00",
+    "when": "2026-11-18T19:00:00-05:00",
+    "slot": "gta"
   }
 }
