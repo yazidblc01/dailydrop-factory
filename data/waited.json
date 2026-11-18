@@ -1,10 +1,11 @@
 {
-  "count": 10,
+  "count": 11,
   "finales": [
     "AMD",
     "AAPL",
     "AMZN",
-    "TSLA"
+    "TSLA",
+    "MSFT"
   ],
   "made": [
     "waited__20261115__0",
@@ -16,7 +17,8 @@
     "gta_board_gas__20261117__6",
     "gta_consoles__20261117__7",
     "waited__20261117__8",
-    "gta_coins__20261118__9"
+    "gta_coins__20261118__9",
+    "waited__20261118__10"
   ],
   "other": {
     "board": 2,
