@@ -14,7 +14,7 @@ SLOTS = [("06:13", "daily.yml", {"once": "yes"}),                            # o
          ("10:37", "catchup.yml", {}),                                       # old reels to TikTok/Instagram (until done)
          ("12:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
          ("13:37", "catchup.yml", {}),
-         ("15:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("15:07", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6
          ("16:37", "catchup.yml", {}),
          ("18:07", "gta_waited.yml", {"format": "streamreact"}),             # streamers react
          ("18:47", "daily.yml", {"mode": "check"}),
@@ -53,7 +53,8 @@ def due(now):
             if hm in PAUSED and at < PAUSE_UNTIL:
                 if hm == "06:13":
                     continue
-                wf, inputs = "gta_waited.yml", {"format": "streamclip"}   # the paused original's slot becomes a clip
+                # the paused original's slot becomes a clip, or a GTA 5 vs GTA 6 at 10:37 and 9:07 PM
+                wf, inputs = "gta_waited.yml", {"format": "streamvs" if hm in ("10:37", "21:07") else "streamclip"}
             if at <= now < at + LATE_OK:
                 yield at, wf, inputs
 

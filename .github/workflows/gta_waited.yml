@@ -11,7 +11,7 @@ on:
         description: "flat finale only, no 3D (yes/no)"
         default: "no"
       format:
-        description: "force one format (waited, board, receipt, coins, consoles, bestsellers, gtamath, streamclip, streamreact); empty = the rotation"
+        description: "force one format (waited, board, receipt, coins, consoles, bestsellers, gtamath, streamclip, streamreact, streamvs); empty = the rotation"
         default: ""
 
 permissions:

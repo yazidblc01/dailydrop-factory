@@ -45,6 +45,11 @@ STATE = DATA_DIR / "streamclips.json"
 ALLOW = DATA_DIR / "streamers.json"
 HELIX = "https://api.twitch.tv/helix"
 GAME = "Grand Theft Auto VI"
+GAME5 = "Grand Theft Auto V"
+# actions that look different between the games (GTA 5 vs GTA 6 reels pair clips by these); value = the on-screen word
+ACTIONS = {"police chase": "POLICE", "car crash": "CRASHES", "swimming": "WATER", "falling": "FALLS", "explosion": "EXPLOSIONS",
+           "shootout": "GUNFIGHTS", "driving fast": "DRIVING", "motorcycle": "BIKES", "flying": "FLYING", "fist fight": "FIGHTS",
+           "robbery": "ROBBERIES", "weather": "WEATHER", "beach": "BEACHES", "npc reaction": "NPCS", "ragdoll": "RAGDOLL"}
 MIN_S, MAX_S = 10, 60            # Twitch clips we look at
 CUT_MIN, CUT_MAX = 8, 30         # what we keep of them
 PER_STREAMER_DAY = 2
@@ -59,7 +64,7 @@ LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-vf", "unsharp=5:5:0.6:5:5:0.0
 def load_state():
     st = json.loads(STATE.read_text()) if STATE.exists() else {}
     return {"used": st.get("used", []), "count": st.get("count", 0), "seen": st.get("seen", {}),
-            "posted": st.get("posted", []), "house": st.get("house", "")}
+            "posted": st.get("posted", []), "house": st.get("house", ""), "seen5": st.get("seen5", {})}
 
 
 def save_state(st):
@@ -105,18 +110,18 @@ def helix(path, tok, **params):
     return r.json()["data"]
 
 
-def game_id(tok):
-    g = helix("games", tok, name=GAME)
+def game_id(tok, name=GAME):
+    g = helix("games", tok, name=name)
     if not g:
-        raise RuntimeError(f"Twitch has no '{GAME}' category")
+        raise RuntimeError(f"Twitch has no '{name}' category")
     return g[0]["id"]
 
 
-def candidates(st, hours=36):
-    """Allowlisted GTA 6 clips from the last `hours`, best first."""
+def candidates(st, hours=36, game=GAME):
+    """Allowlisted clips of `game` (GTA 6 unless asked) from the last `hours`, best first."""
     from engine import clipstats
     tok = token()
-    gid = game_id(tok)
+    gid = game_id(tok, game)
     logins = list(allowlist())
     users = []
     for i in range(0, len(logins), 100):
@@ -267,6 +272,7 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
     "score": {"type": "integer", "description": "1-10, how likely it is to stop a scroll"},
     "star": {"type": "string", "enum": ["reaction", "gameplay"], "description": "what makes it worth watching"},
     "moment": {"type": "string", "description": "3 to 6 words naming the game moment, so the same moment can be matched across streamers, e.g. 'first time seeing Lucia', 'first police chase', 'the opening drive'"},
+    "action": {"type": "string", "enum": [*ACTIONS, "none"], "description": "the main on-screen action, for GTA 5 vs GTA 6 comparisons; none if no clear one"},
     "facecam": {**BOX, "description": "the streamer's webcam as fractions of the frame (x, y = top-left), null if none"},
     "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and overlays"},
     "start": {"type": "number", "description": "seconds: where the reel should start, just before the moment builds (8 to 30 s in total)"},
@@ -290,7 +296,15 @@ Reject the clip (use=false) ONLY if one of these is true (the apps remove these 
 - dead air: nothing happens and nobody reacts
 Find the facecam and the game region. Decide whether the reaction or the gameplay is the star, and write the hook and
 title for that. Pick the trim: start just before the moment builds, end right after the payoff, 8 to 30 seconds, no dead
-air at either end. The loudness peaks and the timed transcript tell you where things happen."""
+air at either end. The loudness peaks and the timed transcript tell you where things happen.
+Also tag the main on-screen action (police chase, car crash, ...) so the clip can be paired with GTA 5; none if there isn't one."""
+
+SCREEN5_SYS = """You tag GTA 5 (Grand Theft Auto V) stream clips, to pair them with GTA 6 clips of the SAME action in a 'GTA 5 vs GTA 6' Short.
+use=true only if one action is clearly happening in the game on screen: a police chase, a car crash, swimming, a fall, an explosion,
+a shootout, fast driving, a motorcycle, flying, a fist fight, a robbery, weather, a beach, NPCs reacting, ragdoll physics.
+use=false if it's mostly talking, menus, a loading screen, chat or the facecam, or if there is nudity, gore in the first 7 seconds,
+slurs or a song with lyrics. Find the game region and the facecam. Trim start/end tightly around the action (6 to 12 seconds)
+and put the peak on its best instant. Fill hook/title/description/pinned_comment with a few words; they are not used."""
 
 GAUNTLET = {"name": "verdict", "description": "Pass or fail the vertical.", "input_schema": {"type": "object", "properties": {
     "pass": {"type": "boolean"}, "faults": {"type": "string"}}, "required": ["pass", "faults"]}}
@@ -313,12 +327,12 @@ def timed(words):
     return "\n".join(lines)[:2500] or "(no speech)"
 
 
-def screen(c, src, dur, words, loud, out):
+def screen(c, src, dur, words, loud, out, system=None):
     at = [dur * 0.15, min(max(loud[0] if loud else dur * 0.5, 0.0), dur - 0.2), max(0.0, dur - 1.5)]   # 3 frames: early, the peak, the end
     content = [*map(img, frames(src, at, out, "src")), {"type": "text", "text":
                f"Streamer: {c['broadcaster_name']} (Twitch). Clip title: {c['title']}. {dur:.1f} s long, {c['view_count']} views.\n"
                f"Frames at {', '.join(f'{t:.1f}s' for t in at)}.\nLoudest moments (s): {loud}\nWhat they say, with times:\n{timed(words)}"}]
-    v = ask(content, SCREEN, SCREEN_SYS, model=CLAUDE_FAST)   # the cheap model screens; the strong one writes the words on winners
+    v = ask(content, SCREEN, system or SCREEN_SYS, model=CLAUDE_FAST)   # the cheap model screens; the strong one writes the words on winners
     # keep the trim sane, whatever came back
     peak = v.get("peak")
     peak = float(peak) if peak is not None else (loud[0] if loud else dur / 2)
@@ -521,7 +535,7 @@ def make(dry=False, today=None, tries=30, renders=5, screen_only=False):
                 continue
             st["seen"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
                                    "url": c["url"], "title": c["title"],
-                                   **{k: v.get(k) for k in ("use", "why", "score", "star", "moment", "facecam", "gamebox", "start", "end", "peak")}}
+                                   **{k: v.get(k) for k in ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak")}}
             print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('star')}, {v.get('moment')}) {v['why'][:110]}")
             if not v["use"] or screen_only:
                 continue
@@ -640,6 +654,140 @@ def make_react(dry=False, today=None):
     return name, final
 
 
+# ---------- GTA 5 vs GTA 6 ----------
+def quick_info(lvl):
+    w, h, dur = probe(lvl)
+    return {"src": lvl, "w": w, "h": h, "dur": dur, "words": []}
+
+
+def fill5(st, actions, screens=6):
+    """Screens GTA 5 clips from the allowlisted streamers (last 2 years, most viewed first) until the bank has
+    one for an action we already have in GTA 6. The bank is kept, so this gets cheaper every day."""
+    have = {v.get("action") for v in st["seen5"].values() if v.get("use") and not v.get("vs_used")}
+    if have & actions:
+        return
+    n = 0
+    for c in candidates(st, hours=24 * 730, game=GAME5)[:60]:
+        if n >= screens:
+            break
+        if c["id"] in st["seen5"]:
+            continue
+        out = MEDIA_DIR / f"gta5__{c['id'][:24]}".replace("-", "_")
+        out.mkdir(parents=True, exist_ok=True)
+        print(f"      GTA 5: {c['broadcaster_name']}: {c['title']} ({c['view_count']} views)")
+        try:
+            lvl = download(c["url"], out)
+            a = audio(lvl)
+            info = quick_info(lvl)
+            n += 1
+            v = screen(c, lvl, info["dur"], [], peaks(a), out, system=SCREEN5_SYS)
+        except Exception as e:
+            print(f"        skipped: {e}")
+            st["seen5"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "use": False}
+            continue
+        st["seen5"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
+                                "url": c["url"], "title": c["title"],
+                                **{k: v.get(k) for k in ("use", "score", "action", "facecam", "gamebox", "start", "end", "peak")}}
+        print(f"        tag: {'yes' if v.get('use') else 'no'} {v.get('action')} ({v.get('score')}/10)")
+        if v.get("use") and v.get("action") in actions:
+            return
+
+
+def window(info, m, d):
+    """d seconds around the clip's peak, inside the clip."""
+    pk = min(max(m.get("peak") or info["dur"] / 2, 0.0), info["dur"])
+    s = max(0.0, min(pk - d * 0.6, info["dur"] - d))
+    return s, min(info["dur"], s + d), pk
+
+
+def make_vs(dry=False, today=None, pairs=2):
+    """GTA 5 vs GTA 6: the same action in both games, stacked and playing together, 1 or 2 actions per reel.
+    GTA 6 side: approved clips from the last 2 days (fresh ones screened if needed). GTA 5 side: the GTA 5 bank."""
+    today = today or datetime.now().date()
+    cut = (datetime.now(timezone.utc) - timedelta(hours=48)).isoformat()
+
+    def pool6(st):
+        return {k: v for k, v in st["seen"].items() if v.get("use") and v.get("action") in ACTIONS and not v.get("vs_used")
+                and not v.get("posted") and v.get("at", "") > cut}
+    st = load_state()
+    if len(pool6(st)) < 3:
+        try:
+            make(today=today, tries=12, screen_only=True)
+        except Exception as e:
+            print(f"      fresh screening skipped: {e}")
+        st = load_state()
+    p6 = pool6(st)
+    print(f"      GTA 6 clips with an action: {len(p6)} ({', '.join(sorted({v['action'] for v in p6.values()}))})")
+    try:
+        fill5(st, {v["action"] for v in p6.values()})
+    finally:
+        if not dry:
+            save_state(st)
+    p5 = {k: v for k, v in st["seen5"].items() if v.get("use") and v.get("action") in ACTIONS and not v.get("vs_used")}
+    chosen = []
+    for action in sorted({v["action"] for v in p6.values()} & {v["action"] for v in p5.values()},
+                         key=lambda a: -max(v.get("score") or 0 for v in p6.values() if v["action"] == a)):
+        k6 = max((k for k, v in p6.items() if v["action"] == action), key=lambda k: p6[k].get("score") or 0)
+        k5 = max((k for k, v in p5.items() if v["action"] == action), key=lambda k: p5[k].get("score") or 0)
+        chosen.append((action, k5, k6))
+        if len(chosen) == pairs:
+            break
+    if not chosen:
+        raise RuntimeError("no action found in both GTA 5 and GTA 6 clips yet")
+    label = ACTIONS[chosen[0][0]]
+    name = f"clip__{today:%Y%m%d}__vs_{chosen[0][2][:16]}".replace("-", "_")
+    out = MEDIA_DIR / name
+    out.mkdir(parents=True, exist_ok=True)
+    pairs_txt = ", ".join(f"{a} ({p5[k5]['name']} vs {p6[k6]['name']})" for a, k5, k6 in chosen)
+    print(f"      GTA 5 vs GTA 6: {pairs_txt}")
+    if dry:
+        return name, None
+    prs, n = [], 0
+    for action, k5, k6 in chosen:
+        sides = []
+        for m in (p5[k5], p6[k6]):
+            sub = out / f"s{n}"
+            sub.mkdir(exist_ok=True)
+            info = quick_info(download(m["url"], sub))
+            sides.append((info, m, publish_src(info, name, n)))
+            n += 1
+        d = round(min(8.0, sides[0][0]["dur"], sides[1][0]["dur"]), 2)
+        segs = []
+        for info, m, rel in sides:
+            a, b, pk = window(info, m, d)
+            segs.append(seg(info, {**m, "peak": pk}, rel, f"{m['name']} on Twitch", a, b, words=False))
+        prs.append({"top": segs[0], "bottom": segs[1], "dur": d, "action": ACTIONS[action]})
+    total = round(sum(x["dur"] for x in prs), 2)
+    hook = f"GTA 5 VS 6: {label}"
+    props = {"pairs": prs, "hook": hook, "badge": badge(today), "duration": round(total + FOLLOW, 2), "follow": follow_card(today, total),
+             "headA": "GTA 5 vs GTA 6", "headB": label.capitalize(), "pal": "vice"}
+    (out / "props.json").write_text(json.dumps(props, indent=2, ensure_ascii=False))
+    final = out / "final.mp4"
+    try:
+        subprocess.run(["npx", "remotion", "render", "src/index.ts", "EdVs", str(final), f"--props={out / 'props.json'}",
+                        "--codec=h264", "--crf=16", "--scale=2", "--image-format=png", "--x264-preset=slow"], cwd=VIDEO_DIR, check=True)
+    finally:
+        for pr in prs:
+            for sd in (pr["top"], pr["bottom"]):
+                (render.PUBLIC / sd["src"]).unlink(missing_ok=True)
+    g = gauntlet(final, total, out)
+    print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
+    if not g["pass"]:
+        raise RuntimeError(f"vs reel failed the checks: {g['faults'][:120]}")
+    st = load_state()
+    for _, k5, k6 in chosen:
+        st["seen5"].setdefault(k5, {})["vs_used"] = True
+        st["seen"].setdefault(k6, {})["vs_used"] = True
+    words = " and ".join(ACTIONS[a].lower() for a, _, _ in chosen)
+    title = f"GTA 6 vs GTA 5: {words.title()} Side by Side"[:60]
+    credits = "\n".join(f"🎥 {m['name']} on Twitch: https://twitch.tv/{m['login']} (clip: {m['url']})"
+                        for _, k5, k6 in chosen for m in (p5[k5], p6[k6]))
+    finish(name, out, final, title, f"Same moment, 13 years apart: {words} in GTA 5 vs GTA 6.",
+           "Which one surprised you more? 👇", credits, st, sorted({p6[k6]["login"] for _, _, k6 in chosen}), "vs")
+    save_state(st)
+    return name, final
+
+
 if __name__ == "__main__":
     from dotenv import load_dotenv
     load_dotenv()
@@ -647,9 +795,10 @@ if __name__ == "__main__":
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--react", action="store_true")
+    ap.add_argument("--vs", action="store_true")
     a = ap.parse_args()
     if a.list:
         for c in candidates(load_state())[:20]:
             print(f"{c['rank']:>8.0f} {c['vph']:>6.0f}/h {c['outlier']:>4.1f}x  {c['broadcaster_name']:<14} {c['duration']:>4.0f}s  {c['title']}  {c['url']}")
     else:
-        print(make_react(a.dry) if a.react else make(a.dry))
+        print(make_vs(a.dry) if a.vs else make_react(a.dry) if a.react else make(a.dry))
