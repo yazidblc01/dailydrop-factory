@@ -48,7 +48,7 @@ GAME = "Grand Theft Auto VI"
 MIN_S, MAX_S = 10, 60            # Twitch clips we look at
 CUT_MIN, CUT_MAX = 8, 30         # what we keep of them
 PER_STREAMER_DAY = 2
-SCREENS = 3          # most clips Claude looks at per reel; the rest are ranked and filtered for free
+SCREENS = 10         # most fresh clips the cheap model screens per reel (about half a cent each); free filter first
 SWEARS = re.compile(r"^(f+u+c+k\w*|motherf\w*|s+h+i+t\w*|bitch\w*|asshole\w*|dick\w*|pussy\w*|bastard\w*|cunt\w*)([.,!?]*)$", re.I)
 # the clip at the same loudness as every other, its picture lightly sharpened (it gets enlarged in the vertical) and kept near-lossless
 LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-vf", "unsharp=5:5:0.6:5:5:0.0", "-c:v", "libx264", "-crf", "12", "-preset", "veryfast",
@@ -450,19 +450,58 @@ def finish(name, out, final, title, description, pinned, credits, st, logins, st
 
 
 # ---------- the two formats ----------
-def make(dry=False, today=None, tries=10, renders=3, screen_only=False):
-    """One clip: a 1 s cold open of the peak, then the trimmed moment.
-    screen_only: just screen the top clips and remember them (feeds 'streamers react')."""
+def build(c, v, info, name, out, st, today):
+    """Words, render and checks for one approved clip. Returns the final file, or None if it did not hold up."""
+    try:
+        v = copy(c, v, info["words"])
+        rel = publish_src(info, name, 0)
+        credit = f"{c['broadcaster_name']} on Twitch"
+        cold = seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True)
+        main = seg(info, v, rel, credit, v["start"], v["end"])
+        final, dur = render_reel([cold, main], v["hook"], out, today)
+        g = gauntlet(final, dur, out)
+        print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
+        if not g["pass"]:
+            return None
+    except Exception as e:
+        print(f"        render failed: {e}")
+        return None
+    st["seen"].setdefault(c["id"], {})["posted"] = True
+    finish(name, out, final, v["title"], v["description"], v["pinned_comment"],
+           f"🎥 {c['broadcaster_name']} on Twitch: https://twitch.tv/{c['login']}\nOriginal clip: {c['url']}",
+           st, [c["login"]], v.get("star"))
+    return final
+
+
+def bank(st, hours=72):
+    """Clips Claude already approved that never got posted (a slot only uses one): free, no new screening."""
+    cut = (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat()
+    today = datetime.now().strftime("%Y-%m-%d")
+    done = {}
+    for p in st["posted"]:
+        if p["date"] == today:
+            for lg in p["logins"]:
+                done[lg] = done.get(lg, 0) + 1
+    pool = [(k, v) for k, v in st["seen"].items() if v.get("use") and not v.get("posted") and not v.get("failed")
+            and v.get("at", "") > cut and done.get(v.get("login"), 0) < PER_STREAMER_DAY]
+    return sorted(pool, key=lambda kv: -(kv[1].get("score") or 0))
+
+
+def make(dry=False, today=None, tries=30, renders=5, screen_only=False):
+    """One clip: a 1 s cold open of the peak, then the trimmed moment. Built never to come back empty:
+      1. fresh clips (last 36 h), the free filter first, the cheap model screens up to SCREENS of them
+      2. the bank: clips already approved earlier that never got posted (no new screening)
+      3. fresh clips from the last 4 days
+    screen_only: just screen the top clips and remember them (feeds 'streamers react' and the bank)."""
     today = today or datetime.now().date()
     st = load_state()
     housekeeping(st)
-    found = candidates(st)
-    print(f"      stream clips: {len(found)} allowlisted GTA 6 clips")
-    screens = 0
-    try:
+    budget = {"screens": 0, "renders": renders}
+
+    def fresh(found, limit):
         for c in found[:tries]:
-            if screens >= SCREENS:
-                break
+            if budget["screens"] >= limit or budget["renders"] <= 0:
+                return None
             name = f"clip__{today:%Y%m%d}__{c['id'][:24]}".replace("-", "_")
             out = MEDIA_DIR / name
             out.mkdir(parents=True, exist_ok=True)
@@ -475,48 +514,68 @@ def make(dry=False, today=None, tries=10, renders=3, screen_only=False):
                 if skip:
                     print(f"        skipped for free: {skip}")
                     continue
-                screens += 1
+                budget["screens"] += 1
                 v = screen(c, info["src"], info["dur"], info["words"], peaks(a), out)
             except Exception as e:
                 print(f"        skipped: {e}")
                 continue
             st["seen"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
                                    "url": c["url"], "title": c["title"],
-                                   **{k: v.get(k) for k in ("use", "score", "star", "moment", "facecam", "gamebox", "start", "end", "peak")}}
+                                   **{k: v.get(k) for k in ("use", "why", "score", "star", "moment", "facecam", "gamebox", "start", "end", "peak")}}
             print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('star')}, {v.get('moment')}) {v['why'][:110]}")
             if not v["use"] or screen_only:
                 continue
             if dry:
                 print(f"        trim {v['start']}-{v['end']}s, peak {v['peak']}s | hook: {v['hook']} | title: {v['title']}")
                 return name, None
-            if renders <= 0:
+            budget["renders"] -= 1
+            final = build(c, v, info, name, out, st, today)
+            if final:
+                return name, final
+            st["seen"][c["id"]]["failed"] = True
+        return None
+
+    try:
+        found = candidates(st)
+        print(f"      stream clips: {len(found)} allowlisted GTA 6 clips")
+        got = fresh(found, SCREENS)
+        if got or screen_only:
+            return got or (None, None)
+
+        for cid, m in bank(st):                          # 2. already approved, never posted
+            if budget["renders"] <= 0:
                 break
-            renders -= 1
+            print(f"      from the bank: {m['name']}: {m['title']} (score {m.get('score')})")
+            name = f"clip__{today:%Y%m%d}__{cid[:24]}".replace("-", "_")
+            out = MEDIA_DIR / name
+            out.mkdir(parents=True, exist_ok=True)
+            c = {"id": cid, "login": m["login"], "broadcaster_name": m["name"], "url": m["url"], "title": m["title"]}
             try:
-                v = copy(c, v, info["words"])
-                rel = publish_src(info, name, 0)
-                credit = f"{c['broadcaster_name']} on Twitch"
-                cold = seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True)
-                main = seg(info, v, rel, credit, v["start"], v["end"])
-                final, dur = render_reel([cold, main], v["hook"], out, today)
-                g = gauntlet(final, dur, out)
-                print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
-                if not g["pass"]:
-                    continue
+                info = media_info(download(m["url"], out))
             except Exception as e:
-                print(f"        render failed: {e}")
+                print(f"        skipped: {e}")
+                m["failed"] = True
                 continue
-            st["seen"][c["id"]]["posted"] = True
-            finish(name, out, final, v["title"], v["description"], v["pinned_comment"],
-                   f"🎥 {c['broadcaster_name']} on Twitch: https://twitch.tv/{c['login']}\nOriginal clip: {c['url']}",
-                   st, [c["login"]], v.get("star"))
-            return name, final
+            pk = min(max(m.get("peak") or info["dur"] / 2, 0.0), info["dur"])
+            v = {**m, "peak": pk, "start": min(m.get("start") or 0.0, pk), "end": max(min(m.get("end") or info["dur"], info["dur"]), pk),
+                 "hook": "WAIT FOR IT", "title": f"GTA 6: {m['name']} {m.get('moment') or 'Loses It'}".strip()[:60],
+                 "description": f"{m['name']} playing GTA 6.", "pinned_comment": "Would you have done the same? 👇"}
+            if dry:
+                return name, None
+            budget["renders"] -= 1
+            final = build(c, v, info, name, out, st, today)
+            if final:
+                return name, final
+            m["failed"] = True
+
+        print("      widening to the last 4 days")                # 3. older clips
+        got = fresh(candidates(st, hours=96), SCREENS + 8)
+        if got:
+            return got
     finally:
         if not dry:
             save_state(st)
-    if screen_only:
-        return None, None
-    raise RuntimeError(f"none of the clips passed ({screens} screened by Claude)")
+    raise RuntimeError(f"no clip held up ({budget['screens']} screened, bank empty)")
 
 
 GROUP = {"name": "group", "description": "The best 'streamers react' reel you can make.", "input_schema": {"type": "object", "properties": {
