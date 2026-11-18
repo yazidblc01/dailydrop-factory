@@ -421,5 +421,25 @@
     "posted_at": "2026-11-18T11:25:48+00:00",
     "when": "2026-11-18T16:00:00-05:00",
     "slot": "main"
+  },
+  "gta_coins__20261118__9": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=VqCmH2HxXf4",
+      "facebook": "https://www.facebook.com/reel/1418704716711642",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709518341987142933",
+      "instagram": "https://www.instagram.com/reel/Df4uLSuAEBW/"
+    },
+    "title": "GTA 6: $100 from GTA V day is now worth $69 😬",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afdb612c041235d0e73fbd2",
+    "posted_at": "2026-11-18T14:28:56+00:00",
+    "url": "https://www.youtube.com/watch?v=VqCmH2HxXf4",
+    "slot": "waited"
   }
 }
