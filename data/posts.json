@@ -407,5 +407,19 @@
     "posted_at": "2026-11-18T02:26:21+00:00",
     "url": "https://www.youtube.com/watch?v=PlcUOwHUj9A",
     "slot": "waited"
+  },
+  "texts__gta6_trailer2_gpu": {
+    "title": "GTA 6: I texted myself before buying a $1,000 GPU for GTA 6 💀",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afd8b3a98d79d58c8417faf",
+    "posted_at": "2026-11-18T11:25:48+00:00",
+    "when": "2026-11-18T16:00:00-05:00",
+    "slot": "main"
   }
 }
