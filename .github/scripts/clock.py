@@ -9,18 +9,17 @@ from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("America/Toronto")
 # (Toronto time, workflow, inputs)
-SLOTS = [("06:13", "daily.yml", {"once": "yes"}),
-         ("09:07", "gta_waited.yml", {}),
-         ("10:37", "catchup.yml", {}),
-         ("12:07", "gta_waited.yml", {}),
-         ("12:13", "daily.yml", {"slot": "gta", "once": "yes"}),
+SLOTS = [("06:13", "daily.yml", {"once": "yes"}),                            # original: the main daily reel
+         ("09:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("10:37", "catchup.yml", {}),                                       # old reels to TikTok/Instagram (until done)
+         ("12:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
          ("13:37", "catchup.yml", {}),
-         ("15:07", "gta_waited.yml", {"format": "gtamath"}),
+         ("15:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
          ("16:37", "catchup.yml", {}),
-         ("18:07", "gta_waited.yml", {}),
+         ("18:07", "gta_waited.yml", {"format": "streamreact"}),             # streamers react
          ("18:47", "daily.yml", {"mode": "check"}),
-         ("20:17", "daily.yml", {"mode": "check", "slot": "gta"}),
-         ("21:07", "gta_waited.yml", {"format": "gtamath"})]
+         ("20:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("21:07", "gta_waited.yml", {"format": "gtamath"})]                 # original: the GTA Math skit
 LATE_OK = timedelta(minutes=90)
 LIFE = timedelta(hours=5, minutes=30)
 

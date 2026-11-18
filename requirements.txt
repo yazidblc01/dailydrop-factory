@@ -5,3 +5,4 @@ yfinance>=0.2.66
 pandas>=2.2
 numpy>=1.26
 faster-whisper>=1.1
+yt-dlp>=2025.1

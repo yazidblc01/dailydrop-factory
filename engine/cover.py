@@ -16,7 +16,7 @@ import sys
 from config import MEDIA_DIR
 from engine.render import PUBLIC, VIDEO_DIR
 
-STILL = ("gtamath__", "texts__")
+STILL = ("gtamath__", "texts__", "clip__")
 EMOJI = re.compile("[\U0001F000-\U0001FAFF☀-➿️‍]")
 
 

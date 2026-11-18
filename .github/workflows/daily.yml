@@ -11,10 +11,7 @@ on:
     - cron: "43 12 * * *"   # make, backup: 7:43 AM
     - cron: "13 14 * * *"   # make, backup: 9:13 AM
     - cron: "47 23 * * *"   # check: 6:47 PM Toronto in winter (7:47 in summer), after every slot
-    # GTA season (Nov 12 to Dec 31): a second Short, made in the afternoon, scheduled for 7 PM Toronto
-    - cron: "13 17 * 11,12 *"   # make GTA: 12:13 PM Toronto (only does something Nov 12 to Dec 31)
-    - cron: "43 18 * 11,12 *"   # make GTA, backup: 1:43 PM
-    - cron: "17 1 * 11,12 *"     # check: 8:17 PM Toronto, after the 7 PM GTA post
+    # (the GTA-season 7 PM Short is off during launch hype: stream clips take its place, see .github/scripts/clock.py)
   workflow_dispatch:
     inputs:
       mode:

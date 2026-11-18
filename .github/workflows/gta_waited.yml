@@ -11,7 +11,7 @@ on:
         description: "flat finale only, no 3D (yes/no)"
         default: "no"
       format:
-        description: "force one format (waited, board, receipt, coins, consoles, bestsellers, gtamath); empty = the rotation"
+        description: "force one format (waited, board, receipt, coins, consoles, bestsellers, gtamath, streamclip, streamreact); empty = the rotation"
         default: ""
 
 permissions:
@@ -32,6 +32,8 @@ jobs:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+      TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+      TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
       UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
       UPLOAD_POST_USER: ${{ secrets.UPLOAD_POST_USER }}
       TZ: America/Toronto
@@ -82,4 +84,4 @@ jobs:
         run: |
           git config user.name "daily-drop-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          python3 .github/scripts/save_state.py "state: $(date +%F) gta waited" data/waited.json data/gtamath.json data/posts.json
+          python3 .github/scripts/save_state.py "state: $(date +%F) gta waited" data/waited.json data/gtamath.json data/streamclips.json data/streamers.json data/clipstats.json data/posts.json

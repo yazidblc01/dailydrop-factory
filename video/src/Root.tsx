@@ -10,6 +10,7 @@ import {EdTexts} from './ed/Texts';
 import {EdMath} from './ed/Math';
 import {EdSkit} from './ed/Skit';
 import {Cover} from './ed/Cover';
+import {EdClip} from './ed/Clip';
 import edskit from '../props/edskit.json';
 import edmath from '../props/edmath.json';
 import {EdWaited} from './ed/Waited';
@@ -91,6 +92,10 @@ export const RemotionRoot: React.FC = () => {
       defaultProps={story as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS) + TAIL_FRAMES})} />
     <Composition id="EdWaited" component={EdWaited as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edwaited as any).duration * FPS)}
       defaultProps={edwaited as any} calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdClip" component={EdClip as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
+      defaultProps={{segs: [{src: 'clips/sample.mp4', srcW: 1920, srcH: 1080, from: 0, dur: 8.4, facecam: {x: 0.74, y: 0.04, w: 0.24, h: 0.3},
+        gamebox: null, star: 'gameplay', peak: 3, words: [], credit: 'Streamer on Twitch'}], hook: 'HE DID IT', badge: 'GTA 6 · DAY 1', duration: 10} as any}
+      calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="Cover" component={Cover as any} width={1080} height={1920} fps={FPS} durationInFrames={1}
       defaultProps={{kind: 'text', pal: 'vice', a: 'Everything that changed', b: 'while we waited', big: '13 YEARS'} as any} />
     <Composition id="EdSkit" component={EdSkit as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil((edskit as any).duration * FPS)}
