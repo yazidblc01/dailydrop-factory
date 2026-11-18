@@ -23,7 +23,7 @@ from datetime import datetime
 
 import requests
 
-from config import CLAUDE_MODEL, DATA_DIR, MEDIA_DIR
+from config import CLAUDE_MODEL, DATA_DIR, MEDIA_DIR, VOICE
 from engine import render
 from engine.render import VIDEO_DIR
 from engine.voice import ELEVEN, duration, to_wav
@@ -135,7 +135,9 @@ def ask_claude(style, topic, today, feedback=None):
             "Write the funniest version of this you can. Make it edgy.")
     if feedback:
         user += f"\n\nYour previous skit was rejected: {feedback} Fix it."
-    msg = client.messages.create(model=CLAUDE_MODEL, max_tokens=3000, system=SYSTEM, tools=[SKIT_TOOL],
+    system = SYSTEM if VOICE else SYSTEM + ("\n\nTHERE IS NO VOICE: nobody hears this, it is READ on screen (bubbles, texts, captions) over music. "
+                                            "Write it to be read fast: short lines, the punchline in the last words. No delivery tags.")
+    msg = client.messages.create(model=CLAUDE_MODEL, max_tokens=3000, system=system, tools=[SKIT_TOOL],
                                  messages=[{"role": "user", "content": user}])
     for b in msg.content:
         if b.type == "tool_use":
@@ -327,7 +329,28 @@ def line_by_line(inputs, out):
     return res
 
 
+READ_WPS = 2.6   # with no voice: how fast people read the bubbles (words a second)
+
+
+def silent(sk, out):
+    """No voice: each line stays up as long as it takes to read, words popping in one after the other.
+    Same shape as the voiced timings [(start, end, [(word, t)])], plus a silent voice.wav."""
+    res, cursor = [], 0.4
+    for l in sk["lines"]:
+        ws = shown(l["say"]).split()
+        d = max(1.5, len(ws) / READ_WPS + 0.5)
+        pop = min(d * 0.55, len(ws) * 0.12)              # the words land fast, then the line holds to be read
+        res.append((cursor, cursor + d, [(w, round(cursor + pop * i / max(len(ws), 1), 3)) for i, w in enumerate(ws)]))
+        cursor += d + 0.15
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", f"{cursor:.2f}",
+                    str(out / "voice.wav")], check=True)
+    return res
+
+
 def speak(sk, out):
+    if not VOICE:
+        print("      no voice: timed at reading speed")
+        return silent(sk, out)
     v = cast_voices(sk)
     inputs = [{"text": l["say"], "voice_id": v[l["who"]]} for l in sk["lines"]]
     parts = out / "parts"
@@ -427,7 +450,7 @@ def make(dry=False, today=None, style=None, topic=None):
              "sender": sk.get("sender") or "Lucia 🌴",
              "left": contact(sk.get("left"), "My Girl ❤️"), "right": contact(sk.get("right"), "Lucia 🌴"),
              "lines": lines, "tag": sk["tag"], "tagAt": tag_at,
-             "audio": f"voice/{name}.wav", "music": f"music/{music}" if music else None,
+             "audio": f"voice/{name}.wav", "music": f"music/{music}" if music else None, "musicVolume": 0.1 if VOICE else 0.42,
              "follow": follow_card(today, end), "duration": round(end + FOLLOW, 2)}
     if style == "phones" and not props["left"]["dark"] and not props["right"]["dark"]:
         props["right"]["dark"] = True

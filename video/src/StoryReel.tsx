@@ -517,7 +517,7 @@ export const StoryReel: React.FC<StoryProps> = (p) => {
       <Captions captions={p.captions.filter((c) => !p.scenes.some((sc) => (sc.type === 'hook' || sc.type === 'end' || sc.type === 'question') && c.start >= sc.start - 0.05 && c.start < sc.end))} T={T} top={1415} />
       {!p.scenes.some((sc) => sc.type === 'question' && frame / fps >= sc.start - 0.05 && frame / fps < sc.end + 0.25) && <LogoBadge T={T} />}
       <Progress duration={p.duration} T={T} />
-      {p.music && <Audio src={staticFile(p.music)} volume={0.13} loop />}
+      {p.music && <Audio src={staticFile(p.music)} volume={(p as {musicVolume?: number}).musicVolume ?? 0.13} loop />}
       {sfx.whoosh && p.scenes.map((sc, i) => (
         <Sequence key={`w${i}`} from={Math.max(0, Math.round((sc.start - 0.06) * fps))} durationInFrames={fps}>
           <Audio src={staticFile(sfx.whoosh!)} volume={0.3} />

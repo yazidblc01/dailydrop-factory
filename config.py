@@ -5,6 +5,10 @@ DATA_DIR = ROOT / "data"
 MEDIA_DIR = ROOT / "media"
 
 CLAUDE_MODEL = "claude-sonnet-5-5"
+CLAUDE_FAST = "claude-haiku-5-5"   # cheap model for the clip screening and checks
+
+# AI voiceover (ElevenLabs). False: no voice, the reels run on captions, music and effects.
+VOICE = False
 
 CHANNEL_NAME = "The Daily Drop"
 

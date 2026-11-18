@@ -21,7 +21,7 @@ import subprocess
 import requests
 from dotenv import load_dotenv
 
-from config import MEDIA_DIR
+from config import MEDIA_DIR, VOICE
 
 load_dotenv()
 
@@ -30,6 +30,7 @@ VOICE_PREFS = ["Brian", "Adam", "Daniel", "Bill", "George", "Liam"]  # first mat
 VOICE_SETTINGS = {"stability": 0.5, "similarity_boost": 0.8, "style": 0.3, "use_speaker_boost": True, "speed": 1.06}
 GAP = 0.06           # seconds of silence between sections
 PRE_REVEAL_GAP = 0.3  # longer pause right before the reveal
+READ_WPS = 2.6       # with no voice: how fast people read the captions (words a second)
 
 
 def sections(script):
@@ -302,10 +303,39 @@ def build_lines(script, voice_id, out):
     return timed
 
 
+def build_silent(script, out):
+    """No voice: every section lasts as long as it takes to read, the words lit one after the other.
+    Writes a silent voice.wav so the rest of the pipeline is unchanged."""
+    timed, words, cursor = [], [], 0.0
+    for i, (name, text) in enumerate(sections(script)):
+        if i and name == "reveal":
+            cursor += 0.6                                  # a beat before the reveal
+        toks = text.split()
+        d = max(1.8, len(toks) / 3.5 + 0.3) if name == "hook" else max(1.6, len(toks) / READ_WPS + 0.4)  # the hook is a big headline, read faster
+        timed.append({"name": name, "text": text, "start": round(cursor, 3), "end": round(cursor + d, 3)})
+        lens = [max(len(norm(t)), 1) for t in toks]
+        total, acc, span = sum(lens) or 1, 0, d - 0.3
+        for t, n in zip(toks, lens):
+            words.append({"w": t, "start": round(cursor + span * acc / total, 3), "end": round(cursor + span * (acc + n) / total, 3)})
+            acc += n
+        cursor += d + GAP
+    silence(out / "voice.wav", round(cursor, 3))
+    return timed, words
+
+
 def build(topic, file=None):
     out = MEDIA_DIR / topic
     with open(out / "script.json") as f:
         script = json.load(f)
+
+    if not file and not VOICE:
+        timed, words = build_silent(script, out)
+        timing = {"source": "none (captions)", "silent": True, "duration": round(duration(out / "voice.wav"), 3),
+                  "sections": timed, "words": words}
+        with open(out / "timing.json", "w") as f:
+            json.dump(timing, f, indent=2)
+        print(f"      no voice: {timing['duration']:.1f}s at reading speed")
+        return timing
 
     if file:
         to_wav(file, out / "voice.wav")

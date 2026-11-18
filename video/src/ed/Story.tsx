@@ -194,7 +194,7 @@ export const EdStory: React.FC<StoryProps & {pal?: PalName; label?: string}> = (
 
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
-      {p.music && <Audio src={staticFile(p.music)} volume={0.13} loop />}
+      {p.music && <Audio src={staticFile(p.music)} volume={(p as {musicVolume?: number}).musicVolume ?? 0.13} loop />}
       {sc.callouts?.map((c, i) => <Sequence key={`c${i}`} from={Math.round(c.at * fps)} durationInFrames={14}><Audio src={staticFile('sfx/pop.wav')} volume={0.7} /></Sequence>)}
       {sc.revealAt && <Sequence from={Math.round((rv + 0.3) * fps)} durationInFrames={24}><Audio src={staticFile('sfx/thud.wav')} volume={0.9} /></Sequence>}
       {sfx.impact && sc.revealAt && <Sequence from={Math.round((rv + 0.33) * fps)} durationInFrames={fps * 2}><Audio src={staticFile(sfx.impact)} volume={0.5} /></Sequence>}

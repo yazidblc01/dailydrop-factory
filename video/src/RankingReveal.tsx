@@ -571,7 +571,7 @@ const Sound: React.FC<{p: RevealProps; tl: Timeline}> = ({p, tl}) => {
   const mentions = p.items.flatMap((it) => it.mentions || []);
   return (
     <>
-      {p.music && <Audio src={staticFile(p.music)} volume={0.13} trimBefore={Math.round((p.musicStart || 0) * fps)} loop />}
+      {p.music && <Audio src={staticFile(p.music)} volume={(p as {musicVolume?: number}).musicVolume ?? 0.13} trimBefore={Math.round((p.musicStart || 0) * fps)} loop />}
       {sfx.whoosh && [tl.chartIn, tl.endIn].map((s, i) => (
         <Sequence key={`w${i}`} from={at(s - 0.08)} durationInFrames={fps}>
           <Audio src={staticFile(sfx.whoosh!)} volume={0.35} />

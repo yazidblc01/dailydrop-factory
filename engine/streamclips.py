@@ -36,7 +36,7 @@ from datetime import datetime, timedelta, timezone
 
 import requests
 
-from config import CLAUDE_MODEL, DATA_DIR, MEDIA_DIR
+from config import CLAUDE_FAST, CLAUDE_MODEL, DATA_DIR, MEDIA_DIR
 from engine import render
 from engine.render import VIDEO_DIR
 from engine.waited import FOLLOW, GTA6, follow_card
@@ -48,6 +48,7 @@ GAME = "Grand Theft Auto VI"
 MIN_S, MAX_S = 10, 60            # Twitch clips we look at
 CUT_MIN, CUT_MAX = 8, 30         # what we keep of them
 PER_STREAMER_DAY = 2
+SCREENS = 3          # most clips Claude looks at per reel; the rest are ranked and filtered for free
 SWEARS = re.compile(r"^(f+u+c+k\w*|motherf\w*|s+h+i+t\w*|bitch\w*|asshole\w*|dick\w*|pussy\w*|bastard\w*|cunt\w*)([.,!?]*)$", re.I)
 # the clip at the same loudness as every other, its picture lightly sharpened (it gets enlarged in the vertical) and kept near-lossless
 LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-vf", "unsharp=5:5:0.6:5:5:0.0", "-c:v", "libx264", "-crf", "12", "-preset", "veryfast",
@@ -190,6 +191,25 @@ def peaks(a, n=3):
     return out
 
 
+def contrast(a):
+    """How much the loudest moment stands out from the clip's usual level (a scream or a crash scores high)."""
+    import numpy as np
+    if a.size < 16000:
+        return 0.0
+    w = 4000
+    rms = np.sqrt((a[: a.size // w * w].reshape(-1, w) ** 2).mean(1))
+    return float(rms.max() / max(np.median(rms), 1e-6))
+
+
+def worth_a_look(a, words):
+    """Free check before any Claude call: the clip has sound, and either someone talks or something loud happens."""
+    if a.size < 16000:
+        return "no audio"
+    if len(words) < 6 and contrast(a) < 2.0:
+        return "silent and flat (nobody talks, nothing loud happens)"
+    return None
+
+
 _MODEL = None
 
 
@@ -218,7 +238,7 @@ def frames(f, times, out, tag):
     paths = []
     for i, t in enumerate(times):
         p = out / f"{tag}{i}.jpg"
-        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{max(0, t):.2f}", "-i", str(f), "-frames:v", "1", "-vf", "scale=960:-2", str(p)],
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{max(0, t):.2f}", "-i", str(f), "-frames:v", "1", "-vf", "scale=768:-2", str(p)],
                        check=True, capture_output=True)
         paths.append(p)
     return paths
@@ -228,10 +248,10 @@ def img(p):
     return {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(p.read_bytes()).decode()}}
 
 
-def ask(content, tool, system):
+def ask(content, tool, system, model=CLAUDE_MODEL):
     import anthropic
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    msg = client.messages.create(model=CLAUDE_MODEL, max_tokens=2000, system=system, tools=[tool],
+    msg = client.messages.create(model=model, max_tokens=2000, system=system, tools=[tool],
                                  messages=[{"role": "user", "content": content}])
     for b in msg.content:
         if b.type == "tool_use":
@@ -294,11 +314,11 @@ def timed(words):
 
 
 def screen(c, src, dur, words, loud, out):
-    at = [min(1.0, dur * 0.1), dur * 0.35, dur * 0.65, max(0.0, dur - 1.5)]
+    at = [dur * 0.15, min(max(loud[0] if loud else dur * 0.5, 0.0), dur - 0.2), max(0.0, dur - 1.5)]   # 3 frames: early, the peak, the end
     content = [*map(img, frames(src, at, out, "src")), {"type": "text", "text":
                f"Streamer: {c['broadcaster_name']} (Twitch). Clip title: {c['title']}. {dur:.1f} s long, {c['view_count']} views.\n"
                f"Frames at {', '.join(f'{t:.1f}s' for t in at)}.\nLoudest moments (s): {loud}\nWhat they say, with times:\n{timed(words)}"}]
-    v = ask(content, SCREEN, SCREEN_SYS)
+    v = ask(content, SCREEN, SCREEN_SYS, model=CLAUDE_FAST)   # the cheap model screens; the strong one writes the words on winners
     # keep the trim sane, whatever came back
     peak = v.get("peak")
     peak = float(peak) if peak is not None else (loud[0] if loud else dur / 2)
@@ -313,6 +333,26 @@ def screen(c, src, dur, words, loud, out):
     if e - s < CUT_MIN:
         s, e = max(0.0, e - CUT_MIN), min(dur, max(e, s + CUT_MIN))
     v.update({"start": round(s, 2), "end": round(e, 2), "peak": round(peak, 2)})
+    return v
+
+
+COPY = {"name": "copy", "description": "The words for the reel.", "input_schema": {"type": "object", "properties": {
+    k: SCREEN["input_schema"]["properties"][k] for k in ("hook", "title", "description", "pinned_comment")},
+    "required": ["hook", "title", "description", "pinned_comment"]}}
+
+
+def copy(c, v, words):
+    """The strong model rewrites the hook, title and text for a clip that passed (text only, no images: cheap)."""
+    try:
+        w = ask([{"type": "text", "text": f"Streamer: {c['broadcaster_name']} (Twitch). Clip title: {c['title']}.\n"
+                  f"The star is the {v.get('star')}. Moment: {v.get('moment')}. Screener notes: {v.get('why')}\n"
+                  f"Draft hook: {v.get('hook')} | draft title: {v.get('title')}\nWhat they say, with times:\n{timed(words)}\n\n"
+                  "Write the best scroll-stopping words for this Short."}], COPY,
+                "You write the on-screen hook, title, description and pinned comment for GTA 6 stream-clip Shorts "
+                "(gamers 13 to 25). Follow each field's rules exactly. No spoilers.")
+        v.update({k: w[k] for k in ("hook", "title", "description", "pinned_comment") if w.get(k)})
+    except Exception as e:
+        print(f"        copy kept from the screener ({str(e)[:80]})")
     return v
 
 
@@ -366,9 +406,40 @@ def render_reel(segs, hook, out, today):
     return final, dur
 
 
+def free_checks(final, dur):
+    """Checks that cost nothing: length, size, sound level, black and frozen video. Returns the faults found."""
+    faults = []
+    try:
+        real = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=nk=1:nw=1", str(final)],
+                                    capture_output=True, text=True, check=True).stdout.strip())
+        if abs(real - dur) > 1.5:
+            faults.append(f"length {real:.1f}s, expected {dur:.1f}s")
+        if final.stat().st_size < 500_000:
+            faults.append("file is tiny")
+        r = subprocess.run(["ffmpeg", "-v", "info", "-i", str(final), "-vf", "scale=270:-2,blackdetect=d=0.5:pix_th=0.1,freezedetect=n=0.003:d=2.5",
+                            "-af", "volumedetect", "-f", "null", "-"], capture_output=True, text=True, timeout=600).stderr
+        black = sum(float(x) for x in re.findall(r"black_duration:([\d.]+)", r))
+        if black > 0.8:
+            faults.append(f"{black:.1f}s of black")
+        if "freeze_start" in r:
+            faults.append("frozen video")
+        m = re.search(r"mean_volume: (-?[\d.]+) dB", r)
+        if m and float(m.group(1)) < -38:
+            faults.append(f"almost silent ({m.group(1)} dB)")
+    except Exception as e:
+        faults.append(f"checks could not run: {str(e)[:80]}")
+    return faults
+
+
 def gauntlet(final, dur, out):
-    shots = frames(final, [0.4, dur * 0.3, dur * 0.6, dur * 0.85], out, "fin")
-    return ask([*map(img, shots), {"type": "text", "text": "Frames at the start, 30%, 60% and 85% of the video."}], GAUNTLET, GAUNTLET_SYS)
+    """Free checks first. Claude (the cheap model) only looks when one of them finds something."""
+    faults = free_checks(final, dur)
+    if not faults:
+        return {"pass": True, "faults": "free checks clean"}
+    print(f"        free checks flagged: {'; '.join(faults)}, asking Claude")
+    shots = frames(final, [0.4, dur * 0.45, dur * 0.85], out, "fin")
+    return ask([*map(img, shots), {"type": "text", "text": f"Frames at the start, 45% and 85% of the video. Automatic checks flagged: {'; '.join(faults)}."}],
+               GAUNTLET, GAUNTLET_SYS, model=CLAUDE_FAST)
 
 
 def finish(name, out, final, title, description, pinned, credits, st, logins, star):
@@ -387,8 +458,11 @@ def make(dry=False, today=None, tries=10, renders=3, screen_only=False):
     housekeeping(st)
     found = candidates(st)
     print(f"      stream clips: {len(found)} allowlisted GTA 6 clips")
+    screens = 0
     try:
         for c in found[:tries]:
+            if screens >= SCREENS:
+                break
             name = f"clip__{today:%Y%m%d}__{c['id'][:24]}".replace("-", "_")
             out = MEDIA_DIR / name
             out.mkdir(parents=True, exist_ok=True)
@@ -396,7 +470,13 @@ def make(dry=False, today=None, tries=10, renders=3, screen_only=False):
             st["used"].append(c["id"])                 # never look at the same clip twice
             try:
                 info = media_info(download(c["url"], out))
-                v = screen(c, info["src"], info["dur"], info["words"], peaks(audio(info["src"])), out)
+                a = audio(info["src"])
+                skip = worth_a_look(a, info["words"])
+                if skip:
+                    print(f"        skipped for free: {skip}")
+                    continue
+                screens += 1
+                v = screen(c, info["src"], info["dur"], info["words"], peaks(a), out)
             except Exception as e:
                 print(f"        skipped: {e}")
                 continue
@@ -413,6 +493,7 @@ def make(dry=False, today=None, tries=10, renders=3, screen_only=False):
                 break
             renders -= 1
             try:
+                v = copy(c, v, info["words"])
                 rel = publish_src(info, name, 0)
                 credit = f"{c['broadcaster_name']} on Twitch"
                 cold = seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True)
@@ -435,7 +516,7 @@ def make(dry=False, today=None, tries=10, renders=3, screen_only=False):
             save_state(st)
     if screen_only:
         return None, None
-    raise RuntimeError(f"none of the top {tries} clips passed the checks")
+    raise RuntimeError(f"none of the clips passed ({screens} screened by Claude)")
 
 
 GROUP = {"name": "group", "description": "The best 'streamers react' reel you can make.", "input_schema": {"type": "object", "properties": {

@@ -209,7 +209,8 @@ def build_props(topic, theme=None):
         "race": bool(data.get("race")) and all(i["series"] for i in items),
         "sections": sections,
         "hookWords": [w for w in words if w["start"] < sections[0]["end"]],
-        "captions": build_captions(sections, words),
+        "captions": build_captions(sections, words, only=CAPTION_SECTIONS + (("reveal",) if timing.get("silent") else ())),
+        "musicVolume": 0.4 if timing.get("silent") else 0.13,
         "items": items,
         "badges": badges,
         "sourceLabel": data["on_screen_source"],
@@ -232,7 +233,8 @@ def build_story_props(topic, theme=None):
     timing = json.loads((out / "timing.json").read_text())
     backgrounds = {}  # the line race fills every frame; photo backgrounds are kept for other scene types
     props["scenes"] = story.scene_plan(data, script, timing["sections"], backgrounds)
-    props["captions"] = build_captions(timing["sections"], timing["words"], only=STORY_CAPTION_SECTIONS)
+    only = STORY_CAPTION_SECTIONS + (("reveal",) if timing.get("silent") else ())  # no voice: the reveal is read too
+    props["captions"] = build_captions(timing["sections"], timing["words"], only=only)
     props["duration"] = props["scenes"][-1]["end"]
     props_path.write_text(json.dumps(props, indent=2))
     return props_path, props

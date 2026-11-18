@@ -399,7 +399,7 @@ export const EdSkit: React.FC<EdSkitProps> = (p) => {
   return (
     <AbsoluteFill style={{background: '#170828'}}>
       {body}
-      {p.music && <Audio src={staticFile(p.music)} volume={0.1} loop />}
+      {p.music && <Audio src={staticFile(p.music)} volume={(p as {musicVolume?: number}).musicVolume ?? 0.1} loop />}
       {p.audio && <Audio src={staticFile(p.audio)} />}
       {sfx}
       {(p.style !== 'countdown' || hookOn) && <Head a={p.headA} b={p.headB} t={t} />}
