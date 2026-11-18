@@ -387,5 +387,25 @@
     "posted_at": "2026-11-17T23:23:24+00:00",
     "url": "https://www.youtube.com/watch?v=bwd_O5i-a0I",
     "slot": "waited"
+  },
+  "gtamath__20261117__1": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=PlcUOwHUj9A",
+      "facebook": "https://www.facebook.com/reel/1490393349651818",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709332096145296661",
+      "instagram": "https://www.instagram.com/reel/Df3bfDxAl3p/"
+    },
+    "title": "GTA 6 texting myself in 2013 went badly",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afd0cb86d9625c4a0fc6d3b",
+    "posted_at": "2026-11-18T02:26:21+00:00",
+    "url": "https://www.youtube.com/watch?v=PlcUOwHUj9A",
+    "slot": "waited"
   }
 }
