@@ -127,6 +127,7 @@ def candidates(st, hours=36, game=GAME):
     for i in range(0, len(logins), 100):
         users += helix("users", tok, login=logins[i:i + 100])
     since = (datetime.now(timezone.utc) - timedelta(hours=hours)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    until = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     today = datetime.now().strftime("%Y-%m-%d")
     done_today = {}
     for p in st["posted"]:
@@ -139,7 +140,8 @@ def candidates(st, hours=36, game=GAME):
     for u in users:
         if done_today.get(u["login"], 0) >= PER_STREAMER_DAY:
             continue
-        clips = [c for c in helix("clips", tok, broadcaster_id=u["id"], started_at=since, first=100) if c["game_id"] == gid]
+        # ended_at matters: without it Twitch only searches the first week after started_at (that hid every GTA 5 clip)
+        clips = [c for c in helix("clips", tok, broadcaster_id=u["id"], started_at=since, ended_at=until, first=100) if c["game_id"] == gid]
         if not clips:
             continue
         med = statistics.median([c["view_count"] for c in clips]) or 1

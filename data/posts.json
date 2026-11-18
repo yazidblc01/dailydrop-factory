@@ -534,5 +534,24 @@
     "posted_at": "2026-11-18T21:06:47+00:00",
     "url": "https://www.youtube.com/watch?v=xOnMthl9W-8",
     "slot": "waited"
+  },
+  "clip__20261118__vs_DifferentPreciou": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=wueC9TSKYFo",
+      "facebook": "https://www.facebook.com/reel/4456197401361997",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709625031336267016",
+      "instagram": "https://www.instagram.com/reel/Df5dlvHCeR1/"
+    },
+    "title": "GTA 6 vs GTA 5: Police Side by Side",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afe171eb18aad1cc80e2ad9",
+    "posted_at": "2026-11-18T21:23:12+00:00",
+    "url": "https://www.youtube.com/watch?v=wueC9TSKYFo"
   }
 }

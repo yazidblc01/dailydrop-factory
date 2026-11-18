@@ -6,7 +6,25 @@
     "UnusualMoistSharkBIRB-Wlz2wmgaTOQAniKu",
     "TrustworthyCarefulJalapenoKAPOW--CPhZdDJiBW-X0-C",
     "AwkwardColdbloodedBunnyKappaWealth-jwq_HEi8HgaRlves",
-    "ThankfulSoftKoupreyOMGScoots-8rWxvM1hXbQ2r_nz"
+    "ThankfulSoftKoupreyOMGScoots-8rWxvM1hXbQ2r_nz",
+    "SlickStylishBeaverStrawBeary-ljpqadoCXEhYwJx5",
+    "CredulousKawaiiTriangleFUNgineer-Zys54vtw1G4OmIkN",
+    "GracefulNimblePeppermintGrammarKing-gwZm5tSIlpdLgCg-",
+    "EsteemedAlertBoarTTours-qTa7AtR3giDjQF5-",
+    "TriangularFaithfulMushroomTriHard-w7G2t3F9rpXJJxa8",
+    "DifferentPreciousWaffleHotPokket-wMDh_pqLv3Ve6ZOc",
+    "SplendidFurryCobraLitty-aRzKqT4E06s7soNa",
+    "TastyGoldenFlamingoHassanChop-43fCNikHeoMOC0Yg",
+    "RelievedRichRhinocerosPeteZaroll-qOXHVQ3XVK3asCkK",
+    "TubularAwkwardFrogPanicBasket-16J-tuUOS6Kxw8bS",
+    "FitAmazingRedpandaTBTacoLeft-ibIvB_HUTHVEr57b",
+    "PeppyWittyJaguarItsBoshyTime-Y7W5ETNtNFcXOjYn",
+    "SpikyAlertCookieDuDudu-o9wrV5cBrwlNKB_5",
+    "CrazyAbnegateLapwingPipeHype-fzo4DD3_M-TisQLE",
+    "CreativeHeadstrongAniseFunRun-_f88pOqgLQhawQRA",
+    "AgreeableHyperCockroachCeilingCat-_dmoVo8X--AU1Sq7",
+    "HumbleOpenPassionfruitPrimeMe-kw5lcvoycKcFD4j5",
+    "TalentedSteamyHumanHassaanChop-DL8PqlPqix6JV1lU"
   ],
   "count": 3,
   "seen": {
@@ -92,21 +110,21 @@
       "posted": true
     },
     "UnusualMoistSharkBIRB-Wlz2wmgaTOQAniKu": {
-      "at": "2026-11-18T20:57:29.110835+00:00",
+      "at": "2026-11-18T21:03:48.587330+00:00",
       "login": "clix",
       "name": "Clix",
       "url": "https://www.twitch.tv/clix/clip/UnusualMoistSharkBIRB-Wlz2wmgaTOQAniKu",
       "title": "Wtf",
       "use": false,
-      "why": "Frames show nude characters on screen, including exposed bodies in the street and at the poolside, which hits the nudity rule. The reaction about a \"monster\" and the Holy s*** lines don't offset that.",
+      "why": "Rejected: the frames show fully nude characters, and the 28.6s frame shows a sexual act between characters, with the streamer's \"look at his monster\" line matching it. This is nudity and sexual content, which the apps don't allow.",
       "score": 2,
       "star": "reaction",
-      "moment": "nude NPCs at poolside",
+      "moment": "nude NPCs at the beach bar",
       "facecam": {
         "x": 0.0,
         "y": 0.0,
-        "w": 0.18,
-        "h": 0.23
+        "w": 0.27,
+        "h": 0.25
       },
       "gamebox": {
         "x": 0.0,
@@ -115,25 +133,26 @@
         "h": 1.0
       },
       "start": 20.0,
-      "end": 30.0,
-      "peak": 28.25
+      "end": 30.1,
+      "peak": 28.25,
+      "action": null
     },
     "TrustworthyCarefulJalapenoKAPOW--CPhZdDJiBW-X0-C": {
-      "at": "2026-11-18T20:57:59.038016+00:00",
+      "at": "2026-11-18T21:04:06.377004+00:00",
       "login": "xqc",
       "name": "xQc",
       "url": "https://www.twitch.tv/xqc/clip/TrustworthyCarefulJalapenoKAPOW--CPhZdDJiBW-X0-C",
       "title": "XQC gets called a f****** P**** right after he said so to an NPC in GTA 6",
       "use": false,
-      "why": "The streamer directs a gendered slur (\"p****\") at an NPC and the title centers on it, which falls under the slurs rule. Not usable for the channel even though the gameplay itself is fine.",
+      "why": "The streamer himself says slurs on stream, with censored f****** and p**** at 6.3s and 8.7s, and directs them at an NPC. This hits the slur and hateful content rule, so the clip is rejected.",
       "score": 3,
       "star": "reaction",
-      "moment": "Swing first, NPC road rage",
+      "moment": "streamer insults NPC in traffic",
       "facecam": {
         "x": 0.0,
         "y": 0.0,
-        "w": 0.93,
-        "h": 0.42
+        "w": 1,
+        "h": 0.47
       },
       "gamebox": {
         "x": 0.0,
@@ -143,21 +162,22 @@
       },
       "start": 0.0,
       "end": 17.6,
-      "peak": 6.0
+      "peak": 6.0,
+      "action": null
     },
     "AwkwardColdbloodedBunnyKappaWealth-jwq_HEi8HgaRlves": {
-      "at": "2026-11-18T20:58:58.882218+00:00",
+      "at": "2026-11-18T21:04:32.485269+00:00",
       "login": "ohnepixel",
       "name": "ohnePixel",
       "url": "https://www.twitch.tv/ohnepixel/clip/AwkwardColdbloodedBunnyKappaWealth-jwq_HEi8HgaRlves",
       "title": "horny ohne!",
       "use": false,
-      "why": "Rejected: the clip shows nudity and sexual content on screen (topless character in a private room scene), which the apps restrict.",
+      "why": "Frames show nudity and a sexual scene (topless women, sex-scene style content in a strip/private club setting). Rejected under the nudity/sexual content rule.",
       "score": 1,
       "star": "reaction",
-      "moment": "private room lap dance scene",
+      "moment": "private lap dance scene",
       "facecam": {
-        "x": 0.0,
+        "x": 0.02,
         "y": 0.72,
         "w": 0.22,
         "h": 0.28
@@ -170,24 +190,25 @@
       },
       "start": 0.0,
       "end": 30.0,
-      "peak": 15.75
+      "peak": 15.75,
+      "action": null
     },
     "ThankfulSoftKoupreyOMGScoots-8rWxvM1hXbQ2r_nz": {
-      "at": "2026-11-18T21:00:05.498831+00:00",
+      "at": "2026-11-18T21:05:06.687360+00:00",
       "login": "ohnepixel",
       "name": "ohnePixel",
       "url": "https://www.twitch.tv/ohnepixel/clip/ThankfulSoftKoupreyOMGScoots-8rWxvM1hXbQ2r_nz",
       "title": "ohnePixel gets into a high-speed chase",
       "use": true,
-      "why": "Streamer's reaction carries the clip: he yells \"Jackpot!\" after downing someone, then gets a laugh-out-loud moment over a scooter crash with \"Ow, my hip!\" No nudity, no major spoiler, no song lyrics, no slurs, and no dead air.",
+      "why": "Streamer's reactions carry the clip: panicked lines, then a \"Jackpot! She's down!\" payoff with the loudest peak near the end. The gameplay is mostly cutscene banter with a scooter injury gag, so the reaction is the star. No nudity, no main-character death, no gore, no lyrics audible, and no dead air.",
       "score": 7,
       "star": "reaction",
-      "moment": "jackpot takedown and scooter crash",
+      "moment": "mission banter and scooter injury",
       "facecam": {
-        "x": 0.0,
+        "x": 0.08,
         "y": 0.74,
         "w": 0.31,
-        "h": 0.26
+        "h": 0.28
       },
       "gamebox": {
         "x": 0.0,
@@ -195,10 +216,455 @@
         "w": 1.0,
         "h": 1.0
       },
-      "start": 9.0,
+      "start": 9.5,
       "end": 24.0,
       "peak": 22.25,
-      "posted": true
+      "posted": true,
+      "action": null
+    },
+    "SlickStylishBeaverStrawBeary-ljpqadoCXEhYwJx5": {
+      "at": "2026-11-18T21:05:21.490859+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/SlickStylishBeaverStrawBeary-ljpqadoCXEhYwJx5",
+      "title": "LUCIA",
+      "use": true,
+      "why": "Lacy's reaction to the first close-up of Lucia is loud and immediate, with a clear payoff in her \"so hot\" line. The on-screen shot is a neon-lit portrait with no nudity or explicit content, no spoiler, no song, and no dead air.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "first time seeing Lucia",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.3,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.3,
+        "y": 0.06,
+        "w": 0.7,
+        "h": 0.88
+      },
+      "start": 0.0,
+      "end": 12.3,
+      "peak": 1.5
+    },
+    "CredulousKawaiiTriangleFUNgineer-Zys54vtw1G4OmIkN": {
+      "at": "2026-11-18T21:05:51.747120+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/CredulousKawaiiTriangleFUNgineer-Zys54vtw1G4OmIkN",
+      "title": "wtf",
+      "use": false,
+      "why": "Rejected: the clip shows full frontal-adjacent nudity of a character (bare buttocks and back in the shower), and the streamer's commentary is sexual in nature. Both break the nudity and sexual content rule.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "shower scene nudity",
+      "action": "none",
+      "facecam": {
+        "x": 0.07,
+        "y": 0.02,
+        "w": 0.22,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 8.0,
+      "end": 30.0,
+      "peak": 13.5
+    },
+    "GracefulNimblePeppermintGrammarKing-gwZm5tSIlpdLgCg-": {
+      "at": "2026-11-18T21:06:15.091710+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/GracefulNimblePeppermintGrammarKing-gwZm5tSIlpdLgCg-",
+      "title": "bang",
+      "use": false,
+      "why": "The clip is built around a plane livery reading \"America's #1 Porn Site\" with a woman's image and \"Booty Bang\" branding, shown at close range for the whole reveal. That is sexual content on screen, which the apps block, so the clip can't run even though the streamer's reaction is strong.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "the Booty Bang plane reveal",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.66,
+        "w": 0.33,
+        "h": 0.34
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 14.1,
+      "peak": 7.4
+    },
+    "EsteemedAlertBoarTTours-qTa7AtR3giDjQF5-": {
+      "at": "2026-11-18T21:06:37.568330+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/EsteemedAlertBoarTTours-qTa7AtR3giDjQF5-",
+      "title": "neuron activation",
+      "use": false,
+      "why": "Rejected for nudity and sexual content. The 2.6s frame shows a character from behind in a thong with bare buttocks, and the 16s frame shows her in underwear with a suggestive setup. The title and reaction play on that, so the app would likely restrict the channel.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "first time seeing Lucia",
+      "action": null,
+      "facecam": {
+        "x": 0.6,
+        "y": 0.2,
+        "w": 0.4,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 17.6,
+      "peak": 7.0
+    },
+    "TriangularFaithfulMushroomTriHard-w7G2t3F9rpXJJxa8": {
+      "at": "2026-11-18T21:07:17.043574+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/TriangularFaithfulMushroomTriHard-w7G2t3F9rpXJJxa8",
+      "title": "xqc listening to gta VI radio",
+      "use": false,
+      "why": "Rejected: the clip is built around GTA VI radio playing on stream, and the transcript reads like lyric-style radio audio with sexual content (\"dildo in my ass,\" repeated). Both fall under the restricted-content rules, so it can't be published even though the streamer's reaction is strong.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "listening to GTA VI radio",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.03,
+        "w": 0.957,
+        "h": 0.44
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.52,
+        "w": 1.0,
+        "h": 0.48
+      },
+      "start": 7.6,
+      "end": 37.6,
+      "peak": 36.5
+    },
+    "DifferentPreciousWaffleHotPokket-wMDh_pqLv3Ve6ZOc": {
+      "at": "2026-11-18T21:07:56.161134+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/DifferentPreciousWaffleHotPokket-wMDh_pqLv3Ve6ZOc",
+      "title": "GTA 6 First Ever Police Chase",
+      "use": true,
+      "why": "Clear gameplay moment: the first police chase, with cops ordering the player to stop on the roof and the player running through alleys. Chat and xQc's commentary add energy, but the chase is the draw. No rejection rules apply.",
+      "score": 7,
+      "star": "gameplay",
+      "moment": "first police chase",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.2,
+        "h": 0.27
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.05,
+        "w": 1.0,
+        "h": 0.92
+      },
+      "start": 6.0,
+      "end": 30.0,
+      "peak": 24.5,
+      "vs_used": true
+    },
+    "SplendidFurryCobraLitty-aRzKqT4E06s7soNa": {
+      "at": "2026-11-18T21:12:04.888576+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/SplendidFurryCobraLitty-aRzKqT4E06s7soNa",
+      "title": "FPS GAMER OF THE YEAR WITH TRIGGER CONTROL",
+      "use": false,
+      "why": "Rejected: the gameplay shows nude and partially nude character models in a strip club scene, which is sexual content the apps prohibit.",
+      "score": 1,
+      "star": "reaction",
+      "moment": "strip club scene",
+      "action": null,
+      "facecam": {
+        "x": 0.02,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 14.5
+    },
+    "TastyGoldenFlamingoHassanChop-43fCNikHeoMOC0Yg": {
+      "at": "2026-11-18T21:12:26.291127+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/TastyGoldenFlamingoHassanChop-43fCNikHeoMOC0Yg",
+      "title": "Gooner?",
+      "use": true,
+      "why": "Talk-driven reaction clip with no nudity on screen; the PS5 home menu is shown throughout. The strip club mention is spoken only, not shown, so it's not a rejection. The streamer polls chat and makes a crude punchline, which is the hook.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "streamer votes on strip club",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.66,
+        "w": 0.25,
+        "h": 0.34
+      },
+      "gamebox": null,
+      "start": 6.0,
+      "end": 17.0,
+      "peak": 15.5
+    },
+    "RelievedRichRhinocerosPeteZaroll-qOXHVQ3XVK3asCkK": {
+      "at": "2026-11-18T21:12:43.403871+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/RelievedRichRhinocerosPeteZaroll-qOXHVQ3XVK3asCkK",
+      "title": "THE RELEASE OF GTA VI",
+      "use": true,
+      "why": "Lacy reacts loudly to the GTA 6 launch countdown hitting 30 seconds, then counts down the final 10 seconds. The shouting and the countdown build to a loud peak near the end, and no lyrics or spoilers appear.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "launch countdown final seconds",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.3,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 1.0,
+      "end": 30.1,
+      "peak": 25.25
+    },
+    "FitAmazingRedpandaTBTacoLeft-ibIvB_HUTHVEr57b": {
+      "at": "2026-11-18T21:13:30.203968+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/FitAmazingRedpandaTBTacoLeft-ibIvB_HUTHVEr57b",
+      "title": "OHNESIMP",
+      "use": true,
+      "why": "Funny, chatty reaction to a companion walking the player into a house, and the streamer's sink-and-dishes story lands as an unexpected laugh. Nothing on screen is sexual, no music with lyrics, and the speech never goes quiet.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "Mandy leads him inside",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.72,
+        "w": 0.3,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 28.0,
+      "peak": 13.75
+    },
+    "PeppyWittyJaguarItsBoshyTime-Y7W5ETNtNFcXOjYn": {
+      "at": "2026-11-18T21:14:09.714662+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/PeppyWittyJaguarItsBoshyTime-Y7W5ETNtNFcXOjYn",
+      "title": "here",
+      "use": true,
+      "why": "Launch-week countdown and download reaction. The streamer goes wild at \"It's here! It's here!\" with the loudest peak at the end. No lyrics, no spoilers, no gore. The only thing to watch is the artwork in the final frames, which shows a partly bare-shouldered figure in a bikini-style outfit, not nudity.",
+      "score": 8,
+      "star": "reaction",
+      "moment": "GTA 6 launch countdown and download",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.36,
+        "w": 1,
+        "h": 0.64
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 58.75
+    },
+    "SpikyAlertCookieDuDudu-o9wrV5cBrwlNKB_5": {
+      "at": "2026-11-18T21:14:53.337538+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/SpikyAlertCookieDuDudu-o9wrV5cBrwlNKB_5",
+      "title": "kai plays gta 6 first",
+      "use": true,
+      "why": "Kai is reacting to GTA 6 footage live, with a visible chat and lively commentary. The on-screen dialogue about trust and betrayal is early-game setup, not a spoiler, and no song with lyrics is playing.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "first look at the car scene",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.72,
+        "w": 0.2,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.8,
+        "h": 1.0
+      },
+      "start": 0.5,
+      "end": 20.0,
+      "peak": 9.5
+    },
+    "CrazyAbnegateLapwingPipeHype-fzo4DD3_M-TisQLE": {
+      "at": "2026-11-18T21:15:18.539964+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/CrazyAbnegateLapwingPipeHype-fzo4DD3_M-TisQLE",
+      "title": "first robbery speed",
+      "use": true,
+      "why": "Speed's screaming reaction to a GTA 6 robbery is the hook. The loudest peak (29.25s) is a full-volume yell, and the transcript shows him narrating the stick-up in real time. No song lyrics, no gore, no spoilers.",
+      "score": 8,
+      "star": "reaction",
+      "moment": "first robbery in GTA 6",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.45
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.46,
+        "w": 1,
+        "h": 0.51
+      },
+      "start": 18.0,
+      "end": 30.1,
+      "peak": 29.25
+    },
+    "CreativeHeadstrongAniseFunRun-_f88pOqgLQhawQRA": {
+      "at": "2026-11-18T21:15:38.008429+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/CreativeHeadstrongAniseFunRun-_f88pOqgLQhawQRA",
+      "title": "HAHAHAHH",
+      "use": false,
+      "why": "Rejected: the frames show a fully nude character with bare buttocks on screen, which falls under the nudity rule. The streamer's comments about being \"about to get banned\" also point to the same content problem.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "none",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 11.5,
+      "peak": 7.5
+    },
+    "AgreeableHyperCockroachCeilingCat-_dmoVo8X--AU1Sq7": {
+      "at": "2026-11-18T21:15:56.019669+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/AgreeableHyperCockroachCeilingCat-_dmoVo8X--AU1Sq7",
+      "title": "\"ahhhhfuhhh\"",
+      "use": true,
+      "why": "Funny swimming moment with chat erupting in laughter (\"PAAHAHA\", \"AHHH\"). No music, no nudity, no spoilers, and no gore. The streamer's face is small in the facecam, so the gameplay is the star.",
+      "score": 6,
+      "star": "gameplay",
+      "moment": "swimming underwater fail in river",
+      "action": "swimming",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.32,
+        "w": 0.21,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 20.0,
+      "end": 30.1,
+      "peak": 27.75
+    },
+    "TalentedSteamyHumanHassaanChop-DL8PqlPqix6JV1lU": {
+      "at": "2026-11-18T21:16:39.325033+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/TalentedSteamyHumanHassaanChop-DL8PqlPqix6JV1lU",
+      "title": "SPEED PLAY GTA VI EARLY ACCESS",
+      "use": true,
+      "why": "Clear reaction moment: Speed yells \"oh my god\" and \"mother, oh wow\" while watching GTA 6 trailer footage of the car-theft dialogue. Profanity is not a rejection reason, no nudity, no story ending or death, no song lyrics, and no dead air.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "first GTA 6 trailer reaction",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.375
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.455,
+        "w": 1,
+        "h": 0.515
+      },
+      "start": 12.0,
+      "end": 30.1,
+      "peak": 16.0
     }
   },
   "posted": [
@@ -225,7 +691,118 @@
       ],
       "star": "reaction",
       "date": "2026-11-18"
+    },
+    {
+      "topic": "clip__20261118__vs_DifferentPreciou",
+      "logins": [
+        "xqc"
+      ],
+      "star": "vs",
+      "date": "2026-11-18"
     }
   ],
-  "house": "2026-11-18"
+  "house": "2026-11-18",
+  "seen5": {
+    "TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN": {
+      "at": "2026-11-18T21:16:59.699365+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN",
+      "title": "F8",
+      "use": true,
+      "score": 4,
+      "action": null,
+      "facecam": {
+        "x": 0.08,
+        "y": 0.48,
+        "w": 0.18,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 1.5,
+      "end": 13.0,
+      "peak": 11.0
+    },
+    "NaiveEphemeralDaikonPJSalt-zxowVsJ1CAX2obKp": {
+      "at": "2026-11-18T21:17:11.065651+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/NaiveEphemeralDaikonPJSalt-zxowVsJ1CAX2obKp",
+      "title": "bro took his clothes off mid conversation",
+      "use": false,
+      "score": 4,
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0.2,
+        "w": 0.2,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 11.3,
+      "peak": 9.25
+    },
+    "AbrasiveEsteemedSeahorseDBstyle-AQK13VBio_zKsRSX": {
+      "at": "2026-11-18T21:17:35.230770+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/AbrasiveEsteemedSeahorseDBstyle-AQK13VBio_zKsRSX",
+      "title": "LUL",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0.1,
+        "w": 0.22,
+        "h": 0.34
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 12.0,
+      "end": 25.0,
+      "peak": 21.0
+    },
+    "BenevolentSquareDolphinPeanutButterJellyTime-cZn6j11kAfLajjOF": {
+      "at": "2026-11-18T21:18:12.352488+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/BenevolentSquareDolphinPeanutButterJellyTime-cZn6j11kAfLajjOF",
+      "title": "Jean Paul on the run",
+      "use": true,
+      "score": 6,
+      "action": "police chase",
+      "facecam": {
+        "x": 0,
+        "y": 0.25,
+        "w": 0.21,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 48.0,
+      "end": 60.0,
+      "peak": 54.0,
+      "vs_used": true
+    }
+  }
 }
