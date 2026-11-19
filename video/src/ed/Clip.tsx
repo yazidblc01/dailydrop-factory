@@ -14,7 +14,8 @@ type Word = {w: string; start: number; end: number};       // seconds into the s
 export type Seg = {src: string; srcW: number; srcH: number; from: number; dur: number;   // from: seconds into the source
   facecam?: Box | null; gamebox?: Box | null; star?: 'reaction' | 'gameplay'; peak?: number | null;
   words?: Word[]; credit: string; label?: string; flash?: boolean};
-export type EdClipProps = {segs: Seg[]; hook: string; badge: string; duration: number; follow?: Follow; react?: boolean};
+export type EdClipProps = {segs: Seg[]; hook: string; badge: string; duration: number; follow?: Follow; react?: boolean;
+  setup?: string; setupAt?: number};   // setup: one line of context shown for the first seconds of the story
 
 const FPS = 30;
 
@@ -131,6 +132,20 @@ const Brand: React.FC<{t: number}> = ({t}) => {
   );
 };
 
+// the context line: what is going on, so someone scrolling in understands the moment before it lands
+const Setup: React.FC<{text: string; t: number}> = ({text, t}) => {
+  const hold = Math.max(3, text.split(' ').length / 3.2 + 0.8);
+  if (t < 0 || t > hold + 0.3) return null;
+  const k = outBack(clamp01(t / 0.3), 1.6) * (1 - clamp01((t - hold) / 0.3));
+  return (
+    <div style={{position: 'absolute', left: 50, right: 50, top: 270, display: 'flex', justifyContent: 'center', opacity: k,
+      transform: `translateY(${(1 - k) * -30}px) scale(${0.9 + 0.1 * k})`}}>
+      <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 800, fontSize: 50, lineHeight: 1.2, padding: '16px 28px', borderRadius: 24,
+        background: 'rgba(255,255,255,0.96)', color: '#14081f', textAlign: 'center', boxShadow: '0 12px 36px rgba(0,0,0,0.5)'}}>{text}</span>
+    </div>
+  );
+};
+
 export const EdClip: React.FC<EdClipProps> = (p) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -155,6 +170,7 @@ export const EdClip: React.FC<EdClipProps> = (p) => {
   return (
     <AbsoluteFill style={{background: '#0d0718'}}>
       {parts}
+      {p.setup && <Setup text={p.setup} t={frame / fps - (p.setupAt ?? 0)} />}
       <Brand t={frame / fps} />
       {p.follow && <FollowCard P={PAL.vice} t={frame / fps} f={p.follow} />}
     </AbsoluteFill>

@@ -50,8 +50,8 @@ GAME5 = "Grand Theft Auto V"
 ACTIONS = {"police chase": "POLICE", "car crash": "CRASHES", "swimming": "WATER", "falling": "FALLS", "explosion": "EXPLOSIONS",
            "shootout": "GUNFIGHTS", "driving fast": "DRIVING", "motorcycle": "BIKES", "flying": "FLYING", "fist fight": "FIGHTS",
            "robbery": "ROBBERIES", "weather": "WEATHER", "beach": "BEACHES", "npc reaction": "NPCS", "ragdoll": "RAGDOLL"}
-MIN_S, MAX_S = 10, 60            # Twitch clips we look at
-CUT_MIN, CUT_MAX = 8, 30         # what we keep of them
+MIN_S, MAX_S = 20, 60            # Twitch clips we look at (shorter ones rarely hold a story)
+CUT_MIN, CUT_MAX = 18, 40        # what we keep of them: the setup, the moment and the reaction
 PER_STREAMER_DAY = 2
 SCREENS = 10         # most fresh clips the cheap model screens per reel (about half a cent each); free filter first
 SWEARS = re.compile(r"^(f+u+c+k\w*|motherf\w*|s+h+i+t\w*|bitch\w*|asshole\w*|dick\w*|pussy\w*|bastard\w*|cunt\w*)([.,!?]*)$", re.I)
@@ -277,14 +277,17 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
     "action": {"type": "string", "enum": [*ACTIONS, "none"], "description": "the main on-screen action, for GTA 5 vs GTA 6 comparisons; none if no clear one"},
     "facecam": {**BOX, "description": "the streamer's webcam as fractions of the frame (x, y = top-left), null if none"},
     "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and overlays"},
-    "start": {"type": "number", "description": "seconds: where the reel should start, just before the moment builds (8 to 30 s in total)"},
-    "end": {"type": "number", "description": "seconds: right after the payoff or the reaction ends"},
+    "start": {"type": "number", "description": "seconds: where the SETUP begins, so someone scrolling in understands the situation (18 to 40 s in total)"},
+    "end": {"type": "number", "description": "seconds: after the streamer's reaction to the payoff ends"},
+    "story": {"type": "boolean", "description": "true only if a viewer with no context can follow it: a setup, a payoff and a reaction"},
+    "setup": {"type": "string", "description": "one line shown for the first seconds, 6 to 14 words, present tense, what is going on BEFORE the payoff, never revealing it. E.g. 'xQc tries to rob a store with cops one block away'"},
+    "cold_open": {"type": "boolean", "description": "true only if flashing the payoff for 1 second first makes sense on its own (a crash, an explosion); false for anything that needs the setup"},
     "peak": {"type": "number", "description": "seconds: the single best instant (the scream, the crash, the punchline)"},
     "hook": {"type": "string", "description": "2 to 4 words on screen from the first frame. Reaction: about the streamer ('LACY LOST IT'). Gameplay: about the moment ('WAIT FOR IT'). No spoilers."},
     "title": {"type": "string", "description": "starts with 'GTA 6', under 60 characters, no hashtags. Reaction clips name the streamer: 'GTA 6: Lacy Sees Lucia For The First Time'."},
     "description": {"type": "string", "description": "1 or 2 short sentences"},
     "pinned_comment": {"type": "string", "description": "a question that gets replies"}},
-    "required": ["use", "why", "score", "star", "moment", "start", "end", "peak", "hook", "title", "description", "pinned_comment"]}}
+    "required": ["use", "why", "score", "star", "moment", "start", "end", "peak", "story", "setup", "cold_open", "hook", "title", "description", "pinned_comment"]}}
 
 SCREEN_SYS = """You pick GTA 6 stream clips for The Daily Drop, a Shorts channel for gamers 13 to 25, during launch week.
 Be generous: launch hype is the point. Gameplay, chaos, funny fails, police chases, the streamer losing it, first impressions,
@@ -296,9 +299,10 @@ Reject the clip (use=false) ONLY if one of these is true (the apps remove these 
 - a song with lyrics is clearly playing (a radio station or music on stream)
 - slurs or hateful content from the streamer
 - dead air: nothing happens and nobody reacts
+- no story: random gameplay with no point, where someone scrolling in wouldn't get what happened (set story=false)
 Find the facecam and the game region. Decide whether the reaction or the gameplay is the star, and write the hook and
-title for that. Pick the trim: start just before the moment builds, end right after the payoff, 8 to 30 seconds, no dead
-air at either end. The loudness peaks and the timed transcript tell you where things happen.
+title for that. Pick the trim as a tiny story: start where the setup begins (what they're doing, what's about to go wrong), keep
+the payoff, end after the streamer's reaction. 18 to 40 seconds, no dead air at either end. Write the setup line. The loudness peaks and the timed transcript tell you where things happen.
 Also tag the main on-screen action (police chase, car crash, ...) so the clip can be paired with GTA 5; none if there isn't one."""
 
 SCREEN5_SYS = """You tag GTA 5 (Grand Theft Auto V) stream clips, to pair them with GTA 6 clips of the SAME action in a 'GTA 5 vs GTA 6' Short.
@@ -336,6 +340,9 @@ def screen(c, src, dur, words, loud, out, system=None):
                f"Frames at {', '.join(f'{t:.1f}s' for t in at)}.\nLoudest moments (s): {loud}\nWhat they say, with times:\n{timed(words)}"}]
     v = ask(content, SCREEN, system or SCREEN_SYS, model=CLAUDE_FAST)   # the cheap model screens; the strong one writes the words on winners
     # keep the trim sane, whatever came back
+    if v.get("use") and v.get("story") is False:
+        v["use"] = False
+        v["why"] = f"no story: {v.get('why', '')}"
     peak = v.get("peak")
     peak = float(peak) if peak is not None else (loud[0] if loud else dur / 2)
     peak = min(max(peak, 0.0), dur)
@@ -353,8 +360,8 @@ def screen(c, src, dur, words, loud, out, system=None):
 
 
 COPY = {"name": "copy", "description": "The words for the reel.", "input_schema": {"type": "object", "properties": {
-    k: SCREEN["input_schema"]["properties"][k] for k in ("hook", "title", "description", "pinned_comment")},
-    "required": ["hook", "title", "description", "pinned_comment"]}}
+    k: SCREEN["input_schema"]["properties"][k] for k in ("setup", "hook", "title", "description", "pinned_comment")},
+    "required": ["setup", "hook", "title", "description", "pinned_comment"]}}
 
 
 def copy(c, v, words):
@@ -362,11 +369,11 @@ def copy(c, v, words):
     try:
         w = ask([{"type": "text", "text": f"Streamer: {c['broadcaster_name']} (Twitch). Clip title: {c['title']}.\n"
                   f"The star is the {v.get('star')}. Moment: {v.get('moment')}. Screener notes: {v.get('why')}\n"
-                  f"Draft hook: {v.get('hook')} | draft title: {v.get('title')}\nWhat they say, with times:\n{timed(words)}\n\n"
+                  f"Draft setup line: {v.get('setup')} | draft hook: {v.get('hook')} | draft title: {v.get('title')}\nWhat they say, with times:\n{timed(words)}\n\n"
                   "Write the best scroll-stopping words for this Short."}], COPY,
                 "You write the on-screen hook, title, description and pinned comment for GTA 6 stream-clip Shorts "
                 "(gamers 13 to 25). Follow each field's rules exactly. No spoilers.")
-        v.update({k: w[k] for k in ("hook", "title", "description", "pinned_comment") if w.get(k)})
+        v.update({k: w[k] for k in ("setup", "hook", "title", "description", "pinned_comment") if w.get(k)})
     except Exception as e:
         print(f"        copy kept from the screener ({str(e)[:80]})")
     return v
@@ -404,9 +411,10 @@ def seg(info, v, rel, credit, start, end, label=None, words=True, flash=False):
             "words": ws, "credit": credit, "label": label, "flash": flash}
 
 
-def render_reel(segs, hook, out, today):
+def render_reel(segs, hook, out, today, setup=None, setup_at=0.0):
     dur = sum(s["dur"] for s in segs)
     props = {"segs": segs, "hook": hook.upper()[:28], "badge": badge(today), "react": len({s["credit"] for s in segs}) > 1,
+             "setup": setup, "setupAt": round(setup_at, 2),
              "follow": follow_card(today, dur), "duration": round(dur + FOLLOW, 2),
              "headA": hook.capitalize(), "pal": "vice"}       # headA/pal: for the cover (engine/cover.py)
     (out / "props.json").write_text(json.dumps(props, indent=2, ensure_ascii=False))
@@ -472,9 +480,11 @@ def build(c, v, info, name, out, st, today):
         v = copy(c, v, info["words"])
         rel = publish_src(info, name, 0)
         credit = f"{c['broadcaster_name']} on Twitch"
-        cold = seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True)
         main = seg(info, v, rel, credit, v["start"], v["end"])
-        final, dur = render_reel([cold, main], v["hook"], out, today)
+        segs = [main]
+        if v.get("cold_open"):                     # the payoff flashed first, only when it makes sense on its own
+            segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True), main]
+        final, dur = render_reel(segs, v["hook"], out, today, setup=v.get("setup"), setup_at=sum(x["dur"] for x in segs[:-1]))
         g = gauntlet(final, dur, out)
         print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
         if not g["pass"]:
@@ -498,7 +508,7 @@ def bank(st, hours=72):
         if p["date"] == today:
             for lg in p["logins"]:
                 done[lg] = done.get(lg, 0) + 1
-    pool = [(k, v) for k, v in st["seen"].items() if v.get("use") and not v.get("posted") and not v.get("failed")
+    pool = [(k, v) for k, v in st["seen"].items() if v.get("use") and v.get("story") and not v.get("posted") and not v.get("failed")
             and v.get("at", "") > cut and done.get(v.get("login"), 0) < PER_STREAMER_DAY]
     return sorted(pool, key=lambda kv: -(kv[1].get("score") or 0))
 
@@ -537,7 +547,8 @@ def make(dry=False, today=None, tries=30, renders=5, screen_only=False):
                 continue
             st["seen"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
                                    "url": c["url"], "title": c["title"],
-                                   **{k: v.get(k) for k in ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak")}}
+                                   **{k: v.get(k) for k in ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak",
+                                                             "story", "setup", "cold_open")}}
             print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('star')}, {v.get('moment')}) {v['why'][:110]}")
             if not v["use"] or screen_only:
                 continue
