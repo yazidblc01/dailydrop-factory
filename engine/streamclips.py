@@ -449,8 +449,8 @@ def nude_boxes(src, t0, t1, out, fps=5):
     found = []
     for f in sorted(d.glob("*.jpg")):
         t = max(0.0, t0) + (int(f.stem) - 1) / fps
-        from PIL import Image
-        W, H = Image.open(f).size
+        import cv2                                # comes with NudeNet
+        H, W = cv2.imread(str(f)).shape[:2]
         for hit in _NUDE.detect(str(f)):
             if hit["class"] in EXPOSED and hit["score"] >= 0.3:
                 x, y, w, h = hit["box"]
