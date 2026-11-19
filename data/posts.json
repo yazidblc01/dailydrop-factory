@@ -664,5 +664,25 @@
     "zernio_id": "6aff053c778834724fc9afc7",
     "posted_at": "2026-11-19T14:19:32+00:00",
     "slot": "waited"
+  },
+  "clip__20261119__TrappedYummyMetalWTRuck_": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=4iDCpLQrY90",
+      "facebook": "https://www.facebook.com/reel/2243202149561326",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709916525989219585",
+      "instagram": "https://www.instagram.com/reel/Df7fAX0D0Xw/"
+    },
+    "title": "GTA 6: xQc Gets Shot In A Shootout And Checks In",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6aff203ddb642d529a4c29cb",
+    "posted_at": "2026-11-19T16:14:41+00:00",
+    "url": "https://www.youtube.com/watch?v=4iDCpLQrY90",
+    "slot": "waited"
   }
 }

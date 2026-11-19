@@ -49,9 +49,23 @@
     "MoldySmoggyDonkeyThisIsSparta-mXBDQ8JcdmTZV7p5",
     "DifficultTrustworthyCobblerRaccAttack-eZdV25Nhm-1NTlM2",
     "ManlyProudPidgeonBloodTrail-PjN9TVhQ1zqg3GPr",
-    "VivaciousCallousYogurtDxCat-tcAghtrsbnP82HX2"
+    "VivaciousCallousYogurtDxCat-tcAghtrsbnP82HX2",
+    "SuperSlickStrawberryAMPEnergy-iLijF7374bmMsbtk",
+    "ViscousStormySquirrelDancingBanana-2gkXgAHz-CwpC3GO",
+    "HumbleGeniusStrawberryBleedPurple-CYhEi_LZY9mbAQxo",
+    "InquisitiveJollyVanillaDxCat-vctI-tQHron3Wd5I",
+    "InnocentArtsyHyenaOhMyDog--9COXVqc1TGfCb5X",
+    "BetterBoxyPhoneKappaPride-dj6XJ97C0t6ZaTrX",
+    "PluckyAggressiveYogurtSuperVinlin-NOm5zhuzbWEM1Lnm",
+    "KathishSavoryDugongFutureMan-DWZNl__pV8YNV4qg",
+    "RoundOutstandingFungusStoneLightning-5YP8a2fVmgEKQEUk",
+    "UninterestedSoftLorisKlappa-60EV5Q5rHYYd9sc7",
+    "TiredCovertCougarHeyGirl-RI7i3wdJxWw6RTWv",
+    "PeppySlickOwlAliens-6hpIHuZQymeRQ2y9",
+    "TrappedObliviousSharkMoreCowbell-c8N9-I4Lf-TA13Cv",
+    "TrappedYummyMetalWTRuck-5L2ytqbMKZmQThQ5"
   ],
-  "count": 8,
+  "count": 9,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -1325,6 +1339,394 @@
       "end": 33.7,
       "peak": 31.0,
       "posted": true
+    },
+    "SuperSlickStrawberryAMPEnergy-iLijF7374bmMsbtk": {
+      "at": "2026-11-19T15:41:00.356162+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/SuperSlickStrawberryAMPEnergy-iLijF7374bmMsbtk",
+      "title": "xQc compares GTA 6 with modded framegen ON, vs framegen OFF.",
+      "use": true,
+      "why": "xQc is walking through roadside grass and comparing frame gen on vs off. The visual difference in the grass and the \"this is the game as you buy it\" line make it a strong launch-hype comparison, with no spoilers, music, or gore.",
+      "score": 7,
+      "star": "gameplay",
+      "moment": "frame gen vs native grass comparison",
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0.475,
+        "w": 1,
+        "h": 0.525
+      },
+      "start": 21.0,
+      "end": 40.0,
+      "peak": 27.5
+    },
+    "ViscousStormySquirrelDancingBanana-2gkXgAHz-CwpC3GO": {
+      "at": "2026-11-19T15:41:59.017414+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/ViscousStormySquirrelDancingBanana-2gkXgAHz-CwpC3GO",
+      "title": "GYATT OMG THAT CRAZY",
+      "use": false,
+      "why": "Rejected: the clip shows a fully nude character in the shower (bare back and buttocks on screen for most of the clip), which is nudity under the content rules. The streamer's commentary doesn't change that.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "shower scene with nude character",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.1,
+      "end": 30.1,
+      "peak": 22.25
+    },
+    "HumbleGeniusStrawberryBleedPurple-CYhEi_LZY9mbAQxo": {
+      "at": "2026-11-19T15:43:02.508369+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/HumbleGeniusStrawberryBleedPurple-CYhEi_LZY9mbAQxo",
+      "title": "bahaha",
+      "use": true,
+      "why": "Speed's reaction is the star: he keeps yelling to skip, then \"what the hell is going on, where's Jason.\" The on-screen game shows a character in a dress walking a hallway and entering a bedroom, but no nudity or sexual content is visible in these frames. The reaction is strong and the content is early-game, so it's usable, though the bedroom framing is a bit borderline.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "find Jason hallway and bedroom",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.63,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 17.0,
+      "end": 29.0,
+      "peak": 23.5
+    },
+    "InquisitiveJollyVanillaDxCat-vctI-tQHron3Wd5I": {
+      "at": "2026-11-19T15:45:45.407904+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/InquisitiveJollyVanillaDxCat-vctI-tQHron3Wd5I",
+      "title": "part 2 XQC framegen ON",
+      "use": true,
+      "why": "xQc's frame gen commentary is the draw: he calls AI frame gen a scumbag move, then compares the look and says it has finally become \"actually good.\" The payoff lands at the end, with no lyrics or spoilers, and there's no dead air.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "xQc AI frame gen comparison",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.495,
+        "w": 0.035,
+        "h": 0.15
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.495,
+        "w": 1.0,
+        "h": 0.505
+      },
+      "start": 40.0,
+      "end": 58.8,
+      "peak": 46.5
+    },
+    "InnocentArtsyHyenaOhMyDog--9COXVqc1TGfCb5X": {
+      "at": "2026-11-19T15:46:49.671153+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/InnocentArtsyHyenaOhMyDog--9COXVqc1TGfCb5X",
+      "title": "gta-6-text-bug",
+      "use": true,
+      "why": "Streamer loses it over the GTA 6 UI text size menu, where Small and Medium look identical, and calls it the first bug. Clear reaction payoff, no spoilers, no music, no nudity or gore.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "UI text size bug in settings",
+      "action": null,
+      "facecam": {
+        "x": 0.14,
+        "y": 0.67,
+        "w": 0.23,
+        "h": 0.33
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 12.0,
+      "end": 25.7,
+      "peak": 23.75
+    },
+    "BetterBoxyPhoneKappaPride-dj6XJ97C0t6ZaTrX": {
+      "at": "2026-11-19T15:47:50.408106+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/BetterBoxyPhoneKappaPride-dj6XJ97C0t6ZaTrX",
+      "title": "pegging in gta 6 gone wild",
+      "use": false,
+      "why": "Rejected: the clip shows sexual content on screen. The second frame shows two characters in a sex act on a bed, and the title references pegging. This breaks the app's nudity and sexual content rule.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club and hotel bedroom scene",
+      "action": null,
+      "facecam": {
+        "x": 0.02,
+        "y": 0.4,
+        "w": 0.19,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.1,
+      "end": 30.1,
+      "peak": 23.75
+    },
+    "PluckyAggressiveYogurtSuperVinlin-NOm5zhuzbWEM1Lnm": {
+      "at": "2026-11-19T15:48:32.357383+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/PluckyAggressiveYogurtSuperVinlin-NOm5zhuzbWEM1Lnm",
+      "title": "xQc is freakyy as shittt",
+      "use": false,
+      "why": "The game character is fully nude in the shower, with bare buttocks clearly visible at 7.8s. That is nudity on screen, which the apps don't allow, so the clip is rejected.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "shower scene nudity",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.46
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.46,
+        "w": 1.0,
+        "h": 0.54
+      },
+      "start": 2.0,
+      "end": 19.3,
+      "peak": 7.8
+    },
+    "KathishSavoryDugongFutureMan-DWZNl__pV8YNV4qg": {
+      "at": "2026-11-19T15:50:20.229108+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/KathishSavoryDugongFutureMan-DWZNl__pV8YNV4qg",
+      "title": "whaaaaat",
+      "use": false,
+      "why": "The clip shows sexual content on screen: at 9.0s the game shows a sex scene on a bed with two characters in a sexual position. Opening audio is also sexually explicit. This breaks the nudity and sexual content rule, so the clip can't run on the channel.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "in-game bedroom scene, sexual content",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.92,
+        "h": 0.46
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.47,
+        "w": 1,
+        "h": 0.53
+      },
+      "start": 26.75,
+      "end": 56.75,
+      "peak": 29.75
+    },
+    "RoundOutstandingFungusStoneLightning-5YP8a2fVmgEKQEUk": {
+      "at": "2026-11-19T15:52:21.779986+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/RoundOutstandingFungusStoneLightning-5YP8a2fVmgEKQEUk",
+      "title": "GYAT! Mandy",
+      "use": false,
+      "why": "Rejected for nudity and sexual content. The first frame shows the in-game woman in a skimpy bikini that exposes most of her breast, and the 58.6s frame shows her topless from behind. The app rules bar this regardless of the joke.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "stalking Mandy on Snapmatic",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.5,
+        "w": 1.0,
+        "h": 0.5
+      },
+      "start": 28.0,
+      "end": 58.0,
+      "peak": 51.5
+    },
+    "UninterestedSoftLorisKlappa-60EV5Q5rHYYd9sc7": {
+      "at": "2026-11-19T15:55:17.277739+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/UninterestedSoftLorisKlappa-60EV5Q5rHYYd9sc7",
+      "title": "ohne just wants to see sum stuff",
+      "use": false,
+      "why": "Rejected: the 9.0s frame shows a topless woman in a thong during a strip club scene, which is nudity and breaks the app rules. The rest of the clip is club and dancing content, but the nudity alone is enough to reject it.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "strip club visit",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.68,
+        "w": 0.22,
+        "h": 0.32
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 30.0,
+      "end": 60.0,
+      "peak": 47.8
+    },
+    "TiredCovertCougarHeyGirl-RI7i3wdJxWw6RTWv": {
+      "at": "2026-11-19T16:02:16.922723+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/TiredCovertCougarHeyGirl-RI7i3wdJxWw6RTWv",
+      "title": "We like that",
+      "use": false,
+      "why": "The clip shows a topless dancer in the Sphynx strip club, with bare breasts visible on screen. That breaks the nudity rule, so it can't be published.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club money spending",
+      "action": null,
+      "facecam": {
+        "x": 0.39,
+        "y": 0.0,
+        "w": 0.6,
+        "h": 0.34
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.48,
+        "w": 1.0,
+        "h": 0.52
+      },
+      "start": 9.5,
+      "end": 39.5,
+      "peak": 12.5
+    },
+    "PeppySlickOwlAliens-6hpIHuZQymeRQ2y9": {
+      "at": "2026-11-19T16:03:51.145054+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/PeppySlickOwlAliens-6hpIHuZQymeRQ2y9",
+      "title": "stick drift",
+      "use": false,
+      "why": "At 4.5s a fully nude character is on screen in the hallway, which is nudity and is grounds for rejection. The clip is also a controller-complaint moment, so the gameplay payoff is weak.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "stick drift controller complaint",
+      "action": null,
+      "facecam": {
+        "x": 0.1,
+        "y": 0.72,
+        "w": 0.2,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 3.0,
+      "end": 22.5,
+      "peak": 6.25
+    },
+    "TrappedObliviousSharkMoreCowbell-c8N9-I4Lf-TA13Cv": {
+      "at": "2026-11-19T16:05:46.227993+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/TrappedObliviousSharkMoreCowbell-c8N9-I4Lf-TA13Cv",
+      "title": "speed",
+      "use": false,
+      "why": "The game footage shows a woman in a revealing cut-out bikini top with the breasts largely exposed, plus sexual dialogue (\"they're so fucking hot\"). That risks the nudity/sexual content rule, so the clip is rejected.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "Jason and Lucia's flirty bikini scene",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.5,
+        "w": 1.0,
+        "h": 0.5
+      },
+      "start": 0.0,
+      "end": 20.0,
+      "peak": 10.5
+    },
+    "TrappedYummyMetalWTRuck-5L2ytqbMKZmQThQ5": {
+      "at": "2026-11-19T16:06:54.795003+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/TrappedYummyMetalWTRuck-5L2ytqbMKZmQThQ5",
+      "title": "woman aim huh",
+      "use": true,
+      "why": "A shootout where xQc yells \"F***!\" at the peak, then gets hit and checks in with chat. The streamer's reaction carries the clip. Profanity is fine, and there's no nudity, slur, or spoiler. Blood is minor and not graphic.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "xQc gets shot in shootout",
+      "action": null,
+      "facecam": {
+        "x": 0.046,
+        "y": 0.498,
+        "w": 0.147,
+        "h": 0.273
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 2.0,
+      "end": 20.0,
+      "peak": 8.8,
+      "posted": true
     }
   },
   "posted": [
@@ -1395,6 +1797,14 @@
     },
     {
       "topic": "clip__20261119__VivaciousCallousYogurtDx",
+      "logins": [
+        "xqc"
+      ],
+      "star": "reaction",
+      "date": "2026-11-19"
+    },
+    {
+      "topic": "clip__20261119__TrappedYummyMetalWTRuck_",
       "logins": [
         "xqc"
       ],
@@ -1577,6 +1987,81 @@
         "h": 1
       },
       "start": 8.0,
+      "end": 22.0,
+      "peak": 14.0
+    },
+    "HilariousLivelyCarrotNotLikeThis-OsdwAfaxCwMRZzhP": {
+      "at": "2026-11-19T15:56:35.142814+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/HilariousLivelyCarrotNotLikeThis-OsdwAfaxCwMRZzhP",
+      "title": "xQc talks about CG leaving NP",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.21,
+        "h": 0.49
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.2,
+      "end": 30.2,
+      "peak": 3.2
+    },
+    "FrailDullWatercressTheThing-DWH7T9vcg6gdLbAR": {
+      "at": "2026-11-19T15:58:18.438895+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/FrailDullWatercressTheThing-DWH7T9vcg6gdLbAR",
+      "title": "Best Chase of Nopixel 5.0",
+      "use": true,
+      "score": 5,
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0.25,
+        "w": 0.21,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 36.0,
+      "end": 52.0,
+      "peak": 45.8
+    },
+    "AuspiciousCarefulPizzaBatChest-C17vrdTbMiXPC9GT": {
+      "at": "2026-11-19T15:59:58.594147+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/AuspiciousCarefulPizzaBatChest-C17vrdTbMiXPC9GT",
+      "title": "John Bobby as a Rookie Cop",
+      "use": true,
+      "score": 6,
+      "action": null,
+      "facecam": {
+        "x": 0.05,
+        "y": 0.45,
+        "w": 0.3,
+        "h": 0.55
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.9,
+        "h": 0.97
+      },
+      "start": 6.0,
       "end": 22.0,
       "peak": 14.0
     }
