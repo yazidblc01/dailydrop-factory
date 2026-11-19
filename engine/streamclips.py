@@ -52,12 +52,12 @@ ACTIONS = {"police chase": "POLICE", "car crash": "CRASHES", "swimming": "WATER"
            "robbery": "ROBBERIES", "weather": "WEATHER", "beach": "BEACHES", "npc reaction": "NPCS", "ragdoll": "RAGDOLL"}
 MIN_S, MAX_S = 15, 60            # Twitch clips we look at
 CUT_MIN, CUT_MAX = 12, 40        # what we keep: 12 to 20 s for a punchy moment, longer only when it needs a setup
-MIN_VIEWS = 500                  # viewers voted: a clip needs this many Twitch views
-FRESH_H = 12                     # fresh clips only (day-1 missions age out); 24 h if 12 comes up dry
+MIN_VIEWS = 200                  # viewers voted: a clip needs this many Twitch views (views per hour and the outlier rank the rest)
+FRESH_H = 24                     # fresh clips only (day-1 missions age out); 48 h if 24 comes up dry
 MIN_SCORE = 7                    # the final pick posts nothing below this
 EXPOSED = {"FEMALE_BREAST_EXPOSED", "FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED", "BUTTOCKS_EXPOSED", "ANUS_EXPOSED"}
 CLIP_PLATFORMS = ["youtube", "facebook"]   # plain clips: TikTok and Instagram demote reposted streams
-PER_STREAMER_DAY = 1
+PER_STREAMER_DAY = 2
 SCREENS = 10         # most fresh clips the cheap model screens per reel (about half a cent each); free filter first
 SWEARS = re.compile(r"^(f+u+c+k\w*|motherf\w*|s+h+i+t\w*|bitch\w*|asshole\w*|dick\w*|pussy\w*|bastard\w*|cunt\w*)([.,!?]*)$", re.I)
 # the clip at the same loudness as every other, its picture lightly sharpened (it gets enlarged in the vertical) and kept near-lossless
@@ -298,7 +298,8 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
 
 SCREEN_SYS = """You are the first filter for GTA 6 stream clips for The Daily Drop, a Shorts channel for gamers 13 to 25.
 What wins (our hit: a streamer knocks a grandma off her mobility scooter and steals it, his face cracking up on camera):
-an absurd, chaotic or funny thing you can SEE happen, understandable on mute in 1 second, plus a visible reaction.
+an absurd, chaotic or funny thing happening, plus a visible reaction. Our reels carry big captions of everything said, so a
+funny line of dialogue counts too: it doesn't have to work on mute.
 Score 1 to 10 on that. Low scores: talking about the game, opinions ("it's too easy"), menus, walking around, a truck driving by.
 Reject the clip (use=false) ONLY if:
 - a sex act or sexual scene (nudity alone is fine: it gets blurred automatically; set nudity=true)
@@ -306,7 +307,9 @@ Reject the clip (use=false) ONLY if:
 - a major story spoiler (an ending, a main character's death, a big twist)
 - graphic gore in the first 7 seconds
 - a song with lyrics clearly playing
-- no story: random gameplay where someone scrolling in wouldn't get what happened (story=false)
+- no story (story=false): ONLY when nothing understandable happens: wandering around, menus, loading, talking about something
+  off screen. For GTA, chaos IS the story: an action and its consequence (a fight then the cops, a crash then an explosion, a theft
+  then a chase, running naked through a club with cops coming) or a fail and the streamer reacting all count as a story
 - the reaction is the star but the streamer's face is not visible (face_visible=false): a voice over gameplay is not a reaction
 Find the facecam and the game region. Trim to fit the moment: a punchy moment is 12 to 20 seconds, starting just before it;
 only a moment that needs context starts earlier (up to 40 s). End after the reaction, no dead air. Write the setup line.
@@ -377,7 +380,8 @@ FINAL = {"name": "pick", "description": "Pick the clip to post, or none.", "inpu
     **{k: SCREEN["input_schema"]["properties"][k] for k in ("setup", "hook", "title", "description", "pinned_comment")}},
     "required": ["pick", "score", "why", "setup", "hook", "title", "description", "pinned_comment"]}}
 FINAL_SYS = """You make the final call on which GTA 6 stream clip The Daily Drop posts (Shorts, gamers 13 to 25).
-What wins: an absurd, chaotic or funny thing you can SEE happen, clear on mute in a second, with the streamer's face reacting.
+What wins: an absurd, chaotic or funny thing happening, with the streamer's face reacting. Our reels caption every word said,
+so a funny line of dialogue works too. Chaos is a story: an action and its consequence, or a fail and the reaction.
 Our hit: a streamer knocks a grandma off her mobility scooter and steals it. A flop: a streamer says the game is too easy as a truck drives by.
 Score each clip honestly. Pick the best only if it's 7/10 or more, else pick -1 (posting nothing beats posting a flop).
 Never pick a moment we already posted recently (the list is given). Then write its words:
@@ -731,8 +735,8 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
         if got:
             return got
 
-        print("      widening to the last 24 h")                  # 3. a bit older
-        got = fresh(candidates(st, hours=24), SCREENS + 6)
+        print("      widening to the last 48 h")                  # 3. a bit older
+        got = fresh(candidates(st, hours=48), SCREENS + 6)
         if got:
             return got
     finally:
