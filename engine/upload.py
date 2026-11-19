@@ -235,7 +235,7 @@ def up_post(topic, when=None, only=None):
     """
     out = MEDIA_DIR / topic
     meta = seo(json.loads((out / "upload.json").read_text()))
-    platforms = only or PLATFORMS
+    platforms = only or [p for p in meta.get("platforms") or PLATFORMS if p in PLATFORMS]   # a reel can name its own platforms
     primary = PRIMARY if PRIMARY in platforms else platforms[0]
     record = not only
     known = load_posts().get(topic, {}) if record else {}
@@ -401,7 +401,7 @@ def zernio_body(topic, meta, media_url, when, platforms, draft, cover_url=None, 
 def z_post(topic, when=None, only=None, draft=False):
     out = MEDIA_DIR / topic
     meta = seo(json.loads((out / "upload.json").read_text()))
-    platforms = only or PLATFORMS
+    platforms = only or [p for p in meta.get("platforms") or PLATFORMS if p in PLATFORMS]   # a reel can name its own platforms
     primary = PRIMARY if PRIMARY in platforms else platforms[0]
     record = not only and not draft
     known = load_posts().get(topic, {}) if record else {}

@@ -13,15 +13,16 @@ type Box = {x: number; y: number; w: number; h: number};   // fractions of the s
 type Word = {w: string; start: number; end: number};       // seconds into the segment
 export type Seg = {src: string; srcW: number; srcH: number; from: number; dur: number;   // from: seconds into the source
   facecam?: Box | null; gamebox?: Box | null; star?: 'reaction' | 'gameplay'; peak?: number | null;
-  words?: Word[]; credit: string; label?: string; flash?: boolean};
+  words?: Word[]; credit: string; label?: string; flash?: boolean;
+  blurs?: {t0: number; t1: number; x: number; y: number; w: number; h: number}[]};   // nudity to blur: segment seconds, source fractions
 export type EdClipProps = {segs: Seg[]; hook: string; badge: string; duration: number; follow?: Follow; react?: boolean;
   setup?: string; setupAt?: number};   // setup: one line of context shown for the first seconds of the story
 
 const FPS = 30;
 
 // a window of width W x height H showing the region r of the source, filled edge to edge
-const Win: React.FC<{s: Seg; r: Box; W: number; H: number; top: number; blur?: boolean; muted?: boolean; zoom?: number}> =
-  ({s, r, W, H, top, blur, muted, zoom = 1}) => {
+const Win: React.FC<{s: Seg; r: Box; W: number; H: number; top: number; blur?: boolean; muted?: boolean; zoom?: number; t?: number}> =
+  ({s, r, W, H, top, blur, muted, zoom = 1, t}) => {
   const k = Math.max(W / (r.w * s.srcW), H / (r.h * s.srcH)) * zoom;
   const vw = s.srcW * k, vh = s.srcH * k;
   const left = -r.x * vw + (W - r.w * vw) / 2, vtop = -r.y * vh + (H - r.h * vh) / 2;
@@ -29,6 +30,10 @@ const Win: React.FC<{s: Seg; r: Box; W: number; H: number; top: number; blur?: b
     <div style={{position: 'absolute', left: 0, top, width: W, height: H, overflow: 'hidden'}}>
       <OffthreadVideo src={staticFile(s.src)} muted={muted} startFrom={Math.round(s.from * FPS)}
         style={{position: 'absolute', left, top: vtop, width: vw, height: vh, filter: blur ? 'blur(40px) brightness(0.45)' : undefined}} />
+      {t != null && (s.blurs ?? []).filter((b) => t >= b.t0 && t <= b.t1).map((b, i) => (
+        <div key={i} style={{position: 'absolute', left: left + b.x * vw, top: vtop + b.y * vh, width: b.w * vw, height: b.h * vh, borderRadius: 24,
+          backdropFilter: 'blur(38px)', WebkitBackdropFilter: 'blur(38px)', background: 'rgba(90,70,100,0.35)'}} />
+      ))}
     </div>
   );
 };
@@ -77,11 +82,12 @@ const Shot: React.FC<{s: Seg; t: number; hook: string; badge: string; showHook: 
   return (
     <AbsoluteFill style={{background: '#0d0718'}}>
       {!cam && <Win s={s} r={{x: 0.2, y: 0, w: 0.6, h: 1}} W={1080} H={1920} top={0} blur muted />}
-      {cam && <Win s={s} r={cam} W={1080} H={camH} top={0} muted zoom={zoom} />}
-      <Win s={s} r={game} W={1080} H={gameH} top={gameTop} zoom={cam ? 1 : zoom} />
+      {cam && <Win s={s} r={cam} W={1080} H={camH} top={0} muted zoom={zoom} t={t} />}
+      <Win s={s} r={game} W={1080} H={gameH} top={gameTop} zoom={cam ? 1 : zoom} t={t} />
       <div style={{position: 'absolute', left: 0, right: 0, top: seam - 3, height: 6, background: '#FF4FA0'}} />
       {showHook && (
-        <div style={{position: 'absolute', left: 40, right: 40, top: seam - 70, textAlign: 'center', transform: `scale(${0.7 + 0.3 * pop})`}}>
+        <div style={{position: 'absolute', left: 40, right: 40, bottom: 1920 - seam - 22, textAlign: 'center', transform: `scale(${0.7 + 0.3 * pop})`,
+          transformOrigin: 'center bottom'}}>
           <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 900, fontSize: hook.length > 16 ? 70 : 90, lineHeight: 1.05, color: '#FFE07A',
             textTransform: 'uppercase', WebkitTextStroke: '10px #1a0a2e', paintOrder: 'stroke fill', textShadow: '0 8px 30px rgba(0,0,0,0.6)'}}>{hook}</span>
         </div>
@@ -133,12 +139,15 @@ const Brand: React.FC<{t: number}> = ({t}) => {
 };
 
 // the context line: what is going on, so someone scrolling in understands the moment before it lands
-const Setup: React.FC<{text: string; t: number}> = ({text, t}) => {
+// where the facecam strip meets the game (the hook sits just above it, the setup line just below)
+const seamOf = (s: Seg) => (s.facecam && s.facecam.w > 0.05 ? (s.star === 'reaction' ? 660 : 540) : 360);
+
+const Setup: React.FC<{text: string; t: number; top: number}> = ({text, t, top}) => {
   const hold = Math.max(3, text.split(' ').length / 3.2 + 0.8);
   if (t < 0 || t > hold + 0.3) return null;
   const k = outBack(clamp01(t / 0.3), 1.6) * (1 - clamp01((t - hold) / 0.3));
   return (
-    <div style={{position: 'absolute', left: 50, right: 50, top: 270, display: 'flex', justifyContent: 'center', opacity: k,
+    <div style={{position: 'absolute', left: 50, right: 50, top, display: 'flex', justifyContent: 'center', opacity: k,
       transform: `translateY(${(1 - k) * -30}px) scale(${0.9 + 0.1 * k})`}}>
       <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 800, fontSize: 50, lineHeight: 1.2, padding: '16px 28px', borderRadius: 24,
         background: 'rgba(255,255,255,0.96)', color: '#14081f', textAlign: 'center', boxShadow: '0 12px 36px rgba(0,0,0,0.5)'}}>{text}</span>
@@ -170,7 +179,7 @@ export const EdClip: React.FC<EdClipProps> = (p) => {
   return (
     <AbsoluteFill style={{background: '#0d0718'}}>
       {parts}
-      {p.setup && <Setup text={p.setup} t={frame / fps - (p.setupAt ?? 0)} />}
+      {p.setup && p.segs.length > 0 && <Setup text={p.setup} t={frame / fps - (p.setupAt ?? 0)} top={seamOf(p.segs[p.segs.length - 1]) + 40} />}
       <Brand t={frame / fps} />
       {p.follow && <FollowCard P={PAL.vice} t={frame / fps} f={p.follow} />}
     </AbsoluteFill>

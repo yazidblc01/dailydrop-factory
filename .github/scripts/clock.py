@@ -9,20 +9,20 @@ from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("America/Toronto")
 # (Toronto time, workflow, inputs)
-SLOTS = [("06:13", "daily.yml", {"once": "yes"}),                            # original: the main daily reel
+SLOTS = [("06:13", "daily.yml", {"once": "yes"}),                            # original: the main daily reel (paused, see below)
          ("09:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("10:37", "catchup.yml", {}),                                       # old reels to TikTok/Instagram (until done)
-         ("12:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("13:37", "catchup.yml", {}),
-         ("15:07", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6
-         ("16:37", "catchup.yml", {}),
+         ("10:37", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6
+         ("12:07", "gta_waited.yml", {}),                                    # original: the GTA wave rotation
+         ("13:37", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("15:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("16:37", "gta_waited.yml", {}),                                    # original: the GTA wave rotation
          ("18:07", "gta_waited.yml", {"format": "streamreact"}),             # streamers react
          ("18:47", "daily.yml", {"mode": "check"}),
          ("20:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("21:07", "gta_waited.yml", {"format": "gtamath"})]                 # original: the GTA Math skit
-# Clips only for a week: the original reels (daily reel, catch-up, GTA Math) are paused until this time.
+         ("21:07", "gta_waited.yml", {"format": "streamvs"})]                # GTA 5 vs GTA 6
+# the main daily data reel stays paused until this time (the originals come back once a day, decided Monday)
 PAUSE_UNTIL = datetime(2026, 11, 25, 15, 12, tzinfo=TZ)
-PAUSED = {"06:13", "10:37", "13:37", "16:37", "21:07"}
+PAUSED = {"06:13"}
 LATE_OK = timedelta(minutes=90)
 LIFE = timedelta(hours=5, minutes=30)
 
@@ -51,10 +51,7 @@ def due(now):
             h, m = map(int, hm.split(":"))
             at = datetime(day.year, day.month, day.day, h, m, tzinfo=TZ)
             if hm in PAUSED and at < PAUSE_UNTIL:
-                if hm == "06:13":
-                    continue
-                # the paused original's slot becomes a clip, or a GTA 5 vs GTA 6 at 10:37 and 9:07 PM
-                wf, inputs = "gta_waited.yml", {"format": "streamvs" if hm in ("10:37", "21:07") else "streamclip"}
+                continue
             if at <= now < at + LATE_OK:
                 yield at, wf, inputs
 

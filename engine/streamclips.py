@@ -50,9 +50,14 @@ GAME5 = "Grand Theft Auto V"
 ACTIONS = {"police chase": "POLICE", "car crash": "CRASHES", "swimming": "WATER", "falling": "FALLS", "explosion": "EXPLOSIONS",
            "shootout": "GUNFIGHTS", "driving fast": "DRIVING", "motorcycle": "BIKES", "flying": "FLYING", "fist fight": "FIGHTS",
            "robbery": "ROBBERIES", "weather": "WEATHER", "beach": "BEACHES", "npc reaction": "NPCS", "ragdoll": "RAGDOLL"}
-MIN_S, MAX_S = 20, 60            # Twitch clips we look at (shorter ones rarely hold a story)
-CUT_MIN, CUT_MAX = 18, 40        # what we keep of them: the setup, the moment and the reaction
-PER_STREAMER_DAY = 2
+MIN_S, MAX_S = 15, 60            # Twitch clips we look at
+CUT_MIN, CUT_MAX = 12, 40        # what we keep: 12 to 20 s for a punchy moment, longer only when it needs a setup
+MIN_VIEWS = 500                  # viewers voted: a clip needs this many Twitch views
+FRESH_H = 12                     # fresh clips only (day-1 missions age out); 24 h if 12 comes up dry
+MIN_SCORE = 7                    # the final pick posts nothing below this
+EXPOSED = {"FEMALE_BREAST_EXPOSED", "FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED", "BUTTOCKS_EXPOSED", "ANUS_EXPOSED"}
+CLIP_PLATFORMS = ["youtube", "facebook"]   # plain clips: TikTok and Instagram demote reposted streams
+PER_STREAMER_DAY = 1
 SCREENS = 10         # most fresh clips the cheap model screens per reel (about half a cent each); free filter first
 SWEARS = re.compile(r"^(f+u+c+k\w*|motherf\w*|s+h+i+t\w*|bitch\w*|asshole\w*|dick\w*|pussy\w*|bastard\w*|cunt\w*)([.,!?]*)$", re.I)
 # the clip at the same loudness as every other, its picture lightly sharpened (it gets enlarged in the vertical) and kept near-lossless
@@ -117,7 +122,7 @@ def game_id(tok, name=GAME):
     return g[0]["id"]
 
 
-def candidates(st, hours=36, game=GAME):
+def candidates(st, hours=FRESH_H, game=GAME):
     """Allowlisted clips of `game` (GTA 6 unless asked) from the last `hours`, best first."""
     from engine import clipstats
     tok = token()
@@ -146,7 +151,7 @@ def candidates(st, hours=36, game=GAME):
             continue
         med = statistics.median([c["view_count"] for c in clips]) or 1
         for c in clips:
-            if c["id"] in used or not MIN_S <= c["duration"] <= MAX_S:
+            if c["id"] in used or not MIN_S <= c["duration"] <= MAX_S or c["view_count"] < MIN_VIEWS:
                 continue
             age = (datetime.now(timezone.utc) - datetime.fromisoformat(c["created_at"].replace("Z", "+00:00"))).total_seconds() / 3600
             c["login"], c["vph"], c["outlier"] = u["login"], c["view_count"] / max(age, 1), c["view_count"] / med
@@ -277,7 +282,9 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
     "action": {"type": "string", "enum": [*ACTIONS, "none"], "description": "the main on-screen action, for GTA 5 vs GTA 6 comparisons; none if no clear one"},
     "facecam": {**BOX, "description": "the streamer's webcam as fractions of the frame (x, y = top-left), null if none"},
     "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and overlays"},
-    "start": {"type": "number", "description": "seconds: where the SETUP begins, so someone scrolling in understands the situation (18 to 40 s in total)"},
+    "start": {"type": "number", "description": "seconds: where the reel starts. Punchy moment: just before it (12 to 20 s in total). Only a moment that needs a setup starts earlier (up to 40 s)"},
+    "nudity": {"type": "boolean", "description": "true if any nude body shows (it gets blurred automatically, do NOT reject for it)"},
+    "face_visible": {"type": "boolean", "description": "true if the streamer's face is visible on screen (a facecam)"},
     "end": {"type": "number", "description": "seconds: after the streamer's reaction to the payoff ends"},
     "story": {"type": "boolean", "description": "true only if a viewer with no context can follow it: a setup, a payoff and a reaction"},
     "setup": {"type": "string", "description": "one line shown for the first seconds, 6 to 14 words, present tense, what is going on BEFORE the payoff, never revealing it. E.g. 'xQc tries to rob a store with cops one block away'"},
@@ -287,22 +294,22 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
     "title": {"type": "string", "description": "starts with 'GTA 6', under 60 characters, no hashtags. Reaction clips name the streamer: 'GTA 6: Lacy Sees Lucia For The First Time'."},
     "description": {"type": "string", "description": "1 or 2 short sentences"},
     "pinned_comment": {"type": "string", "description": "a question that gets replies"}},
-    "required": ["use", "why", "score", "star", "moment", "start", "end", "peak", "story", "setup", "cold_open", "hook", "title", "description", "pinned_comment"]}}
+    "required": ["use", "why", "score", "star", "moment", "start", "end", "peak", "story", "setup", "cold_open", "nudity", "face_visible", "hook", "title", "description", "pinned_comment"]}}
 
-SCREEN_SYS = """You pick GTA 6 stream clips for The Daily Drop, a Shorts channel for gamers 13 to 25, during launch week.
-Be generous: launch hype is the point. Gameplay, chaos, funny fails, police chases, the streamer losing it, first impressions,
-the launch countdown and first boot, and short cutscene moments where the streamer's reaction is the star are all fine.
-Reject the clip (use=false) ONLY if one of these is true (the apps remove these or restrict the channel):
-- nudity or sexual content on screen (bare breasts, genitals, sex scenes, strip club scenes)
-- a major story spoiler: an ending, a death of a main character or a big twist (early-game scenes are fine)
+SCREEN_SYS = """You are the first filter for GTA 6 stream clips for The Daily Drop, a Shorts channel for gamers 13 to 25.
+What wins (our hit: a streamer knocks a grandma off her mobility scooter and steals it, his face cracking up on camera):
+an absurd, chaotic or funny thing you can SEE happen, understandable on mute in 1 second, plus a visible reaction.
+Score 1 to 10 on that. Low scores: talking about the game, opinions ("it's too easy"), menus, walking around, a truck driving by.
+Reject the clip (use=false) ONLY if:
+- a sex act or sexual scene (nudity alone is fine: it gets blurred automatically; set nudity=true)
+- slurs or hateful content (ordinary swearing is fine: it gets bleeped)
+- a major story spoiler (an ending, a main character's death, a big twist)
 - graphic gore in the first 7 seconds
-- a song with lyrics is clearly playing (a radio station or music on stream)
-- slurs or hateful content from the streamer
-- dead air: nothing happens and nobody reacts
-- no story: random gameplay with no point, where someone scrolling in wouldn't get what happened (set story=false)
-Find the facecam and the game region. Decide whether the reaction or the gameplay is the star, and write the hook and
-title for that. Pick the trim as a tiny story: start where the setup begins (what they're doing, what's about to go wrong), keep
-the payoff, end after the streamer's reaction. 18 to 40 seconds, no dead air at either end. Write the setup line. The loudness peaks and the timed transcript tell you where things happen.
+- a song with lyrics clearly playing
+- no story: random gameplay where someone scrolling in wouldn't get what happened (story=false)
+- the reaction is the star but the streamer's face is not visible (face_visible=false): a voice over gameplay is not a reaction
+Find the facecam and the game region. Trim to fit the moment: a punchy moment is 12 to 20 seconds, starting just before it;
+only a moment that needs context starts earlier (up to 40 s). End after the reaction, no dead air. Write the setup line.
 Also tag the main on-screen action (police chase, car crash, ...) so the clip can be paired with GTA 5; none if there isn't one."""
 
 SCREEN5_SYS = """You tag GTA 5 (Grand Theft Auto V) stream clips, to pair them with GTA 6 clips of the SAME action in a 'GTA 5 vs GTA 6' Short.
@@ -343,6 +350,9 @@ def screen(c, src, dur, words, loud, out, system=None):
     if v.get("use") and v.get("story") is False:
         v["use"] = False
         v["why"] = f"no story: {v.get('why', '')}"
+    if v.get("use") and v.get("star") == "reaction" and not v.get("face_visible"):
+        v["use"] = False
+        v["why"] = f"reaction with no face on screen: {v.get('why', '')}"
     peak = v.get("peak")
     peak = float(peak) if peak is not None else (loud[0] if loud else dur / 2)
     peak = min(max(peak, 0.0), dur)
@@ -357,6 +367,100 @@ def screen(c, src, dur, words, loud, out, system=None):
         s, e = max(0.0, e - CUT_MIN), min(dur, max(e, s + CUT_MIN))
     v.update({"start": round(s, 2), "end": round(e, 2), "peak": round(peak, 2)})
     return v
+
+
+# ---------- the final pick (the strong model) ----------
+FINAL = {"name": "pick", "description": "Pick the clip to post, or none.", "input_schema": {"type": "object", "properties": {
+    "pick": {"type": "integer", "description": "the clip number to post, or -1 if none is good enough"},
+    "score": {"type": "integer", "description": "1 to 10 for the picked clip; post only at 7 or more"},
+    "why": {"type": "string"},
+    **{k: SCREEN["input_schema"]["properties"][k] for k in ("setup", "hook", "title", "description", "pinned_comment")}},
+    "required": ["pick", "score", "why", "setup", "hook", "title", "description", "pinned_comment"]}}
+FINAL_SYS = """You make the final call on which GTA 6 stream clip The Daily Drop posts (Shorts, gamers 13 to 25).
+What wins: an absurd, chaotic or funny thing you can SEE happen, clear on mute in a second, with the streamer's face reacting.
+Our hit: a streamer knocks a grandma off her mobility scooter and steals it. A flop: a streamer says the game is too easy as a truck drives by.
+Score each clip honestly. Pick the best only if it's 7/10 or more, else pick -1 (posting nothing beats posting a flop).
+Never pick a moment we already posted recently (the list is given). Then write its words:
+hook = the EVENT in 2 to 5 words ('HE STOLE GRANDMA'S SCOOTER'), never a mood ('X LOST IT', 'X IS UNIMPRESSED').
+title starts with 'GTA 6: ' and names the event. setup = the context line, never giving the payoff away."""
+
+
+def recent_moments(st, days=3):
+    cut = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    return [p.get("moment") for p in st["posted"] if p.get("moment") and p["date"] >= cut]
+
+
+def final_pick(cands, st, out):
+    """The strong model sees the finalists side by side (2 frames each) and picks one, or none."""
+    content = []
+    for i, (c, v, info) in enumerate(cands):
+        shots = frames(info["src"], [v["start"] + 0.5, v["peak"]], out, f"fin{i}")
+        content += [{"type": "text", "text": f"Clip {i}: {c['broadcaster_name']}, '{c['title']}' ({c.get('view_count', '?')} Twitch views). "
+                                             f"Screener: {v.get('score')}/10, star {v.get('star')}, moment: {v.get('moment')}. {v.get('why')}\n"
+                                             f"Trim {v['start']}-{v['end']}s, peak {v['peak']}s. Said:\n"
+                                             f"{timed([w for w in info['words'] if v['start'] <= w['start'] <= v['end']])}\n"
+                                             f"Frames: the start, then the peak."}, *map(img, shots)]
+    rec = recent_moments(st)
+    content.append({"type": "text", "text": "Moments we posted in the last 3 days (don't repeat): " + ("; ".join(rec) if rec else "none")})
+    try:
+        return ask(content, FINAL, FINAL_SYS)
+    except Exception as e:
+        print(f"        final pick failed ({str(e)[:80]}), taking the screener's best")
+        i = max(range(len(cands)), key=lambda j: cands[j][1].get("score") or 0)
+        return {"pick": i, "score": cands[i][1].get("score") or 0, "why": "screener's best"}
+
+
+def bleep(info, out):
+    """Swear words muted with a beep laid over them (the captions star them out). Returns info for the new file."""
+    spans = [(max(0.0, w["start"] - 0.03), w["end"] + 0.03) for w in info["words"] if SWEARS.match(re.sub(r"[^\w*.,!?]", "", w["w"]) or "") or "*" in w["w"]]
+    if not spans:
+        return info
+    on = "+".join(f"between(t,{a:.2f},{b:.2f})" for a, b in spans)
+    dst = out / "bleeped.mp4"
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(info["src"]), "-f", "lavfi", "-i", "sine=frequency=1000:sample_rate=48000",
+                    "-filter_complex", f"[0:a]volume='if({on},0,1)':eval=frame[m];[1:a]volume='if({on},0.35,0)':eval=frame[b];"
+                    f"[m][b]amix=inputs=2:duration=first:normalize=0[a]", "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                    str(dst)], check=True)
+    print(f"        bleeped {len(spans)} word(s)")
+    return {**info, "src": dst}
+
+
+_NUDE = None
+
+
+def nude_boxes(src, t0, t1, out, fps=5):
+    """NudeNet (free, runs on the processor) on frames of [t0, t1]: exposed body parts as (time, x, y, w, h), as fractions of the frame."""
+    global _NUDE
+    from nudenet import NudeDetector
+    _NUDE = _NUDE or NudeDetector()
+    d = out / "nn"
+    subprocess.run(["rm", "-rf", str(d)])
+    d.mkdir()
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{max(0.0, t0):.2f}", "-to", f"{t1:.2f}", "-i", str(src), "-vf", f"fps={fps},scale=960:-2",
+                    str(d / "%05d.jpg")], check=True)
+    found = []
+    for f in sorted(d.glob("*.jpg")):
+        t = max(0.0, t0) + (int(f.stem) - 1) / fps
+        from PIL import Image
+        W, H = Image.open(f).size
+        for hit in _NUDE.detect(str(f)):
+            if hit["class"] in EXPOSED and hit["score"] >= 0.3:
+                x, y, w, h = hit["box"]
+                found.append((t, x / W, y / H, w / W, h / H))
+    subprocess.run(["rm", "-rf", str(d)])
+    return found
+
+
+def blur_list(src, start, end, out):
+    """Blur boxes for the trimmed part: each box 30% bigger and held 0.5 s either side, so a missed frame never flashes anything."""
+    out_list = []
+    for t, x, y, w, h in nude_boxes(src, start - 0.5, end + 0.5, out):
+        cx, cy, w2, h2 = x + w / 2, y + h / 2, w * 1.3, h * 1.3
+        out_list.append({"t0": round(t - 0.5, 2), "t1": round(t + 0.5, 2), "x": round(cx - w2 / 2, 4), "y": round(cy - h2 / 2, 4),
+                         "w": round(w2, 4), "h": round(h2, 4)})
+    if out_list:
+        print(f"        blurring {len(out_list)} nudity box(es)")
+    return out_list
 
 
 COPY = {"name": "copy", "description": "The words for the reel.", "input_schema": {"type": "object", "properties": {
@@ -402,13 +506,14 @@ def publish_src(info, name, i):
     return rel
 
 
-def seg(info, v, rel, credit, start, end, label=None, words=True, flash=False):
+def seg(info, v, rel, credit, start, end, label=None, words=True, flash=False, blurs=None):
     ws = [{"w": x["w"], "start": round(x["start"] - start, 2), "end": round(x["end"] - start, 2)}
           for x in info["words"] if start <= x["start"] < end] if words else []
     return {"src": rel, "srcW": info["w"], "srcH": info["h"], "from": round(start, 2), "dur": round(end - start, 2),
             "facecam": v.get("facecam"), "gamebox": v.get("gamebox"), "star": v.get("star") or "gameplay",
             "peak": round(v["peak"] - start, 2) if start <= v["peak"] <= end else None,
-            "words": ws, "credit": credit, "label": label, "flash": flash}
+            "words": ws, "credit": credit, "label": label, "flash": flash,
+            "blurs": [{**b, "t0": round(b["t0"] - start, 2), "t1": round(b["t1"] - start, 2)} for b in (blurs or []) if b["t1"] > start and b["t0"] < end]}
 
 
 def render_reel(segs, hook, out, today, setup=None, setup_at=0.0):
@@ -466,26 +571,35 @@ def gauntlet(final, dur, out):
                GAUNTLET, GAUNTLET_SYS, model=CLAUDE_FAST)
 
 
-def finish(name, out, final, title, description, pinned, credits, st, logins, star):
+def finish(name, out, final, title, description, pinned, credits, st, logins, star, moment=None, platforms=None):
     meta = {"topic": name, "title": title, "description": f"{description}\n\n{credits}", "pinned_comment": pinned, "file": str(final)}
+    if platforms:
+        meta["platforms"] = platforms
     (out / "upload.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False))
     st["count"] += 1
-    st["posted"].append({"topic": name, "logins": logins, "star": star, "date": datetime.now().strftime("%Y-%m-%d")})
+    st["posted"].append({"topic": name, "logins": logins, "star": star, "moment": moment, "date": datetime.now().strftime("%Y-%m-%d")})
 
 
 # ---------- the two formats ----------
-def build(c, v, info, name, out, st, today):
-    """Words, render and checks for one approved clip. Returns the final file, or None if it did not hold up."""
+def build(c, v, info, name, out, st, today, worded=False):
+    """Bleep, blur, words, render and checks for one approved clip. Returns the final file, or None if it did not hold up."""
     try:
-        v = copy(c, v, info["words"])
+        if not worded:
+            v = copy(c, v, info["words"])
+        info = bleep(info, out)
+        blurs = blur_list(info["src"], v["start"], v["end"], out)
         rel = publish_src(info, name, 0)
         credit = f"{c['broadcaster_name']} on Twitch"
-        main = seg(info, v, rel, credit, v["start"], v["end"])
+        main = seg(info, v, rel, credit, v["start"], v["end"], blurs=blurs)
         segs = [main]
         if v.get("cold_open"):                     # the payoff flashed first, only when it makes sense on its own
-            segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True), main]
+            segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True, blurs=blurs), main]
         final, dur = render_reel(segs, v["hook"], out, today, setup=v.get("setup"), setup_at=sum(x["dur"] for x in segs[:-1]))
         g = gauntlet(final, dur, out)
+        if g["pass"] and (blurs or v.get("nudity")):           # the safety net: nothing exposed may be left in the final reel
+            left = nude_boxes(final, 0, dur, out, fps=2)
+            if left:
+                g = {"pass": False, "faults": f"nudity still visible in {len(left)} frame(s) after blurring"}
         print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
         if not g["pass"]:
             return None
@@ -495,7 +609,7 @@ def build(c, v, info, name, out, st, today):
     st["seen"].setdefault(c["id"], {})["posted"] = True
     finish(name, out, final, v["title"], v["description"], v["pinned_comment"],
            f"🎥 {c['broadcaster_name']} on Twitch: https://twitch.tv/{c['login']}\nOriginal clip: {c['url']}",
-           st, [c["login"]], v.get("star"))
+           st, [c["login"]], v.get("star"), v.get("moment"), CLIP_PLATFORMS)
     return final
 
 
@@ -509,25 +623,55 @@ def bank(st, hours=72):
             for lg in p["logins"]:
                 done[lg] = done.get(lg, 0) + 1
     pool = [(k, v) for k, v in st["seen"].items() if v.get("use") and v.get("story") and not v.get("posted") and not v.get("failed")
+            and not v.get("final_no") and v.get("nudity") is not None
             and v.get("at", "") > cut and done.get(v.get("login"), 0) < PER_STREAMER_DAY]
     return sorted(pool, key=lambda kv: -(kv[1].get("score") or 0))
 
 
-def make(dry=False, today=None, tries=30, renders=5, screen_only=False):
-    """One clip: a 1 s cold open of the peak, then the trimmed moment. Built never to come back empty:
-      1. fresh clips (last 36 h), the free filter first, the cheap model screens up to SCREENS of them
-      2. the bank: clips already approved earlier that never got posted (no new screening)
-      3. fresh clips from the last 4 days
-    screen_only: just screen the top clips and remember them (feeds 'streamers react' and the bank)."""
+def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
+    """One clip. The cheap model filters, the strong model picks the best of up to 3 finalists (7/10 or nothing).
+    Built never to come back empty:
+      1. fresh clips (last 12 h), the free filter first, the cheap model screens up to SCREENS of them
+      2. the bank: clips already approved earlier that never got posted
+      3. fresh clips from the last 24 h
+    screen_only: just screen the top clips and remember them (feeds 'streamers react', GTA 5 vs 6 and the bank)."""
     today = today or datetime.now().date()
     st = load_state()
     housekeeping(st)
     budget = {"screens": 0, "renders": renders}
+    KEEP = ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak", "story", "setup", "cold_open",
+            "nudity", "face_visible")
+
+    def decide(finalists):
+        """The strong model's pick among the finalists, then the render. Returns (name, final) or None."""
+        if not finalists:
+            return None
+        if dry:
+            c, v, info, name, out = finalists[0]
+            print(f"        (dry) finalists: {', '.join(f[0]['broadcaster_name'] for f in finalists)}")
+            return name, None
+        while finalists and budget["renders"] > 0:
+            f = final_pick([(c, v, info) for c, v, info, _, _ in finalists], st, finalists[0][4])
+            i = f.get("pick", -1)
+            print(f"        final pick: {i} ({f.get('score')}/10) {str(f.get('why'))[:140]}")
+            if not (0 <= i < len(finalists)) or (f.get("score") or 0) < MIN_SCORE:
+                for x in finalists:
+                    st["seen"].get(x[0]["id"], {})["final_no"] = True
+                return None
+            c, v, info, name, out = finalists.pop(i)
+            v.update({k: f[k] for k in ("setup", "hook", "title", "description", "pinned_comment") if f.get(k)})
+            budget["renders"] -= 1
+            final = build(c, v, info, name, out, st, today, worded=True)
+            if final:
+                return name, final
+            st["seen"].get(c["id"], {})["failed"] = True
+        return None
 
     def fresh(found, limit):
+        finalists = []
         for c in found[:tries]:
             if budget["screens"] >= limit or budget["renders"] <= 0:
-                return None
+                break
             name = f"clip__{today:%Y%m%d}__{c['id'][:24]}".replace("-", "_")
             out = MEDIA_DIR / name
             out.mkdir(parents=True, exist_ok=True)
@@ -546,63 +690,55 @@ def make(dry=False, today=None, tries=30, renders=5, screen_only=False):
                 print(f"        skipped: {e}")
                 continue
             st["seen"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
-                                   "url": c["url"], "title": c["title"],
-                                   **{k: v.get(k) for k in ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak",
-                                                             "story", "setup", "cold_open")}}
+                                   "url": c["url"], "title": c["title"], "views": c["view_count"], **{k: v.get(k) for k in KEEP}}
             print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('star')}, {v.get('moment')}) {v['why'][:110]}")
             if not v["use"] or screen_only:
                 continue
-            if dry:
-                print(f"        trim {v['start']}-{v['end']}s, peak {v['peak']}s | hook: {v['hook']} | title: {v['title']}")
-                return name, None
-            budget["renders"] -= 1
-            final = build(c, v, info, name, out, st, today)
-            if final:
-                return name, final
-            st["seen"][c["id"]]["failed"] = True
-        return None
+            finalists.append((c, v, info, name, out))
+            if len(finalists) == 3:
+                got = decide(finalists)
+                if got:
+                    return got
+                finalists = []
+        return decide(finalists)
 
     try:
         found = candidates(st)
-        print(f"      stream clips: {len(found)} allowlisted GTA 6 clips")
+        print(f"      stream clips: {len(found)} fresh allowlisted GTA 6 clips (last {FRESH_H} h, {MIN_VIEWS}+ views)")
         got = fresh(found, SCREENS)
         if got or screen_only:
             return got or (None, None)
 
-        for cid, m in bank(st):                          # 2. already approved, never posted
-            if budget["renders"] <= 0:
-                break
+        picks = []                                       # 2. already approved, never posted
+        for cid, m in bank(st)[:3]:
             print(f"      from the bank: {m['name']}: {m['title']} (score {m.get('score')})")
             name = f"clip__{today:%Y%m%d}__{cid[:24]}".replace("-", "_")
             out = MEDIA_DIR / name
             out.mkdir(parents=True, exist_ok=True)
-            c = {"id": cid, "login": m["login"], "broadcaster_name": m["name"], "url": m["url"], "title": m["title"]}
             try:
                 info = media_info(download(m["url"], out))
             except Exception as e:
                 print(f"        skipped: {e}")
                 m["failed"] = True
                 continue
+            c = {"id": cid, "login": m["login"], "broadcaster_name": m["name"], "url": m["url"], "title": m["title"], "view_count": m.get("views")}
             pk = min(max(m.get("peak") or info["dur"] / 2, 0.0), info["dur"])
             v = {**m, "peak": pk, "start": min(m.get("start") or 0.0, pk), "end": max(min(m.get("end") or info["dur"], info["dur"]), pk),
-                 "hook": "WAIT FOR IT", "title": f"GTA 6: {m['name']} {m.get('moment') or 'Loses It'}".strip()[:60],
+                 "hook": "WAIT FOR IT", "title": f"GTA 6: {m['name']} {m.get('moment') or ''}".strip()[:60],
                  "description": f"{m['name']} playing GTA 6.", "pinned_comment": "Would you have done the same? 👇"}
-            if dry:
-                return name, None
-            budget["renders"] -= 1
-            final = build(c, v, info, name, out, st, today)
-            if final:
-                return name, final
-            m["failed"] = True
+            picks.append((c, v, info, name, out))
+        got = decide(picks)
+        if got:
+            return got
 
-        print("      widening to the last 4 days")                # 3. older clips
-        got = fresh(candidates(st, hours=96), SCREENS + 8)
+        print("      widening to the last 24 h")                  # 3. a bit older
+        got = fresh(candidates(st, hours=24), SCREENS + 6)
         if got:
             return got
     finally:
         if not dry:
             save_state(st)
-    raise RuntimeError(f"no clip held up ({budget['screens']} screened, bank empty)")
+    raise RuntimeError(f"no clip reached {MIN_SCORE}/10 ({budget['screens']} screened)")
 
 
 GROUP = {"name": "group", "description": "The best 'streamers react' reel you can make.", "input_schema": {"type": "object", "properties": {
@@ -622,7 +758,8 @@ def make_react(dry=False, today=None):
         print(f"      fresh screening skipped: {e}")
     st = load_state()
     cut = (datetime.now(timezone.utc) - timedelta(hours=48)).isoformat()
-    pool = {k: v for k, v in st["seen"].items() if v.get("use") and not v.get("posted") and v.get("at", "") > cut and v.get("moment")}
+    pool = {k: v for k, v in st["seen"].items() if v.get("use") and not v.get("posted") and v.get("at", "") > cut and v.get("moment")
+            and not v.get("nudity")}
     if len({v["login"] for v in pool.values()}) < 2:
         raise RuntimeError("not enough screened clips from different streamers to match")
     listing = "\n".join(f"{k} | {v['name']} | {v['moment']} | {v['star']} | score {v['score']} | {v['title']}" for k, v in pool.items())
@@ -648,7 +785,7 @@ def make_react(dry=False, today=None):
         meta = pool[i]
         sub = out / f"s{n}"
         sub.mkdir(exist_ok=True)
-        info = media_info(download(meta["url"], sub))
+        info = bleep(media_info(download(meta["url"], sub)), sub)
         pk = min(max(meta.get("peak") or info["dur"] / 2, 0.0), info["dur"])
         s, e = max(0.0, pk - 5.5), min(info["dur"], pk + 2.5)      # each streamer: the build-up and the reaction, about 8 s
         v = {**meta, "star": "reaction", "peak": pk}
@@ -662,7 +799,8 @@ def make_react(dry=False, today=None):
         st["seen"][i]["posted"] = True
         st["used"].append(i)
     credits = "\n".join(f"🎥 {pool[i]['name']} on Twitch: https://twitch.tv/{pool[i]['login']} (clip: {pool[i]['url']})" for i in ids)
-    finish(name, out, final, g["title"], g["description"], g["pinned_comment"], credits, st, [pool[i]["login"] for i in ids], "react")
+    finish(name, out, final, g["title"], g["description"], g["pinned_comment"], credits, st, [pool[i]["login"] for i in ids], "react",
+           g["hook"], CLIP_PLATFORMS)
     save_state(st)
     return name, final
 
@@ -720,7 +858,7 @@ def make_vs(dry=False, today=None, pairs=2):
     cut = (datetime.now(timezone.utc) - timedelta(hours=48)).isoformat()
 
     def pool6(st):
-        return {k: v for k, v in st["seen"].items() if v.get("use") and v.get("action") in ACTIONS and not v.get("vs_used")
+        return {k: v for k, v in st["seen"].items() if v.get("use") and v.get("action") in ACTIONS and not v.get("vs_used") and not v.get("nudity")
                 and not v.get("posted") and v.get("at", "") > cut}
     st = load_state()
     if len(pool6(st)) < 3:
