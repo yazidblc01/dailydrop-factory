@@ -624,5 +624,25 @@
     "zernio_id": "6afe4e1e7cc99c931be73a96",
     "posted_at": "2026-11-19T01:18:34+00:00",
     "slot": "waited"
+  },
+  "clip__20261118__ManlyProudPidgeonBloodTr": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=cJmL3jQIGEQ",
+      "facebook": "https://www.facebook.com/reel/1809510803613059",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709709971084119304",
+      "instagram": "https://www.instagram.com/reel/Df6DQ4nFVxc/"
+    },
+    "url": "https://www.youtube.com/watch?v=cJmL3jQIGEQ",
+    "title": "GTA 6: jasontheween Goes Full Road Rage",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afe645956cd4bed5f4cdfe1",
+    "posted_at": "2026-11-19T02:52:58+00:00",
+    "slot": "waited"
   }
 }

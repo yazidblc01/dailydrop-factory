@@ -35,9 +35,22 @@
     "TiredConfidentPhoneCopyThis-bndkrew-Sq62qYKf",
     "GrossSmoggyLadiesFUNgineer-ke4af90JEX91EDuX",
     "DullCalmGullUWot-yyTc1tkQ0S4Gv-5E",
-    "SincerePluckyPepperoniDxAbomb-PvKlNZ-B7Y0IhxCv"
+    "SincerePluckyPepperoniDxAbomb-PvKlNZ-B7Y0IhxCv",
+    "ViscousCallousMuleRuleFive-HpdKHtraw_2ro91m",
+    "ObliqueProtectiveSardinePJSalt-AEA-GOY38N4ROLcJ",
+    "TenuousFunWaspBigBrother-pWNf2GWhFy6gEUad",
+    "FurryAntsyRamenJonCarnage-ZcZa5r607qBCjERF",
+    "EvilKindChamoisFreakinStinkin-_Q6h9MGvEezIzSw0",
+    "SparklingGrotesqueArtichokeCorgiDerp-I3x3bsdsVQvrlIkt",
+    "WealthyObliqueCiderNononoCat-4AWlrWlfOilJh5Vi",
+    "SeductivePlacidOysterOSsloth-n4IP8pGHH3fu5X8z",
+    "RacyFreezingWebDuDudu-L5DqegYwxBAaJyMT",
+    "CharmingCutePastaGivePLZ-YO40ueMBjtcjczNg",
+    "MoldySmoggyDonkeyThisIsSparta-mXBDQ8JcdmTZV7p5",
+    "DifficultTrustworthyCobblerRaccAttack-eZdV25Nhm-1NTlM2",
+    "ManlyProudPidgeonBloodTrail-PjN9TVhQ1zqg3GPr"
   ],
-  "count": 6,
+  "count": 7,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -978,6 +991,310 @@
       "end": 28.5,
       "peak": 7.0,
       "posted": true
+    },
+    "ViscousCallousMuleRuleFive-HpdKHtraw_2ro91m": {
+      "at": "2026-11-19T02:35:13.587546+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/ViscousCallousMuleRuleFive-HpdKHtraw_2ro91m",
+      "title": "gyaaat",
+      "use": false,
+      "why": "Rejected: the first frame shows a character in a barely-covering bikini with bare breasts and a thong, which is sexualized nudity on screen. The clip is also a streamer reacting to that content, with no speech and no gameplay payoff to salvage it.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "none",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.4,
+        "w": 0.22,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 8.0,
+      "end": 30.0,
+      "peak": 21.5
+    },
+    "ObliqueProtectiveSardinePJSalt-AEA-GOY38N4ROLcJ": {
+      "at": "2026-11-19T02:35:58.104874+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/ObliqueProtectiveSardinePJSalt-AEA-GOY38N4ROLcJ",
+      "title": "what is going on in GTA 6",
+      "use": true,
+      "why": "Clean, early-game motorcycle ride on a highway with a \"Yo!\" reaction and a car in the lane. No nudity, spoilers, gore, music with lyrics, slurs, or dead air. The streamer's reaction is small, so the gameplay is the star.",
+      "score": 5,
+      "star": "gameplay",
+      "moment": "motorcycle ride on the highway",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.27,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 24.0,
+      "peak": 1.5
+    },
+    "FurryAntsyRamenJonCarnage-ZcZa5r607qBCjERF": {
+      "at": "2026-11-19T02:37:17.607265+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/FurryAntsyRamenJonCarnage-ZcZa5r607qBCjERF",
+      "title": "Put what",
+      "use": true,
+      "why": "Streamer robs a teller at a Money Shift-style bank and gets loud and hyped at the counter. The on-screen content is a robbery with no nudity, no spoilers, no song and no slurs, so it's safe. The crude shouting is the draw, though the phrasing is borderline for the audience.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "bank teller robbery at the counter",
+      "action": null,
+      "facecam": {
+        "x": 0.79,
+        "y": 0.0,
+        "w": 0.21,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.94
+      },
+      "start": 0.0,
+      "end": 19.8,
+      "peak": 7.25
+    },
+    "EvilKindChamoisFreakinStinkin-_Q6h9MGvEezIzSw0": {
+      "at": "2026-11-19T02:37:45.523578+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/EvilKindChamoisFreakinStinkin-_Q6h9MGvEezIzSw0",
+      "title": "Jynxy plays gta6 for the first time",
+      "use": true,
+      "why": "Streamer reacts to the GTA 6 cutscene and VI logo, with the chat hyping up. The clip is clean: no nudity, no spoilers, no song lyrics, and he's talking throughout.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "first look at GTA 6 cutscene",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.58,
+        "w": 0.31,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.05,
+        "w": 1.0,
+        "h": 0.9
+      },
+      "start": 3.0,
+      "end": 14.8,
+      "peak": 5.5
+    },
+    "SparklingGrotesqueArtichokeCorgiDerp-I3x3bsdsVQvrlIkt": {
+      "at": "2026-11-19T02:38:22.991832+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/SparklingGrotesqueArtichokeCorgiDerp-I3x3bsdsVQvrlIkt",
+      "title": "Kai talks GTA 6 after the first look",
+      "use": true,
+      "why": "Kai reacts to the GTA 6 first look, praising Miami, the characters, and the visuals. Clear reaction moment with no nudity, spoilers, slurs, or lyrics. Facecam is the star, and the game itself isn't visible in these frames.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Kai's first look reaction",
+      "action": null,
+      "facecam": {
+        "x": 0.36,
+        "y": 0.42,
+        "w": 0.28,
+        "h": 0.58
+      },
+      "gamebox": null,
+      "start": 0.5,
+      "end": 30.0,
+      "peak": 21.3
+    },
+    "WealthyObliqueCiderNononoCat-4AWlrWlfOilJh5Vi": {
+      "at": "2026-11-19T02:39:18.952097+00:00",
+      "login": "clix",
+      "name": "Clix",
+      "url": "https://www.twitch.tv/clix/clip/WealthyObliqueCiderNononoCat-4AWlrWlfOilJh5Vi",
+      "title": "clix crashout",
+      "use": true,
+      "why": "Clix loses it during a seaplane escape that ends in a FAILED screen. His yelling and \"I'm trying\" lines carry the clip, and the swearing is censored. Early-game mission, no nudity, slurs, music, or spoilers.",
+      "score": 8,
+      "star": "reaction",
+      "moment": "failed seaplane escape from camp",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.25,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 30.0,
+      "end": 40.5,
+      "peak": 33.5
+    },
+    "SeductivePlacidOysterOSsloth-n4IP8pGHH3fu5X8z": {
+      "at": "2026-11-19T02:40:39.705780+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/SeductivePlacidOysterOSsloth-n4IP8pGHH3fu5X8z",
+      "title": "first baby in gta",
+      "use": true,
+      "why": "Kai reacts to a surprise baby found in a police scene, and his \"first baby in GTA\" line gets a big reaction. No nudity, no music with lyrics, no spoiler of a main character's death or ending, and no dead air. The profanity is bleeped and not a slur.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "first baby found by police",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.32,
+        "w": 0.2,
+        "h": 0.35
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 17.0,
+      "end": 28.0,
+      "peak": 23.5
+    },
+    "RacyFreezingWebDuDudu-L5DqegYwxBAaJyMT": {
+      "at": "2026-11-19T02:41:19.840044+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/RacyFreezingWebDuDudu-L5DqegYwxBAaJyMT",
+      "title": "😂😂",
+      "use": false,
+      "why": "At the 9.2s peak, a character in the background is shown topless and in underwear, which breaks the nudity rule. The reaction is strong, but the frame can't be cut around cleanly in a 30s reel.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Snapmatic scrolling reveal",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.25,
+        "h": 0.33
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.88,
+        "h": 1.0
+      },
+      "start": 4.0,
+      "end": 20.0,
+      "peak": 9.2
+    },
+    "CharmingCutePastaGivePLZ-YO40ueMBjtcjczNg": {
+      "at": "2026-11-19T02:41:56.009563+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/CharmingCutePastaGivePLZ-YO40ueMBjtcjczNg",
+      "title": "Lacy gets excited and realises he has no more money!",
+      "use": false,
+      "why": "Rejected: the clip shows a strip club scene with a near-nude performer in a thong, which is sexual content under the rules. The streamer's money-running-out joke doesn't change that.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club money runs out",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.26,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.1,
+      "end": 30.1,
+      "peak": 11.5
+    },
+    "MoldySmoggyDonkeyThisIsSparta-mXBDQ8JcdmTZV7p5": {
+      "at": "2026-11-19T02:42:30.966622+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/MoldySmoggyDonkeyThisIsSparta-mXBDQ8JcdmTZV7p5",
+      "title": "GYATT",
+      "use": false,
+      "why": "Rejected for nudity: the clip shows a fully nude character in the shower for most of its length, and the dialogue turns sexual (\"is he stroking it\"). This breaks the app's nudity and sexual content rule.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "Jason's shower scene",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.4,
+        "w": 0.27,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.1,
+      "end": 30.1,
+      "peak": 15.5
+    },
+    "ManlyProudPidgeonBloodTrail-PjN9TVhQ1zqg3GPr": {
+      "at": "2026-11-19T02:45:42.599432+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/ManlyProudPidgeonBloodTrail-PjN9TVhQ1zqg3GPr",
+      "title": "crazy road rage",
+      "use": true,
+      "why": "A clear reaction moment: the streamer gets cut off in traffic and erupts into road rage, with a loud peak and a funny payoff line. No spoilers, nudity, gore, lyric music, or dead air.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "road rage after being cut off",
+      "action": null,
+      "facecam": {
+        "x": 0.8,
+        "y": 0.55,
+        "w": 0.2,
+        "h": 0.35
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 11.0,
+      "end": 29.8,
+      "peak": 19.75,
+      "posted": true
     }
   },
   "posted": [
@@ -1034,6 +1351,14 @@
       "topic": "clip__20261118__SincerePluckyPepperoniDx",
       "logins": [
         "ishowspeed"
+      ],
+      "star": "reaction",
+      "date": "2026-11-18"
+    },
+    {
+      "topic": "clip__20261118__ManlyProudPidgeonBloodTr",
+      "logins": [
+        "jasontheween"
       ],
       "star": "reaction",
       "date": "2026-11-18"
@@ -1141,6 +1466,81 @@
       "end": 60.0,
       "peak": 54.0,
       "vs_used": true
+    },
+    "HyperCharmingAlbatrossVoHiYo-ZI8CfDwF12jixR76": {
+      "at": "2026-11-19T02:43:00.348551+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/HyperCharmingAlbatrossVoHiYo-ZI8CfDwF12jixR76",
+      "title": "With his own car",
+      "use": true,
+      "score": 6,
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.556,
+        "w": 0.333,
+        "h": 0.444
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.5,
+      "end": 12.5,
+      "peak": 3.5
+    },
+    "DullStrangeMeerkatSoonerLater-GMXyrsPcsw4AdhWQ": {
+      "at": "2026-11-19T02:43:33.550775+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/DullStrangeMeerkatSoonerLater-GMXyrsPcsw4AdhWQ",
+      "title": "Happens to the best of us",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.55,
+        "w": 0.34,
+        "h": 0.45
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 8.0,
+      "end": 22.0,
+      "peak": 12.0
+    },
+    "OilyDirtyBaguetteAMPEnergy-vW8FnWGmrEGvjqau": {
+      "at": "2026-11-19T02:44:21.807375+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/OilyDirtyBaguetteAMPEnergy-vW8FnWGmrEGvjqau",
+      "title": "HARD R",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0.17,
+        "w": 0.25,
+        "h": 0.66
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 8.0,
+      "end": 22.0,
+      "peak": 14.0
     }
   }
 }
