@@ -644,5 +644,25 @@
     "zernio_id": "6afe645956cd4bed5f4cdfe1",
     "posted_at": "2026-11-19T02:52:58+00:00",
     "slot": "waited"
+  },
+  "clip__20261119__VivaciousCallousYogurtDx": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=ZgW5srOr1sw",
+      "facebook": "https://www.facebook.com/reel/2586074185239077",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709886824142982401",
+      "instagram": "https://www.instagram.com/reel/Df7R0GJG17B/"
+    },
+    "url": "https://www.youtube.com/watch?v=ZgW5srOr1sw",
+    "title": "GTA 6: xQc Says the Frame Rate Gave Him Headaches",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6aff053c778834724fc9afc7",
+    "posted_at": "2026-11-19T14:19:32+00:00",
+    "slot": "waited"
   }
 }

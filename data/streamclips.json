@@ -48,9 +48,10 @@
     "CharmingCutePastaGivePLZ-YO40ueMBjtcjczNg",
     "MoldySmoggyDonkeyThisIsSparta-mXBDQ8JcdmTZV7p5",
     "DifficultTrustworthyCobblerRaccAttack-eZdV25Nhm-1NTlM2",
-    "ManlyProudPidgeonBloodTrail-PjN9TVhQ1zqg3GPr"
+    "ManlyProudPidgeonBloodTrail-PjN9TVhQ1zqg3GPr",
+    "VivaciousCallousYogurtDxCat-tcAghtrsbnP82HX2"
   ],
-  "count": 7,
+  "count": 8,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -1295,6 +1296,35 @@
       "end": 29.8,
       "peak": 19.75,
       "posted": true
+    },
+    "VivaciousCallousYogurtDxCat-tcAghtrsbnP82HX2": {
+      "at": "2026-11-19T14:09:45.794917+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/VivaciousCallousYogurtDxCat-tcAghtrsbnP82HX2",
+      "title": "xQc shares his thoughts on GTA VI after a 24hr stream",
+      "use": true,
+      "why": "xQc gives a blunt take on GTA VI's frame rate and immersion. The reaction carries the clip, and nothing on screen is a spoiler, nudity, gore, or song.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "xQc on the frame rate",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.21,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.95
+      },
+      "start": 8.0,
+      "end": 33.7,
+      "peak": 31.0,
+      "posted": true
     }
   },
   "posted": [
@@ -1362,9 +1392,17 @@
       ],
       "star": "reaction",
       "date": "2026-11-18"
+    },
+    {
+      "topic": "clip__20261119__VivaciousCallousYogurtDx",
+      "logins": [
+        "xqc"
+      ],
+      "star": "reaction",
+      "date": "2026-11-19"
     }
   ],
-  "house": "2026-11-18",
+  "house": "2026-11-19",
   "seen5": {
     "TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN": {
       "at": "2026-11-18T21:16:59.699365+00:00",
