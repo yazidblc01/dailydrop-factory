@@ -684,5 +684,25 @@
     "posted_at": "2026-11-19T16:14:41+00:00",
     "url": "https://www.youtube.com/watch?v=4iDCpLQrY90",
     "slot": "waited"
+  },
+  "clip__20261119__CooperativeBlatantPistac": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=eLAPsgBC7pc",
+      "facebook": "https://www.facebook.com/reel/2175041450599831",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709936667729071368",
+      "instagram": "https://www.instagram.com/reel/Df7n7WggbBS/"
+    },
+    "title": "GTA 6: ohnePixel Gets Spooked By Something At Night",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6aff328744cddc2b80d100d6",
+    "posted_at": "2026-11-19T17:32:36+00:00",
+    "url": "https://www.youtube.com/watch?v=eLAPsgBC7pc",
+    "slot": "waited"
   }
 }

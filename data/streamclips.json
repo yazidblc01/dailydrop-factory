@@ -63,9 +63,10 @@
     "TiredCovertCougarHeyGirl-RI7i3wdJxWw6RTWv",
     "PeppySlickOwlAliens-6hpIHuZQymeRQ2y9",
     "TrappedObliviousSharkMoreCowbell-c8N9-I4Lf-TA13Cv",
-    "TrappedYummyMetalWTRuck-5L2ytqbMKZmQThQ5"
+    "TrappedYummyMetalWTRuck-5L2ytqbMKZmQThQ5",
+    "CooperativeBlatantPistachioRalpherZ-OS-L15w7fNFQNzSn"
   ],
-  "count": 9,
+  "count": 10,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -1727,6 +1728,30 @@
       "end": 20.0,
       "peak": 8.8,
       "posted": true
+    },
+    "CooperativeBlatantPistachioRalpherZ-OS-L15w7fNFQNzSn": {
+      "at": "2026-11-19T17:09:29.580363+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/CooperativeBlatantPistachioRalpherZ-OS-L15w7fNFQNzSn",
+      "title": "Move Mark",
+      "use": true,
+      "why": "Streamer's loud, rapid-fire reaction (\"selfish... what's that? what was it?\") over a night-time walk and a crouch by a parked SUV, with an NPC reacting nearby. No nudity, spoiler, gore, lyrics, slurs, or dead air. The voice carries it, but the on-screen action is light.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "streamer startled on night street",
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 14.8,
+      "peak": 8.25,
+      "posted": true
     }
   },
   "posted": [
@@ -1807,6 +1832,14 @@
       "topic": "clip__20261119__TrappedYummyMetalWTRuck_",
       "logins": [
         "xqc"
+      ],
+      "star": "reaction",
+      "date": "2026-11-19"
+    },
+    {
+      "topic": "clip__20261119__CooperativeBlatantPistac",
+      "logins": [
+        "ohnepixel"
       ],
       "star": "reaction",
       "date": "2026-11-19"
