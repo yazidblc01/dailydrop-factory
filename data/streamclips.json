@@ -77,9 +77,19 @@
     "OnerousSwissIguanaChefFrank-YhL9t_QVWtPNUe6v",
     "TiredSecretiveChipmunkUncleNox-DfMhl81_JzpEi5pi",
     "AbrasivePatientMageRaccAttack-buWjiUiqf-LAh40B",
-    "DifferentBlindingMartenKappaPride-0r0DTjKY8R7hrnkX"
+    "DifferentBlindingMartenKappaPride-0r0DTjKY8R7hrnkX",
+    "InventiveStylishSwanTBCheesePull-bpUxg33iLnxUyEOG",
+    "CuriousBadEchidnaCoolStoryBro-g66TfyHbfF_r5vxZ",
+    "BeautifulModernTermiteYouWHY-nEB5VffTKnvTR2UD",
+    "BrightWanderingLemurAMPTropPunch-1Ygg3jlwmtQYBO13",
+    "HeadstrongEnthusiasticDragonflyOSsloth-gCmDYEr1mzJEH3tW",
+    "FrozenPluckyPistachioBleedPurple-D6ZTqqv8nSMcLUy2",
+    "TubularBashfulHeronShadyLulu-XAm39nSjTyF0Gwcp",
+    "NeighborlyScrumptiousBeanEleGiggle-vCkxTlQrhDPjBG4l",
+    "JazzyOptimisticMacaroniSMOrc-bBkV8KO_jmGrw4uj",
+    "SwissBenevolentRhinocerosRedCoat-_qn39IFUSFPG0nep"
   ],
-  "count": 12,
+  "count": 13,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -2165,6 +2175,316 @@
       "setup": "IShowSpeed runs from cops with a stolen bag, looking for a hiding spot",
       "cold_open": false,
       "posted": true
+    },
+    "InventiveStylishSwanTBCheesePull-bpUxg33iLnxUyEOG": {
+      "at": "2026-11-19T20:57:22.207578+00:00",
+      "login": "dinah",
+      "name": "Dinah",
+      "url": "https://www.twitch.tv/dinah/clip/InventiveStylishSwanTBCheesePull-bpUxg33iLnxUyEOG",
+      "title": "LMAO",
+      "views": 55692,
+      "use": false,
+      "why": "Rejected: the in-game scene is a sexualized strip club lap dance, with close framing on a near-nude character and hands on her body, which falls under the sexual scene rule. The payoff is also weak, a single \"Please, I'm a professional\" line followed by a mission map.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "strip club heist briefing",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.5,
+        "w": 1.0,
+        "h": 0.5
+      },
+      "start": 0.0,
+      "end": 25.5,
+      "peak": 24.0,
+      "story": false,
+      "setup": "Dinah plays a strip club scene in GTA 6, then reacts to the mission briefing",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "CuriousBadEchidnaCoolStoryBro-g66TfyHbfF_r5vxZ": {
+      "at": "2026-11-19T20:57:34.874794+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/CuriousBadEchidnaCoolStoryBro-g66TfyHbfF_r5vxZ",
+      "title": "How did they survive???",
+      "views": 23187,
+      "use": true,
+      "why": "A seaplane flies low over the water past a power pole while the streamer jokes about not questioning the physics. The loudest moment is near the end, but the frames don't clearly show the crash or survival, so the payoff is uncertain and the clip is only a modest pick.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "seaplane flight near power pole",
+      "action": "flying",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.13,
+        "w": 0.21,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 18.0,
+      "end": 35.7,
+      "peak": 32.5,
+      "story": true,
+      "setup": "caseoh_ flies a seaplane low over the water near power lines",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "BeautifulModernTermiteYouWHY-nEB5VffTKnvTR2UD": {
+      "at": "2026-11-19T20:57:49.578540+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/BeautifulModernTermiteYouWHY-nEB5VffTKnvTR2UD",
+      "title": "He called it!   the timing haha",
+      "views": 7158,
+      "use": true,
+      "why": "Absurd premise: caseoh riding a mobility scooter around town while his chat taunts him, then he yells that it's broken. The reaction is loud and face-visible, and the dialogue is funny on its own. The exact payoff is not fully clear from the frames, so the score is moderate.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "riding the mobility scooter",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.13,
+        "w": 0.21,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 21.5,
+      "peak": 3.5,
+      "story": true,
+      "setup": "Caseoh rides a mobility scooter while chat mocks his driving",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "BrightWanderingLemurAMPTropPunch-1Ygg3jlwmtQYBO13": {
+      "at": "2026-11-19T20:58:11.469885+00:00",
+      "login": "timthetatman",
+      "name": "TimTheTatman",
+      "url": "https://www.twitch.tv/timthetatman/clip/BrightWanderingLemurAMPTropPunch-1Ygg3jlwmtQYBO13",
+      "title": "LMAO",
+      "views": 7712,
+      "use": false,
+      "why": "Rejected as a likely sexual scene. The streamer and chat describe a series of rooms that get progressively more explicit (\"every room gets better\", \"no explicit nudity\", \"go back to the other room\"), and the streamer's face is visible throughout. The frames only show a clothed woman walking hallways, so this is unconfirmed. A human should re-check the rooms before any reuse. Otherwise the reaction is strong and the clip works as a story.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "exploring the strange hallway rooms",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.25,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 12.0,
+      "end": 52.0,
+      "peak": 20.5,
+      "story": true,
+      "setup": "TimTheTatman walks a hallway of rooms that keep getting stranger",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "HeadstrongEnthusiasticDragonflyOSsloth-gCmDYEr1mzJEH3tW": {
+      "at": "2026-11-19T20:58:25.884824+00:00",
+      "login": "squeex",
+      "name": "Squeex",
+      "url": "https://www.twitch.tv/squeex/clip/HeadstrongEnthusiasticDragonflyOSsloth-gCmDYEr1mzJEH3tW",
+      "title": "classic",
+      "views": 7870,
+      "use": true,
+      "why": "Clear chain: he's bad at controls, cops are chasing him, then a sidewalk scuffle and his outraged reaction. The \"such an ass\" lines are funny and the facecam shows his reaction. Mid-level chaos, not a big payoff.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "trying to evade the cops",
+      "action": "police chase",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.48
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.485,
+        "w": 1,
+        "h": 0.515
+      },
+      "start": 12.0,
+      "end": 44.6,
+      "peak": 42.5,
+      "story": true,
+      "setup": "Squeex fumbles the controls while the cops chase him through the city",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "FrozenPluckyPistachioBleedPurple-D6ZTqqv8nSMcLUy2": {
+      "at": "2026-11-19T20:59:06.741236+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/FrozenPluckyPistachioBleedPurple-D6ZTqqv8nSMcLUy2",
+      "title": "We have to go to the top",
+      "views": 2709,
+      "use": true,
+      "why": "Jerma climbs a tower joking about nosebleeds and parachutes, then falls off the top. His shocked scream and the \"wasted\" screen make a clear action, consequence, and reaction. Face is visible in the facecam throughout.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "climbing tower then falling off",
+      "action": "falling",
+      "facecam": {
+        "x": 0,
+        "y": 0.01,
+        "w": 0.86,
+        "h": 0.48
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.59,
+        "w": 1.0,
+        "h": 0.41
+      },
+      "start": 4.0,
+      "end": 33.0,
+      "peak": 27.5,
+      "story": true,
+      "setup": "Jerma climbs a tower joking about a nosebleed and no parachute",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
+    },
+    "TubularBashfulHeronShadyLulu-XAm39nSjTyF0Gwcp": {
+      "at": "2026-11-19T20:59:21.303178+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/TubularBashfulHeronShadyLulu-XAm39nSjTyF0Gwcp",
+      "title": "oh well",
+      "views": 5661,
+      "use": false,
+      "why": "Mild, mostly talk-driven moment. The payoff is a joke about running over a dog, and the reaction is the star, but the facecam is a cartoon avatar, not the streamer's real face, so there is no visible reaction.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "running over a dog in a van",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.14,
+        "y": 0.73,
+        "w": 0.1,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 12.0,
+      "end": 29.4,
+      "peak": 25.8,
+      "story": true,
+      "setup": "TheBurntPeanut drives a van he stole and jokes about the drive-bys he's doing",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false
+    },
+    "NeighborlyScrumptiousBeanEleGiggle-vCkxTlQrhDPjBG4l": {
+      "at": "2026-11-19T20:59:59.373368+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/NeighborlyScrumptiousBeanEleGiggle-vCkxTlQrhDPjBG4l",
+      "title": "Jerma in a sticky situation",
+      "views": 3483,
+      "use": true,
+      "why": "Jerma's Trans Am crashes into a parking booth wall, he yells \"No! No!\", then gets wedged and laughs while stuck. Funny chaos with a clear, visible reaction and a readable line of dialogue. Setup is needed, so it runs from the start.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "stuck in parking booth",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0.072,
+        "w": 0.706,
+        "h": 0.395
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.586,
+        "w": 1,
+        "h": 0.414
+      },
+      "start": 0.0,
+      "end": 38.8,
+      "peak": 37.5,
+      "story": true,
+      "setup": "Jerma speeds through a parking structure and things go wrong fast",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "SwissBenevolentRhinocerosRedCoat-_qn39IFUSFPG0nep": {
+      "at": "2026-11-19T21:00:52.217000+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/SwissBenevolentRhinocerosRedCoat-_qn39IFUSFPG0nep",
+      "title": "W PLAN 🤣🤣🤣👍",
+      "views": 4667,
+      "use": true,
+      "why": "Clear setup and payoff: he repaints a red Phoenix black to dodge heat, then a police car rolls past and he jokes with the officer while laughing on facecam. The 'W PLAN' line and his waving reaction make it funny even on mute.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "repaint to dodge cops",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.02,
+        "y": 0.13,
+        "w": 0.19,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 18.0,
+      "end": 41.0,
+      "peak": 31.8,
+      "story": true,
+      "setup": "caseoh_ repaints his red Phoenix black to dodge the police",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
     }
   },
   "posted": [
@@ -2271,6 +2591,15 @@
         "ishowspeed"
       ],
       "star": "reaction",
+      "date": "2026-11-19"
+    },
+    {
+      "topic": "clip__20261119__FrozenPluckyPistachioBle",
+      "logins": [
+        "jerma985"
+      ],
+      "star": "reaction",
+      "moment": "climbing tower then falling off",
       "date": "2026-11-19"
     }
   ],
