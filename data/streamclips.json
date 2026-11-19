@@ -31,9 +31,13 @@
     "MoralGracefulBorkGingerPower-vJkaq2y2EEZXfAiB",
     "EnergeticVastTofuTheRinger-Mi3gDMWyJsLZwDUy",
     "ProductiveBraveNikudonDeIlluminati-qNMmyjkr7j_nq38Z",
-    "TiredCrepuscularLettuceTebowing-_ckSEJKNEXXBWDj1"
+    "TiredCrepuscularLettuceTebowing-_ckSEJKNEXXBWDj1",
+    "TiredConfidentPhoneCopyThis-bndkrew-Sq62qYKf",
+    "GrossSmoggyLadiesFUNgineer-ke4af90JEX91EDuX",
+    "DullCalmGullUWot-yyTc1tkQ0S4Gv-5E",
+    "SincerePluckyPepperoniDxAbomb-PvKlNZ-B7Y0IhxCv"
   ],
-  "count": 5,
+  "count": 6,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -866,6 +870,114 @@
       "start": 8.0,
       "end": 29.0,
       "peak": 25.5
+    },
+    "TiredConfidentPhoneCopyThis-bndkrew-Sq62qYKf": {
+      "at": "2026-11-19T01:09:09.724375+00:00",
+      "login": "marlon",
+      "name": "Marlon",
+      "url": "https://www.twitch.tv/marlon/clip/TiredConfidentPhoneCopyThis-bndkrew-Sq62qYKf",
+      "title": "gyattttttt",
+      "use": false,
+      "why": "Rejected: the frames center on a near-nude character in a skimpy micro bikini, with the top barely covering the chest. That falls under the nudity and sexual content rule. The Snapmatic and stalking joke is funny, but the visuals can't be cleared for the apps.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Snapmatic stalking Mandy bikini",
+      "action": null,
+      "facecam": {
+        "x": 0.11,
+        "y": 0.0,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.99,
+        "h": 0.9
+      },
+      "start": 8.0,
+      "end": 24.0,
+      "peak": 14.0
+    },
+    "GrossSmoggyLadiesFUNgineer-ke4af90JEX91EDuX": {
+      "at": "2026-11-19T01:10:00.935039+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/GrossSmoggyLadiesFUNgineer-ke4af90JEX91EDuX",
+      "title": "gta 6",
+      "use": false,
+      "why": "Rejected: shows a strip club scene with a near-nude performer in a thong and chat asking to tip her to take her clothes off. That is sexual content under the app rules.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club lap dance",
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 3.25,
+      "end": 33.25,
+      "peak": 6.25
+    },
+    "DullCalmGullUWot-yyTc1tkQ0S4Gv-5E": {
+      "at": "2026-11-19T01:10:31.626103+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/DullCalmGullUWot-yyTc1tkQ0S4Gv-5E",
+      "title": "OMG",
+      "use": false,
+      "why": "The clip shows an intimate bedroom scene with a shirtless character and sexual context (chat is sexualized, and the dialogue sets up a sex scene). That is sexual content on screen, so it's rejected under the app's rules.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "bedroom scene with Lucia",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.29,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.29,
+        "y": 0.06,
+        "w": 0.71,
+        "h": 0.89
+      },
+      "start": 0.0,
+      "end": 23.2,
+      "peak": 10.75
+    },
+    "SincerePluckyPepperoniDxAbomb-PvKlNZ-B7Y0IhxCv": {
+      "at": "2026-11-19T01:11:11.471287+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/SincerePluckyPepperoniDxAbomb-PvKlNZ-B7Y0IhxCv",
+      "title": "speed reacts to gta vi",
+      "use": true,
+      "why": "Clear reaction moment: IShowSpeed loudly reacts and mimics the lines as the GTA VI trailer dialogue plays. The trailer footage is early-game and shows no nudity, gore, or spoilers, and the speech has no music with lyrics.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "IShowSpeed reacts to Lucia dialogue",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.43
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.465,
+        "w": 1,
+        "h": 0.5
+      },
+      "start": 1.5,
+      "end": 28.5,
+      "peak": 7.0,
+      "posted": true
     }
   },
   "posted": [
@@ -916,6 +1028,14 @@
         "lacy"
       ],
       "star": "react",
+      "date": "2026-11-18"
+    },
+    {
+      "topic": "clip__20261118__SincerePluckyPepperoniDx",
+      "logins": [
+        "ishowspeed"
+      ],
+      "star": "reaction",
       "date": "2026-11-18"
     }
   ],

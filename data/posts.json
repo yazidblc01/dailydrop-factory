@@ -604,5 +604,25 @@
     "posted_at": "2026-11-18T23:49:23+00:00",
     "url": "https://www.youtube.com/watch?v=4uw484sN0EE",
     "slot": "waited"
+  },
+  "clip__20261118__SincerePluckyPepperoniDx": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=A7qzEQEuT28",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709684525059656966",
+      "facebook": "https://www.facebook.com/reel/1079460661795350",
+      "instagram": "https://www.instagram.com/reel/Df54ZyRDarn/"
+    },
+    "url": "https://www.youtube.com/watch?v=A7qzEQEuT28",
+    "title": "GTA 6: IShowSpeed Loses It Over Lucia's Lies",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6afe4e1e7cc99c931be73a96",
+    "posted_at": "2026-11-19T01:18:34+00:00",
+    "slot": "waited"
   }
 }
