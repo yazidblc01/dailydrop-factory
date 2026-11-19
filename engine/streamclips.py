@@ -54,7 +54,8 @@ MIN_S, MAX_S = 15, 60            # Twitch clips we look at
 CUT_MIN, CUT_MAX = 12, 40        # what we keep: 12 to 20 s for a punchy moment, longer only when it needs a setup
 MIN_VIEWS = 200                  # viewers voted: a clip needs this many Twitch views (views per hour and the outlier rank the rest)
 FRESH_H = 24                     # fresh clips only (day-1 missions age out); 48 h if 24 comes up dry
-MIN_SCORE = 7                    # the final pick posts nothing below this
+MIN_SCORE = 7                    # the final pick's bar
+FLOOR = 6                        # after a full search with no 7, the best 6 is posted; never lower
 EXPOSED = {"FEMALE_BREAST_EXPOSED", "FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED", "BUTTOCKS_EXPOSED", "ANUS_EXPOSED"}
 CLIP_PLATFORMS = ["youtube", "facebook"]   # plain clips: TikTok and Instagram demote reposted streams
 PER_STREAMER_DAY = 2
@@ -374,8 +375,8 @@ def screen(c, src, dur, words, loud, out, system=None):
 
 # ---------- the final pick (the strong model) ----------
 FINAL = {"name": "pick", "description": "Pick the clip to post, or none.", "input_schema": {"type": "object", "properties": {
-    "pick": {"type": "integer", "description": "the clip number to post, or -1 if none is good enough"},
-    "score": {"type": "integer", "description": "1 to 10 for the picked clip; post only at 7 or more"},
+    "pick": {"type": "integer", "description": "the number of the best clip (always name one)"},
+    "score": {"type": "integer", "description": "1 to 10 for that clip, as it will look in our finished reel"},
     "why": {"type": "string"},
     **{k: SCREEN["input_schema"]["properties"][k] for k in ("setup", "hook", "title", "description", "pinned_comment")}},
     "required": ["pick", "score", "why", "setup", "hook", "title", "description", "pinned_comment"]}}
@@ -383,7 +384,10 @@ FINAL_SYS = """You make the final call on which GTA 6 stream clip The Daily Drop
 What wins: an absurd, chaotic or funny thing happening, with the streamer's face reacting. Our reels caption every word said,
 so a funny line of dialogue works too. Chaos is a story: an action and its consequence, or a fail and the reaction.
 Our hit: a streamer knocks a grandma off her mobility scooter and steals it. A flop: a streamer says the game is too easy as a truck drives by.
-Score each clip honestly. Pick the best only if it's 7/10 or more, else pick -1 (posting nothing beats posting a flop).
+Judge each clip as it will look in OUR finished reel, not raw: nudity gets blurred automatically, swears get bleeped,
+every word said is captioned on screen, and the setup line you write explains the context in the first seconds.
+So never mark a clip down for nudity, swearing or needing context. Mark it down for a weak or unclear payoff, no reaction,
+or a moment we already posted. Name the best clip and score it honestly (7+ = we'd be proud to post it).
 Never pick a moment we already posted recently (the list is given). Then write its words:
 hook = the EVENT in 2 to 5 words ('HE STOLE GRANDMA'S SCOOTER'), never a mood ('X LOST IT', 'X IS UNIMPRESSED').
 title starts with 'GTA 6: ' and names the event. setup = the context line, never giving the payoff away."""
@@ -642,7 +646,7 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
     today = today or datetime.now().date()
     st = load_state()
     housekeeping(st)
-    budget = {"screens": 0, "renders": renders}
+    budget = {"screens": 0, "renders": renders, "best": (0, None, None)}
     KEEP = ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak", "story", "setup", "cold_open",
             "nudity", "face_visible")
 
@@ -659,6 +663,8 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
             i = f.get("pick", -1)
             print(f"        final pick: {i} ({f.get('score')}/10) {str(f.get('why'))[:140]}")
             if not (0 <= i < len(finalists)) or (f.get("score") or 0) < MIN_SCORE:
+                if 0 <= i < len(finalists) and (f.get("score") or 0) >= FLOOR and (f.get("score") or 0) > budget["best"][0]:
+                    budget["best"] = (f["score"], finalists[i], f)      # the best 6 so far, posted if no 7 turns up
                 for x in finalists:
                     st["seen"].get(x[0]["id"], {})["final_no"] = True
                 return None
@@ -739,6 +745,15 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
         got = fresh(candidates(st, hours=48), SCREENS + 6)
         if got:
             return got
+
+        score, fin, f = budget["best"]                     # 4. no 7 anywhere: the best 6, never lower
+        if fin and not dry and budget["renders"] > 0:
+            c, v, info, name, out = fin
+            print(f"      no 7/10 today, posting the best {score}/10: {c['broadcaster_name']}: {c['title']}")
+            v.update({k: f[k] for k in ("setup", "hook", "title", "description", "pinned_comment") if f.get(k)})
+            final = build(c, v, info, name, out, st, today, worded=True)
+            if final:
+                return name, final
     finally:
         if not dry:
             save_state(st)
