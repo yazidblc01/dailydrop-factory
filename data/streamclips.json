@@ -65,9 +65,21 @@
     "TrappedObliviousSharkMoreCowbell-c8N9-I4Lf-TA13Cv",
     "TrappedYummyMetalWTRuck-5L2ytqbMKZmQThQ5",
     "CooperativeBlatantPistachioRalpherZ-OS-L15w7fNFQNzSn",
-    "PricklySpineyChickpeaKeyboardCat-lPhZkKg4k9Nq98Bm"
+    "PricklySpineyChickpeaKeyboardCat-lPhZkKg4k9Nq98Bm",
+    "BombasticSpookyAlpacaBibleThump-Ro8z9XgpJAAF_WGU",
+    "GeniusHappyCookieWholeWheat-ycx2UAFgtgFJxOQ_",
+    "FlirtyFancyMangetoutKeepo-zrWg06dtnCooZ6IW",
+    "AssiduousTacitCurlewBigBrother-iONSnZn21uUITjLw",
+    "BumblingConsiderateMagpieAsianGlow-uwONm1vYSnm95Wzn",
+    "SmallEnjoyableTaroOSfrog-_Zzas-tX_kGF_p0r",
+    "RelentlessSavageTomatoDAESuppy-XwOHThFQTJaruvrb",
+    "SullenGoldenMeerkatPraiseIt-F6yo76wFvD7eb0DT",
+    "OnerousSwissIguanaChefFrank-YhL9t_QVWtPNUe6v",
+    "TiredSecretiveChipmunkUncleNox-DfMhl81_JzpEi5pi",
+    "AbrasivePatientMageRaccAttack-buWjiUiqf-LAh40B",
+    "DifferentBlindingMartenKappaPride-0r0DTjKY8R7hrnkX"
   ],
-  "count": 11,
+  "count": 12,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -1780,6 +1792,379 @@
       "setup": "ohnePixel calls GTA 6 too easy while a truck rolls toward him",
       "cold_open": false,
       "posted": true
+    },
+    "BombasticSpookyAlpacaBibleThump-Ro8z9XgpJAAF_WGU": {
+      "at": "2026-11-19T20:09:06.200229+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/BombasticSpookyAlpacaBibleThump-Ro8z9XgpJAAF_WGU",
+      "title": "ummmmmm",
+      "use": false,
+      "why": "Rejected: a song with lyrics is clearly playing in the clip (the captions show \"♪ Putting girls in college ♪\"). The first frame also shows a strip-club-style scene with revealing outfits, which is a risk for the channel's rules.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "IShowSpeed party scene with music",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.41,
+        "w": 0.21,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 25.8,
+      "peak": 16.5,
+      "story": false,
+      "setup": "IShowSpeed walks into a party with a crew and starts hyping the room",
+      "cold_open": false
+    },
+    "GeniusHappyCookieWholeWheat-ycx2UAFgtgFJxOQ_": {
+      "at": "2026-11-19T20:09:49.696482+00:00",
+      "login": "marlon",
+      "name": "Marlon",
+      "url": "https://www.twitch.tv/marlon/clip/GeniusHappyCookieWholeWheat-ycx2UAFgtgFJxOQ_",
+      "title": "WTF",
+      "use": true,
+      "why": "Marlon panics as cops close in, then pulls off a jump and escapes, shouting the whole way. Clear setup, payoff, and reaction, with the police chase as the action.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "escaping cops with a jump",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.29,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.95
+      },
+      "start": 2.0,
+      "end": 30.0,
+      "peak": 10.3,
+      "story": true,
+      "setup": "Marlon is spotted by cops and has to get out fast",
+      "cold_open": false
+    },
+    "FlirtyFancyMangetoutKeepo-zrWg06dtnCooZ6IW": {
+      "at": "2026-11-19T20:10:29.844422+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/FlirtyFancyMangetoutKeepo-zrWg06dtnCooZ6IW",
+      "title": "speed runs into a fight for the first time",
+      "use": true,
+      "why": "Clear setup (grabbing a pistol and running to the dock), a payoff (enemies crawling out, a race to the seaplane), and a streamer reaction (\"Get it's on\"). No nudity, spoilers, gore, music with lyrics, or slurs. The in-game dialogue is fine.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "first fight at the dock",
+      "action": "shootout",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.43,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 23.8,
+      "peak": 21.5,
+      "story": true,
+      "setup": "Speed grabs a pistol and sprints toward the dock area",
+      "cold_open": false
+    },
+    "AssiduousTacitCurlewBigBrother-iONSnZn21uUITjLw": {
+      "at": "2026-11-19T20:11:23.447189+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/AssiduousTacitCurlewBigBrother-iONSnZn21uUITjLw",
+      "title": "bro omega sus",
+      "use": false,
+      "why": "Rejected: the clip shows a sexual or intimate shower scene with bare skin and a kiss on screen, which breaks the nudity and sexual content rule. The rest of the clip is a shirtless character walking through an apartment, and the streamer's reaction is mostly chat-reading with no clear payoff.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "none",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.43,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 2.5,
+      "end": 42.5,
+      "peak": 5.5,
+      "story": false,
+      "setup": "IShowSpeed watches an intimate scene and reacts to the rain",
+      "cold_open": false
+    },
+    "BumblingConsiderateMagpieAsianGlow-uwONm1vYSnm95Wzn": {
+      "at": "2026-11-19T20:12:02.283140+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/BumblingConsiderateMagpieAsianGlow-uwONm1vYSnm95Wzn",
+      "title": "GYATT",
+      "use": false,
+      "why": "Rejected: the clip's focus is a woman in a revealing bikini top, and the original title (\"GYATT\") sexualizes her. Chat also comments sexually. That is sexual content on screen, which the apps restrict, so I won't rewrite it around the streamer's reaction.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "first time seeing Lucia",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.4,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 28.0,
+      "story": false,
+      "setup": "KaiCenat helps a guy with a car and then gets a strange question from him",
+      "cold_open": false
+    },
+    "SmallEnjoyableTaroOSfrog-_Zzas-tX_kGF_p0r": {
+      "at": "2026-11-19T20:12:40.923666+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/SmallEnjoyableTaroOSfrog-_Zzas-tX_kGF_p0r",
+      "title": "Jason first time to shoe store in gta 6",
+      "use": false,
+      "why": "Rejected: the clip shows a strip club scene with a woman in lingerie and a near-nude dance, plus sexual content in the frames. The streamer's talk about tipping reinforces it. This breaks the nudity and sexual content rule.",
+      "score": 1,
+      "star": "reaction",
+      "moment": "first time at the shoe store",
+      "action": "none",
+      "facecam": {
+        "x": 0.78,
+        "y": 0.44,
+        "w": 0.22,
+        "h": 0.27
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.78,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 34.3,
+      "peak": 25.5,
+      "story": false,
+      "setup": "jasontheween pays a dancer in a red-lit room while chatting about tipping",
+      "cold_open": false
+    },
+    "RelentlessSavageTomatoDAESuppy-XwOHThFQTJaruvrb": {
+      "at": "2026-11-19T20:13:26.822503+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/RelentlessSavageTomatoDAESuppy-XwOHThFQTJaruvrb",
+      "title": "hell no",
+      "use": true,
+      "why": "Clear setup (driving with a passenger, streamer predicting a crash), then an airbag-smoke crash that makes the streamer lose it. Reaction is the star, with a bridge and boat scene for context.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "the airbag car crash",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.03,
+        "y": 0.45,
+        "w": 0.22,
+        "h": 0.31
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.056,
+        "w": 1,
+        "h": 0.888
+      },
+      "start": 1.0,
+      "end": 33.1,
+      "peak": 14.0,
+      "story": true,
+      "setup": "Jynxzi is driving with a friend and predicts a crash ahead",
+      "cold_open": true
+    },
+    "SullenGoldenMeerkatPraiseIt-F6yo76wFvD7eb0DT": {
+      "at": "2026-11-19T20:14:03.413684+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/SullenGoldenMeerkatPraiseIt-F6yo76wFvD7eb0DT",
+      "title": "SPEED BANANA HEHEHEHE",
+      "use": false,
+      "why": "Rejected: the frame at 4.5s shows nudity and sexual content (bare buttocks and a sexualized scene with several people), which the apps prohibit. The later GTA gameplay is fine, but the clip can't run as is.",
+      "score": 1,
+      "star": "reaction",
+      "moment": "none",
+      "action": "none",
+      "facecam": {
+        "x": 0.02,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 8.5,
+      "story": false,
+      "setup": "IShowSpeed watches a scene that is not suitable for this channel",
+      "cold_open": false
+    },
+    "OnerousSwissIguanaChefFrank-YhL9t_QVWtPNUe6v": {
+      "at": "2026-11-19T20:14:40.711620+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/OnerousSwissIguanaChefFrank-YhL9t_QVWtPNUe6v",
+      "title": "..",
+      "use": false,
+      "why": "Rejected: the clip shows nudity on screen. The character is naked in a strip club scene, which falls under the nudity and sexual content rule. The \"they're coming to lock me up\" banter doesn't make it safe to post.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "strip club chaos",
+      "action": null,
+      "facecam": {
+        "x": 0.02,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 23.8,
+      "story": false,
+      "setup": "IShowSpeed gets chased out of a strip club while the cops close in",
+      "cold_open": false
+    },
+    "TiredSecretiveChipmunkUncleNox-DfMhl81_JzpEi5pi": {
+      "at": "2026-11-19T20:15:25.212235+00:00",
+      "login": "clix",
+      "name": "Clix",
+      "url": "https://www.twitch.tv/clix/clip/TiredSecretiveChipmunkUncleNox-DfMhl81_JzpEi5pi",
+      "title": "LOL",
+      "use": true,
+      "why": "Clear reaction payoff: Clix yells at his buddy Obet and then panics with \"No!\" Early-game traffic, no spoiler, no gore, no lyrics, and the reaction carries it.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Obet yelling in traffic",
+      "action": "driving fast",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.25,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 7.0,
+      "story": true,
+      "setup": "Clix pulls up beside a blue truck while his buddy Obet starts yelling",
+      "cold_open": false
+    },
+    "AbrasivePatientMageRaccAttack-buWjiUiqf-LAh40B": {
+      "at": "2026-11-19T20:16:01.168755+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/AbrasivePatientMageRaccAttack-buWjiUiqf-LAh40B",
+      "title": "AYOOOO",
+      "use": false,
+      "why": "Rejected for sexual content. The clip shows an intimate hookup scene in a dim room, with a woman in a low-cut dress and bare shoulders, and the streamer's own lines are about who is \"getting f***ed.\" Under the rules, that is sexual content on screen, so the clip can't go out.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "intimate hookup scene in apartment",
+      "action": null,
+      "facecam": {
+        "x": 0.78,
+        "y": 0.66,
+        "w": 0.22,
+        "h": 0.34
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.04,
+        "w": 0.78,
+        "h": 0.92
+      },
+      "start": 0.0,
+      "end": 21.1,
+      "peak": 5.75,
+      "story": false,
+      "setup": "jasontheween reacts to a scene where a woman walks into a room",
+      "cold_open": false
+    },
+    "DifferentBlindingMartenKappaPride-0r0DTjKY8R7hrnkX": {
+      "at": "2026-11-19T20:16:47.023481+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/DifferentBlindingMartenKappaPride-0r0DTjKY8R7hrnkX",
+      "title": "SPEED PLAYING GTA 6",
+      "use": true,
+      "why": "Clear setup (fleeing cops with a loot bag) and payoff (hiding in a bin, \"Lose the cops\"), with Speed's reaction as the closing beat. No nudity, spoilers, gore, lyrics, or slurs. The Lucia reaction is early-game and fine.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "hiding from cops in a bin",
+      "action": "police chase",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.375
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.46,
+        "w": 1,
+        "h": 0.5
+      },
+      "start": 2.0,
+      "end": 30.1,
+      "peak": 29.5,
+      "story": true,
+      "setup": "IShowSpeed runs from cops with a stolen bag, looking for a hiding spot",
+      "cold_open": false,
+      "posted": true
     }
   },
   "posted": [
@@ -1876,6 +2261,14 @@
       "topic": "clip__20261119__PricklySpineyChickpeaKey",
       "logins": [
         "ohnepixel"
+      ],
+      "star": "reaction",
+      "date": "2026-11-19"
+    },
+    {
+      "topic": "clip__20261119__DifferentBlindingMartenK",
+      "logins": [
+        "ishowspeed"
       ],
       "star": "reaction",
       "date": "2026-11-19"

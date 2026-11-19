@@ -724,5 +724,25 @@
     "zernio_id": "6aff4875108d36740cc9583d",
     "posted_at": "2026-11-19T19:06:12+00:00",
     "slot": "waited"
+  },
+  "clip__20261119__DifferentBlindingMartenK": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=4jhJ9jy0bjA",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709981014113701141",
+      "facebook": "https://www.facebook.com/reel/1504355138278329",
+      "instagram": "https://www.instagram.com/reel/Df77oaaAPOS/"
+    },
+    "url": "https://www.youtube.com/watch?v=4jhJ9jy0bjA",
+    "title": "GTA 6: IShowSpeed Hides From Cops In A Bin",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6aff5ad49c57f99287c717fa",
+    "posted_at": "2026-11-19T20:24:59+00:00",
+    "slot": "waited"
   }
 }
