@@ -761,7 +761,12 @@
     "url": "https://www.youtube.com/watch?v=oIU-fX0Ookk"
   },
   "gta_board_game__20261119__11": {
-    "urls": {},
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=TGrtu5NwNbw",
+      "facebook": "https://www.facebook.com/reel/1146942271368883",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7710006139873742081",
+      "instagram": "https://www.instagram.com/reel/Df8Gx3pjq4o/"
+    },
     "title": "GTA 6: What every GTA cost on launch day 💸",
     "platforms": [
       "youtube",
@@ -771,7 +776,8 @@
     ],
     "service": "zernio",
     "zernio_id": "6aff71b99b4566d96b074787",
-    "posted_at": "2026-11-19T22:01:46+00:00"
+    "posted_at": "2026-11-19T22:01:46+00:00",
+    "url": "https://www.youtube.com/watch?v=TGrtu5NwNbw"
   },
   "clip__20261119__react_CrazyAbnegateLap": {
     "urls": {},
@@ -782,6 +788,7 @@
     ],
     "service": "zernio",
     "zernio_id": "6aff8612579bd6f9f4072649",
-    "posted_at": "2026-11-19T23:29:04+00:00"
+    "posted_at": "2026-11-19T23:29:04+00:00",
+    "failed": "youtube: YouTube upload session initialization failed: 400 {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"The user has exceeded the number of videos they may upload.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has exceeded the number of videos they may upload.\",\n        \"domain\": \"youtube.video\",\n        \"reason\": \"uploadLimitExceeded\"\n      }\n    ]\n  }\n}\n"
   }
 }
