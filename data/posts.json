@@ -704,5 +704,25 @@
     "posted_at": "2026-11-19T17:32:36+00:00",
     "url": "https://www.youtube.com/watch?v=eLAPsgBC7pc",
     "slot": "waited"
+  },
+  "clip__20261119__PricklySpineyChickpeaKey": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=ZL1rLTgxgpI",
+      "facebook": "https://www.facebook.com/reel/2187672928768559",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7709960741184490753",
+      "instagram": "https://www.instagram.com/reel/Df7yo-cFexT/"
+    },
+    "url": "https://www.youtube.com/watch?v=ZL1rLTgxgpI",
+    "title": "GTA 6: ohnePixel Says A 10 Year Old Can Win",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6aff4875108d36740cc9583d",
+    "posted_at": "2026-11-19T19:06:12+00:00",
+    "slot": "waited"
   }
 }
