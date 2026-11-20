@@ -838,5 +838,21 @@
     "posted_at": "2026-11-20T14:36:44+00:00",
     "url": "https://www.youtube.com/watch?v=VGbO5xj0ERA",
     "slot": "waited"
+  },
+  "clip__20261120__EvilChillyKleeKeepo_uq_T": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=LdOWW_3AdcE",
+      "facebook": "https://www.facebook.com/reel/1152421923926144"
+    },
+    "title": "GTA 6: CaseOh Throws NPCs Off A Bridge, Don't Snitch",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b006efd19b7e011f16c7543",
+    "posted_at": "2026-11-20T16:03:35+00:00",
+    "url": "https://www.youtube.com/watch?v=LdOWW_3AdcE",
+    "slot": "waited"
   }
 }

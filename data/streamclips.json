@@ -121,9 +121,15 @@
     "RockySourAsteriskTooSpicy-6U8FM1MWLFtUXMc9",
     "InspiringFriendlyLemurJebaited-oFs8vW6U4uy5p44B",
     "AntediluvianDarkNuggetsCclamChamp-20eTlBwERPpcDKFS",
-    "AmorphousDeafZucchiniSpicyBoy-IdVR1IqHfRWD57LN"
+    "AmorphousDeafZucchiniSpicyBoy-IdVR1IqHfRWD57LN",
+    "EvilChillyKleeKeepo-uq_TPadcMek2sAdf",
+    "LittleLittleLardMingLee-aI6VoMiZkZmUAEhu",
+    "CourageousGleamingCurry4Head-6iFyrD9BaXzZcwiU",
+    "UgliestSpeedyOctopus4Head-REF-ZMF0H5SbSiSF",
+    "LovelyImportantAlfalfaLitty-TvWeJzP9zG95rT47",
+    "TangibleAttractiveOpossumSSSsss-cJhrmc-JXuEmLWv5"
   ],
-  "count": 17,
+  "count": 18,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -3666,6 +3672,206 @@
       "nudity": false,
       "face_visible": true,
       "posted": true
+    },
+    "EvilChillyKleeKeepo-uq_TPadcMek2sAdf": {
+      "at": "2026-11-20T15:46:21.048708+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/EvilChillyKleeKeepo-uq_TPadcMek2sAdf",
+      "title": "dont snitch",
+      "views": 392,
+      "use": true,
+      "why": "Chaotic and funny: caseoh and Bubba toss NPCs off an overpass, a game of \"throw stuff off the bridge,\" then he cracks up and delivers the \"you better not snitch\" punchline. Clear setup, payoff, and visible reaction on the facecam.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "throwing NPCs off the bridge",
+      "action": "falling",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.13,
+        "w": 0.21,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 16.0,
+      "end": 56.0,
+      "peak": 28.3,
+      "story": true,
+      "setup": "caseoh proposes a game of throwing bodies off the overpass with Bubba",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
+    },
+    "LittleLittleLardMingLee-aI6VoMiZkZmUAEhu": {
+      "at": "2026-11-20T15:47:29.681850+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/LittleLittleLardMingLee-aI6VoMiZkZmUAEhu",
+      "title": "new chapter begins",
+      "views": 279,
+      "use": false,
+      "why": "A slow car ride with a relationship notification and one calm line of dialogue. No absurd moment, no payoff, and no visible reaction, so nothing stops a scroll.",
+      "score": 2,
+      "star": "gameplay",
+      "moment": "Jason and Lucia relationship notification",
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 30.1,
+      "peak": 9.8,
+      "story": false,
+      "setup": "Jason rides in a car while the game announces his relationship with Lucia has changed",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false
+    },
+    "CourageousGleamingCurry4Head-6iFyrD9BaXzZcwiU": {
+      "at": "2026-11-20T15:48:49.715371+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/CourageousGleamingCurry4Head-6iFyrD9BaXzZcwiU",
+      "title": "step away",
+      "views": 273,
+      "use": true,
+      "why": "Absurd chain: he hoists a man over an overpass wall, cops show up, and he runs off, then he admits he caused a highway pile-up while trying to be the good guy. The facecam shows him reacting to his own mess, and the cop dialogue is funny on its own.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "caseoh causes highway pile-up",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.13,
+        "w": 0.21,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 24.0,
+      "end": 57.0,
+      "peak": 48.5,
+      "story": true,
+      "setup": "caseoh_ tosses a man off an overpass, then gets chased by cops on the highway",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "UgliestSpeedyOctopus4Head-REF-ZMF0H5SbSiSF": {
+      "at": "2026-11-20T15:49:37.440058+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/UgliestSpeedyOctopus4Head-REF-ZMF0H5SbSiSF",
+      "title": "BIG BIg",
+      "views": 2674,
+      "use": false,
+      "why": "Rejected: the payoff is a sexual scene. A shirtless man is caught at a door with a woman, and the streamer's punchline is a joke about him being \"hard.\" The content is implied rather than explicit, but it is still a sexual scene, so it fails the reject rule. The reaction itself is funny and the facecam is visible, so an editor could re-cut around a non-sexual part if one exists.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "IShowSpeed reacts to the cheating scene",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.58,
+        "w": 1.0,
+        "h": 0.42
+      },
+      "start": 14.0,
+      "end": 26.7,
+      "peak": 22.0,
+      "story": true,
+      "setup": "IShowSpeed watches a GTA 6 scene about a man caught at a door",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "LovelyImportantAlfalfaLitty-TvWeJzP9zG95rT47": {
+      "at": "2026-11-20T15:50:19.334917+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/LovelyImportantAlfalfaLitty-TvWeJzP9zG95rT47",
+      "title": "kkkkkkkkkkkkk",
+      "views": 1825,
+      "use": false,
+      "why": "Rejected: the clip shows a sexual scene in the game (a staged shoot with nude characters, and the dialogue \"get into your positions\" and \"is everybody good\" points to a sex act). Nudity alone would be fine, but this is a sexual scene, which is a hard reject. The reaction is also tied to that scene, so there is no safe trim.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "adult scene reaction",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 12.0,
+      "end": 30.0,
+      "peak": 19.25,
+      "story": false,
+      "setup": "KaiCenat reacts to a staged adult scene being filmed in the game",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "TangibleAttractiveOpossumSSSsss-cJhrmc-JXuEmLWv5": {
+      "at": "2026-11-20T15:51:52.519190+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/TangibleAttractiveOpossumSSSsss-cJhrmc-JXuEmLWv5",
+      "title": "random guy falls",
+      "views": 1130,
+      "use": true,
+      "why": "Clear absurd sequence: he jacks a car, a woman pulls a gun, he crashes into a plant while shouting, and his face is visible throughout. The loud reactions and the crash make it watchable, though the gun setup needs the earlier seconds for context.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "stealing car from gun-wielding woman",
+      "action": "car crash",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.866,
+        "h": 0.496
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.591,
+        "w": 1,
+        "h": 0.409
+      },
+      "start": 10.0,
+      "end": 38.7,
+      "peak": 37.5,
+      "story": true,
+      "setup": "Jerma tries to steal a car while a woman pulls out a gun",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
     }
   },
   "posted": [
@@ -3819,6 +4025,15 @@
       ],
       "star": "reaction",
       "moment": "helicopter crashes on him",
+      "date": "2026-11-20"
+    },
+    {
+      "topic": "clip__20261120__EvilChillyKleeKeepo_uq_T",
+      "logins": [
+        "caseoh_"
+      ],
+      "star": "reaction",
+      "moment": "throwing NPCs off the bridge",
       "date": "2026-11-20"
     }
   ],
@@ -4204,6 +4419,116 @@
       "start": 8.0,
       "end": 48.0,
       "peak": 16.8
+    },
+    "AgileSmilingSrirachaSaltBae-suRHTLxNY3REW8nu": {
+      "at": "2026-11-20T15:39:52.609223+00:00",
+      "login": "garek",
+      "name": "Garek",
+      "url": "https://www.twitch.tv/garek/clip/AgileSmilingSrirachaSaltBae-suRHTLxNY3REW8nu",
+      "title": "First Weed Strain",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 38.8,
+      "peak": 21.2
+    },
+    "SoftPlausibleMosquitoKippa-t4K5CAwlv2L7YJsC": {
+      "at": "2026-11-20T15:40:39.358366+00:00",
+      "login": "indoorscream",
+      "name": "IndoorScream",
+      "url": "https://www.twitch.tv/indoorscream/clip/SoftPlausibleMosquitoKippa-t4K5CAwlv2L7YJsC",
+      "title": "tp KEKW",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 34.5,
+      "peak": 12.5
+    },
+    "SuaveCoyBorkCclamChamp-KfyCUxPsFUG9JDVy": {
+      "at": "2026-11-20T15:41:09.820291+00:00",
+      "login": "carmen",
+      "name": "carmen",
+      "url": "https://www.twitch.tv/carmen/clip/SuaveCoyBorkCclamChamp-KfyCUxPsFUG9JDVy",
+      "title": "Ryan makes an exit",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 22.8,
+      "peak": 22.0
+    },
+    "DullFlirtyDragonflyVoHiYo-8eCdU7iQeQ-Z20Hh": {
+      "at": "2026-11-20T15:42:42.735630+00:00",
+      "login": "harmless",
+      "name": "Harmless",
+      "url": "https://www.twitch.tv/harmless/clip/DullFlirtyDragonflyVoHiYo-8eCdU7iQeQ-Z20Hh",
+      "title": "Magnus Failure Ridealong",
+      "use": false,
+      "score": 3,
+      "action": "police chase",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 40.0,
+      "end": 56.0,
+      "peak": 49.0
+    },
+    "BigDependableBaguetteBatChest-1j-Vggueesp1W4jl": {
+      "at": "2026-11-20T15:43:48.466581+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/BigDependableBaguetteBatChest-1j-Vggueesp1W4jl",
+      "title": "Fanny ulting on Rhodes",
+      "use": false,
+      "score": 3,
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0.1,
+        "w": 1,
+        "h": 0.8
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 51.0
+    },
+    "EndearingFaintPeanutFUNgineer-5ziWGxu9uZFiEQpf": {
+      "at": "2026-11-20T15:44:37.962624+00:00",
+      "login": "crystalst",
+      "name": "Crystalst",
+      "url": "https://www.twitch.tv/crystalst/clip/EndearingFaintPeanutFUNgineer-5ziWGxu9uZFiEQpf",
+      "title": "Tony (AnthonyZ) jukes cops at white garage",
+      "use": false,
+      "score": 6,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 14.0,
+      "end": 26.0,
+      "peak": 19.8
     }
   }
 }
