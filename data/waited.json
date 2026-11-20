@@ -1,5 +1,5 @@
 {
-  "count": 13,
+  "count": 14,
   "finales": [
     "AMD",
     "AAPL",
@@ -21,11 +21,12 @@
     "gta_coins__20261118__9",
     "waited__20261118__10",
     "gta_board_game__20261119__11",
-    "waited__20261120__12"
+    "waited__20261120__12",
+    "gta_receipt__20261120__13"
   ],
   "other": {
     "board": 3,
-    "receipt": 1,
+    "receipt": 2,
     "bestsellers": 1,
     "consoles": 1,
     "coins": 1

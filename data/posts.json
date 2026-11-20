@@ -906,5 +906,25 @@
     "zernio_id": "6b00add6bb36e403c1c975e1",
     "posted_at": "2026-11-20T20:31:25+00:00",
     "slot": "waited"
+  },
+  "gta_receipt__20261120__13": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=brqPhZZQkhk",
+      "facebook": "https://www.facebook.com/reel/1628609368748614",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7710375465361378567",
+      "instagram": "https://www.instagram.com/reel/Df-qzQWiCqU/"
+    },
+    "title": "GTA 6: The same grocery cart, GTA V day vs GTA 6 day 🧾",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b00c1a28dd166aa72b753b1",
+    "posted_at": "2026-11-20T21:55:00+00:00",
+    "url": "https://www.youtube.com/watch?v=brqPhZZQkhk",
+    "slot": "waited"
   }
 }
