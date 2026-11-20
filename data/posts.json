@@ -926,5 +926,21 @@
     "posted_at": "2026-11-20T21:55:00+00:00",
     "url": "https://www.youtube.com/watch?v=brqPhZZQkhk",
     "slot": "waited"
+  },
+  "clip__20261120__react_WealthyObliqueCi": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=8a84R1KWCBo",
+      "facebook": "https://www.facebook.com/reel/1798128944773168"
+    },
+    "title": "GTA 6: Streamers Try The Gator Camp Seaplane Escape",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b00d72b7e276f48dc34dbd2",
+    "posted_at": "2026-11-20T23:27:22+00:00",
+    "url": "https://www.youtube.com/watch?v=8a84R1KWCBo",
+    "slot": "waited"
   }
 }

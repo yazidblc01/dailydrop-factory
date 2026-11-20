@@ -146,9 +146,15 @@
     "CreativeOilyPoxPipeHype-XzQXLYZJIS1Zl9H9",
     "DrabHelpfulHamburgerEagleEye-d5DuX91uYoz7wbxH",
     "NastyConfidentOpossumPupper-x1E5ITWpFfmVq4K3",
-    "WiseSolidJuiceRuleFive-4CitvrkS30C-5KNR"
+    "WiseSolidJuiceRuleFive-4CitvrkS30C-5KNR",
+    "ResoluteCrazyPistachioPrimeMe-FgUccHgoroOQYUJB",
+    "FragileTardySquidAMPEnergyCherry-sWGYVnxAPuBi_y1v",
+    "CaringFunnySrirachaOSfrog-CPLxPX0JVwrIruwO",
+    "ZanyRealLEDKevinTurtle-SQ2MfYjhrtgfEN-0",
+    "ObeseCrypticGarlicVoteYea-j6KGDIo3-1pUEZEx",
+    "SparklyTacitSquirrelGrammarKing-8bL24bi2h7oCrG3g"
   ],
-  "count": 20,
+  "count": 21,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -1254,7 +1260,8 @@
       },
       "start": 30.0,
       "end": 40.5,
-      "peak": 33.5
+      "peak": 33.5,
+      "posted": true
     },
     "SeductivePlacidOysterOSsloth-n4IP8pGHH3fu5X8z": {
       "at": "2026-11-19T02:40:39.705780+00:00",
@@ -2305,7 +2312,8 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": true,
-      "final_no": true
+      "final_no": true,
+      "posted": true
     },
     "BeautifulModernTermiteYouWHY-nEB5VffTKnvTR2UD": {
       "at": "2026-11-19T20:57:49.578540+00:00",
@@ -3046,7 +3054,8 @@
       "setup": "2xRaKai gets chased by gators and sprints for a seaplane",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "posted": true
     },
     "PiliableDeafDonutKlappa-OHSX2rY_MZswXM4_": {
       "at": "2026-11-20T02:28:17.384226+00:00",
@@ -4465,6 +4474,210 @@
       "nudity": false,
       "face_visible": true,
       "posted": true
+    },
+    "ResoluteCrazyPistachioPrimeMe-FgUccHgoroOQYUJB": {
+      "at": "2026-11-20T23:10:30.085644+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/ResoluteCrazyPistachioPrimeMe-FgUccHgoroOQYUJB",
+      "title": "cooked them",
+      "views": 7019,
+      "use": true,
+      "why": "Chaotic action with a clear payoff: the streamer drives into people sitting on an overpass wall, leaves them on the ground, then jokes about killing them. His face is visible and his reactions carry the funny lines.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "running down people on overpass",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.07,
+        "y": 0.13,
+        "w": 0.14,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 52.8,
+      "story": true,
+      "setup": "caseoh_ drives toward a group of people sitting on an overpass wall",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "FragileTardySquidAMPEnergyCherry-sWGYVnxAPuBi_y1v": {
+      "at": "2026-11-20T23:12:27.899984+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/FragileTardySquidAMPEnergyCherry-sWGYVnxAPuBi_y1v",
+      "title": "Ohne Bricked Up!!",
+      "views": 915,
+      "use": true,
+      "why": "Streamer blows his last cash on VIP dancers, then riffs on a strange NPC face. Funny, with a clear laughing reaction and his face on the facecam. Mostly talk-driven with modest visual chaos, so the score is middling.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "throwing last money at VIP dancers",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.72,
+        "w": 0.24,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 20.0,
+      "end": 53.0,
+      "peak": 34.2,
+      "story": true,
+      "setup": "ohnePixel throws his last few bucks at dancers in a GTA 6 VIP club",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "CaringFunnySrirachaOSfrog-CPLxPX0JVwrIruwO": {
+      "at": "2026-11-20T23:14:11.673249+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/CaringFunnySrirachaOSfrog-CPLxPX0JVwrIruwO",
+      "title": "RICH STREAMER ENJOYING!!",
+      "views": 970,
+      "use": false,
+      "why": "Rejected: the clip is set in a strip club, and the second frame shows an explicit sexual scene with a dancer's nude body in a sexual pose on the pole. That is a reject under the sexual-content rule, not just nudity. The dialogue about money and a missing wife is not enough to save it.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club money throwing",
+      "action": "none",
+      "facecam": {
+        "x": 0.19,
+        "y": 0.66,
+        "w": 0.13,
+        "h": 0.32
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 26.0,
+      "end": 44.4,
+      "peak": 41.6,
+      "story": false,
+      "setup": "ohnePixel throws money at strippers in a club and starts getting confused",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "ZanyRealLEDKevinTurtle-SQ2MfYjhrtgfEN-0": {
+      "at": "2026-11-20T23:15:11.001497+00:00",
+      "login": "squeex",
+      "name": "Squeex",
+      "url": "https://www.twitch.tv/squeex/clip/ZanyRealLEDKevinTurtle-SQ2MfYjhrtgfEN-0",
+      "title": "squeex does a cool trick in gta",
+      "views": 534,
+      "use": true,
+      "why": "Setup is a bike trick that needs speed, then the payoff is a Wasted screen and the streamer cracking up. Face is clearly visible. The trick itself is a bit thin, but the wipeout and reaction carry it.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "bike trick ends in wasted",
+      "action": "motorcycle",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.474
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.475,
+        "w": 1,
+        "h": 0.525
+      },
+      "start": 22.0,
+      "end": 40.7,
+      "peak": 37.5,
+      "story": true,
+      "setup": "Squeex builds up speed on a motorbike to pull off a trick",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "ObeseCrypticGarlicVoteYea-j6KGDIo3-1pUEZEx": {
+      "at": "2026-11-20T23:17:09.916049+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/ObeseCrypticGarlicVoteYea-j6KGDIo3-1pUEZEx",
+      "title": "XD",
+      "views": 443,
+      "use": true,
+      "why": "Streamer boasts about driving perfectly, then a crash lands and he blames the other driver while the car is left hanging off a ledge. Visible facecam reaction and a funny line ending with \"expensive as f***\". Stands alone with captions, though the crash itself is mid-clip.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "the overconfident drive crash",
+      "action": null,
+      "facecam": {
+        "x": 0.15,
+        "y": 0.63,
+        "w": 0.22,
+        "h": 0.37
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 24.0,
+      "end": 56.0,
+      "peak": 33.0,
+      "story": true,
+      "setup": "ohnePixel vows he won't crash once while driving a car",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "SparklyTacitSquirrelGrammarKing-8bL24bi2h7oCrG3g": {
+      "at": "2026-11-20T23:17:43.532369+00:00",
+      "login": "hutchmf",
+      "name": "HutchMF",
+      "url": "https://www.twitch.tv/hutchmf/clip/SparklyTacitSquirrelGrammarKing-8bL24bi2h7oCrG3g",
+      "title": "Nick loves feet confirmed",
+      "views": 313,
+      "use": false,
+      "why": "Rejected: the on-screen gallery image shows a sexual scene (a nude figure with a foot in its mouth), which is a reject rule. The reaction and the laptop bit are otherwise harmless, but the clip can't run.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "Nick's laptop gallery",
+      "action": null,
+      "facecam": {
+        "x": 0.02,
+        "y": 0.6,
+        "w": 0.2,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.1,
+        "y": 0.05,
+        "w": 0.8,
+        "h": 0.9
+      },
+      "start": 0.0,
+      "end": 15.9,
+      "peak": 2.5,
+      "story": false,
+      "setup": "HutchMF snoops through Nick's laptop and finds his gallery",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
     }
   },
   "posted": [
@@ -4645,6 +4858,17 @@
       ],
       "star": "reaction",
       "moment": "wrong car carjack and psycho owner",
+      "date": "2026-11-20"
+    },
+    {
+      "topic": "clip__20261120__react_WealthyObliqueCi",
+      "logins": [
+        "clix",
+        "2xrakai",
+        "caseoh_"
+      ],
+      "star": "react",
+      "moment": "SEAPLANE ESCAPE GOES WRONG",
       "date": "2026-11-20"
     }
   ],
