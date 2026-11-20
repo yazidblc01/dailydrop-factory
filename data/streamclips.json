@@ -102,9 +102,19 @@
     "PoisedFlaccidGooseYouDontSay-JIcFShXyT-deyXRF",
     "TiredDeafJuiceUncleNox-CD_q5QQDwhv_jCLj",
     "SleepyMoistPigNotATK-q0pJ0zN3aSDmLNlx",
-    "ClearDifferentGarlicNomNom-Fs_0YNyTuWAtVMSk"
+    "ClearDifferentGarlicNomNom-Fs_0YNyTuWAtVMSk",
+    "PiliableDeafDonutKlappa-OHSX2rY_MZswXM4_",
+    "PrettiestSpookyIguanaWOOP-jACKcmsXPCLidZHW",
+    "ExquisiteAstuteBaconPoooound-kLietOJbbGIeMxsP",
+    "DeafOpenArmadilloPhilosoraptor-GbJe9VOAwJK8WUDv",
+    "EagerBovineVelociraptorTwitchRaid-j2H8aK-F-0bObWVL",
+    "BraveBashfulScallionCoolStoryBro-oNSTNnnOlCim8EVa",
+    "DirtySmoothCougarGOWSkull-KcmwI3w0cKL2nNaP",
+    "AffluentEncouragingBeeAMPTropPunch-mG1yofBOqKYvIXtE",
+    "BreakableGlamorousHamburgerPrimeMe-jgWIVjeBE5spIXiU",
+    "LitigiousCloudyLorisMau5-UGlTsrxSHpyNKKaY"
   ],
-  "count": 15,
+  "count": 16,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -2502,7 +2512,8 @@
       "setup": "caseoh_ repaints his red Phoenix black to dodge the police",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "posted": true
     },
     "VainCourteousKaleBabyRage-06rqGkLgi3OzfREJ": {
       "at": "2026-11-19T23:13:27.800900+00:00",
@@ -3002,6 +3013,348 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": true
+    },
+    "PiliableDeafDonutKlappa-OHSX2rY_MZswXM4_": {
+      "at": "2026-11-20T02:28:17.384226+00:00",
+      "login": "joe_bartolozzi",
+      "name": "Joe_Bartolozzi",
+      "url": "https://www.twitch.tv/joe_bartolozzi/clip/PiliableDeafDonutKlappa-OHSX2rY_MZswXM4_",
+      "title": "JOES RULES ON GTA 6",
+      "views": 1141,
+      "use": true,
+      "why": "A rant with no gameplay, but it has a clear setup (chat spoils the game), an escalating threat, and a funny payoff: wishing a spoiler the flu and a lost pinky. The streamer's face is fully visible and animated. The spoiler mention (\"Iron Man died\") is hypothetical, not a real plot reveal. Lower score because nothing happens on screen; the value is in the dialogue.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "Joe rants about GTA 6 spoilers",
+      "action": "none",
+      "facecam": {
+        "x": 0.2,
+        "y": 0.0,
+        "w": 0.6,
+        "h": 1.0
+      },
+      "gamebox": null,
+      "start": 16.5,
+      "end": 56.5,
+      "peak": 51.7,
+      "story": true,
+      "setup": "Joe warns chat that anyone who spoils GTA 6 will be banned for good",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "PrettiestSpookyIguanaWOOP-jACKcmsXPCLidZHW": {
+      "at": "2026-11-20T02:29:07.478962+00:00",
+      "login": "zwebackhd",
+      "name": "zwebackhd",
+      "url": "https://www.twitch.tv/zwebackhd/clip/PrettiestSpookyIguanaWOOP-jACKcmsXPCLidZHW",
+      "title": "FREAKY YACHT PARTY",
+      "views": 2144,
+      "use": true,
+      "why": "A swimmer surfaces into an open-water yacht party, and the streamer's \"Wait what?\" reaction is clearly visible on the facecam. The partygoers on the decks are partly nude, so it's flagged for blur, but nothing sexual is shown. The payoff is a bit small on its own, so the score is moderate.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "stumbling onto a yacht party",
+      "action": "none",
+      "facecam": {
+        "x": 0.04,
+        "y": 0,
+        "w": 0.92,
+        "h": 0.46
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.47,
+        "w": 1,
+        "h": 0.53
+      },
+      "start": 0.0,
+      "end": 22.0,
+      "peak": 4.8,
+      "story": true,
+      "setup": "zwebackhd swims through open water and stumbles onto something unexpected",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "final_no": true
+    },
+    "ExquisiteAstuteBaconPoooound-kLietOJbbGIeMxsP": {
+      "at": "2026-11-20T02:30:55.463691+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/ExquisiteAstuteBaconPoooound-kLietOJbbGIeMxsP",
+      "title": "The Gator Incident",
+      "views": 1909,
+      "use": true,
+      "why": "Mild but understandable: he zooms his camera in on a gator swimming up toward him, then the stream cuts to a BRB card with a pee joke. The face is visible for the reaction and the closing line is funny. Score is modest because the gator stays in the water and the payoff is small.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "gator swims up during photo mode",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.6,
+        "w": 0.14,
+        "h": 0.23
+      },
+      "gamebox": {
+        "x": 0.22,
+        "y": 0.0,
+        "w": 0.56,
+        "h": 1.0
+      },
+      "start": 12.0,
+      "end": 48.0,
+      "peak": 17.0,
+      "story": true,
+      "setup": "Jerma photographs alligators in the water, and one swims straight at his camera",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "DeafOpenArmadilloPhilosoraptor-GbJe9VOAwJK8WUDv": {
+      "at": "2026-11-20T02:32:05.508250+00:00",
+      "login": "typicalgamer",
+      "name": "TypicalGamer",
+      "url": "https://www.twitch.tv/typicalgamer/clip/DeafOpenArmadilloPhilosoraptor-GbJe9VOAwJK8WUDv",
+      "title": "tg couldnt handle all that gta ahh",
+      "views": 2156,
+      "use": false,
+      "why": "Mostly dialogue while walking through a strip club about tipping and keeping the peace. No clear action or payoff, and the last frame is a black screen with only the facecam, so there's no reaction to build on.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club tipping dialogue",
+      "action": "none",
+      "facecam": {
+        "x": 0.007,
+        "y": 0.4,
+        "w": 0.22,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 31.2,
+      "peak": 10.75,
+      "story": false,
+      "setup": "TypicalGamer tries to keep the peace inside a strip club",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "EagerBovineVelociraptorTwitchRaid-j2H8aK-F-0bObWVL": {
+      "at": "2026-11-20T02:32:30.312415+00:00",
+      "login": "marlon",
+      "name": "Marlon",
+      "url": "https://www.twitch.tv/marlon/clip/EagerBovineVelociraptorTwitchRaid-j2H8aK-F-0bObWVL",
+      "title": "marlon cant handle a little sushi night?",
+      "views": 1941,
+      "use": false,
+      "why": "Rejected: the on-screen footage shows an explicit sexual scene with nudity and a sex act. Reject rule: sex act or sexual scene. The swearing and reaction don't change that.",
+      "score": 1,
+      "star": "reaction",
+      "moment": "explicit scene shown on screen",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.29,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0.29,
+        "y": 0.0,
+        "w": 0.71,
+        "h": 0.94
+      },
+      "start": 0.0,
+      "end": 16.6,
+      "peak": 1.0,
+      "story": false,
+      "setup": "Marlon reacts loudly to something on screen",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "BraveBashfulScallionCoolStoryBro-oNSTNnnOlCim8EVa": {
+      "at": "2026-11-20T02:34:29.819081+00:00",
+      "login": "timthetatman",
+      "name": "TimTheTatman",
+      "url": "https://www.twitch.tv/timthetatman/clip/BraveBashfulScallionCoolStoryBro-oNSTNnnOlCim8EVa",
+      "title": "im quick",
+      "views": 536,
+      "use": false,
+      "why": "Mostly a shower scrubbing minigame with the streamer talking about a timer and a joke about not beating GTA 6. Nothing clear happens on screen, and the talk refers to things a viewer can't see. Nudity is blurred and not a rejection reason, but the clip has no understandable story.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "shower scene timer minigame",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.25,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 36.0,
+      "end": 60.0,
+      "peak": 48.0,
+      "story": false,
+      "setup": "TimTheTatman gets put on a timer during a shower scene",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "DirtySmoothCougarGOWSkull-KcmwI3w0cKL2nNaP": {
+      "at": "2026-11-20T02:36:39.155289+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/DirtySmoothCougarGOWSkull-KcmwI3w0cKL2nNaP",
+      "title": "J-Man B Slaps ManBaby",
+      "views": 1224,
+      "use": true,
+      "why": "A funny escalating mess: Jerma eats apples at a juice stand, the worker goes off on him, and the cops roll up while he backs down. The dialogue is funny on its own, and the facecam shows his reactions throughout. Needs the setup to land, so it starts earlier.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "juice stand argument then cops",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.6,
+        "w": 0.14,
+        "h": 0.23
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 20.0,
+      "end": 56.6,
+      "peak": 36.4,
+      "story": true,
+      "setup": "Jerma gets into a shouting match at a juice stand over apples",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "failed": true
+    },
+    "AffluentEncouragingBeeAMPTropPunch-mG1yofBOqKYvIXtE": {
+      "at": "2026-11-20T02:38:40.094588+00:00",
+      "login": "cohhcarnage",
+      "name": "CohhCarnage",
+      "url": "https://www.twitch.tv/cohhcarnage/clip/AffluentEncouragingBeeAMPTropPunch-mG1yofBOqKYvIXtE",
+      "title": "This Game Is Insane",
+      "views": 820,
+      "use": true,
+      "why": "Funny sarcastic line after someone bumps his car, then police roll in, and the streamer's face is visible on the facecam. The payoff is mild and the setup is thin, so it's only a modest clip.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "someone bumps his car",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.39,
+        "w": 0.22,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 16.0,
+      "peak": 12.75,
+      "story": true,
+      "setup": "CohhCarnage gets bumped by another car while standing beside his muscle car",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "BreakableGlamorousHamburgerPrimeMe-jgWIVjeBE5spIXiU": {
+      "at": "2026-11-20T02:39:20.546675+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/BreakableGlamorousHamburgerPrimeMe-jgWIVjeBE5spIXiU",
+      "title": "THE LUCIA SHOWER",
+      "views": 648,
+      "use": true,
+      "why": "A shower reveal in GTA 6 with a streamer's facecam reaction (hands on head, face cracking up) and chat going wild. The nudity is non-sexual game content and gets blurred. The payoff is mild and the story is thin, so the score stays low.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "first time seeing Lucia in shower",
+      "action": "none",
+      "facecam": {
+        "x": 0.07,
+        "y": 0.02,
+        "w": 0.23,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.71,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 22.5,
+      "story": true,
+      "setup": "Lacy wanders into a bathroom and finds Lucia showering",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "final_no": true
+    },
+    "LitigiousCloudyLorisMau5-UGlTsrxSHpyNKKaY": {
+      "at": "2026-11-20T02:51:03.486640+00:00",
+      "login": "cinna",
+      "name": "Cinna",
+      "url": "https://www.twitch.tv/cinna/clip/LitigiousCloudyLorisMau5-UGlTsrxSHpyNKKaY",
+      "title": "ayoo",
+      "views": 1374,
+      "use": true,
+      "why": "Cinna is stuck on the shower scrub controls and reads them out loud in a rising panic, then the character lets go of the controls and she reacts. The dialogue and face make it funny, but the action is mild. Nudity is non-sexual and gets blurred.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "stuck on shower controls",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.27,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.77,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 26.0,
+      "peak": 21.8,
+      "story": true,
+      "setup": "Cinna tries to scrub in the shower but can't work out the controls",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "final_no": true
     }
   },
   "posted": [
@@ -3137,6 +3490,15 @@
       ],
       "star": "reaction",
       "moment": "stolen car caught by cops",
+      "date": "2026-11-19"
+    },
+    {
+      "topic": "clip__20261119__SwissBenevolentRhinocero",
+      "logins": [
+        "caseoh_"
+      ],
+      "star": "reaction",
+      "moment": "repaint to dodge cops",
       "date": "2026-11-19"
     }
   ],
@@ -3392,6 +3754,136 @@
       "start": 6.0,
       "end": 22.0,
       "peak": 14.0
+    },
+    "SolidPlainChickpeaCoolStoryBob-fhJLgOr0w1BbIfNJ": {
+      "at": "2026-11-20T02:19:44.886239+00:00",
+      "login": "vanillamace",
+      "name": "vanillamace",
+      "url": "https://www.twitch.tv/vanillamace/clip/SolidPlainChickpeaCoolStoryBob-fhJLgOr0w1BbIfNJ",
+      "title": "BYE LIZ",
+      "use": true,
+      "score": 6,
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.27,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 3.0,
+      "end": 17.0,
+      "peak": 15.7
+    },
+    "LuckyCautiousNikudonBIRB-MfYcKwJXy-Ln9p5A": {
+      "at": "2026-11-20T02:22:02.378672+00:00",
+      "login": "syndicate",
+      "name": "Syndicate",
+      "url": "https://www.twitch.tv/syndicate/clip/LuckyCautiousNikudonBIRB-MfYcKwJXy-Ln9p5A",
+      "title": "Please, one last time! To the sunset! No way! It was meant to be!",
+      "use": false,
+      "score": 4,
+      "action": null,
+      "facecam": {
+        "x": 0.73,
+        "y": 0.16,
+        "w": 0.25,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 38.0,
+      "end": 55.0,
+      "peak": 47.5
+    },
+    "BraveBillowingChinchillaPlanking-9qcmdSBUceAzZQw_": {
+      "at": "2026-11-20T02:22:39.872563+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/BraveBillowingChinchillaPlanking-9qcmdSBUceAzZQw_",
+      "title": "Burn checks how AnthonyZ is doing",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 15.0,
+      "end": 38.4,
+      "peak": 21.0
+    },
+    "SaltyPlainSandwichDeIlluminati-vjQJfypl2wSMXfbY": {
+      "at": "2026-11-20T02:24:13.736091+00:00",
+      "login": "garek",
+      "name": "Garek",
+      "url": "https://www.twitch.tv/garek/clip/SaltyPlainSandwichDeIlluminati-vjQJfypl2wSMXfbY",
+      "title": "H1 comes in hot",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 15.0,
+      "end": 55.0,
+      "peak": 18.0
+    },
+    "ObliqueBusyElkAsianGlow-UkZC9G-OljHAcHIn": {
+      "at": "2026-11-20T02:25:18.683362+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/ObliqueBusyElkAsianGlow-UkZC9G-OljHAcHIn",
+      "title": "Chris Handsome: To Catch A Weeb ft. Ken-sama",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0.1,
+        "w": 1,
+        "h": 0.8
+      },
+      "start": 20.0,
+      "end": 60.0,
+      "peak": 49.2
+    },
+    "TubularCarelessKittenTF2John-qzaSHS1VQNQ7anSS": {
+      "at": "2026-11-20T02:26:11.197968+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/TubularCarelessKittenTF2John-qzaSHS1VQNQ7anSS",
+      "title": "Last Resort",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 8.0,
+      "end": 48.0,
+      "peak": 16.8
     }
   }
 }

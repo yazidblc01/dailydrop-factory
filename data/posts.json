@@ -806,5 +806,21 @@
     "zernio_id": "6affa152ce3ecf96f0e955c9",
     "posted_at": "2026-11-20T01:25:24+00:00",
     "slot": "waited"
+  },
+  "clip__20261119__SwissBenevolentRhinocero": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=6O82yCIhLG8",
+      "facebook": "https://www.facebook.com/reel/1200199005996156"
+    },
+    "title": "GTA 6: CaseOh Repaints His Car To Dodge The Cops",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6affb7971dda9c3d7536a896",
+    "posted_at": "2026-11-20T03:00:15+00:00",
+    "url": "https://www.youtube.com/watch?v=6O82yCIhLG8",
+    "slot": "waited"
   }
 }
