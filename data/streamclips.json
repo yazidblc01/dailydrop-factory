@@ -138,9 +138,17 @@
     "SuccessfulSnappyDiamondPastaThat-xNRFdR22plJFfA7H",
     "MagnificentHilariousMonitorCclamChamp-u_WBK66Y7rsqXeUD",
     "FuriousArtisticLemurCoolStoryBob-1i51GMB_U858vT50",
-    "GentleDoubtfulHawkCoolCat-sMpS9-0zBnjb9xM-"
+    "GentleDoubtfulHawkCoolCat-sMpS9-0zBnjb9xM-",
+    "VainIncredulousGarbageNerfBlueBlaster-czSRLxlV6pxUC02I",
+    "ReliableAverageWebFUNgineer-m8rTD--hodMm-JVH",
+    "TameLightWombatHumbleLife-VYtN0ReqVqbaLdYr",
+    "QuaintAbnegateGnatFailFish-v0xBkFBoEeE_iFfL",
+    "CreativeOilyPoxPipeHype-XzQXLYZJIS1Zl9H9",
+    "DrabHelpfulHamburgerEagleEye-d5DuX91uYoz7wbxH",
+    "NastyConfidentOpossumPupper-x1E5ITWpFfmVq4K3",
+    "WiseSolidJuiceRuleFive-4CitvrkS30C-5KNR"
   ],
-  "count": 19,
+  "count": 20,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -4228,6 +4236,235 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": true
+    },
+    "VainIncredulousGarbageNerfBlueBlaster-czSRLxlV6pxUC02I": {
+      "at": "2026-11-20T20:10:36.469292+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/VainIncredulousGarbageNerfBlueBlaster-czSRLxlV6pxUC02I",
+      "title": "SPAM MANDY if u see ths",
+      "views": 334,
+      "use": false,
+      "why": "Nothing absurd or funny happens: the player walks up to the Jack of Hearts entrance under a mission-style subtitle, with no speech, no chaos, and no reaction. There is no facecam, so no streamer reaction can be seen.",
+      "score": 2,
+      "star": "gameplay",
+      "moment": "walking into Jack of Hearts",
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 15.0,
+      "story": false,
+      "setup": "A player heads toward the Jack of Hearts club entrance while a crowd waits outside.",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false
+    },
+    "ReliableAverageWebFUNgineer-m8rTD--hodMm-JVH": {
+      "at": "2026-11-20T20:12:02.803401+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/ReliableAverageWebFUNgineer-m8rTD--hodMm-JVH",
+      "title": "jason ok?",
+      "views": 456,
+      "use": true,
+      "why": "Funny chaos: a character crashes down a staircase and the streamer's dialogue carries it (\"I permanently altered his looks\"). The streamer's face is visible in the facecam and he reacts to the wreck. Story is followable from the setup and the payoff. Starts before the crash so the context lands.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "Jason bike fall down stairs",
+      "action": "falling",
+      "facecam": {
+        "x": 0,
+        "y": 0.12,
+        "w": 0.21,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 34.0,
+      "end": 58.0,
+      "peak": 48.5,
+      "story": true,
+      "setup": "caseoh_ and Jason ride bikes through the city, and the ride goes badly",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "TameLightWombatHumbleLife-VYtN0ReqVqbaLdYr": {
+      "at": "2026-11-20T20:13:10.666553+00:00",
+      "login": "squeex",
+      "name": "Squeex",
+      "url": "https://www.twitch.tv/squeex/clip/TameLightWombatHumbleLife-VYtN0ReqVqbaLdYr",
+      "title": "Never miss giving a foot massage…",
+      "views": 2084,
+      "use": false,
+      "why": "Mostly the streamer talking about a cutscene he missed, which happens off screen. The game footage is a blurred photo studio with nothing understandable happening, so there is no story to follow.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "missed Lucia foot massage cutscene",
+      "action": null,
+      "facecam": {
+        "x": 0.007,
+        "y": 0.21,
+        "w": 0.204,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.28,
+        "y": 0,
+        "w": 0.72,
+        "h": 1
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 57.5,
+      "story": false,
+      "setup": "Squeex admits he missed a Lucia cutscene while playing a zombie arcade game",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "QuaintAbnegateGnatFailFish-v0xBkFBoEeE_iFfL": {
+      "at": "2026-11-20T20:14:21.871128+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/QuaintAbnegateGnatFailFish-v0xBkFBoEeE_iFfL",
+      "title": "broken",
+      "views": 428,
+      "use": true,
+      "why": "Absurd theft of a mobility scooter with the streamer riding it and cracking up on facecam. Reaction is visible and the dialogue is funny on its own, though the payoff is mild.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "stealing the mobility scooter",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.1,
+        "w": 0.21,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 30.0,
+      "end": 52.2,
+      "peak": 45.5,
+      "story": true,
+      "setup": "caseoh_ hops on an old woman's mobility scooter and rides off with it",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "CreativeOilyPoxPipeHype-XzQXLYZJIS1Zl9H9": {
+      "at": "2026-11-20T20:14:51.296887+00:00",
+      "login": "2xrakai",
+      "name": "2xRaKai",
+      "url": "https://www.twitch.tv/2xrakai/clip/CreativeOilyPoxPipeHype-XzQXLYZJIS1Zl9H9",
+      "title": "I owe y'all 100 songs",
+      "views": 976,
+      "use": false,
+      "why": "Rejected: the transcript has a racial slur at 3.2s (\"Bich nigger\"), which is a hard reject under the slurs rule regardless of context. The rest is a talking-head rant with no visible GTA action, so it would not be a strong pick anyway.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "streamer rant about playing games",
+      "action": "none",
+      "facecam": {
+        "x": 0.3,
+        "y": 0.2,
+        "w": 0.45,
+        "h": 0.7
+      },
+      "gamebox": null,
+      "start": 0.0,
+      "end": 21.7,
+      "peak": 7.75,
+      "story": false,
+      "setup": "2xRaKai rants at chat about gaming and his subs while the game stays off screen",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "NastyConfidentOpossumPupper-x1E5ITWpFfmVq4K3": {
+      "at": "2026-11-20T20:18:32.941833+00:00",
+      "login": "extraemily",
+      "name": "ExtraEmily",
+      "url": "https://www.twitch.tv/extraemily/clip/NastyConfidentOpossumPupper-x1E5ITWpFfmVq4K3",
+      "title": "Emily reacts to Jason and Lucia in bed",
+      "views": 966,
+      "use": false,
+      "why": "Rejected: the clip is built around a sexual scene in bed between Jason and Lucia, with a figure on top of another in frame 2 and dialogue about sex. Nudity alone would be fine, but this is a sex scene, which is a hard reject.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "Jason and Lucia in bed",
+      "action": "none",
+      "facecam": {
+        "x": 0.41,
+        "y": 0.02,
+        "w": 0.59,
+        "h": 0.44
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.56,
+        "w": 0.91,
+        "h": 0.42
+      },
+      "start": 22.0,
+      "end": 56.0,
+      "peak": 31.5,
+      "story": true,
+      "setup": "ExtraEmily watches Jason and Lucia's bedroom scene get interrupted by a knock",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "WiseSolidJuiceRuleFive-4CitvrkS30C-5KNR": {
+      "at": "2026-11-20T20:20:39.325985+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/WiseSolidJuiceRuleFive-4CitvrkS30C-5KNR",
+      "title": "pnut meets a psycho",
+      "views": 1076,
+      "use": true,
+      "why": "He jacks the wrong car, the owner goes psycho and fights him, and he reacts loudly (\"this guy's crazy\", \"oh my god\" repeated). Clear setup, payoff and reaction. The facecam is a stylized avatar that reacts visibly, so I count it as the face on screen, though it isn't a real face.",
+      "score": 8,
+      "star": "reaction",
+      "moment": "wrong car carjack and psycho owner",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.17,
+        "y": 0.72,
+        "w": 0.11,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 2.0,
+      "end": 30.0,
+      "peak": 21.5,
+      "story": true,
+      "setup": "pnut jacks the wrong car and its angry owner fights back",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
     }
   },
   "posted": [
@@ -4399,6 +4636,15 @@
       ],
       "star": "reaction",
       "moment": "stealing car from gun-wielding woman",
+      "date": "2026-11-20"
+    },
+    {
+      "topic": "clip__20261120__WiseSolidJuiceRuleFive_4",
+      "logins": [
+        "theburntpeanut"
+      ],
+      "star": "reaction",
+      "moment": "wrong car carjack and psycho owner",
       "date": "2026-11-20"
     }
   ],

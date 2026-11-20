@@ -890,5 +890,21 @@
     "zernio_id": "6b009a4b04d346397f9c62b0",
     "posted_at": "2026-11-20T19:08:45+00:00",
     "slot": "waited"
+  },
+  "clip__20261120__WiseSolidJuiceRuleFive_4": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=WVByibJa7WM",
+      "facebook": "https://www.facebook.com/reel/1143219665333507"
+    },
+    "url": "https://www.youtube.com/watch?v=WVByibJa7WM",
+    "title": "GTA 6: He Jacks The Wrong Car And The Owner Snaps",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b00add6bb36e403c1c975e1",
+    "posted_at": "2026-11-20T20:31:25+00:00",
+    "slot": "waited"
   }
 }
