@@ -790,5 +790,21 @@
     "zernio_id": "6aff8612579bd6f9f4072649",
     "posted_at": "2026-11-19T23:29:04+00:00",
     "failed": "youtube: YouTube upload session initialization failed: 400 {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"The user has exceeded the number of videos they may upload.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has exceeded the number of videos they may upload.\",\n        \"domain\": \"youtube.video\",\n        \"reason\": \"uploadLimitExceeded\"\n      }\n    ]\n  }\n}\n"
+  },
+  "clip__20261119__PoisedFlaccidGooseYouDon": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=5wT6l3IJ9PE",
+      "facebook": "https://www.facebook.com/reel/2233211927224369"
+    },
+    "url": "https://www.youtube.com/watch?v=5wT6l3IJ9PE",
+    "title": "GTA 6: Cops Catch Him In His \"Mom's\" Stolen Car",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6affa152ce3ecf96f0e955c9",
+    "posted_at": "2026-11-20T01:25:24+00:00",
+    "slot": "waited"
   }
 }
