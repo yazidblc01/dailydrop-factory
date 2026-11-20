@@ -822,5 +822,21 @@
     "posted_at": "2026-11-20T03:00:15+00:00",
     "url": "https://www.youtube.com/watch?v=6O82yCIhLG8",
     "slot": "waited"
+  },
+  "clip__20261120__AmorphousDeafZucchiniSpi": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=VGbO5xj0ERA",
+      "facebook": "https://www.facebook.com/reel/1136114815470010"
+    },
+    "title": "GTA 6: Jerma Gets Chased By A Crashing Helicopter",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b005abe0222177e71ad2e01",
+    "posted_at": "2026-11-20T14:36:44+00:00",
+    "url": "https://www.youtube.com/watch?v=VGbO5xj0ERA",
+    "slot": "waited"
   }
 }

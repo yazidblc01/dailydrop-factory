@@ -112,9 +112,18 @@
     "DirtySmoothCougarGOWSkull-KcmwI3w0cKL2nNaP",
     "AffluentEncouragingBeeAMPTropPunch-mG1yofBOqKYvIXtE",
     "BreakableGlamorousHamburgerPrimeMe-jgWIVjeBE5spIXiU",
-    "LitigiousCloudyLorisMau5-UGlTsrxSHpyNKKaY"
+    "LitigiousCloudyLorisMau5-UGlTsrxSHpyNKKaY",
+    "FurryLittleBunnyCoolStoryBob-_J3RtuezOHW-UCWQ",
+    "AbstruseCoweringCoyoteBatChest-Xg9AV0XyktTGeK8F",
+    "SpineyFairEggplantDancingBanana-bH0uBbWgNv4K9RfE",
+    "MoldyRespectfulOstrichPartyTime-xKoKzoNh9OvfuiNS",
+    "ArborealVictoriousSnailDatSheffy-LUDJxQAqZjCXFVjP",
+    "RockySourAsteriskTooSpicy-6U8FM1MWLFtUXMc9",
+    "InspiringFriendlyLemurJebaited-oFs8vW6U4uy5p44B",
+    "AntediluvianDarkNuggetsCclamChamp-20eTlBwERPpcDKFS",
+    "AmorphousDeafZucchiniSpicyBoy-IdVR1IqHfRWD57LN"
   ],
-  "count": 16,
+  "count": 17,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -3355,6 +3364,308 @@
       "nudity": true,
       "face_visible": true,
       "final_no": true
+    },
+    "FurryLittleBunnyCoolStoryBob-_J3RtuezOHW-UCWQ": {
+      "at": "2026-11-20T14:11:54.026797+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/FurryLittleBunnyCoolStoryBob-_J3RtuezOHW-UCWQ",
+      "title": "gta6 review so far",
+      "views": 16482,
+      "use": false,
+      "why": "xQc gives a spoken opinion on the GTA 6 console version. The gameplay behind him is blurred and nothing understandable happens on screen, so there is no story. Only a mild hair-pull reaction, no payoff.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "xQc GTA 6 console review",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.97,
+        "h": 0.46
+      },
+      "gamebox": {
+        "x": 0.08,
+        "y": 0.5,
+        "w": 0.92,
+        "h": 0.5
+      },
+      "start": 20.0,
+      "end": 60.0,
+      "peak": 23.0,
+      "story": false,
+      "setup": "xQc gives his honest take on GTA 6 running on consoles",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "AbstruseCoweringCoyoteBatChest-Xg9AV0XyktTGeK8F": {
+      "at": "2026-11-20T14:13:51.369301+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/AbstruseCoweringCoyoteBatChest-Xg9AV0XyktTGeK8F",
+      "title": "Stick drift???",
+      "views": 6337,
+      "use": true,
+      "why": "A dancer's deadpan lecture about stage fees and \"five-star facility\" lines is funny on its own, and the streamer's laughing facecam sells it. The \"I'm lost\" and \"all right\" repeats are a good comedic beat, but the payoff is mostly talk, not chaos.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "strip club dancer lecture",
+      "action": "none",
+      "facecam": {
+        "x": 0.02,
+        "y": 0.72,
+        "w": 0.22,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 32.7,
+      "peak": 25.0,
+      "story": true,
+      "setup": "ohnePixel gets a lecture from a club dancer about stage fees",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "SpineyFairEggplantDancingBanana-bH0uBbWgNv4K9RfE": {
+      "at": "2026-11-20T14:14:41.729942+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/SpineyFairEggplantDancingBanana-bH0uBbWgNv4K9RfE",
+      "title": "xQc just wanted to put his coffee down",
+      "views": 2348,
+      "use": false,
+      "why": "Rejected: nothing absurd happens on screen. The game shows characters talking and a woman drinking coffee, and the streamer's joke about dropping it is a mishearing-style aside, with no clear payoff. Without the cutscene context it is a weak reaction, and the moment is mostly talk. Face is visible, but the reaction is not strong enough to carry a clip.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "coffee cutscene going legit",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.46
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.47,
+        "w": 1.0,
+        "h": 0.53
+      },
+      "start": 0.0,
+      "end": 16.4,
+      "peak": 15.2,
+      "story": false,
+      "setup": "xQc watches characters chat outside a coffee shop about going legit",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "MoldyRespectfulOstrichPartyTime-xKoKzoNh9OvfuiNS": {
+      "at": "2026-11-20T14:15:42.627004+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/MoldyRespectfulOstrichPartyTime-xKoKzoNh9OvfuiNS",
+      "title": "ohnePixel says GTA 6 gets him more bricked up than porn",
+      "views": 455,
+      "use": false,
+      "why": "no story: Weak clip: he's reacting to a Reddit post and talking about GTA 6 strip club physics being more arousing than porn. It's talk, with no sexual scene or nudity on screen. The reaction is visible on his facecam, and the punchline is understandable without the Reddit context. No gameplay is shown, so it's a low score.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "GTA 6 strip club physics rant",
+      "action": "none",
+      "facecam": {
+        "x": 0.08,
+        "y": 0.66,
+        "w": 0.2,
+        "h": 0.34
+      },
+      "gamebox": null,
+      "start": 6.5,
+      "end": 21.5,
+      "peak": 14.7,
+      "story": false,
+      "setup": "ohnePixel reacts to a Reddit post while talking about GTA 6",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "ArborealVictoriousSnailDatSheffy-LUDJxQAqZjCXFVjP": {
+      "at": "2026-11-20T14:17:56.924739+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/ArborealVictoriousSnailDatSheffy-LUDJxQAqZjCXFVjP",
+      "title": "xQc refuses to leave the club in GTA 6",
+      "views": 1685,
+      "use": false,
+      "why": "Rejected for no clear story. xQc is mostly talking over a club scene, with fragments about phones, a girl driving and not leaving. Nothing clearly happens on screen that a viewer without context can follow. The one visible reaction (at 46.5s) is a mild \"you bum\" and not a strong payoff. The bikini top on the phone-style screen is not nudity and is not a sex act.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "xQc refuses to leave club",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.45
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.47,
+        "w": 1,
+        "h": 0.53
+      },
+      "start": 36.0,
+      "end": 52.0,
+      "peak": 46.5,
+      "story": false,
+      "setup": "xQc is stuck in a GTA club while his friends pull him toward the car",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "RockySourAsteriskTooSpicy-6U8FM1MWLFtUXMc9": {
+      "at": "2026-11-20T14:18:42.336944+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/RockySourAsteriskTooSpicy-6U8FM1MWLFtUXMc9",
+      "title": "changing clothes",
+      "views": 3433,
+      "use": false,
+      "why": "Rejected for no story. The clip is a clothing-store menu where the streamer comments on bodysuit colors while the outfit changes. Nothing happens beyond browsing, so there is no setup, payoff, or real reaction.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "changing bodysuit outfits in store",
+      "action": "none",
+      "facecam": {
+        "x": 0.01,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 22.5,
+      "peak": 12.8,
+      "story": false,
+      "setup": "IShowSpeed browses bodysuits in a clothing store and comments on each color",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "InspiringFriendlyLemurJebaited-oFs8vW6U4uy5p44B": {
+      "at": "2026-11-20T14:20:59.873430+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/InspiringFriendlyLemurJebaited-oFs8vW6U4uy5p44B",
+      "title": "LMAOOOOO",
+      "views": 3169,
+      "use": false,
+      "why": "Rejected for sexual content. The game shows a porn-set scene with nudity, and the dialogue lists explicit sex acts being shot. The reaction is funny, but the clip is built around a sexual scene, which is a hard reject even though nudity alone would be blurred.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "porn set scene shoot",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.66,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.98,
+        "h": 0.98
+      },
+      "start": 20.1,
+      "end": 60.1,
+      "peak": 27.2,
+      "story": false,
+      "setup": "IShowSpeed watches a film crew shoot a scene at a pool in GTA 6",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "AntediluvianDarkNuggetsCclamChamp-20eTlBwERPpcDKFS": {
+      "at": "2026-11-20T14:22:00.090162+00:00",
+      "login": "2xrakai",
+      "name": "2xRaKai",
+      "url": "https://www.twitch.tv/2xrakai/clip/AntediluvianDarkNuggetsCclamChamp-20eTlBwERPpcDKFS",
+      "title": "Wait, chat, we going to jail?",
+      "views": 1253,
+      "use": true,
+      "why": "Funny spoken line (\"Wait, chat, we going to jail?\") lands right after a sneaky setup, and the streamer's facecam is visible. The reaction is mild, though, so the payoff relies on the line itself.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "sneaking into the exhibition",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.17,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.06,
+        "w": 0.83,
+        "h": 0.9
+      },
+      "start": 8.5,
+      "end": 26.0,
+      "peak": 22.8,
+      "story": true,
+      "setup": "2xRaKai sneaks his friend into an exhibition space before getting caught",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "AmorphousDeafZucchiniSpicyBoy-IdVR1IqHfRWD57LN": {
+      "at": "2026-11-20T14:23:33.746593+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/AmorphousDeafZucchiniSpicyBoy-IdVR1IqHfRWD57LN",
+      "title": "omegalul",
+      "views": 244,
+      "use": true,
+      "why": "A falling helicopter comes down on the streamer, he yells at it, and the 'Wasted' screen follows. The facecam shows a clear, wide-eyed reaction, and the absurd crash plus his 'what the f***' line make it funny.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "helicopter crashes on him",
+      "action": null,
+      "facecam": {
+        "x": 0.03,
+        "y": 0,
+        "w": 0.8,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.59,
+        "w": 1,
+        "h": 0.41
+      },
+      "start": 0.3,
+      "end": 28.5,
+      "peak": 18.2,
+      "story": true,
+      "setup": "Jerma says bye to a helicopter, then sees it falling straight at him",
+      "cold_open": true,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
     }
   },
   "posted": [
@@ -3500,9 +3811,18 @@
       "star": "reaction",
       "moment": "repaint to dodge cops",
       "date": "2026-11-19"
+    },
+    {
+      "topic": "clip__20261120__AmorphousDeafZucchiniSpi",
+      "logins": [
+        "jerma985"
+      ],
+      "star": "reaction",
+      "moment": "helicopter crashes on him",
+      "date": "2026-11-20"
     }
   ],
-  "house": "2026-11-19",
+  "house": "2026-11-20",
   "seen5": {
     "TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN": {
       "at": "2026-11-18T21:16:59.699365+00:00",
