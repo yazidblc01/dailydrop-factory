@@ -874,5 +874,21 @@
     "posted_at": "2026-11-20T17:19:55+00:00",
     "url": "https://www.youtube.com/watch?v=RaHqMSPsK04",
     "slot": "waited"
+  },
+  "clip__20261120__TangibleAttractiveOpossu": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=MSq4avhqzMA",
+      "facebook": "https://www.facebook.com/reel/2043680672987862"
+    },
+    "url": "https://www.youtube.com/watch?v=MSq4avhqzMA",
+    "title": "GTA 6: Jerma Steals A Car From A Woman With A Gun",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b009a4b04d346397f9c62b0",
+    "posted_at": "2026-11-20T19:08:45+00:00",
+    "slot": "waited"
   }
 }
