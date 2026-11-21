@@ -1058,5 +1058,25 @@
     "zernio_id": "6b01feb0dd4ab5fd040763be",
     "posted_at": "2026-11-21T20:28:34+00:00",
     "slot": "waited"
+  },
+  "waited__20261121__15": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=JEPZkWioXl8",
+      "facebook": "https://www.facebook.com/reel/1138504658996143",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7710743178730638593",
+      "instagram": "https://www.instagram.com/reel/DgBOG5bjS9p/"
+    },
+    "title": "GTA 6: What 13 years of waiting for GTA 6 did to prices 😭",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b021018a398b5ed41861258",
+    "posted_at": "2026-11-21T21:42:01+00:00",
+    "url": "https://www.youtube.com/watch?v=JEPZkWioXl8",
+    "slot": "waited"
   }
 }
