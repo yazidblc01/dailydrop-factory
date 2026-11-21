@@ -162,9 +162,19 @@
     "AmusedGracefulRaccoonPanicVis-OCWsXp_i-UYrZkHA",
     "CrowdedEsteemedPigeonDatBoi-GJD-l8MPsVSh4KXI",
     "SassyHonestCarabeef4Head-dlvVz6khMR53Tz4m",
-    "CloudyVastDonutAliens-XLDJYEBu1KypYD2x"
+    "CloudyVastDonutAliens-XLDJYEBu1KypYD2x",
+    "BenevolentSpinelessRaccoonTBCheesePull-UYnYo-vpn0BjWJIM",
+    "CoyHedonisticCurlewCoolStoryBro-xN2E9E31h4FN4hpt",
+    "AcceptableKindChinchillaCurseLit-7ypQY1ylfv-1xE8k",
+    "AggressiveWildCamelPupper-VvkAPb5IfLVILc_e",
+    "TenderFurtiveBaconArsonNoSexy-wHYBaSMTEub2s7No",
+    "OilyAlluringCheetahEleGiggle-MrzvudOd4ooIf60I",
+    "BraveHelpfulSwordKappa-qsILVGSorUkWKUS7",
+    "WonderfulWrongBarracudaPunchTrees-Z-Ipha2HrGUkEwHL",
+    "IgnorantDeliciousClamVoHiYo-uGGhZngq_sR2PCqo",
+    "ExcitedPlumpMomNerfBlueBlaster-kcrH6JTKxuAS5S1u"
   ],
-  "count": 22,
+  "count": 23,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -2663,7 +2673,8 @@
       "setup": "Joe watches a guy fix a pipe while Mandy wanders the apartment in lingerie",
       "cold_open": false,
       "nudity": true,
-      "face_visible": true
+      "face_visible": true,
+      "posted": true
     },
     "BlueRoughPistachioUWot-irHbCK3AZ0089Bqh": {
       "at": "2026-11-19T23:17:28.365035+00:00",
@@ -5027,6 +5038,348 @@
       "nudity": false,
       "face_visible": true,
       "final_no": true
+    },
+    "BenevolentSpinelessRaccoonTBCheesePull-UYnYo-vpn0BjWJIM": {
+      "at": "2026-11-21T02:19:11.888982+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/BenevolentSpinelessRaccoonTBCheesePull-UYnYo-vpn0BjWJIM",
+      "title": "Now we need to find a new Wife",
+      "views": 275,
+      "use": false,
+      "why": "no story: Funny spoken bit: the streamer jokes about needing a new wife, then tells the partner to grab the bag, while the hallway tension is set up by gunfire. The payoff is a quip rather than visible chaos, and the setup is thin, so it's a middling clip.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "hallway shootout with Lu",
+      "action": "shootout",
+      "facecam": {
+        "x": 0.18,
+        "y": 0.7,
+        "w": 0.13,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 3.0,
+      "end": 19.1,
+      "peak": 18.2,
+      "story": false,
+      "setup": "TheBurntPeanut pushes down a dark hallway with Lu, gun raised, after a gunfight",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "CoyHedonisticCurlewCoolStoryBro-xN2E9E31h4FN4hpt": {
+      "at": "2026-11-21T02:21:34.922615+00:00",
+      "login": "pokelawls",
+      "name": "pokelawls",
+      "url": "https://www.twitch.tv/pokelawls/clip/CoyHedonisticCurlewCoolStoryBro-xN2E9E31h4FN4hpt",
+      "title": "Poke Gets Jumped",
+      "views": 308,
+      "use": true,
+      "why": "A fight that goes wrong: he hunts construction workers at a crane at 3am, then gets jumped and wasted. The payoff is the wasted screen, and the streamer's voice keeps narrating the confusion. Gameplay carries it, with a small facecam.",
+      "score": 6,
+      "star": "gameplay",
+      "moment": "jumped at the crane site",
+      "action": "fist fight",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.37,
+        "w": 0.16,
+        "h": 0.27
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 15.0,
+      "end": 46.9,
+      "peak": 34.0,
+      "story": true,
+      "setup": "Poke hunts construction workers at a crane at 3am and starts a fight",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "AcceptableKindChinchillaCurseLit-7ypQY1ylfv-1xE8k": {
+      "at": "2026-11-21T02:22:47.246369+00:00",
+      "login": "joe_bartolozzi",
+      "name": "Joe_Bartolozzi",
+      "url": "https://www.twitch.tv/joe_bartolozzi/clip/AcceptableKindChinchillaCurseLit-7ypQY1ylfv-1xE8k",
+      "title": "W GOON GAME!",
+      "views": 441,
+      "use": false,
+      "why": "Mostly wandering a hotel hallway and opening doors while searching for Jay. The funny lines (\"golf ball into his nuts\", \"why is this every room?\") don't show a clear action or consequence on screen, so there's no real story. Rejected as wandering.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "searching rooms for Jay",
+      "action": null,
+      "facecam": {
+        "x": 0.745,
+        "y": 0.13,
+        "w": 0.2,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.74,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 20.2,
+      "peak": 14.4,
+      "story": false,
+      "setup": "Joe searches a hotel hallway for his friend Jay, room after room",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "AggressiveWildCamelPupper-VvkAPb5IfLVILc_e": {
+      "at": "2026-11-21T02:24:07.630045+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/AggressiveWildCamelPupper-VvkAPb5IfLVILc_e",
+      "title": "JIGGLE PHYSICS",
+      "views": 705,
+      "use": true,
+      "why": "A funny, understandable bit: the player vents to his mom on the phone about a creepy boss, then gets the \"no limit on phone time\" line. Dialogue carries it, and the streamer's face is visible, but his reaction is mild and the clip is more a comedic line than a big visible payoff. Nothing sexual on screen; the boss grab is only spoken about.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "mom phone call about boss",
+      "action": "none",
+      "facecam": {
+        "x": 0.15,
+        "y": 0.63,
+        "w": 0.2,
+        "h": 0.37
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 25.4,
+      "peak": 23.5,
+      "story": true,
+      "setup": "Player vents to his mom on the phone about his creepy boss.",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "TenderFurtiveBaconArsonNoSexy-wHYBaSMTEub2s7No": {
+      "at": "2026-11-21T02:25:31.626658+00:00",
+      "login": "lvndmark",
+      "name": "LVNDMARK",
+      "url": "https://www.twitch.tv/lvndmark/clip/TenderFurtiveBaconArsonNoSexy-wHYBaSMTEub2s7No",
+      "title": "Fix driving settings",
+      "views": 1115,
+      "use": false,
+      "why": "Rejected: no story. The clip is a settings tutorial, mostly menu screens and a streamer explaining a PS5 controller toggle. Nothing absurd or chaotic happens in the game, and the only reaction is mild cussing about a setting.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "PS5 driving settings fix",
+      "action": null,
+      "facecam": {
+        "x": 0.02,
+        "y": 0.48,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 25.2,
+      "peak": 22.5,
+      "story": false,
+      "setup": "LVNDMARK explains how to fix bad driving controls in the PS5 settings",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "OilyAlluringCheetahEleGiggle-MrzvudOd4ooIf60I": {
+      "at": "2026-11-21T02:28:13.923010+00:00",
+      "login": "cohhcarnage",
+      "name": "CohhCarnage",
+      "url": "https://www.twitch.tv/cohhcarnage/clip/OilyAlluringCheetahEleGiggle-MrzvudOd4ooIf60I",
+      "title": "How Is GTA 6 Different?",
+      "views": 655,
+      "use": false,
+      "why": "Streamer lectures on how GTA has shifted from crime loop to life sim, compared with RDR2. No on-screen action, no setup-payoff-reaction, and nothing absurd or funny happens. He's mostly just lifting weights while talking.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "streamer explains RDR2 vs GTA design",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 13.5,
+      "end": 53.5,
+      "peak": 16.5,
+      "story": false,
+      "setup": "CohhCarnage explains how GTA 6 differs from RDR2 while lifting weights",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "BraveHelpfulSwordKappa-qsILVGSorUkWKUS7": {
+      "at": "2026-11-21T02:31:20.163144+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/BraveHelpfulSwordKappa-qsILVGSorUkWKUS7",
+      "title": "not 100%",
+      "views": 885,
+      "use": false,
+      "why": "Funny commentary over a pool-party fistfight, but the reaction is the star and the streamer's face is not visible. The facecam is a cartoon avatar, so this reads as voice-over gameplay. The mission is a bit awkward too, with a topless woman and talk of an inappropriate husband, though no sex act is shown.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "pool party fight with Rodney",
+      "action": "fist fight",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.72,
+        "w": 0.3,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 6.0,
+      "end": 40.0,
+      "peak": 22.0,
+      "story": true,
+      "setup": "TheBurntPeanut starts a fight with Rodney at a poolside party",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": false
+    },
+    "WonderfulWrongBarracudaPunchTrees-Z-Ipha2HrGUkEwHL": {
+      "at": "2026-11-21T02:32:40.330432+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/WonderfulWrongBarracudaPunchTrees-Z-Ipha2HrGUkEwHL",
+      "title": "bravo",
+      "views": 240,
+      "use": false,
+      "why": "Rejected: the clip shows a sexual scene in the strip club (a lap dance with nudity and simulated sex motion). That breaks the sex-act rule, so it can't be posted even though the streamer's reactions are funny.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club lap dance",
+      "action": "none",
+      "facecam": {
+        "x": 0.8,
+        "y": 0.47,
+        "w": 0.2,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.78,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 39.1,
+      "peak": 8.8,
+      "story": false,
+      "setup": "MissMikkaa dances with a girl at a strip club in the game",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "IgnorantDeliciousClamVoHiYo-uGGhZngq_sR2PCqo": {
+      "at": "2026-11-21T02:33:49.744644+00:00",
+      "login": "stableronaldo",
+      "name": "stableronaldo",
+      "url": "https://www.twitch.tv/stableronaldo/clip/IgnorantDeliciousClamVoHiYo-uGGhZngq_sR2PCqo",
+      "title": "CAUGHT",
+      "views": 361,
+      "use": false,
+      "why": "Mostly a streamer talking while wandering around a city and sneaking toward a building. The funny kick and \"I'm mad\" lines are good, but nothing happens that gets a consequence, so there's no story.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "trying to get inside a building",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.52,
+        "w": 0.2,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 25.7,
+      "peak": 17.0,
+      "story": false,
+      "setup": "stableronaldo wanders around looking for a way into a building",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "ExcitedPlumpMomNerfBlueBlaster-kcrH6JTKxuAS5S1u": {
+      "at": "2026-11-21T02:36:27.036954+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/ExcitedPlumpMomNerfBlueBlaster-kcrH6JTKxuAS5S1u",
+      "title": "gta-6-mandy-irl-voice-actor",
+      "views": 551,
+      "use": false,
+      "why": "no story: Rambling talking-head bit where the streamer claims he voices and mocap-acts Mandy, then a sudden \"What the f***?\" reaction and a stream of rapid, funny lines. The story is loose, the reaction is real and the face is visible. No gameplay chaos, so it's a weak pick.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "streamer claims he voices Mandy",
+      "action": "none",
+      "facecam": {
+        "x": 0.17,
+        "y": 0.65,
+        "w": 0.15,
+        "h": 0.35
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 8.5,
+      "end": 48.5,
+      "peak": 43.5,
+      "story": false,
+      "setup": "ohnePixel claims he's secretly in GTA 6 as Mandy's voice",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
     }
   },
   "posted": [
@@ -5227,6 +5580,15 @@
       ],
       "star": "reaction",
       "moment": "texting while riding a motorcycle",
+      "date": "2026-11-20"
+    },
+    {
+      "topic": "clip__20261120__RudeSilkyHerdNotLikeThis",
+      "logins": [
+        "joe_bartolozzi"
+      ],
+      "star": "reaction",
+      "moment": "Joe sees the finger under the sink",
       "date": "2026-11-20"
     }
   ],
@@ -5722,6 +6084,131 @@
       "start": 14.0,
       "end": 26.0,
       "peak": 19.8
+    },
+    "HumbleGiftedMosquitoRalpherZ-Oy6kLFECbXlfcMGj": {
+      "at": "2026-11-21T02:09:48.232798+00:00",
+      "login": "valkyrae",
+      "name": "Valkyrae",
+      "url": "https://www.twitch.tv/valkyrae/clip/HumbleGiftedMosquitoRalpherZ-Oy6kLFECbXlfcMGj",
+      "title": "Mickey -aura",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.19,
+        "w": 0.16,
+        "h": 0.34
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 16.8,
+      "peak": 14.75
+    },
+    "MiniatureTransparentTigerDatBoi-HZ3JGsVE_h8Qabg9": {
+      "at": "2026-11-21T02:10:46.558064+00:00",
+      "login": "crystalst",
+      "name": "Crystalst",
+      "url": "https://www.twitch.tv/crystalst/clip/MiniatureTransparentTigerDatBoi-HZ3JGsVE_h8Qabg9",
+      "title": "finally a W",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 35.6,
+      "peak": 22.0
+    },
+    "TubularLuckyOilAMPEnergy-futxMDawy4y1uJy8": {
+      "at": "2026-11-21T02:13:55.408658+00:00",
+      "login": "pengwin",
+      "name": "Pengwin",
+      "url": "https://www.twitch.tv/pengwin/clip/TubularLuckyOilAMPEnergy-futxMDawy4y1uJy8",
+      "title": "THEY'VE DONE IT",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 15.5,
+      "end": 55.5,
+      "peak": 37.8
+    },
+    "CourageousAveragePrariedogPrimeMe-ni8oZDTgeCMWkaSP": {
+      "at": "2026-11-21T02:14:58.047393+00:00",
+      "login": "penta",
+      "name": "PENTA",
+      "url": "https://www.twitch.tv/penta/clip/CourageousAveragePrariedogPrimeMe-ni8oZDTgeCMWkaSP",
+      "title": "\"WORK\"",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 12.0,
+      "peak": 6.0
+    },
+    "FilthyBillowingWaterHassaanChop-MM9cmfqjy1SyTJst": {
+      "at": "2026-11-21T02:16:01.367373+00:00",
+      "login": "harmless",
+      "name": "Harmless",
+      "url": "https://www.twitch.tv/harmless/clip/FilthyBillowingWaterHassaanChop-MM9cmfqjy1SyTJst",
+      "title": "Maynard Slams X",
+      "use": true,
+      "score": 5,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 12.0,
+      "end": 30.1,
+      "peak": 25.8
+    },
+    "BoringPuzzledClamFloof-N4pF76vthkmj1yqf": {
+      "at": "2026-11-21T02:17:35.632760+00:00",
+      "login": "harmless",
+      "name": "Harmless",
+      "url": "https://www.twitch.tv/harmless/clip/BoringPuzzledClamFloof-N4pF76vthkmj1yqf",
+      "title": "Harmless successfully baited Jerma intro pressing F while riding a motorcycle",
+      "use": true,
+      "score": 6,
+      "action": "ragdoll",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 48.1,
+      "end": 60.1,
+      "peak": 57.5
     }
   }
 }

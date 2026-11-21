@@ -958,5 +958,21 @@
     "posted_at": "2026-11-21T01:50:35+00:00",
     "url": "https://www.youtube.com/watch?v=MS23Mc0FOnQ",
     "slot": "waited"
+  },
+  "clip__20261120__RudeSilkyHerdNotLikeThis": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=7uYRw3wLnZY",
+      "facebook": "https://www.facebook.com/reel/1674089620910940"
+    },
+    "title": "GTA 6: Joe Freaks Out At A Finger Under The Sink",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b01070351ffc8a0010b2440",
+    "posted_at": "2026-11-21T02:51:16+00:00",
+    "url": "https://www.youtube.com/watch?v=7uYRw3wLnZY",
+    "slot": "waited"
   }
 }
