@@ -1042,5 +1042,21 @@
     "zernio_id": "6b01eeaf88fe78efd8e693f6",
     "posted_at": "2026-11-21T19:20:22+00:00",
     "slot": "waited"
+  },
+  "clip__20261121__PolishedFrailRuffPeteZar": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=xavsPAER3-4",
+      "facebook": "https://www.facebook.com/reel/2407068323466525"
+    },
+    "url": "https://www.youtube.com/watch?v=xavsPAER3-4",
+    "title": "GTA 6: Streamer Steals Grandma's Mobility Scooter",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b01feb0dd4ab5fd040763be",
+    "posted_at": "2026-11-21T20:28:34+00:00",
+    "slot": "waited"
   }
 }

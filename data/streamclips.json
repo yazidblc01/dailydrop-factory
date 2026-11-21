@@ -202,9 +202,15 @@
     "EnticingKawaiiNeanderthalSwiftRage-T-Jf8UxvA3-dxvW7",
     "EndearingNimblePassionfruitChocolateRain-01jh1UKyjqi850ol",
     "BovineEncouragingSangBudStar-S4LzmVNXTtXolCx5",
-    "GorgeousQuaintCucumberTooSpicy-JM19Ajn7izXTVmVf"
+    "GorgeousQuaintCucumberTooSpicy-JM19Ajn7izXTVmVf",
+    "ExuberantHappyMangetoutBigBrother-NuSovjKPZpD_Rzx7",
+    "SourPeacefulTruffleChefFrank-DWXSGftNgVINr0hw",
+    "CrunchyFrigidBasenjiBuddhaBar-YfaqN-_QU8RpMv8b",
+    "PolishedFrailRuffPeteZaroll-gZE2L3MI3Cjm2Zf9",
+    "RacySincereRuffNerfRedBlaster-5gQBQr-HzW1YIdB3",
+    "LightHungryStinkbugRitzMitz--9h2hfQUsrxODcRm"
   ],
-  "count": 26,
+  "count": 27,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -6434,6 +6440,211 @@
       "nudity": false,
       "face_visible": true,
       "final_no": true
+    },
+    "ExuberantHappyMangetoutBigBrother-NuSovjKPZpD_Rzx7": {
+      "at": "2026-11-21T20:11:06.048081+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/ExuberantHappyMangetoutBigBrother-NuSovjKPZpD_Rzx7",
+      "title": "absolute psycho",
+      "views": 381,
+      "use": false,
+      "why": "Rejected: the streamer's face is not visible at the payoff. At the Wasted moment he has turned away from the camera, so the reaction can't be seen. The game moment itself is hard to follow, and the audio is mostly him talking about the game rather than a clear action and consequence.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "getting wasted with friends at a gazebo",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.75,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.59,
+        "w": 1,
+        "h": 0.41
+      },
+      "start": 20.0,
+      "end": 36.5,
+      "peak": 34.0,
+      "story": false,
+      "setup": "Jerma runs around with friends at a gazebo before the game kills him",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false
+    },
+    "SourPeacefulTruffleChefFrank-DWXSGftNgVINr0hw": {
+      "at": "2026-11-21T20:12:47.659267+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/SourPeacefulTruffleChefFrank-DWXSGftNgVINr0hw",
+      "title": "Donnie x Alvis in GTA 6",
+      "views": 447,
+      "use": false,
+      "why": "Mostly a truck driving through a boat yard while the streamer chats about setting a GPS route. Nothing absurd or chaotic happens, and the reaction is a mild stare, so it isn't a payoff. The no-story rule applies: it's wandering and talking with no understandable consequence.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "driving to a GPS waypoint",
+      "action": "driving fast",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.75,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.59,
+        "w": 1,
+        "h": 0.41
+      },
+      "start": 0.0,
+      "end": 30.1,
+      "peak": 21.7,
+      "story": false,
+      "setup": "Jerma drives a Vapid truck around a boat yard, asking for GPS help",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "CrunchyFrigidBasenjiBuddhaBar-YfaqN-_QU8RpMv8b": {
+      "at": "2026-11-21T20:13:51.479743+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/CrunchyFrigidBasenjiBuddhaBar-YfaqN-_QU8RpMv8b",
+      "title": "a",
+      "views": 375,
+      "use": true,
+      "why": "Lacy goes off on a valet who lost his car, with funny lines like \"worth more than your f****** life\" and \"plenty of other jobs out there.\" The payoff is weak: he drops it and asks how to call his car, so the reaction is funny but not a big laugh. Facecam is visible, so the reaction counts.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "yelling at the valet",
+      "action": "none",
+      "facecam": {
+        "x": 0.05,
+        "y": 0.02,
+        "w": 0.2,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 28.0,
+      "peak": 10.3,
+      "story": true,
+      "setup": "Lacy rips into a valet who can't find his car",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "PolishedFrailRuffPeteZaroll-gZE2L3MI3Cjm2Zf9": {
+      "at": "2026-11-21T20:15:37.709548+00:00",
+      "login": "vanillamace",
+      "name": "vanillamace",
+      "url": "https://www.twitch.tv/vanillamace/clip/PolishedFrailRuffPeteZaroll-gZE2L3MI3Cjm2Zf9",
+      "title": "the silence after i'm in tears",
+      "views": 445,
+      "use": true,
+      "why": "Absurd premise: a streamer riding a mobility scooter through a Bahamas-style town, pleading \"I need this,\" then the scooter breaks and he panics on camera. Facecam is visible, and the line dialogue carries the joke. The 29s \"help me somebody\" line may be the bigger punchline, but the clip works around the breakdown.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "riding a stolen mobility scooter",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.27,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 22.0,
+      "peak": 8.0,
+      "story": true,
+      "setup": "vanillamace rides a mobility scooter through town, begging for it to work",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
+    },
+    "RacySincereRuffNerfRedBlaster-5gQBQr-HzW1YIdB3": {
+      "at": "2026-11-21T20:17:41.008816+00:00",
+      "login": "syndicate",
+      "name": "Syndicate",
+      "url": "https://www.twitch.tv/syndicate/clip/RacySincereRuffNerfRedBlaster-5gQBQr-HzW1YIdB3",
+      "title": "She's gone. She's gone.",
+      "views": 501,
+      "use": false,
+      "why": "Rejected as a story spoiler. The clip centers on a character's death (\"She's gone. She's gone.\") during a heist-escape sequence, which reveals a story beat. The streamer's reaction is mild, and the 60% game talk adds nothing.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "companion dies during escape",
+      "action": "none",
+      "facecam": {
+        "x": 0.75,
+        "y": 0.16,
+        "w": 0.23,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 22.0,
+      "peak": 21.3,
+      "story": false,
+      "setup": "A crew flees a collapsing escape as a companion is lost",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "LightHungryStinkbugRitzMitz--9h2hfQUsrxODcRm": {
+      "at": "2026-11-21T20:19:25.823332+00:00",
+      "login": "typicalgamer",
+      "name": "TypicalGamer",
+      "url": "https://www.twitch.tv/typicalgamer/clip/LightHungryStinkbugRitzMitz--9h2hfQUsrxODcRm",
+      "title": "Typical gamer finds unknown island with a lost phone on it",
+      "views": 485,
+      "use": true,
+      "why": "Mystery discovery with a clear reaction: he opens a lost phone on a deserted island, the photo on it creeps him out, and his \"what the heck\" and \"that is creepy\" are on camera with a visible face. Story is light and the reaction is mild, so it's a middling pick rather than a standout.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "finds a phone on the island",
+      "action": "none",
+      "facecam": {
+        "x": 0.007,
+        "y": 0.4,
+        "w": 0.22,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 14.0,
+      "end": 30.0,
+      "peak": 25.4,
+      "story": true,
+      "setup": "TypicalGamer explores a deserted island and finds something strange on the sand",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
     }
   },
   "posted": [
@@ -6670,6 +6881,15 @@
       ],
       "star": "reaction",
       "moment": "stuck in parking booth",
+      "date": "2026-11-21"
+    },
+    {
+      "topic": "clip__20261121__PolishedFrailRuffPeteZar",
+      "logins": [
+        "vanillamace"
+      ],
+      "star": "reaction",
+      "moment": "riding a stolen mobility scooter",
       "date": "2026-11-21"
     }
   ],
