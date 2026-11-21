@@ -152,9 +152,19 @@
     "CaringFunnySrirachaOSfrog-CPLxPX0JVwrIruwO",
     "ZanyRealLEDKevinTurtle-SQ2MfYjhrtgfEN-0",
     "ObeseCrypticGarlicVoteYea-j6KGDIo3-1pUEZEx",
-    "SparklyTacitSquirrelGrammarKing-8bL24bi2h7oCrG3g"
+    "SparklyTacitSquirrelGrammarKing-8bL24bi2h7oCrG3g",
+    "SnappyWealthyPigDancingBaby-qiVQtbTS-g19QmNV",
+    "CarefulTriangularReindeerWutFace-26HdteWTcDkJNwvw",
+    "FurryWealthyTurnipUWot-4BiO3HaSvEy0_4uV",
+    "OriginalKitschyPlumSwiftRage-69TTvPAFvSy7MVDE",
+    "BovineAmusedMilkSuperVinlin-hBAsp0mVEW-0fRBZ",
+    "TriumphantHedonisticWaterDuDudu-tWgHm1msrosEarb5",
+    "AmusedGracefulRaccoonPanicVis-OCWsXp_i-UYrZkHA",
+    "CrowdedEsteemedPigeonDatBoi-GJD-l8MPsVSh4KXI",
+    "SassyHonestCarabeef4Head-dlvVz6khMR53Tz4m",
+    "CloudyVastDonutAliens-XLDJYEBu1KypYD2x"
   ],
-  "count": 21,
+  "count": 22,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -2623,7 +2633,8 @@
       "setup": "Squeex checks his phone while riding a motorcycle down an open highway",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "posted": true
     },
     "RudeSilkyHerdNotLikeThis-G4DngW3oQhoxBOfu": {
       "at": "2026-11-19T23:16:23.022529+00:00",
@@ -4678,6 +4689,344 @@
       "cold_open": false,
       "nudity": true,
       "face_visible": true
+    },
+    "SnappyWealthyPigDancingBaby-qiVQtbTS-g19QmNV": {
+      "at": "2026-11-21T01:10:53.994141+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/SnappyWealthyPigDancingBaby-qiVQtbTS-g19QmNV",
+      "title": "really good lighting",
+      "views": 369,
+      "use": false,
+      "why": "Rejected as a sexualized scene: the clip centers on a nude in-game strip club performance with lap-dance-style dancing. Nudity alone is allowed, but this reads as a sexual scene for a 13 to 25 audience. The joke (\"really good lighting\", \"give her some credit\") is funny, but it doesn't clear the bar. Borderline, so a human reviewer could override.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "strip club dancer glitch",
+      "action": null,
+      "facecam": {
+        "x": 0.76,
+        "y": 0.47,
+        "w": 0.22,
+        "h": 0.53
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 5.4,
+      "end": 45.4,
+      "peak": 8.4,
+      "story": false,
+      "setup": "MissMikkaa watches a dancer in a strip club and jokes about the lighting",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "CarefulTriangularReindeerWutFace-26HdteWTcDkJNwvw": {
+      "at": "2026-11-21T01:12:49.088716+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/CarefulTriangularReindeerWutFace-26HdteWTcDkJNwvw",
+      "title": "wtf",
+      "views": 1679,
+      "use": false,
+      "why": "Rejected: the game footage shows a sexual scene through a window (a figure on a bed in a sex act) and a topless character in a strip-club setting. The streamer's reactions are ordinary and the dialogue is incoherent, so there is no strong payoff to salvage.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "streamer reacts to adult scene",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.44
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.44,
+        "w": 1.0,
+        "h": 0.56
+      },
+      "start": 8.8,
+      "end": 48.8,
+      "peak": 11.8,
+      "story": false,
+      "setup": "IShowSpeed watches a strange scene unfold through a window in GTA",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "FurryWealthyTurnipUWot-4BiO3HaSvEy0_4uV": {
+      "at": "2026-11-21T01:14:37.987251+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/FurryWealthyTurnipUWot-4BiO3HaSvEy0_4uV",
+      "title": "his reaction",
+      "views": 1602,
+      "use": true,
+      "why": "Kai's reaction to a hotel room full of awkward surprises is funny and clearly visible, with his face cracking up and calling it highly inappropriate. Full nudity appears, but it gets blurred automatically, so it is not a rejection.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "awkward hotel room surprise",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.39,
+        "w": 0.22,
+        "h": 0.21
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 9.0,
+      "end": 44.5,
+      "peak": 22.5,
+      "story": true,
+      "setup": "Kai Cenat hunts for a missing statue while the hotel room gets very awkward",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "failed": true
+    },
+    "OriginalKitschyPlumSwiftRage-69TTvPAFvSy7MVDE": {
+      "at": "2026-11-21T01:16:22.818116+00:00",
+      "login": "vanillamace",
+      "name": "vanillamace",
+      "url": "https://www.twitch.tv/vanillamace/clip/OriginalKitschyPlumSwiftRage-69TTvPAFvSy7MVDE",
+      "title": "gta",
+      "views": 1664,
+      "use": true,
+      "why": "Story-moment reaction with a loud payoff: the GTA 6 logo hits with a big sound and chat explodes, while the streamer's face is visible in the facecam. The dialogue is mild and the reaction modest, so it's a middling pick.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "GTA 6 title card reveal",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.24,
+        "h": 0.25
+      },
+      "gamebox": null,
+      "start": 44.0,
+      "end": 58.0,
+      "peak": 51.8,
+      "story": true,
+      "setup": "vanillamace watches the opening story and waits for the big reveal",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "BovineAmusedMilkSuperVinlin-hBAsp0mVEW-0fRBZ": {
+      "at": "2026-11-21T01:17:11.576906+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/BovineAmusedMilkSuperVinlin-hBAsp0mVEW-0fRBZ",
+      "title": "He lost all of it",
+      "views": 494,
+      "use": false,
+      "why": "Rejected: no story. Nothing happens on screen beyond scrolling the save-file menu and talking about which save to load. The reaction is mild and there is no action or payoff.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "choosing a save file",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.04,
+        "w": 1.0,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.4,
+        "w": 1.0,
+        "h": 0.5
+      },
+      "start": 0.0,
+      "end": 22.7,
+      "peak": 9.0,
+      "story": false,
+      "setup": "IShowSpeed scrolls through his save files and debates which one to load",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "TriumphantHedonisticWaterDuDudu-tWgHm1msrosEarb5": {
+      "at": "2026-11-21T01:19:07.344673+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/TriumphantHedonisticWaterDuDudu-tWgHm1msrosEarb5",
+      "title": "hair physics",
+      "views": 323,
+      "use": false,
+      "why": "Rejected for no story: the clip is MissMikkaa wandering a strip club in-game and commenting on nude dancers and the mature content warning, with no clear action and consequence. The main visual is sexualized nudity and the lines are sexual-adjacent, so it doesn't fit a family-friendly Shorts feed even though it isn't an explicit sex act.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "strip club hair physics",
+      "action": "none",
+      "facecam": {
+        "x": 0.79,
+        "y": 0.48,
+        "w": 0.21,
+        "h": 0.52
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 20.0,
+      "end": 60.0,
+      "peak": 39.5,
+      "story": false,
+      "setup": "MissMikkaa walks through a strip club in-game and comments on the dancers",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "AmusedGracefulRaccoonPanicVis-OCWsXp_i-UYrZkHA": {
+      "at": "2026-11-21T01:21:00.997582+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/AmusedGracefulRaccoonPanicVis-OCWsXp_i-UYrZkHA",
+      "title": "wtf",
+      "views": 1276,
+      "use": false,
+      "why": "Rejected: the clip shows a sexual scene (a private-room encounter with partial nudity), and the dialogue (\"on your knees\", \"go for me\") makes the sexual content explicit. Nudity alone would be blurred, but this is a sex act or sexual scene, which is a hard reject.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "private room scene with Jay",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 19.1,
+      "end": 59.1,
+      "peak": 31.5,
+      "story": false,
+      "setup": "IShowSpeed is in a private room scene with a character named Jay",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "CrowdedEsteemedPigeonDatBoi-GJD-l8MPsVSh4KXI": {
+      "at": "2026-11-21T01:22:54.284659+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/CrowdedEsteemedPigeonDatBoi-GJD-l8MPsVSh4KXI",
+      "title": "niko belic",
+      "views": 673,
+      "use": false,
+      "why": "no story: Speed reacts loudly to a Niko Bellic fan edit full of desperate pleas and threats, with clear \"Oh my gosh\" and \"bro\" reactions on his face. The payoff is funny but the footage is a montage, not a clear action, so it's mid-tier.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "IShowSpeed reacts to Niko begging",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.05,
+        "w": 1,
+        "h": 0.38
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.45,
+        "w": 1,
+        "h": 0.52
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 54.6,
+      "story": false,
+      "setup": "IShowSpeed watches a Niko Bellic montage of desperate pleas and threats",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "SassyHonestCarabeef4Head-dlvVz6khMR53Tz4m": {
+      "at": "2026-11-21T01:23:58.458835+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/SassyHonestCarabeef4Head-dlvVz6khMR53Tz4m",
+      "title": "90%",
+      "views": 706,
+      "use": false,
+      "why": "Rejected: no story. IShowSpeed spends the clip debating how to title the video (\"final, G-T-A, 90%\") while a blurred gameplay shot plays behind him. Nothing absurd or funny happens on screen, and the reaction is just him talking about the title.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "streamer debating video title",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.04,
+        "w": 1.0,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.14,
+        "y": 0.47,
+        "w": 0.86,
+        "h": 0.53
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 17.8,
+      "story": false,
+      "setup": "IShowSpeed argues with his editor about how to title a GTA video",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "CloudyVastDonutAliens-XLDJYEBu1KypYD2x": {
+      "at": "2026-11-21T01:25:47.939494+00:00",
+      "login": "2xrakai",
+      "name": "2xRaKai",
+      "url": "https://www.twitch.tv/2xrakai/clip/CloudyVastDonutAliens-XLDJYEBu1KypYD2x",
+      "title": "I think just killed that",
+      "views": 1209,
+      "use": true,
+      "why": "Night motorbike ride where he keeps saying he won't crash, then a loud \"Oh shit\" reaction near the end. The payoff is unclear on screen and the bike stays upright, so the humor is mostly in his voice and chat, not the action.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "motorbike ride near crash",
+      "action": "motorcycle",
+      "facecam": {
+        "x": 0,
+        "y": 0.35,
+        "w": 0.23,
+        "h": 0.23
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.82,
+        "h": 1.0
+      },
+      "start": 38.0,
+      "end": 58.9,
+      "peak": 55.0,
+      "story": true,
+      "setup": "2xRaKai speeds down a night road on a motorbike, insisting he won't crash",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
     }
   },
   "posted": [
@@ -4869,6 +5218,15 @@
       ],
       "star": "react",
       "moment": "SEAPLANE ESCAPE GOES WRONG",
+      "date": "2026-11-20"
+    },
+    {
+      "topic": "clip__20261120__ApatheticZealousNarwhalG",
+      "logins": [
+        "squeex"
+      ],
+      "star": "reaction",
+      "moment": "texting while riding a motorcycle",
       "date": "2026-11-20"
     }
   ],

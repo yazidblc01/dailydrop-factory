@@ -942,5 +942,21 @@
     "posted_at": "2026-11-20T23:27:22+00:00",
     "url": "https://www.youtube.com/watch?v=8a84R1KWCBo",
     "slot": "waited"
+  },
+  "clip__20261120__ApatheticZealousNarwhalG": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=MS23Mc0FOnQ",
+      "facebook": "https://www.facebook.com/reel/1795599324894133"
+    },
+    "title": "GTA 6: Squeex Texts While Riding A Motorcycle",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b00f8c385cf1dbb4f812aee",
+    "posted_at": "2026-11-21T01:50:35+00:00",
+    "url": "https://www.youtube.com/watch?v=MS23Mc0FOnQ",
+    "slot": "waited"
   }
 }
