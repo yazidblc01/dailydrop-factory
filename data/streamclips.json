@@ -182,9 +182,19 @@
     "SuperExuberantMilkFreakinStinkin-7trg3TxFMolpqhzw",
     "RichVainScallionBigBrother-AYQxqQHepL8VvwDR",
     "UgliestLazyPicklesWTRuck-qZu5ppqb0OrfrsYB",
-    "HedonisticSmilingCheeseDogFace-KEwg0hqS3txXfjp3"
+    "HedonisticSmilingCheeseDogFace-KEwg0hqS3txXfjp3",
+    "OddSweetToadMVGame-GtoXLBw9qz8XcLCg",
+    "PolishedDirtyOtterFunRun-Uz0aNrAhtbOQlzg7",
+    "CheerfulTrappedStapleWutFace-jixZG8vYnQfoSHur",
+    "BrightLivelySlothFreakinStinkin-G7XEe4zRhKWABvyb",
+    "SoftWiseWalrusUnSane-axfl7lDmcLtkn2Ke",
+    "MoistGenerousMilkSMOrc-0_h_4c2_tpa0H4iL",
+    "PoorOddSoybeanSoonerLater-r11i8-nRU3oOEnW8",
+    "CautiousBombasticCaribouRuleFive-HkBQHlvqhCcGd-oV",
+    "UglyAbrasiveKale4Head-2CtJf83JiA6v97eC",
+    "EnticingTacitPeafowlKreygasm-gNwqMOaE_EuHagnR"
   ],
-  "count": 24,
+  "count": 25,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -5727,6 +5737,345 @@
       "nudity": false,
       "face_visible": true,
       "final_no": true
+    },
+    "OddSweetToadMVGame-GtoXLBw9qz8XcLCg": {
+      "at": "2026-11-21T15:51:17.332076+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/OddSweetToadMVGame-GtoXLBw9qz8XcLCg",
+      "title": "kyle 1",
+      "views": 886,
+      "use": true,
+      "why": "Chaotic setup (chasing a SWAT team and a suspected mutant Kyle) pays off with a shirtless mutant screaming and a deadpan line, and the streamer's shocked reaction is visible on facecam. Funny enough for a short, but the payoff is modest.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Kyle the mutant confrontation",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.13,
+        "w": 0.21,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 46.0,
+      "end": 59.0,
+      "peak": 55.0,
+      "story": true,
+      "setup": "caseoh_ hunts for Kyle, who may have mutated after eating something weird",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "PolishedDirtyOtterFunRun-Uz0aNrAhtbOQlzg7": {
+      "at": "2026-11-21T15:53:02.468911+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/PolishedDirtyOtterFunRun-Uz0aNrAhtbOQlzg7",
+      "title": "kyle 2",
+      "views": 367,
+      "use": true,
+      "why": "Tense story beat: Lucia tries to calm a hulking, bloodied Kyle in a dark warehouse. The streamer's reaction is visible on the facecam, but the payoff is more dread than comedy, so the score is moderate.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "Kyle turns into a hulking mutant",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.12,
+        "w": 0.22,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 20.0,
+      "end": 40.0,
+      "peak": 26.75,
+      "story": true,
+      "setup": "Lucia tries to calm Kyle, who has turned into something monstrous",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "CheerfulTrappedStapleWutFace-jixZG8vYnQfoSHur": {
+      "at": "2026-11-21T15:54:55.369433+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/CheerfulTrappedStapleWutFace-jixZG8vYnQfoSHur",
+      "title": "kyle 3",
+      "views": 264,
+      "use": true,
+      "why": "Absurd moment: a hazmat-suited player finds a huge red Hulk-looking guy hurt behind a shed, and chat erupts. The streamer's face is visible in the facecam, hand over face laughing. Dialogue is funny on its own. Setup is needed to follow it, so the reel starts a bit earlier.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "the red hulk behind the shed",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.127,
+        "w": 0.211,
+        "h": 0.278
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 56.0,
+      "story": true,
+      "setup": "caseoh_ and Kyle wander into a wreck-filled street and find a huge red Hulk-like guy",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "BrightLivelySlothFreakinStinkin-G7XEe4zRhKWABvyb": {
+      "at": "2026-11-21T15:56:54.728067+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/BrightLivelySlothFreakinStinkin-G7XEe4zRhKWABvyb",
+      "title": "kyle 4",
+      "views": 232,
+      "use": true,
+      "why": "Absurd, funny moment: the streamer hugs a beaten-up Red Hulk-style NPC named Kyle, who yells \"you hurt me\" and \"my back,\" then a hazmat truck appears. The streamer's laughing facecam is visible throughout and reacts at the end (\"What is going on?\"). Needs the setup, so it starts a bit earlier.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "hugging injured Kyle in hazmat zone",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.127,
+        "w": 0.208,
+        "h": 0.278
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 16.5,
+      "end": 56.0,
+      "peak": 54.25,
+      "story": true,
+      "setup": "caseoh_ tries to comfort a beaten-up Red Hulk-style NPC named Kyle",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
+    },
+    "SoftWiseWalrusUnSane-axfl7lDmcLtkn2Ke": {
+      "at": "2026-11-21T15:57:57.430280+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/SoftWiseWalrusUnSane-axfl7lDmcLtkn2Ke",
+      "title": "WWWW eiii",
+      "views": 688,
+      "use": false,
+      "why": "Rejected: the spoken line at 7.1s and again at 29.8s includes the n-word, a slur. The club dance itself is mild and has no clear payoff, so it wouldn't score well anyway.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "club dancing with Kai",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.4,
+        "w": 0.21,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.1,
+      "peak": 5.75,
+      "story": false,
+      "setup": "KaiCenat dances in a GTA club while the crowd gathers around him",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "MoistGenerousMilkSMOrc-0_h_4c2_tpa0H4iL": {
+      "at": "2026-11-21T16:01:08.629176+00:00",
+      "login": "lirik",
+      "name": "LIRIK",
+      "url": "https://www.twitch.tv/lirik/clip/MoistGenerousMilkSMOrc-0_h_4c2_tpa0H4iL",
+      "title": "he found first person mode",
+      "views": 967,
+      "use": false,
+      "why": "Rejected: the reaction is the star, but no facecam is visible in the frames, so the streamer's face can't be seen. The voice-over reaction over gameplay doesn't qualify. The first-person discovery itself is only mildly funny.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "accidentally turning on first person",
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 22.0,
+      "end": 46.0,
+      "peak": 39.5,
+      "story": true,
+      "setup": "LIRIK fumbles through the phone menu trying to switch the camera view",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false
+    },
+    "PoorOddSoybeanSoonerLater-r11i8-nRU3oOEnW8": {
+      "at": "2026-11-21T16:02:21.616889+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/PoorOddSoybeanSoonerLater-r11i8-nRU3oOEnW8",
+      "title": "Kai was NOT ready for this GTA 6 scene",
+      "views": 728,
+      "use": false,
+      "why": "Rejected: the 6.0s frame shows an intimate shower scene with nude bodies and kissing, which is a sexual scene. The rest of the clip is a mild phone-call banter bit with no real payoff.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "the knock and payday phone call",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.4,
+        "w": 0.22,
+        "h": 0.4
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 40.0,
+      "peak": 10.7,
+      "story": false,
+      "setup": "Kai waits on a knock at the door while a payday call comes in",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "CautiousBombasticCaribouRuleFive-HkBQHlvqhCcGd-oV": {
+      "at": "2026-11-21T16:03:18.831411+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/CautiousBombasticCaribouRuleFive-HkBQHlvqhCcGd-oV",
+      "title": "a",
+      "views": 514,
+      "use": true,
+      "why": "Lacy wanders into a back room and stumbles on an underground pit fight, then reacts with a disbelieving \"What the f***?\" on camera. The funny line and the absurd scene carry it, though the facecam is small and the payoff is mostly her voice.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "stumbling into underground cockfight",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.2,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.88,
+        "h": 1.0
+      },
+      "start": 12.5,
+      "end": 27.0,
+      "peak": 22.6,
+      "story": true,
+      "setup": "Lacy searches for a contact and walks into a back room full of betting spectators.",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "UglyAbrasiveKale4Head-2CtJf83JiA6v97eC": {
+      "at": "2026-11-21T16:05:05.788096+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/UglyAbrasiveKale4Head-2CtJf83JiA6v97eC",
+      "title": "G1AY SEX",
+      "views": 889,
+      "use": false,
+      "why": "Rejected: the clip is a strip club lap dance scene with sexualized close-ups and groin-area framing, which falls under the sexual scene rule. The streamer's jokes are funny, but the on-screen content can't be published on a Shorts channel for 13 to 25 year olds.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "strip club lap dance",
+      "action": null,
+      "facecam": {
+        "x": 0.18,
+        "y": 0.7,
+        "w": 0.16,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 14.0,
+      "end": 30.0,
+      "peak": 16.2,
+      "story": false,
+      "setup": "ohnePixel walks into a strip club in the game and gets a lap dance",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "EnticingTacitPeafowlKreygasm-gNwqMOaE_EuHagnR": {
+      "at": "2026-11-21T16:06:28.364439+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/EnticingTacitPeafowlKreygasm-gNwqMOaE_EuHagnR",
+      "title": "goonathon",
+      "views": 814,
+      "use": false,
+      "why": "Rejected: the frames show an explicit sexual scene in a private dance room, and the audio includes \"came\". This breaks the sex-act rule regardless of the comedy in the commentary.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "private dance room scene",
+      "action": "none",
+      "facecam": {
+        "x": 0.26,
+        "y": 0.0,
+        "w": 0.22,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 9.1,
+      "end": 49.1,
+      "peak": 26.0,
+      "story": false,
+      "setup": "Lacy starts a private dance in a GTA 6 club room with a bald NPC",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
     }
   },
   "posted": [
@@ -5945,6 +6294,15 @@
       ],
       "star": "reaction",
       "moment": "Jason bike fall down stairs",
+      "date": "2026-11-21"
+    },
+    {
+      "topic": "clip__20261121__BrightLivelySlothFreakin",
+      "logins": [
+        "caseoh_"
+      ],
+      "star": "reaction",
+      "moment": "hugging injured Kyle in hazmat zone",
       "date": "2026-11-21"
     }
   ],
@@ -6565,6 +6923,121 @@
       "start": 48.1,
       "end": 60.1,
       "peak": 57.5
+    },
+    "WittySparklyAlmondM4xHeh-xVvybo35l1j6QnEY": {
+      "at": "2026-11-21T15:42:34.110154+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/WittySparklyAlmondM4xHeh-xVvybo35l1j6QnEY",
+      "title": "+2",
+      "use": false,
+      "score": 3,
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 20.1,
+      "end": 60.1,
+      "peak": 50.0
+    },
+    "AmericanCrispyLyrebirdWoofer-xulONhJLu8azjRsU": {
+      "at": "2026-11-21T15:43:38.467657+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/AmericanCrispyLyrebirdWoofer-xulONhJLu8azjRsU",
+      "title": "Lang finally crashes out on mr C",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 12.0,
+      "peak": 8.0
+    },
+    "EsteemedHomelyTurnipDoubleRainbow-O78kpr5GXNy_szae": {
+      "at": "2026-11-21T15:45:17.069939+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/EsteemedHomelyTurnipDoubleRainbow-O78kpr5GXNy_szae",
+      "title": "doing it in the Police Station bathroom",
+      "use": false,
+      "score": 2,
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 2.5,
+      "end": 42.5,
+      "peak": 30.2
+    },
+    "CredulousUnusualFalconChocolateRain-Af84wNNF_fPj0NQ5": {
+      "at": "2026-11-21T15:46:36.448581+00:00",
+      "login": "garek",
+      "name": "Garek",
+      "url": "https://www.twitch.tv/garek/clip/CredulousUnusualFalconChocolateRain-Af84wNNF_fPj0NQ5",
+      "title": "Gloryon steals from the wrong local",
+      "use": false,
+      "score": 5,
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 29.8,
+      "peak": 27.5
+    },
+    "AltruisticObedientCrocodileThunBeast-La3saX4PyFrJ6oiT": {
+      "at": "2026-11-21T15:47:53.770636+00:00",
+      "login": "carmen",
+      "name": "carmen",
+      "url": "https://www.twitch.tv/carmen/clip/AltruisticObedientCrocodileThunBeast-La3saX4PyFrJ6oiT",
+      "title": "CARMELLA WINS A GAMESHOW 💗 // NOPIXEL V",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 5.0,
+      "end": 45.0,
+      "peak": 25.75
+    },
+    "MildPreciousDurianAMPEnergy-ufPSh6RK7HaB6zZk": {
+      "at": "2026-11-21T15:49:08.921467+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/MildPreciousDurianAMPEnergy-ufPSh6RK7HaB6zZk",
+      "title": "Owner and DM RP",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 20.0,
+      "end": 60.0,
+      "peak": 28.0
     }
   }
 }
