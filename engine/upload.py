@@ -60,11 +60,25 @@ def is_gta(meta):
     return bool(re.search(r"\bgta\b|grand theft|lucia|rockstar|vice city", f"{meta.get('title', '')} {meta.get('description', '')}", re.I))
 
 
-GTA_HASHTAGS = "#GTA6 #GTAVI #GTA6Trailer #GTAOnline #Gaming #Shorts"
+GTA_HASHTAGS = "#GTA6 #GTAVI #Shorts"   # a few only: search runs on the words now, not on hashtags
+
+
+def keywords(meta):
+    """The search line: the words people actually type, in plain text (platform search reads these, not hashtags)."""
+    text = f"{meta['title']} {meta['description']}"
+    who = re.findall(r"🎥 ([^\n:]+?) on Twitch", meta["description"])
+    words = [f"{w} GTA 6" for w in dict.fromkeys(who)]
+    words += ["GTA 6 funny moments", "GTA 6 gameplay"] if who else ["GTA 6", "GTA 6 launch"]
+    if re.search(r"gta ?(5|v)\b", text, re.I):
+        words.append("GTA 5 vs GTA 6")
+    if re.search(r"lucia", text, re.I):
+        words.append("Lucia GTA 6")
+    words += ["Grand Theft Auto VI", "Vice City"]
+    return ", ".join(dict.fromkeys(words))
 
 
 def seo(meta):
-    """Launch week: GTA reels lead with "GTA 6" in the title (what people search) and carry the searched hashtags."""
+    """GTA reels lead with "GTA 6" in the title, open the description with a plain search line, and keep 2 or 3 hashtags."""
     if not is_gta(meta):
         return meta
     m = dict(meta)
@@ -72,9 +86,8 @@ def seo(meta):
     if not re.match(r"gta ?(6|vi)\b", title, re.I):
         title = f"GTA 6: {title}"
     m["title"] = title[:100]
-    tags = GTA_HASHTAGS + (" #Lucia" if re.search(r"lucia", f"{meta['title']} {meta['description']}", re.I) else "")
     body = re.sub(r"(\s*#\w+)+\s*$", "", m["description"]).rstrip()   # drop the old hashtag line
-    m["description"] = f"{body}\n\n{tags}"
+    m["description"] = f"{body}\n\n{keywords(m)}\n{GTA_HASHTAGS}"
     return m
 
 
