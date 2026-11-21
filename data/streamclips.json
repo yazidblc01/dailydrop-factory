@@ -192,9 +192,19 @@
     "PoorOddSoybeanSoonerLater-r11i8-nRU3oOEnW8",
     "CautiousBombasticCaribouRuleFive-HkBQHlvqhCcGd-oV",
     "UglyAbrasiveKale4Head-2CtJf83JiA6v97eC",
-    "EnticingTacitPeafowlKreygasm-gNwqMOaE_EuHagnR"
+    "EnticingTacitPeafowlKreygasm-gNwqMOaE_EuHagnR",
+    "TentativeOutstandingGoshawkImGlitch-eotur1_pZFWPlZYU",
+    "TransparentRoughWalrusTheThing-ddBJIvKac-xQYipi",
+    "PreciousAuspiciousBadgerDatSheffy-fh37oxpTOtMsmkk3",
+    "CarelessHeartlessDolphinRaccAttack-YUl-EwA3_MSL9B0i",
+    "SmallBoringFriesFunRun-Y5yvpV9A5_8UoPAD",
+    "ConsiderateViscousKeyboardTBCheesePull-f2S35hbuDedw8-LX",
+    "EnticingKawaiiNeanderthalSwiftRage-T-Jf8UxvA3-dxvW7",
+    "EndearingNimblePassionfruitChocolateRain-01jh1UKyjqi850ol",
+    "BovineEncouragingSangBudStar-S4LzmVNXTtXolCx5",
+    "GorgeousQuaintCucumberTooSpicy-JM19Ajn7izXTVmVf"
   ],
-  "count": 25,
+  "count": 26,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -2560,7 +2570,8 @@
       "setup": "Jerma speeds through a parking structure and things go wrong fast",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "posted": true
     },
     "SwissBenevolentRhinocerosRedCoat-_qn39IFUSFPG0nep": {
       "at": "2026-11-19T21:00:52.217000+00:00",
@@ -6076,6 +6087,353 @@
       "cold_open": false,
       "nudity": true,
       "face_visible": true
+    },
+    "TentativeOutstandingGoshawkImGlitch-eotur1_pZFWPlZYU": {
+      "at": "2026-11-21T18:42:48.749896+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/TentativeOutstandingGoshawkImGlitch-eotur1_pZFWPlZYU",
+      "title": "JTW'S REACTION",
+      "views": 723,
+      "use": false,
+      "why": "Rejected for a major story spoiler: the clip shows Jason bleeding out beside the car after a police shootout on the bridge, and the streamer calls it the \"worst ending\". The death is the main beat, so it can't be posted. The reaction is strong, but the spoiler rule wins.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Jason's death on the bridge",
+      "action": "police chase",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.4
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.58,
+        "w": 1,
+        "h": 0.39
+      },
+      "start": 0.0,
+      "end": 37.6,
+      "peak": 32.3,
+      "story": true,
+      "setup": "Jason and Lucia's convertible gets shot up on a bridge as cops close in",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "TransparentRoughWalrusTheThing-ddBJIvKac-xQYipi": {
+      "at": "2026-11-21T18:45:51.475119+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/TransparentRoughWalrusTheThing-ddBJIvKac-xQYipi",
+      "title": "Ohne Caught in 2k!!",
+      "views": 615,
+      "use": false,
+      "why": "Not GTA 6 footage; it's an office sim. The clip's whole point is the streamer watching explicit nude imagery on a laptop, with nudity on screen throughout, and the hook is porn, not the game. Off-brand for the channel and not a GTA moment.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "caught watching porn at work",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.72,
+        "w": 0.3,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 4.0,
+      "end": 30.0,
+      "peak": 21.5,
+      "story": true,
+      "setup": "ohnePixel sneaks around an office while someone is coming down the hall",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "PreciousAuspiciousBadgerDatSheffy-fh37oxpTOtMsmkk3": {
+      "at": "2026-11-21T18:47:46.345373+00:00",
+      "login": "jasontheween",
+      "name": "jasontheween",
+      "url": "https://www.twitch.tv/jasontheween/clip/PreciousAuspiciousBadgerDatSheffy-fh37oxpTOtMsmkk3",
+      "title": "trolling marlon",
+      "views": 262,
+      "use": true,
+      "why": "A streamer yelling absurd, escalating orders at Marlon in a car, ending in a crash with sheriffs and bodies on the bridge. Both facecam reactions are big (hands over faces, screaming). Possible spoiler risk: the cutscene at the start and the body in the car could be a main character, so check before publishing.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "trolling Marlon into a crash",
+      "action": null,
+      "facecam": {
+        "x": 0.05,
+        "y": 0.0,
+        "w": 0.12,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.29,
+        "y": 0.0,
+        "w": 0.71,
+        "h": 0.94
+      },
+      "start": 30.0,
+      "end": 56.0,
+      "peak": 44.8,
+      "story": true,
+      "setup": "Jasontheween yells bad orders at Marlon in a car, and the ride goes wrong.",
+      "cold_open": true,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "CarelessHeartlessDolphinRaccAttack-YUl-EwA3_MSL9B0i": {
+      "at": "2026-11-21T18:49:07.402996+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/CarelessHeartlessDolphinRaccAttack-YUl-EwA3_MSL9B0i",
+      "title": "W BOYFRIEND",
+      "views": 319,
+      "use": true,
+      "why": "A street confrontation by a parked car turns into a fight. The streamer threatens a man (\"I'll f*** you up\"), the man ends up on the ground bleeding, and the streamer's shocked, hyped face is on the facecam. The blood is small and not graphic, and the lines are funny enough to caption. The humour is modest, so the score is middling.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "street fight by the car",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.66,
+        "w": 0.38,
+        "h": 0.34
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 21.5,
+      "peak": 9.8,
+      "story": true,
+      "setup": "ohnePixel threatens a man by a parked car, and it kicks off",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "SmallBoringFriesFunRun-Y5yvpV9A5_8UoPAD": {
+      "at": "2026-11-21T18:51:18.307831+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/SmallBoringFriesFunRun-Y5yvpV9A5_8UoPAD",
+      "title": "Ohne Wants to Cheat On LUCIA!!!",
+      "views": 264,
+      "use": true,
+      "why": "Mostly talk-driven: ohnePixel jokes about cheating on Lucia with the furry in his van, then begs for a full-auto weapon and grabs at it. The van scene shows no sex act, just two characters sitting close. The face cam is visible and reacting, but the on-screen chaos is thin, so it's a middling clip.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "furry passenger and full-auto pouncer",
+      "action": "none",
+      "facecam": {
+        "x": 0.13,
+        "y": 0.72,
+        "w": 0.18,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 20.0,
+      "end": 37.4,
+      "peak": 33.8,
+      "story": true,
+      "setup": "ohnePixel drives a van with two furry characters in the back and wants their gun",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "ConsiderateViscousKeyboardTBCheesePull-f2S35hbuDedw8-LX": {
+      "at": "2026-11-21T18:52:57.799102+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/ConsiderateViscousKeyboardTBCheesePull-f2S35hbuDedw8-LX",
+      "title": "Ohnes finest NPC gameplay",
+      "views": 232,
+      "use": true,
+      "why": "A convertible with NPC passengers turns into a cop chase, with bodies on the street and a Vice cruiser closing in. ohnePixel's panicked \"we are cooked\" reaction, with his face on camera, sells the chaos. The setup is a bit thin, so the score is moderate.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "police chase after convertible shootout",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.13,
+        "y": 0.64,
+        "w": 0.22,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 22.2,
+      "peak": 15.2,
+      "story": true,
+      "setup": "ohnePixel drives a convertible with passengers while the cops start closing in",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "EnticingKawaiiNeanderthalSwiftRage-T-Jf8UxvA3-dxvW7": {
+      "at": "2026-11-21T18:54:39.324066+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/EnticingKawaiiNeanderthalSwiftRage-T-Jf8UxvA3-dxvW7",
+      "title": "glorious",
+      "views": 277,
+      "use": false,
+      "why": "no story: Jerma drives a classic car on a dusk road and yells \"Holy s***\" then \"I have to do it!\" while going for what looks like a stunt jump (\"vehicle in air\" HUD text). The frames shown don't include the payoff, so the jump's outcome is unclear. The HUD doesn't clearly confirm GTA 6, so verify the game before publishing. Low-confidence pick.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "Jerma's stunt jump attempt",
+      "action": "driving fast",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.97,
+        "h": 0.165
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.59,
+        "w": 1,
+        "h": 0.41
+      },
+      "start": 12.0,
+      "end": 30.0,
+      "peak": 25.8,
+      "story": false,
+      "setup": "Jerma drives a classic car at dusk and commits to a risky jump",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "EndearingNimblePassionfruitChocolateRain-01jh1UKyjqi850ol": {
+      "at": "2026-11-21T18:55:20.227164+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/EndearingNimblePassionfruitChocolateRain-01jh1UKyjqi850ol",
+      "title": "a",
+      "views": 490,
+      "use": true,
+      "why": "Clear setup and payoff: Lacy announces a stylish drift on a motorcycle, then nearly plows into Méndez at night, and his yelled reaction is on the facecam. The stakes are small and the humor depends on the captions, so it's a mid-range score.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "near miss with Méndez on bike",
+      "action": "motorcycle",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.13,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.25,
+        "w": 0.85,
+        "h": 0.75
+      },
+      "start": 0.0,
+      "end": 16.1,
+      "peak": 14.6,
+      "story": true,
+      "setup": "Lacy boasts he'll drift in style on a motorcycle at night",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "BovineEncouragingSangBudStar-S4LzmVNXTtXolCx5": {
+      "at": "2026-11-21T18:57:50.517883+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/BovineEncouragingSangBudStar-S4LzmVNXTtXolCx5",
+      "title": "GTA 6 is a videogane",
+      "views": 247,
+      "use": true,
+      "why": "Jerma's confused, swearing reaction to a random shirtless guy in the street, then a woman kicks him. The face is clearly visible and the line 'Who is this guy?' is funny, but the moment is mild.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "random guy in the street",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.05,
+        "w": 0.81,
+        "h": 0.45
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.59,
+        "w": 1,
+        "h": 0.41
+      },
+      "start": 5.0,
+      "end": 24.0,
+      "peak": 16.0,
+      "story": true,
+      "setup": "Jerma spots a shirtless stranger in the street and gets confused",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "GorgeousQuaintCucumberTooSpicy-JM19Ajn7izXTVmVf": {
+      "at": "2026-11-21T18:59:04.882726+00:00",
+      "login": "stableronaldo",
+      "name": "stableronaldo",
+      "url": "https://www.twitch.tv/stableronaldo/clip/GorgeousQuaintCucumberTooSpicy-JM19Ajn7izXTVmVf",
+      "title": "NEONNNNN",
+      "views": 627,
+      "use": true,
+      "why": "Absurd setup with a funny payoff: a man pops out of a car trunk, names himself \"Neons,\" then the streamer laughs as he realises his friend's car was stolen. Visible face reaction and a readable story, though the chaos is mild and the laugh is the main hook.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "man found hiding in trunk",
+      "action": "robbery",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.506,
+        "w": 0.78,
+        "h": 0.494
+      },
+      "start": 0.0,
+      "end": 19.1,
+      "peak": 17.6,
+      "story": true,
+      "setup": "stableronaldo opens a car trunk and finds a stranger hiding inside",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
     }
   },
   "posted": [
@@ -6303,6 +6661,15 @@
       ],
       "star": "reaction",
       "moment": "hugging injured Kyle in hazmat zone",
+      "date": "2026-11-21"
+    },
+    {
+      "topic": "clip__20261121__NeighborlyScrumptiousBea",
+      "logins": [
+        "jerma985"
+      ],
+      "star": "reaction",
+      "moment": "stuck in parking booth",
       "date": "2026-11-21"
     }
   ],

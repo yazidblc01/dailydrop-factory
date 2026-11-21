@@ -1026,5 +1026,21 @@
     "posted_at": "2026-11-21T17:19:42+00:00",
     "url": "https://www.youtube.com/watch?v=SNBy9mUwTm4",
     "slot": "waited"
+  },
+  "clip__20261121__NeighborlyScrumptiousBea": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=UuKUIuMGWzg",
+      "facebook": "https://www.facebook.com/reel/1651176410080800"
+    },
+    "url": "https://www.youtube.com/watch?v=UuKUIuMGWzg",
+    "title": "GTA 6: Jerma Crashes Into A Toll Booth And Gets Stuck",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b01eeaf88fe78efd8e693f6",
+    "posted_at": "2026-11-21T19:20:22+00:00",
+    "slot": "waited"
   }
 }
