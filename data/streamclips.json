@@ -244,7 +244,7 @@
     "ExcitedColdbloodedSquidPeteZarollTie-bgJIuh8c7AuEVeXz",
     "BovineFunnyTroutSwiftRage-ksOijdDY6ZZLbK6M"
   ],
-  "count": 29,
+  "count": 30,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -7112,7 +7112,8 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": true,
-      "final_no": true
+      "final_no": true,
+      "vs_used": true
     },
     "DifferentProudCheeseFutureMan-J6NKch0NAmpPCK75": {
       "at": "2026-11-21T23:25:31.406449+00:00",
@@ -7998,6 +7999,15 @@
       "star": "reaction",
       "moment": "meeting the fox-suit stranger",
       "date": "2026-11-21"
+    },
+    {
+      "topic": "clip__20261121__vs_DullMushyYamRedC",
+      "logins": [
+        "jerma985"
+      ],
+      "star": "vs",
+      "moment": null,
+      "date": "2026-11-21"
     }
   ],
   "house": "2026-11-21",
@@ -8616,7 +8626,8 @@
       },
       "start": 48.1,
       "end": 60.1,
-      "peak": 57.5
+      "peak": 57.5,
+      "vs_used": true
     },
     "WittySparklyAlmondM4xHeh-xVvybo35l1j6QnEY": {
       "at": "2026-11-21T15:42:34.110154+00:00",
