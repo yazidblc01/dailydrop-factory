@@ -1218,5 +1218,25 @@
     "zernio_id": "6b03550a19e81b9beb5bf5f6",
     "posted_at": "2026-11-22T20:48:57+00:00",
     "slot": "waited"
+  },
+  "gta_consoles__20261122__17": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=mm9i5138lJA",
+      "facebook": "https://www.facebook.com/reel/1429527609353023",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7711116050418404615",
+      "instagram": "https://www.instagram.com/reel/DgDztAUnL53/"
+    },
+    "title": "GTA 6: Console launch prices: higher or lower? 🎮",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b03633bd6818f48afeab1a1",
+    "posted_at": "2026-11-22T21:49:08+00:00",
+    "url": "https://www.youtube.com/watch?v=mm9i5138lJA",
+    "slot": "waited"
   }
 }
