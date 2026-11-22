@@ -260,7 +260,7 @@
     "AmusedSpikyMeerkatBigBrother-7FMWQabNRJ3gubYw",
     "TubularBoxyDumplingsBabyRage-tnXrWQ4-tF5ZipDe"
   ],
-  "count": 31,
+  "count": 32,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -4287,7 +4287,8 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": true,
-      "final_no": true
+      "final_no": true,
+      "vs_used": true
     },
     "FuriousArtisticLemurCoolStoryBob-1i51GMB_U858vT50": {
       "at": "2026-11-20T18:52:03.933590+00:00",
@@ -8583,6 +8584,15 @@
       "star": "reaction",
       "moment": "assaulting the barber",
       "date": "2026-11-22"
+    },
+    {
+      "topic": "clip__20261122__vs_MagnificentHilar",
+      "logins": [
+        "caseoh_"
+      ],
+      "star": "vs",
+      "moment": null,
+      "date": "2026-11-22"
     }
   ],
   "house": "2026-11-22",
@@ -9318,6 +9328,57 @@
       "start": 20.0,
       "end": 60.0,
       "peak": 28.0
+    },
+    "AbstemiousCrowdedLasagnaStrawBeary-xZx862neqNjAUQCM": {
+      "at": "2026-11-22T15:40:27.275854+00:00",
+      "login": "blau",
+      "name": "blau",
+      "url": "https://www.twitch.tv/blau/clip/AbstemiousCrowdedLasagnaStrawBeary-xZx862neqNjAUQCM",
+      "title": "BPM sees the whiteboard",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.2,
+        "w": 0.18,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.18,
+        "y": 0.0,
+        "w": 0.82,
+        "h": 1.0
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 47.0
+    },
+    "BrainyThoughtfulHamsterMVGame-QFVdsmr8erh_gBMs": {
+      "at": "2026-11-22T15:41:06.020844+00:00",
+      "login": "vanillamace",
+      "name": "vanillamace",
+      "url": "https://www.twitch.tv/vanillamace/clip/BrainyThoughtfulHamsterMVGame-QFVdsmr8erh_gBMs",
+      "title": "RIP VIVIENNE",
+      "use": true,
+      "score": 6,
+      "action": "falling",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.27,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 2.0,
+      "end": 29.0,
+      "peak": 8.0,
+      "vs_used": true
     }
   }
 }

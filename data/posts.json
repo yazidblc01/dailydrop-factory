@@ -1146,5 +1146,25 @@
     "zernio_id": "6b02fde08de754fdb9d5f029",
     "posted_at": "2026-11-22T14:37:24+00:00",
     "slot": "waited"
+  },
+  "clip__20261122__vs_MagnificentHilar": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=QxzLk_rBmHQ",
+      "facebook": "https://www.facebook.com/reel/3948352921970986",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7711022488666344712",
+      "instagram": "https://www.instagram.com/reel/DgDKH9tDU_V/"
+    },
+    "title": "GTA 6 vs GTA 5: Falls Side by Side",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b030e12d245d29943dbc8f6",
+    "posted_at": "2026-11-22T15:45:49+00:00",
+    "url": "https://www.youtube.com/watch?v=QxzLk_rBmHQ",
+    "slot": "waited"
   }
 }
