@@ -1130,5 +1130,21 @@
     "posted_at": "2026-11-22T02:14:09+00:00",
     "url": "https://www.youtube.com/watch?v=OsUJYFD7jKs",
     "slot": "waited"
+  },
+  "clip__20261122__ArtisticVenomousCoffeeSS": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=L8KhCiC1lro",
+      "facebook": "https://www.facebook.com/reel/2239431493669418"
+    },
+    "url": "https://www.youtube.com/watch?v=L8KhCiC1lro",
+    "title": "GTA 6: Ludwig Watches Jason Assault The Barber",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b02fde08de754fdb9d5f029",
+    "posted_at": "2026-11-22T14:37:24+00:00",
+    "slot": "waited"
   }
 }
