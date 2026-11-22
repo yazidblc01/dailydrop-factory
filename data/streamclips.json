@@ -263,9 +263,19 @@
     "UnsightlyWanderingDiscPipeHype-N8ySiJHdA6x0qn0l",
     "BillowingBetterMushroomDerp-lBAWE6GKLfc6gTJU",
     "FancyCallousGuanacoRitzMitz-4iksB4A87tC2UNO-",
-    "TalentedCrackyMinkTBTacoRight-ZM1WeRFKztFINBwp"
+    "TalentedCrackyMinkTBTacoRight-ZM1WeRFKztFINBwp",
+    "DeliciousSolidDogDAESuppy-y7ZZPRoHSC_-ACmu",
+    "ComfortableThirstySageLitty-XeXUjr_8VqCqxWK2",
+    "FineWiseButterCclamChamp-7ZE5dxqaehZGKK1K",
+    "HorribleSpikyDonkeyPJSugar-fCWRElnVOzV01xF1",
+    "SmellyViscousHeronThisIsSparta-h9lnKTsc6Fw5K78k",
+    "PolishedSleepyWalrusPhilosoraptor-7GAaqQgv9mgg9bU7",
+    "TameDepressedPieShazBotstix-5OaggqL46KzAHu_C",
+    "AstuteGlamorousDadRedCoat-ivbLcyqoG_6KCfi1",
+    "MotionlessNiceCheesecakeGOWSkull-Z7suiG-1YXLQI2Om",
+    "HonorableThirstyDonkeyHassanChop-fpmOS4KDci42X7KE"
   ],
-  "count": 33,
+  "count": 34,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -4627,7 +4637,8 @@
       "setup": "caseoh_ drives toward a group of people sitting on an overpass wall",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "posted": true
     },
     "FragileTardySquidAMPEnergyCherry-sWGYVnxAPuBi_y1v": {
       "at": "2026-11-20T23:12:27.899984+00:00",
@@ -8478,6 +8489,353 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": true
+    },
+    "DeliciousSolidDogDAESuppy-y7ZZPRoHSC_-ACmu": {
+      "at": "2026-11-22T20:19:40.342229+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/DeliciousSolidDogDAESuppy-y7ZZPRoHSC_-ACmu",
+      "title": "FINDING EASTER EGGS IN THE STRIP CLUB😭😭😭😭",
+      "views": 789,
+      "use": false,
+      "why": "Mostly wandering around a strip club with a pole dancer, then a blurred menu transition and shouted \"get out\" lines with no clear cause or payoff. The story doesn't land on its own, and the streamer's reaction is hard to read.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "strip club easter eggs hunt",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.32,
+        "w": 0.22,
+        "h": 0.23
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 28.7,
+      "story": false,
+      "setup": "Kai hunts for easter eggs inside a strip club VIP room",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
+    },
+    "ComfortableThirstySageLitty-XeXUjr_8VqCqxWK2": {
+      "at": "2026-11-22T20:21:13.014068+00:00",
+      "login": "joe_bartolozzi",
+      "name": "Joe_Bartolozzi",
+      "url": "https://www.twitch.tv/joe_bartolozzi/clip/ComfortableThirstySageLitty-XeXUjr_8VqCqxWK2",
+      "title": "LAP DANCE",
+      "views": 807,
+      "use": true,
+      "why": "Clear setup and payoff: Mario keeps crashing Lucia's lap dance, Joe's reaction is loud and face is visible. Dialogue is funny on its own. Nudity risk in the club scene is blurred, not a sex act. Score held back because the gameplay is mostly blurred club visuals.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Mario interrupts Lucia's lap dance",
+      "action": null,
+      "facecam": {
+        "x": 0.09,
+        "y": 0.02,
+        "w": 0.86,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.45,
+        "w": 1,
+        "h": 0.55
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 27.75,
+      "story": true,
+      "setup": "Joe watches Mario keep crashing Lucia's lap dance in the club",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "final_no": true
+    },
+    "FineWiseButterCclamChamp-7ZE5dxqaehZGKK1K": {
+      "at": "2026-11-22T20:23:50.624126+00:00",
+      "login": "syndicate",
+      "name": "Syndicate",
+      "url": "https://www.twitch.tv/syndicate/clip/FineWiseButterCclamChamp-7ZE5dxqaehZGKK1K",
+      "title": "told you we could handle it",
+      "views": 505,
+      "use": true,
+      "why": "Dry, ironic dialogue after a botched job with the crew dead: \"Told you we could handle it\" and \"if we're gonna class that as handled\" land as a funny line with a visible reaction. Visuals are mostly boat driving and menus, so it leans on the captions, but the facecam is clear and the story is followable.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "botched job, crew dead",
+      "action": "none",
+      "facecam": {
+        "x": 0.732,
+        "y": 0.162,
+        "w": 0.248,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 18.0,
+      "end": 51.87,
+      "peak": 30.1,
+      "story": true,
+      "setup": "Syndicate's crew comes back from a job with everyone dead",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "HorribleSpikyDonkeyPJSugar-fCWRElnVOzV01xF1": {
+      "at": "2026-11-22T20:25:31.826323+00:00",
+      "login": "loserfruit",
+      "name": "Loserfruit",
+      "url": "https://www.twitch.tv/loserfruit/clip/HorribleSpikyDonkeyPJSugar-fCWRElnVOzV01xF1",
+      "title": "Lucia vs L-son dressup",
+      "views": 264,
+      "use": false,
+      "why": "Mostly a customization menu (nails, outfits) with the streamer chatting about her picks. Nothing absurd or chaotic happens on screen, and the only punchline (\"Jason takes the massive L\") is a mild joke with no visible consequence. Fails the story rule.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "character customization shopping trip",
+      "action": "none",
+      "facecam": {
+        "x": 0.75,
+        "y": 0.23,
+        "w": 0.25,
+        "h": 0.47
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.75,
+        "h": 1
+      },
+      "start": 40.0,
+      "end": 60.0,
+      "peak": 51.0,
+      "story": false,
+      "setup": "Loserfruit shops for outfits and nails while joking about Jason's shopping trip",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "SmellyViscousHeronThisIsSparta-h9lnKTsc6Fw5K78k": {
+      "at": "2026-11-22T20:27:05.032323+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/SmellyViscousHeronThisIsSparta-h9lnKTsc6Fw5K78k",
+      "title": "UMM WHUT?! This Monkey just Ooozed me!",
+      "views": 480,
+      "use": true,
+      "why": "Funny chaotic mission moment: a chimp in a cage gets a forklift-and-cage treatment while the streamer riffs (\"identity crisis\", \"being free is a big change\"). The reaction is real but comes through an animated avatar, not a real face, so the reaction is weaker than a true facecam. Story is light and the mission context is clear enough.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "the chimp cage forklift mission",
+      "action": "none",
+      "facecam": {
+        "x": 0.18,
+        "y": 0.73,
+        "w": 0.15,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 23.0,
+      "story": true,
+      "setup": "Lucia works a forklift while a chimp sits caged, and the streamer starts commenting",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "PolishedSleepyWalrusPhilosoraptor-7GAaqQgv9mgg9bU7": {
+      "at": "2026-11-22T20:29:10.743999+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/PolishedSleepyWalrusPhilosoraptor-7GAaqQgv9mgg9bU7",
+      "title": "ALMOST GOT EM",
+      "views": 369,
+      "use": true,
+      "why": "A three-star wanted level in a teal supercar turns into a frantic escape, with the streamer panicking \"Oh my god... please, I'm begging you\" over the chase. The \"Yeah!\" at the end reads as a clear payoff, and the pause menu closes it out. Facecam is an animated avatar with expressive mouth movement, so the reaction is readable, though it isn't a real face.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "escaping three-star cops in supercar",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.72,
+        "w": 0.2,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 31.5,
+      "peak": 28.25,
+      "story": true,
+      "setup": "TheBurntPeanut drives a supercar with three stars of heat on his tail",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "TameDepressedPieShazBotstix-5OaggqL46KzAHu_C": {
+      "at": "2026-11-22T20:30:40.506391+00:00",
+      "login": "fanum",
+      "name": "Fanum",
+      "url": "https://www.twitch.tv/fanum/clip/TameDepressedPieShazBotstix-5OaggqL46KzAHu_C",
+      "title": "fanum doom scrolling",
+      "views": 331,
+      "use": false,
+      "why": "Fanum just scrolls through in-game phone posts and talks over them. Nothing happens on screen that a viewer could follow without the audio, and the only reaction is a late \"the f***\" with no visible payoff.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "scrolling the in-game phone",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.37,
+        "w": 0.22,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.78,
+        "h": 1.0
+      },
+      "start": 8.2,
+      "end": 48.2,
+      "peak": 11.2,
+      "story": false,
+      "setup": "Fanum scrolls through posts on his in-game phone and talks fast over them",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "AstuteGlamorousDadRedCoat-ivbLcyqoG_6KCfi1": {
+      "at": "2026-11-22T20:32:25.361533+00:00",
+      "login": "loserfruit",
+      "name": "Loserfruit",
+      "url": "https://www.twitch.tv/loserfruit/clip/AstuteGlamorousDadRedCoat-ivbLcyqoG_6KCfi1",
+      "title": "matching clothes = make out",
+      "views": 217,
+      "use": true,
+      "why": "Mostly talking, but there is a clear setup (couples outfit), a punchline (matching outfits, so let's make out) and a visible laugh from the streamer. The joke line works with captions. Score is modest because it is more talk than chaos.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "matching couples outfit joke",
+      "action": "none",
+      "facecam": {
+        "x": 0.75,
+        "y": 0.23,
+        "w": 0.23,
+        "h": 0.47
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 30.0,
+      "end": 55.0,
+      "peak": 42.2,
+      "story": true,
+      "setup": "Loserfruit explains how a matching couples outfit led to a joke about making out",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "MotionlessNiceCheesecakeGOWSkull-Z7suiG-1YXLQI2Om": {
+      "at": "2026-11-22T20:34:14.342029+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/MotionlessNiceCheesecakeGOWSkull-Z7suiG-1YXLQI2Om",
+      "title": "Clutch save by gator",
+      "views": 541,
+      "use": true,
+      "why": "Chaotic swamp scene with naked NPCs turning hostile, a shootout, and a gator joining in. The streamer's live reactions (\"Like Jesus Christ, what did I do?\") are visible and funny. Nudity is present but blurred automatically.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "naked swamp crew turns on her",
+      "action": "shootout",
+      "facecam": {
+        "x": 0.79,
+        "y": 0.45,
+        "w": 0.21,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 24.0,
+      "end": 52.0,
+      "peak": 40.0,
+      "story": true,
+      "setup": "Streamer wades through a swamp as naked locals start turning hostile",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "final_no": true
+    },
+    "HonorableThirstyDonkeyHassanChop-fpmOS4KDci42X7KE": {
+      "at": "2026-11-22T20:36:22.670821+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/HonorableThirstyDonkeyHassanChop-fpmOS4KDci42X7KE",
+      "title": "Lazy claiming to be the best driver",
+      "views": 525,
+      "use": true,
+      "why": "A supercar chase with police cars right behind, Lacy yelling at the car to go, then crashing it, while he brags about being the best driver. Clear action and consequence, with his face visible and reacting. The funny line at the end makes it work without sound.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "police chase in the supercar",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.27,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 30.0,
+      "end": 56.0,
+      "peak": 52.0,
+      "story": true,
+      "setup": "Lacy speeds a supercar away from cops through the city streets",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
     }
   },
   "posted": [
@@ -8777,6 +9135,15 @@
       ],
       "star": "reaction",
       "moment": "mom hates you joke",
+      "date": "2026-11-22"
+    },
+    {
+      "topic": "clip__20261122__ResoluteCrazyPistachioPr",
+      "logins": [
+        "caseoh_"
+      ],
+      "star": "reaction",
+      "moment": "running down people on overpass",
       "date": "2026-11-22"
     }
   ],
