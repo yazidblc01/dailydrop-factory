@@ -1094,5 +1094,21 @@
     "posted_at": "2026-11-21T23:47:43+00:00",
     "url": "https://www.youtube.com/watch?v=axOylMXaydg",
     "slot": "waited"
+  },
+  "clip__20261121__BovineFunnyTroutSwiftRag": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=8n_AaOXUNVg",
+      "facebook": "https://www.facebook.com/reel/1148254571258045"
+    },
+    "url": "https://www.youtube.com/watch?v=8n_AaOXUNVg",
+    "title": "GTA 6: ohnePixel Gets Confronted By A Fox Suit Guy",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0245b1ad4d20f51365e4a1",
+    "posted_at": "2026-11-22T01:31:11+00:00",
+    "slot": "waited"
   }
 }
