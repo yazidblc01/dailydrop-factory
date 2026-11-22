@@ -258,9 +258,14 @@
     "DistinctReliableChowderBCouch-PUUYSqjaldNsYPSE",
     "HumbleAlertTireKreygasm-GYLDtKCVKOLSM8Ip",
     "AmusedSpikyMeerkatBigBrother-7FMWQabNRJ3gubYw",
-    "TubularBoxyDumplingsBabyRage-tnXrWQ4-tF5ZipDe"
+    "TubularBoxyDumplingsBabyRage-tnXrWQ4-tF5ZipDe",
+    "MuddyInexpensiveLardAliens-bXEojJwJjpV5Wwh-",
+    "UnsightlyWanderingDiscPipeHype-N8ySiJHdA6x0qn0l",
+    "BillowingBetterMushroomDerp-lBAWE6GKLfc6gTJU",
+    "FancyCallousGuanacoRitzMitz-4iksB4A87tC2UNO-",
+    "TalentedCrackyMinkTBTacoRight-ZM1WeRFKztFINBwp"
   ],
-  "count": 32,
+  "count": 33,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -8302,6 +8307,177 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": false
+    },
+    "MuddyInexpensiveLardAliens-bXEojJwJjpV5Wwh-": {
+      "at": "2026-11-22T18:48:33.503434+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/MuddyInexpensiveLardAliens-bXEojJwJjpV5Wwh-",
+      "title": "spoke too soon",
+      "views": 206,
+      "use": true,
+      "why": "Dialogue-driven comedy with a clear setup and payoff: Jerma jokes about his mom demanding a mother-in-law suite, then the NPC asks if his mom doesn't hate him, and he cracks up. The facecam is clearly visible for the reaction. Not a huge visual spectacle, so the score is moderate.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "mom hates you joke",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.064,
+        "w": 0.75,
+        "h": 0.43
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.59,
+        "w": 1,
+        "h": 0.41
+      },
+      "start": 0.0,
+      "end": 30.1,
+      "peak": 28.6,
+      "story": true,
+      "setup": "Jerma jokes about his mom demanding a mother-in-law suite while climbing a tower",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
+    },
+    "UnsightlyWanderingDiscPipeHype-N8ySiJHdA6x0qn0l": {
+      "at": "2026-11-22T18:49:32.900169+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/UnsightlyWanderingDiscPipeHype-N8ySiJHdA6x0qn0l",
+      "title": "Ohne planet naming",
+      "views": 218,
+      "use": false,
+      "why": "Streamer rattles off planet names in a dark space-like scene with a character in a tan outfit, with no clear action, consequence or payoff. Nothing happens that a viewer can follow, and the closing line is a weak joke. Rejected for no story.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "planet naming in space scene",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.66,
+        "w": 0.3,
+        "h": 0.34
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 14.0,
+      "end": 27.8,
+      "peak": 26.5,
+      "story": false,
+      "setup": "ohnePixel tries to name every planet he can think of",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "BillowingBetterMushroomDerp-lBAWE6GKLfc6gTJU": {
+      "at": "2026-11-22T18:50:49.157346+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/BillowingBetterMushroomDerp-lBAWE6GKLfc6gTJU",
+      "title": "Rip keyboard",
+      "views": 283,
+      "use": false,
+      "why": "Weak story. The frames show a chaotic highway scene with a woman by a car and the map at 3 wanted stars, but the streamer's big reactions are to a picture he is describing off screen (\"I'll show you a picture\"), so a viewer can't follow what went wrong. Reaction is visible, but the payoff is unclear.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "wanted stars on the highway",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.64,
+        "w": 0.3,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 3.5,
+      "end": 43.5,
+      "peak": 36.8,
+      "story": false,
+      "setup": "ohnePixel gets a wanted level on a crowded highway and checks the map",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "FancyCallousGuanacoRitzMitz-4iksB4A87tC2UNO-": {
+      "at": "2026-11-22T18:51:33.477792+00:00",
+      "login": "kaicenat",
+      "name": "KaiCenat",
+      "url": "https://www.twitch.tv/kaicenat/clip/FancyCallousGuanacoRitzMitz-4iksB4A87tC2UNO-",
+      "title": "Chat explodes | Grand Theft Auto VI | clipped with twitch-tools.panda-core.net",
+      "views": 987,
+      "use": true,
+      "why": "Kai approaches a club dancer, flirts with lines that land, and the chat reaction plus his line about giving her money's worth make it a funny, readable moment. The private dance is suggestive but not explicit, with no nudity or sex act. The facecam is visible, so the reaction counts.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "Kai flirts with club dancer",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0.33,
+        "w": 0.22,
+        "h": 0.23
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 10.0,
+      "end": 30.0,
+      "peak": 21.5,
+      "story": true,
+      "setup": "Kai walks up to a club dancer and starts flirting with her",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "TalentedCrackyMinkTBTacoRight-ZM1WeRFKztFINBwp": {
+      "at": "2026-11-22T18:52:49.110743+00:00",
+      "login": "clix",
+      "name": "Clix",
+      "url": "https://www.twitch.tv/clix/clip/TalentedCrackyMinkTBTacoRight-ZM1WeRFKztFINBwp",
+      "title": "1",
+      "views": 625,
+      "use": true,
+      "why": "Clix is trapped in a police precinct, then the station gets attacked and he reacts loudly on camera. Chaotic and readable, with a clear reaction on the facecam. Dialogue is mostly exclamations, and the setup is a bit thin, so it's a mid-range score.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "escaping the precinct as it's attacked",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.4,
+        "w": 0.25,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 2.0,
+      "end": 30.0,
+      "peak": 24.5,
+      "story": true,
+      "setup": "Clix is locked inside a police precinct while attackers storm the station",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
     }
   },
   "posted": [
@@ -8592,6 +8768,15 @@
       ],
       "star": "vs",
       "moment": null,
+      "date": "2026-11-22"
+    },
+    {
+      "topic": "clip__20261122__MuddyInexpensiveLardAlie",
+      "logins": [
+        "jerma985"
+      ],
+      "star": "reaction",
+      "moment": "mom hates you joke",
       "date": "2026-11-22"
     }
   ],
