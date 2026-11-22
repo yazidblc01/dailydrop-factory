@@ -1238,5 +1238,21 @@
     "posted_at": "2026-11-22T21:49:08+00:00",
     "url": "https://www.youtube.com/watch?v=mm9i5138lJA",
     "slot": "waited"
+  },
+  "clip__20261122__PrettiestApatheticCockro": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=Clz7EbZ1W80",
+      "facebook": "https://www.facebook.com/reel/1157699743637391"
+    },
+    "url": "https://www.youtube.com/watch?v=Clz7EbZ1W80",
+    "title": "GTA 6: Peanut Begs Cops Then Sinks Into A Canal",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b037c35d371ec23cc1516e5",
+    "posted_at": "2026-11-22T23:36:28+00:00",
+    "slot": "waited"
   }
 }
