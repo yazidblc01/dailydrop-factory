@@ -1166,5 +1166,25 @@
     "posted_at": "2026-11-22T15:45:49+00:00",
     "url": "https://www.youtube.com/watch?v=QxzLk_rBmHQ",
     "slot": "waited"
+  },
+  "gta_board_eggs__20261122__16": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=m9RJqkhj6ns",
+      "facebook": "https://www.facebook.com/reel/1171866695710270",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7711046767801912582",
+      "instagram": "https://www.instagram.com/reel/DgDVJSqiXph/"
+    },
+    "title": "GTA 6: A dozen eggs on every GTA release day 💸",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0324a69a6eeec45bb00667",
+    "posted_at": "2026-11-22T17:22:00+00:00",
+    "url": "https://www.youtube.com/watch?v=m9RJqkhj6ns",
+    "slot": "waited"
   }
 }
