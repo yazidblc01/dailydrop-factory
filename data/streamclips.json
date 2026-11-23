@@ -284,9 +284,17 @@
     "ShinyAbstrusePizzaDancingBanana-cqf2oYbk-zR4Pupk",
     "BlushingDoubtfulWalrusTBTacoRight-W6WWO1bvVO7WTlA_",
     "SpikyPhilanthropicFerretFrankerZ-vo535leP2r8KJCUc",
-    "PrettiestApatheticCockroachVoteNay-jTUn6F93NhqITAJS"
+    "PrettiestApatheticCockroachVoteNay-jTUn6F93NhqITAJS",
+    "AdorableGenerousDootTheRinger-RxNBAdOhh2-dC7ws",
+    "CloudyJoyousAlmondBibleThump--4P8K4-5MiTiWMjA",
+    "OutstandingLongElkPeoplesChamp-wDpsX2-RjUu9iv7g",
+    "AverageBlazingPlumageDoubleRainbow-hcN6PsPOOLMvgifw",
+    "KnottyAffluentGaurGivePLZ-Hak5tNGLqHkcs6ji",
+    "KawaiiDepressedTrayBatChest-bsnx6Y07DBfG0o9h",
+    "ExquisiteSoftZebraTakeNRG-qOHuHRykQjn2c2ka",
+    "GrossCuriousSpiderRalpherZ-K94AxOBZOTukKq6k"
   ],
-  "count": 35,
+  "count": 36,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -9207,6 +9215,274 @@
       "nudity": false,
       "face_visible": true,
       "posted": true
+    },
+    "AdorableGenerousDootTheRinger-RxNBAdOhh2-dC7ws": {
+      "at": "2026-11-23T01:09:55.666087+00:00",
+      "login": "hasanabi",
+      "name": "HasanAbi",
+      "url": "https://www.twitch.tv/hasanabi/clip/AdorableGenerousDootTheRinger-RxNBAdOhh2-dC7ws",
+      "title": "Lexie Shoaibi reacts to real life Florida boy",
+      "views": 426,
+      "use": false,
+      "why": "Talk-show style stream with no game on screen. They're discussing a \"real life Florida boy\" video that never appears on screen, so nothing visible happens. Reaction is off-camera-content driven and the story doesn't land without context.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "Lexie reacts to Florida boy video",
+      "action": "none",
+      "facecam": {
+        "x": 0.15,
+        "y": 0.0,
+        "w": 0.35,
+        "h": 0.7
+      },
+      "gamebox": null,
+      "start": 0.0,
+      "end": 22.0,
+      "peak": 10.25,
+      "story": false,
+      "setup": "HasanAbi and Lexie Shoaibi talk about a Florida man video on the couch-style set",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "CloudyJoyousAlmondBibleThump--4P8K4-5MiTiWMjA": {
+      "at": "2026-11-23T01:10:27.531649+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/CloudyJoyousAlmondBibleThump--4P8K4-5MiTiWMjA",
+      "title": "wwwwww",
+      "views": 208,
+      "use": false,
+      "why": "Rejected for no story: the clip is menus and a blurred pause screen with no speech, and nothing understandable happens. Chat talks about game endings, which hints at a spoiler, but nothing on screen shows one.",
+      "score": 1,
+      "star": "reaction",
+      "moment": "save menu and endings chat",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.26,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.27,
+        "y": 0.0,
+        "w": 0.73,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 12.0,
+      "peak": 3.5,
+      "story": false,
+      "setup": "Lacy sits on the save and stats menus while chat argues about game endings",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "OutstandingLongElkPeoplesChamp-wDpsX2-RjUu9iv7g": {
+      "at": "2026-11-23T01:11:23.817398+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/OutstandingLongElkPeoplesChamp-wDpsX2-RjUu9iv7g",
+      "title": "jason fell LULE",
+      "views": 215,
+      "use": true,
+      "why": "Funny, chaotic moment: Jason crawls along a ledge above a parking lot while the streamer says he doesn't want cops again, then takes a fall. The streamer's laughing face is visible throughout, but the fall itself is only partly on screen, so the payoff is a bit soft.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "Jason falls off a parking ledge",
+      "action": "falling",
+      "facecam": {
+        "x": 0.02,
+        "y": 0.66,
+        "w": 0.2,
+        "h": 0.32
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 21.9,
+      "peak": 21.2,
+      "story": true,
+      "setup": "ohnePixel runs from cops again and Jason tries to climb along a ledge",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "AverageBlazingPlumageDoubleRainbow-hcN6PsPOOLMvgifw": {
+      "at": "2026-11-23T01:13:54.601436+00:00",
+      "login": "cohhcarnage",
+      "name": "CohhCarnage",
+      "url": "https://www.twitch.tv/cohhcarnage/clip/AverageBlazingPlumageDoubleRainbow-hcN6PsPOOLMvgifw",
+      "title": "in game store (extra context before)",
+      "views": 304,
+      "use": false,
+      "why": "Rejected for no story: the streamer talks about GTA's $4 billion launch money and a subscription service, which happens off screen. On screen there is only a woman jogging down a road, with nothing that happens as a result. Low energy and no reaction moment.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "subscription service opinion talk",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.2,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 39.8,
+      "end": 59.0,
+      "peak": 45.3,
+      "story": false,
+      "setup": "CohhCarnage rambles about GTA's subscription service while a character jogs down a road",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "KnottyAffluentGaurGivePLZ-Hak5tNGLqHkcs6ji": {
+      "at": "2026-11-23T01:15:55.079585+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/KnottyAffluentGaurGivePLZ-Hak5tNGLqHkcs6ji",
+      "title": "ohne-clash-of-clans-revisit",
+      "views": 354,
+      "use": false,
+      "why": "no story: Off-brand: this is a Clash of Clans stream, not GTA 6. The rant has a loose arc (sponsored two hours, played four, now mad) and a laugh at 43.75s, but no GTA action. Low-value filler for this channel.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "sponsored Clash of Clans rant",
+      "action": "none",
+      "facecam": {
+        "x": 0.05,
+        "y": 0.6,
+        "w": 0.3,
+        "h": 0.4
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 7.0,
+      "end": 47.0,
+      "peak": 43.75,
+      "story": false,
+      "setup": "ohnePixel rants about being sponsored to play Clash of Clans",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "KawaiiDepressedTrayBatChest-bsnx6Y07DBfG0o9h": {
+      "at": "2026-11-23T01:16:44.845157+00:00",
+      "login": "ishowspeed",
+      "name": "IShowSpeed",
+      "url": "https://www.twitch.tv/ishowspeed/clip/KawaiiDepressedTrayBatChest-bsnx6Y07DBfG0o9h",
+      "title": "Bro discovers human pig",
+      "views": 209,
+      "use": true,
+      "why": "Absurd find during a UFO abduction event: a naked woman lies in the dirt, and Speed's shocked, mock-serious reaction plays out in his facecam. The dialogue is funny on its own (\"What did the aliens do to her?\", \"Where else am I gonna go?\"). The nudity is non-sexual and gets blurred. The HUD looks like GTA Online, so check the game label before publishing.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "finding naked woman in UFO event",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.34,
+        "w": 0.225,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 1.0,
+      "end": 17.0,
+      "peak": 8.5,
+      "story": true,
+      "setup": "IShowSpeed searches a dark field for a UFO abduction event",
+      "cold_open": true,
+      "nudity": true,
+      "face_visible": true,
+      "posted": true
+    },
+    "ExquisiteSoftZebraTakeNRG-qOHuHRykQjn2c2ka": {
+      "at": "2026-11-23T01:18:32.384954+00:00",
+      "login": "valkyrae",
+      "name": "Valkyrae",
+      "url": "https://www.twitch.tv/valkyrae/clip/ExquisiteSoftZebraTakeNRG-qOHuHRykQjn2c2ka",
+      "title": "her face om",
+      "views": 727,
+      "use": false,
+      "why": "A character in a short dress walks through a hallway and room with a few lines of dialogue, but no clear action or consequence follows. The loudest moment is unclear and the reaction doesn't land as a payoff. Nothing followable happens, so it fails the story check.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "character walking through hallway",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.36,
+        "w": 0.18,
+        "h": 0.27
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 20.0,
+      "peak": 13.8,
+      "story": false,
+      "setup": "Valkyrae watches her character walk through a dim hallway and talk to someone",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "GrossCuriousSpiderRalpherZ-K94AxOBZOTukKq6k": {
+      "at": "2026-11-23T01:19:47.502664+00:00",
+      "login": "carmen",
+      "name": "carmen",
+      "url": "https://www.twitch.tv/carmen/clip/GrossCuriousSpiderRalpherZ-K94AxOBZOTukKq6k",
+      "title": "saving an alien baby",
+      "views": 278,
+      "use": true,
+      "why": "Clear setup and payoff: she thinks an alien baby is dead, plans a burial, then changes course and carries it home. The reaction is visible on the facecam and the dialogue is funny, though the chaos is mild and there's no big action.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "finding the alien baby",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.2,
+        "h": 0.43
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 25.0,
+      "peak": 17.8,
+      "story": true,
+      "setup": "Carmen finds a strange alien creature and decides what to do with it",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
     }
   },
   "posted": [
@@ -9524,6 +9800,15 @@
       ],
       "star": "reaction",
       "moment": "car sinks into canal during police chase",
+      "date": "2026-11-22"
+    },
+    {
+      "topic": "clip__20261122__KawaiiDepressedTrayBatCh",
+      "logins": [
+        "ishowspeed"
+      ],
+      "star": "reaction",
+      "moment": "finding naked woman in UFO event",
       "date": "2026-11-22"
     }
   ],

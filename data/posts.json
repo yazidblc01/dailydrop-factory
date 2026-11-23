@@ -1254,5 +1254,21 @@
     "zernio_id": "6b037c35d371ec23cc1516e5",
     "posted_at": "2026-11-22T23:36:28+00:00",
     "slot": "waited"
+  },
+  "clip__20261122__KawaiiDepressedTrayBatCh": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=D9xkHzujDfg",
+      "facebook": "https://www.facebook.com/reel/996465286358102"
+    },
+    "title": "GTA 6: Speed Finds A Woman Left By Aliens",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b03959ee659bed20cb272af",
+    "posted_at": "2026-11-23T01:24:18+00:00",
+    "url": "https://www.youtube.com/watch?v=D9xkHzujDfg",
+    "slot": "waited"
   }
 }
