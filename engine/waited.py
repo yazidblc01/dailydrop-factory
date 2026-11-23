@@ -390,7 +390,7 @@ ORIGINALS = ["chat", "data", "chat", "coins", "chat", "scale"]
 
 
 def make_original(kind, dry=False, today=None):
-    """One original reel: texts from the future, money to scale, coins, or a data race (stocks, countries, prices).
+    """One original reel: the Vice City chat, texts from the future, money to scale, coins, or the stocks race.
     Falls through the other originals if one fails, so the slot is never empty."""
     from engine.texts import warn
     order = [kind] + [k for k in ("chat", "scale", "coins", "data") if k != kind]
@@ -416,17 +416,11 @@ def make_original(kind, dry=False, today=None):
                     topics.mark_done(topic)
             elif k == "coins":
                 topic, final = make_other("coins", dry, today)
-            else:                                    # a data race: stocks, countries or prices, Miami style
-                from engine import data, render, script, topics, voice
-                topic, payload = topics.pick_next("main", only={"invest", "wb", "prices"})
-                print(f"      {payload['angle']}")
-                s, _ = script.write_script(topic)
-                print(f"      {s['title']}")
+            else:                                    # the stocks race v2: 4 brands from one theme, from a moment people know
+                from engine import stockrace
+                topic, final = stockrace.make(dry, today)
                 if dry:
                     return topic, None
-                voice.build(topic)
-                final = render.render(topic)
-                topics.mark_done(topic)
             return topic, final
         except Exception as e:
             print(f"      {k} failed ({e}), trying the next original")
