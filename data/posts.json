@@ -1286,5 +1286,21 @@
     "zernio_id": "6b03a84c1cddd92d517de358",
     "posted_at": "2026-11-23T02:44:38+00:00",
     "slot": "waited"
+  },
+  "clip__20261123__CautiousBombasticCaribou": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=fno3RqDmmR0",
+      "facebook": "https://www.facebook.com/reel/1124654720196188"
+    },
+    "url": "https://www.youtube.com/watch?v=fno3RqDmmR0",
+    "title": "GTA 6: Lacy Stumbles Into An Underground Chicken Fight",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b044e425baac8e1ad16a7d3",
+    "posted_at": "2026-11-23T14:32:38+00:00",
+    "slot": "waited"
   }
 }

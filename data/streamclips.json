@@ -300,9 +300,20 @@
     "UglyOptimisticLocustUnSane-ffKr1hwTM3hfEYwb",
     "SuccessfulEnticingCurlewWoofer-nKkpkwovwyx0G9V1",
     "PrettyTacitDadBCWarrior-DwVaX2e3Mmie_OUY",
-    "VibrantCrunchyGoldfishLitty-mFQKdu4HOaDAf3wt"
+    "VibrantCrunchyGoldfishLitty-mFQKdu4HOaDAf3wt",
+    "ResilientDrabGrasshopperWow-fKAbKH4GGUaEC2dl",
+    "DullPrettyCaterpillarKappaWealth-_PBk2Ut1sJ0GUkqc",
+    "KnottyTameRhinocerosHeyGirl-OgpyqkXK-_K-KA15",
+    "CalmFrozenCrocodilePeanutButterJellyTime-OwUM1VvaCFBCpYSS",
+    "MoralLivelyMouseTakeNRG-qmHIo42XYrAnTMJG",
+    "SmoothSingleCoffeePeoplesChamp-mlJyCH5uu18ucZ9n",
+    "CrunchyHyperAppleHumbleLife-k2IsvNYXcHHYl20R",
+    "AbrasiveArtsySwanDoubleRainbow-2gMbJ9Ep7llWNMzk",
+    "GorgeousCorrectFerretAMPEnergyCherry-ifRn02RcyUwebMuk",
+    "VainSwissGrasshopperMoreCowbell-x8hoBr8ypJqow4Ef",
+    "CrepuscularTameWaterCeilingCat-NB9altUAd-FUtZst"
   ],
-  "count": 37,
+  "count": 38,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -6124,7 +6135,8 @@
       "setup": "Lacy searches for a contact and walks into a back room full of betting spectators.",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "posted": true
     },
     "UglyAbrasiveKale4Head-2CtJf83JiA6v97eC": {
       "at": "2026-11-21T16:05:05.788096+00:00",
@@ -9757,6 +9769,344 @@
       "cold_open": false,
       "nudity": true,
       "face_visible": true
+    },
+    "DullPrettyCaterpillarKappaWealth-_PBk2Ut1sJ0GUkqc": {
+      "at": "2026-11-23T14:13:24.551882+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/DullPrettyCaterpillarKappaWealth-_PBk2Ut1sJ0GUkqc",
+      "title": "xQc finishes GTA 6 after 62 hours and rates it a 9/10",
+      "views": 6618,
+      "use": false,
+      "why": "Mostly xQc giving his verdict on the game and talking about PC performance and optimization. Nothing absurd or chaotic happens on screen, and there is no setup-payoff-reaction arc. The gameplay is him walking around a plaza and standing by the water.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "final rating after 62 hours",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.23,
+        "h": 0.33
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 20.0,
+      "end": 60.0,
+      "peak": 25.25,
+      "story": false,
+      "setup": "xQc explains his final rating for GTA 6 after 62 hours of play",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "KnottyTameRhinocerosHeyGirl-OgpyqkXK-_K-KA15": {
+      "at": "2026-11-23T14:14:50.836760+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/KnottyTameRhinocerosHeyGirl-OgpyqkXK-_K-KA15",
+      "title": "xQc got the Bonnie and Clyde Ending in GTA 6",
+      "views": 3598,
+      "use": false,
+      "why": "Rejected as a major story spoiler: the clip's payoff is the Bonnie and Clyde ending, where the main characters are shot dead by sheriffs in the car (visible at 58.6s). The title also names the ending outright.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "Bonnie and Clyde ending",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.21,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.05,
+        "w": 1.0,
+        "h": 0.89
+      },
+      "start": 20.0,
+      "end": 60.0,
+      "peak": 30.5,
+      "story": true,
+      "setup": "xQc's getaway with his partner on a coastal bridge ends in a police shootout",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "CalmFrozenCrocodilePeanutButterJellyTime-OwUM1VvaCFBCpYSS": {
+      "at": "2026-11-23T14:16:36.038836+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/CalmFrozenCrocodilePeanutButterJellyTime-OwUM1VvaCFBCpYSS",
+      "title": "xQc thinks GTA 6's world won't be matched for decades",
+      "views": 1164,
+      "use": false,
+      "why": "Wandering around a city and an opinion about the world's detail. No action, no payoff, no consequence, so there is no story. Low energy for a Short.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "xQc on the world detail",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.23,
+        "h": 0.33
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 40.0,
+      "end": 56.5,
+      "peak": 49.5,
+      "story": false,
+      "setup": "xQc walks around Vice City and praises how detailed the world feels",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "MoralLivelyMouseTakeNRG-qmHIo42XYrAnTMJG": {
+      "at": "2026-11-23T14:17:42.024195+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/MoralLivelyMouseTakeNRG-qmHIo42XYrAnTMJG",
+      "title": "xQc's first GTA 6 Cinematic \"Ending\"",
+      "views": 1044,
+      "use": false,
+      "why": "Rejected: the clip is mostly xQc talking about a cinematic playthrough, and the payoff is a spoiler, a named character (\"plaything number one\") dying in an accident. There is no visible reaction and no on-screen chaos; he is just riding a motorcycle at night.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "cinematic mode story talk",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.42,
+        "w": 0.21,
+        "h": 0.29
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 29.0,
+      "end": 42.0,
+      "peak": 31.5,
+      "story": false,
+      "setup": "xQc rides a motorcycle at night while explaining his cinematic playthrough",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "SmoothSingleCoffeePeoplesChamp-mlJyCH5uu18ucZ9n": {
+      "at": "2026-11-23T14:19:21.313479+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/SmoothSingleCoffeePeoplesChamp-mlJyCH5uu18ucZ9n",
+      "title": "xQc criticizes GTA 6's story pacing: \"One good big cinematic event every eight hours of play\"",
+      "views": 576,
+      "use": false,
+      "why": "Rejected for no story. xQc talks about GTA 6's pacing while his character wanders along the docks and runs down a pier. Nothing happens on screen, and the criticism is an opinion, not an action with a consequence.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "xQc criticizes story pacing",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.23,
+        "h": 0.33
+      },
+      "gamebox": {
+        "x": 0.23,
+        "y": 0.0,
+        "w": 0.77,
+        "h": 1.0
+      },
+      "start": 15.4,
+      "end": 55.4,
+      "peak": 37.8,
+      "story": false,
+      "setup": "xQc walks along the Vice City docks while he complains about GTA 6's story pacing",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "CrunchyHyperAppleHumbleLife-k2IsvNYXcHHYl20R": {
+      "at": "2026-11-23T14:19:49.250879+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/CrunchyHyperAppleHumbleLife-k2IsvNYXcHHYl20R",
+      "title": "sad incident",
+      "views": 1200,
+      "use": false,
+      "why": "Not GTA 6 gameplay at all. The clip is a TikTok playing in the browser about a \"Jupiter incident\" meme, and caseoh_ commenting on it. Nothing absurd happens in the game, and the story is only understandable from off-screen context, so it has no GTA 6 hook.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "TikTok about the Jupiter incident",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.12,
+        "w": 0.22,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 17.7,
+      "peak": 15.5,
+      "story": false,
+      "setup": "caseoh_ scrolls through a TikTok about the Jupiter incident meme",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "AbrasiveArtsySwanDoubleRainbow-2gMbJ9Ep7llWNMzk": {
+      "at": "2026-11-23T14:20:47.972374+00:00",
+      "login": "agent00",
+      "name": "Agent00",
+      "url": "https://www.twitch.tv/agent00/clip/AbrasiveArtsySwanDoubleRainbow-2gMbJ9Ep7llWNMzk",
+      "title": "Agent reacts to Emily speaking too soon",
+      "views": 517,
+      "use": true,
+      "why": "Chaotic payoff (a car set on fire in the water, with a jinx line about it not blowing up) and a visible facecam reaction, though the explosion is modest and the reaction is mild.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "Emily says car won't blow up",
+      "action": "explosion",
+      "facecam": {
+        "x": 0.677,
+        "y": 0.58,
+        "w": 0.234,
+        "h": 0.32
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.67,
+        "h": 0.95
+      },
+      "start": 6.0,
+      "end": 28.0,
+      "peak": 18.5,
+      "story": true,
+      "setup": "Agent00 torches a red car in the water while Emily says it won't blow up",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "GorgeousCorrectFerretAMPEnergyCherry-ifRn02RcyUwebMuk": {
+      "at": "2026-11-23T14:22:22.418534+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/GorgeousCorrectFerretAMPEnergyCherry-ifRn02RcyUwebMuk",
+      "title": "Do NOT send Mikkaa to your drug deal",
+      "views": 761,
+      "use": false,
+      "why": "Rejected: the streamer says the n-word slur (\"These really the type of niggas\") at about 42.7s, which is a slur under our rules. The clip is also mostly dialogue over a walk toward a drug deal, with little visible chaos.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "drug deal meetup with gang members",
+      "action": "none",
+      "facecam": {
+        "x": 0.8,
+        "y": 0.45,
+        "w": 0.2,
+        "h": 0.5
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.8,
+        "h": 1
+      },
+      "start": 20.0,
+      "end": 60.0,
+      "peak": 56.5,
+      "story": false,
+      "setup": "MissMikkaa walks with her partner toward a sketchy drug deal in the dark",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "VainSwissGrasshopperMoreCowbell-x8hoBr8ypJqow4Ef": {
+      "at": "2026-11-23T14:23:29.821178+00:00",
+      "login": "hasanabi",
+      "name": "HasanAbi",
+      "url": "https://www.twitch.tv/hasanabi/clip/VainSwissGrasshopperMoreCowbell-x8hoBr8ypJqow4Ef",
+      "title": "Mandy from GTA VI in the house!",
+      "views": 519,
+      "use": true,
+      "why": "Talk-show segment, not gameplay. The payoff is the guest reveal: HasanAbi introduces the actress behind GTA VI's Mandy, then fumbles with the cameras. Some awkward comedy and a visible streamer reaction, but it's mostly talk about the game and the room is the main focus, so it's a weak pick.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "GTA VI actress guest reveal",
+      "action": "none",
+      "facecam": {
+        "x": 0.55,
+        "y": 0.1,
+        "w": 0.45,
+        "h": 0.9
+      },
+      "gamebox": null,
+      "start": 0.5,
+      "end": 36.8,
+      "peak": 18.8,
+      "story": true,
+      "setup": "HasanAbi introduces the actress who plays Mandy in GTA VI",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "CrepuscularTameWaterCeilingCat-NB9altUAd-FUtZst": {
+      "at": "2026-11-23T14:24:55.841154+00:00",
+      "login": "cohhcarnage",
+      "name": "CohhCarnage",
+      "url": "https://www.twitch.tv/cohhcarnage/clip/CrepuscularTameWaterCeilingCat-NB9altUAd-FUtZst",
+      "title": "i believe I can fly",
+      "views": 686,
+      "use": true,
+      "why": "A clear action and consequence: he's riding a quad bike, then cops chase him on foot (\"Stop resisting!\"), and he says he got away. The facecam is visible and he's reacting. The payoff is unclear from the frames, and the title hints at a jump or fall, so the peak timing is a best guess. The clip is moderately funny, not a sure hit.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "quad bike escape from cops",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.38,
+        "w": 0.2,
+        "h": 0.32
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 2.0,
+      "end": 29.0,
+      "peak": 16.75,
+      "story": true,
+      "setup": "CohhCarnage rides a quad bike through town with cops on his tail",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
     }
   },
   "posted": [
@@ -10093,9 +10443,18 @@
       "star": "reaction",
       "moment": "botched shootout with cops, cost talk",
       "date": "2026-11-22"
+    },
+    {
+      "topic": "clip__20261123__CautiousBombasticCaribou",
+      "logins": [
+        "lacy"
+      ],
+      "star": "reaction",
+      "moment": "stumbling into underground cockfight",
+      "date": "2026-11-23"
     }
   ],
-  "house": "2026-11-22",
+  "house": "2026-11-23",
   "seen5": {
     "TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN": {
       "at": "2026-11-18T21:16:59.699365+00:00",
