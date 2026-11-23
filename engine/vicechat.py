@@ -1,8 +1,8 @@
 """The Vice City group chat: GTA 6's cast and its NPCs text each other about a streamer's viral moment.
 
 The reel (video/src/ed/Chat.tsx):
-  0 to 2.5 s  the actual clip, full screen, with its sound: the context comes first
-  then        the clip shrinks into a video bubble in an iMessage group chat on the 3D phone, and the chat goes fast
+  first 4-7 s  the actual clip, full screen, with its sound, ending just after the payoff: the context comes first
+  then         the clip shrinks into a video bubble (looping the payoff) in an iMessage group chat on the 3D phone, and the chat goes fast
               (about 1 s per message, typing dots, tapbacks), ending on a punchline with a camera push. Then the logo outro.
   The title stays on top for the whole reel.
 
@@ -23,7 +23,8 @@ from config import CLAUDE_MODEL, DATA_DIR, MEDIA_DIR
 from engine.render import PUBLIC, VIDEO_DIR
 
 STATE = DATA_DIR / "vicechat.json"
-INTRO = 2.5                     # seconds of the clip, full screen, before the chat
+INTRO_MIN, INTRO_MAX = 4.0, 7.0  # the clip plays full screen first, through to the payoff
+LOOP = 3.0                      # then the video bubble loops just the payoff
 OUTRO = 1.6                     # the logo outro
 CAST = {"lucia": "Lucia, GTA 6's lead: sharp, sarcastic, the brains, roasts Jason",
         "jason": "Jason, Lucia's partner, the player: deadpan, impulsive, always the one who did it. His texts are the blue ones",
@@ -88,10 +89,23 @@ def ask(context):
     return next(b.input for b in msg.content if b.type == "tool_use")
 
 
-def timed(c):
+def windows(v, dur):
+    """The intro (full screen, ends just after the payoff) and the payoff the bubble loops, in source seconds.
+    The payoff is the peak when it sits inside the story; otherwise the end of the final pick's trim (it ends on the payoff)."""
+    s0, s1 = float(v["start"]), min(float(v["end"]), dur)
+    pk = v.get("peak")
+    pay = float(pk) if pk is not None and s0 + INTRO_MIN - 1 <= float(pk) <= s1 else s1 - 1.0
+    ie = min(s1, pay + 1.0, dur)
+    i0 = max(s0, ie - INTRO_MAX)
+    i0 = max(0.0, min(i0, ie - INTRO_MIN))
+    l0 = max(i0, min(pay - 1.5, ie - LOOP))
+    return round(i0, 2), round(ie, 2), round(l0, 2), round(min(ie, l0 + LOOP), 2)
+
+
+def timed(c, intro):
     """When each message lands: the clip bubble right after the intro, then about 1 s per message, a beat before the punchline."""
-    msgs = [{"who": c["poster"], "text": "", "clip": True, "at": INTRO + 0.25, "taps": []}]
-    t, prev = INTRO + 0.25 + 0.9, None
+    msgs = [{"who": c["poster"], "text": "", "clip": True, "at": round(intro + 0.25, 2), "taps": []}]
+    t, prev = intro + 0.25 + 0.9, None
     body = c["msgs"][:7]
     for i, m in enumerate(body):
         if prev:
@@ -131,23 +145,26 @@ def make(dry=False, today=None):
     print(f"      chat about: {v.get('name') or v.get('login')}: {v.get('moment')} ({topic})")
     lvl = streamclips.download(v["url"], out)
     info = streamclips.media_info(lvl)
-    s0, s1, pk = float(v["start"]), float(v["end"]), float(v.get("peak") or v["start"])
-    said = " ".join(w["w"] for w in info["words"] if s0 <= w["start"] <= s1)[:600]
-    c = ask(f"Clip title: {v.get('title')}\nWhat happens: {v.get('setup') or ''}. {v.get('moment')}\nWhat the streamer says: {said}")
+    i0, ie, l0, l1 = windows(v, info["dur"])
+    intro_dur = round(ie - i0, 2)
+    print(f"      intro {i0}-{ie} s, bubble loops {l0}-{l1} s")
+    said = " ".join(w["w"] for w in info["words"] if i0 <= w["start"] <= ie)[:500]   # only what the viewer sees and hears
+    c = ask(f"Clip title: {v.get('title')}\nWhat happens: {v.get('setup') or ''}. {v.get('moment')}\n"
+            f"The viewer sees the last {intro_dur:.0f} seconds, ending on the payoff. What the streamer says in them: {said}\n"
+            "The chat must only react to what's in those seconds.")
     print(f"      title: {c['hook']}\n        {c['poster']:>8}: [the clip]")
     for m in c["msgs"]:
         print(f"        {m['who']:>8}: {m['text']}  {' '.join(m.get('taps', []))}")
     if dry:
         return name, None
     info = streamclips.bleep(info, out)
-    blurs = streamclips.blur_list(info["src"], s0, s1, out)
+    blurs = streamclips.blur_list(info["src"], i0, ie, out)
     rel = streamclips.publish_src(info, name, 0)
     credit = f"{v.get('name') or v.get('login')} on Twitch"
-    i0 = max(s0, min(pk - 1.6, s1 - INTRO))                  # the intro: the moment itself, so the payoff is seen first
-    intro = streamclips.seg(info, v, rel, credit, i0, min(info["dur"], i0 + INTRO), blurs=blurs)
-    bubble = streamclips.seg(info, v, rel, credit, s0, s1, words=False, blurs=blurs)
-    msgs, end = timed(c)
-    props = {"hook": c["hook"].upper()[:44], "cast": cast_of(c), "msgs": msgs, "introDur": INTRO, "intro": intro, "bubble": bubble,
+    intro = streamclips.seg(info, v, rel, credit, i0, ie, blurs=blurs)
+    bubble = streamclips.seg(info, v, rel, credit, l0, l1, words=False, blurs=blurs)
+    msgs, end = timed(c, intro_dur)
+    props = {"hook": c["hook"].upper()[:44], "cast": cast_of(c), "msgs": msgs, "introDur": intro_dur, "intro": intro, "bubble": bubble,
              "credit": credit, "music": f"music/{random.choice(['chaos.mp3', 'headphonk.mp3'])}", "clock": "9:41",
              "duration": round(end + OUTRO, 2), "outroAt": end,
              "headA": c["hook"].capitalize(), "pal": "vice"}       # headA/pal: for the cover

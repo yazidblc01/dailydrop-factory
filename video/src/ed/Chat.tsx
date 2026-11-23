@@ -1,12 +1,12 @@
 // ---------- The Vice City group chat: GTA 6's cast and its NPCs text about a streamer's viral moment ----------
-// 0 to ~2.5 s: the actual clip, full screen, so the viewer knows what happened (context first).
-// Then the clip shrinks into a video bubble in an iMessage group chat on the 3D phone (the one from Texts from the future),
+// First 4 to 7 s: the actual clip, full screen, ending just after the payoff (context first).
+// Then the clip shrinks into a video bubble looping the payoff, in an iMessage group chat on the 3D phone (the one from Texts from the future),
 // and the chat goes fast: ~1 s per message, typing dots, pop-in bubbles, tapbacks. The last message is the punchline:
 // the camera pushes into the phone with a shake and a burst of tapbacks. Then the logo outro.
 // Layout (1080x1920): 0-150 free for the apps' buttons, header 160, title 262-420, phone 450-1760, bottom free.
 import React, {useEffect, useMemo, useState} from 'react';
 import * as THREE from 'three';
-import {AbsoluteFill, Audio, Sequence, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Loop, Sequence, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import {Backdrop, Cam, LogoOutro, Masthead, PAL, SANS, Studio, V3, clamp01, lerp, outBack, outCubic, projector, smooth, useEdFonts} from './kit';
 import {BLUE, F, PH, PW, PD, Phone3D, SH, SW, SoftShadow, homeBar, statusBar, usePhoneScreen, useSoftShadow, wrap} from './phone';
@@ -273,7 +273,10 @@ export const EdChat: React.FC<EdChatProps> = (p) => {
         <div style={{position: 'absolute', left: R.x, top: R.y, width: R.w, height: R.h, borderRadius: R.r, overflow: 'hidden',
           clipPath: m >= 1 && target.cut > 0 ? `inset(${target.cut}px 0 0 0)` : undefined, boxShadow: m < 1 ? '0 30px 80px rgba(0,0,0,0.5)' : undefined}}>
           <Sequence from={Math.round(T0 * fps)} layout="none">
-            <Win s={p.bubble} r={gameRegion(p.bubble, R.w, R.h)} W={R.w} H={R.h} top={0} muted t={t - T0} />
+            {/* the payoff, on a loop */}
+            <Loop durationInFrames={Math.max(1, Math.round(p.bubble.dur * fps))} layout="none">
+              <Win s={p.bubble} r={gameRegion(p.bubble, R.w, R.h)} W={R.w} H={R.h} top={0} muted t={(t - T0) % p.bubble.dur} />
+            </Loop>
           </Sequence>
           {m >= 1 && <div style={{position: 'absolute', left: 14, bottom: 12, width: 44, height: 44, borderRadius: 22, background: 'rgba(0,0,0,0.45)',
             display: 'grid', placeItems: 'center', color: '#fff', fontSize: 22}}>🔇</div>}
