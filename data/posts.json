@@ -1369,5 +1369,25 @@
     "zernio_id": "6b04a933f07a6b376576e9e5",
     "posted_at": "2026-11-23T21:00:33+00:00",
     "slot": "waited"
+  },
+  "chat__20261123__3": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=qGkoCwIp3pc",
+      "facebook": "https://www.facebook.com/reel/1066806326381703",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7711510866201496853",
+      "instagram": "https://www.instagram.com/reel/DgGjIm4nE1L/"
+    },
+    "title": "GTA 6: Cop Chase Ends In A Canal",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b04ca4995a3ab8cc0a1b0d2",
+    "posted_at": "2026-11-23T23:21:04+00:00",
+    "url": "https://www.youtube.com/watch?v=qGkoCwIp3pc",
+    "slot": "waited"
   }
 }
