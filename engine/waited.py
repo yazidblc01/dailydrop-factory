@@ -430,6 +430,50 @@ def render(out, final, flat_only=False):
     return "flat"
 
 
+# ---------- While we waited: the flip clock ----------
+def render_comp(topic, comp, props, meta, dry):
+    out = MEDIA_DIR / topic
+    out.mkdir(parents=True, exist_ok=True)
+    music = pick_music(topic)
+    props["music"] = f"music/{music}" if music else None
+    final = out / "final.mp4"
+    (out / "props.json").write_text(json.dumps(props, indent=2, ensure_ascii=False))
+    (out / "upload.json").write_text(json.dumps({"topic": topic, **meta, "file": str(final)}, indent=2, ensure_ascii=False))
+    print(f"      {topic}: {meta['title']} ({props['duration']}s, {comp}, music {music})")
+    if dry:
+        return topic, None
+    gl = "angle" if sys.platform == "darwin" else "swangle"
+    subprocess.run(["npx", "remotion", "render", "src/index.ts", comp, str(final), f"--props={out / 'props.json'}",
+                    "--codec=h264", "--crf=18", f"--gl={gl}"], cwd=VIDEO_DIR, check=True)
+    return topic, final
+
+
+def make_flip(dry=False, today=None):
+    """The flip clock, 2013 -> 2026, one Vice News headline a year (data/waited_news.json, the variant rotates)."""
+    today = today or datetime.now().date()
+    st = load_state()
+    n = st.get("other", {}).get("flip", 0)
+    news = json.loads((DATA_DIR / "waited_news.json").read_text())
+    events = [{"year": int(y), "head": v[n % len(v)][0], "sub": v[n % len(v)][1]} for y, v in sorted(news.items())]
+    hook, step, end = 1.0, 0.9, 2.2
+    end_at = hook + len(events) * step + 0.3
+    p = {"pal": "vice", "events": events, "hook": hook, "step": step, "endFor": end, "outroAt": round(end_at + end, 2),
+         "duration": round(end_at + end + FOLLOW, 2), "titleA": "13 years of ", "titleEm": "waiting for GTA 6", "headA": "13 years of waiting for GTA 6"}
+    lines = "\n".join(f"• {e['year']}: {e['head']}" for e in events)
+    meta = {"title": "Everything that happened while we waited for GTA 6 ⏳",
+            "description": f"GTA V came out in September 2013. GTA 6 comes out November 19, 2026. In between:\n{lines}\n#gta6 #gtav #gaming",
+            "pinned_comment": "What do you remember from the wait? 👇"}
+    topic = f"gta_flip__{today:%Y%m%d}__{st['count']}"
+    topic, final = render_comp(topic, "EdFlip", p, meta, dry)
+    if final:
+        st = load_state()
+        st["count"] += 1
+        st.setdefault("other", {})["flip"] = n + 1
+        st["made"] = (st["made"] + [topic])[-200:]
+        STATE.write_text(json.dumps(st, indent=2))
+    return topic, final
+
+
 def make_other(kind, dry=False, today=None):
     from engine.texts import warn
     today = today or datetime.now().date()
@@ -459,14 +503,14 @@ def make_other(kind, dry=False, today=None):
 
 
 # the 6:07 PM original: these take turns (texts from the future has its own daily 10:37 AM slot)
-ORIGINALS = ["chat", "data", "chat", "hl", "chat", "pawn", "chat", "coins", "chat", "scale"]
+ORIGINALS = ["chat", "data", "chat", "hl", "chat", "pawn", "chat", "flip", "chat", "coins", "chat", "scale"]
 
 
 def make_original(kind, dry=False, today=None):
     """One original reel: the Vice City chat, texts from the future, money to scale, coins, or the stocks race.
     Falls through the other originals if one fails, so the slot is never empty."""
     from engine.texts import warn
-    order = [kind] + [k for k in ("chat", "scale", "coins", "data", "hl", "pawn") if k != kind]
+    order = [kind] + [k for k in ("chat", "scale", "coins", "data", "hl", "pawn", "flip") if k != kind]
     errors = []
     for k in order:
         try:
@@ -487,6 +531,8 @@ def make_original(kind, dry=False, today=None):
                 topic, final = moneyscale.make(dry=dry, gaming=True)
                 if not dry:
                     topics.mark_done(topic)
+            elif k == "flip":
+                topic, final = make_flip(dry, today)
             elif k in ("coins", "pawn"):
                 topic, final = make_other(k, dry, today)
             elif k == "hl":                          # higher or lower v2: consoles and best sellers take turns
@@ -507,7 +553,7 @@ def make_original(kind, dry=False, today=None):
 
 def make_next(dry=False, flat_only=False, today=None, kind=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
-    if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn") or kind is None:
+    if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn", "flip") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
             st = load_state()
             kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
@@ -588,7 +634,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip"], help="force one format")
     a = ap.parse_args()
     import run
     try:
