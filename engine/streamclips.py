@@ -39,7 +39,8 @@ import requests
 from config import CLAUDE_FAST, CLAUDE_MODEL, DATA_DIR, MEDIA_DIR
 from engine import render
 from engine.render import VIDEO_DIR
-from engine.waited import FOLLOW, GTA6, follow_card
+from engine.waited import GTA6, follow_card
+FOLLOW = 1.2                     # the logo outro at the end of every clip
 
 STATE = DATA_DIR / "streamclips.json"
 ALLOW = DATA_DIR / "streamers.json"
@@ -257,6 +258,45 @@ def frames(f, times, out, tag):
     return paths
 
 
+def sheet(f, t0, t1, out, tag, n=12):
+    """A contact sheet: n frames spread over [t0, t1], tiled 4 x 3 in one image, each stamped with its time.
+    One image costs about as much as one frame, and shows the whole clip (pauses, menus, black screens...)."""
+    import cv2
+    import numpy as np
+    times = [t0 + (t1 - t0) * (i + 0.5) / n for i in range(n)]
+    tiles = []
+    for i, t in enumerate(times):
+        p = out / f"{tag}_t{i}.jpg"
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{max(0, t):.2f}", "-i", str(f), "-frames:v", "1", "-vf", "scale=384:216", str(p)],
+                       check=True, capture_output=True)
+        im = cv2.imread(str(p))
+        im = im if im is not None else np.zeros((216, 384, 3), np.uint8)
+        cv2.rectangle(im, (0, 0), (92, 30), (0, 0, 0), -1)
+        cv2.putText(im, f"{t:.1f}s", (6, 23), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+        tiles.append(im)
+        p.unlink(missing_ok=True)
+    grid = np.vstack([np.hstack(tiles[r * 4:(r + 1) * 4]) for r in range(n // 4)])
+    path = out / f"{tag}_sheet.jpg"
+    cv2.imwrite(str(path), grid, [cv2.IMWRITE_JPEG_QUALITY, 82])
+    return path, times
+
+
+def clean_trim(s, e, peak, dead):
+    """The longest stretch of [s, e] with no dead span in it (pause, map, menu...), keeping the peak if it can."""
+    cuts = sorted((max(s, float(a)), min(e, float(b))) for a, b in (d for d in dead if len(d) == 2) if float(b) > s and float(a) < e)
+    pieces, cur = [], s
+    for a, b in cuts:
+        if a > cur:
+            pieces.append((cur, a))
+        cur = max(cur, b)
+    if cur < e:
+        pieces.append((cur, e))
+    if not pieces:
+        return None
+    with_peak = [x for x in pieces if x[0] <= peak <= x[1]]
+    return max(with_peak or pieces, key=lambda x: x[1] - x[0])
+
+
 def img(p):
     return {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(p.read_bytes()).decode()}}
 
@@ -282,20 +322,24 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
     "moment": {"type": "string", "description": "3 to 6 words naming the game moment, so the same moment can be matched across streamers, e.g. 'first time seeing Lucia', 'first police chase', 'the opening drive'"},
     "action": {"type": "string", "enum": [*ACTIONS, "none"], "description": "the main on-screen action, for GTA 5 vs GTA 6 comparisons; none if no clear one"},
     "facecam": {**BOX, "description": "the streamer's webcam as fractions of the frame (x, y = top-left), null if none"},
-    "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and overlays"},
+    "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and the streamer's overlays (social-handle bars, alerts, goals)"},
     "start": {"type": "number", "description": "seconds: where the reel starts. Punchy moment: just before it (12 to 20 s in total). Only a moment that needs a setup starts earlier (up to 40 s)"},
     "nudity": {"type": "boolean", "description": "true if any nude body shows (it gets blurred automatically, do NOT reject for it)"},
-    "face_visible": {"type": "boolean", "description": "true if the streamer's face is visible on screen (a facecam)"},
+    "face_visible": {"type": "boolean", "description": "true only if a REAL HUMAN face shows on a webcam. An avatar, VTuber, cartoon, mascot or costume head does NOT count"},
+    "dead": {"type": "array", "items": {"type": "array", "items": {"type": "number"}},
+             "description": "[start, end] seconds where nothing playable shows: a pause or settings menu, the map, photo mode, a loading or black screen, frozen video, alt-tabbed away. Empty if none"},
+    "captioned": {"type": "boolean", "description": "true if the stream already shows its OWN burned-in captions of what the streamer says (not the game's subtitles)"},
+    "dark": {"type": "boolean", "description": "true if the gameplay is too dark to see what happens"},
     "end": {"type": "number", "description": "seconds: after the streamer's reaction to the payoff ends"},
     "story": {"type": "boolean", "description": "true only if a viewer with no context can follow it: a setup, a payoff and a reaction"},
     "setup": {"type": "string", "description": "one line shown for the first seconds, 6 to 14 words, present tense, what is going on BEFORE the payoff, never revealing it. E.g. 'xQc tries to rob a store with cops one block away'"},
     "cold_open": {"type": "boolean", "description": "true only if flashing the payoff for 1 second first makes sense on its own (a crash, an explosion); false for anything that needs the setup"},
     "peak": {"type": "number", "description": "seconds: the single best instant (the scream, the crash, the punchline)"},
-    "hook": {"type": "string", "description": "2 to 4 words on screen from the first frame. Reaction: about the streamer ('LACY LOST IT'). Gameplay: about the moment ('WAIT FOR IT'). No spoilers."},
+    "hook": {"type": "string", "description": "2 to 5 words on screen for the first 3 seconds. Tease the moment, NEVER state its ending ('HE TRIED TO OUTRUN THE COPS', not 'HE DROVE INTO THE CANAL')."},
     "title": {"type": "string", "description": "starts with 'GTA 6', under 60 characters, no hashtags. Reaction clips name the streamer: 'GTA 6: Lacy Sees Lucia For The First Time'."},
     "description": {"type": "string", "description": "1 or 2 short sentences"},
     "pinned_comment": {"type": "string", "description": "a question that gets replies"}},
-    "required": ["use", "why", "score", "star", "moment", "start", "end", "peak", "story", "setup", "cold_open", "nudity", "face_visible", "hook", "title", "description", "pinned_comment"]}}
+    "required": ["use", "why", "score", "star", "moment", "start", "end", "peak", "story", "setup", "cold_open", "nudity", "face_visible", "dead", "captioned", "dark", "hook", "title", "description", "pinned_comment"]}}
 
 SCREEN_SYS = """You are the first filter for GTA 6 stream clips for The Daily Drop, a Shorts channel for gamers 13 to 25.
 What wins (our hit: a streamer knocks a grandma off her mobility scooter and steals it, his face cracking up on camera):
@@ -345,10 +389,13 @@ def timed(words):
 
 
 def screen(c, src, dur, words, loud, out, system=None):
-    at = [dur * 0.15, min(max(loud[0] if loud else dur * 0.5, 0.0), dur - 0.2), max(0.0, dur - 1.5)]   # 3 frames: early, the peak, the end
-    content = [*map(img, frames(src, at, out, "src")), {"type": "text", "text":
-               f"Streamer: {c['broadcaster_name']} (Twitch). Clip title: {c['title']}. {dur:.1f} s long, {c['view_count']} views.\n"
-               f"Frames at {', '.join(f'{t:.1f}s' for t in at)}.\nLoudest moments (s): {loud}\nWhat they say, with times:\n{timed(words)}"}]
+    pk0 = min(max(loud[0] if loud else dur * 0.5, 0.0), dur - 0.2)
+    sh, times = sheet(src, 0.0, dur, out, "src")
+    content = [img(sh), *map(img, frames(src, [pk0], out, "pk")), {"type": "text", "text":
+               f"Streamer: {c['broadcaster_name']} (Twitch). Clip title: {c['title']}. {dur:.1f} s long, {c.get('view_count', '?')} views.\n"
+               f"Image 1: a contact sheet of the whole clip, 12 frames left to right, top to bottom, each stamped with its time "
+               f"({', '.join(f'{t:.1f}s' for t in times)}). Image 2: the frame at the loudest moment ({pk0:.1f}s).\n"
+               f"Loudest moments (s): {loud}\nWhat they say, with times:\n{timed(words)}"}]
     v = ask(content, SCREEN, system or SCREEN_SYS, model=CLAUDE_FAST)   # the cheap model screens; the strong one writes the words on winners
     # keep the trim sane, whatever came back
     if v.get("use") and v.get("story") is False:
@@ -356,7 +403,10 @@ def screen(c, src, dur, words, loud, out, system=None):
         v["why"] = f"no story: {v.get('why', '')}"
     if v.get("use") and v.get("star") == "reaction" and not v.get("face_visible"):
         v["use"] = False
-        v["why"] = f"reaction with no face on screen: {v.get('why', '')}"
+        v["why"] = f"reaction with no real face on screen: {v.get('why', '')}"
+    if v.get("use") and v.get("dark"):
+        v["use"] = False
+        v["why"] = f"too dark to see: {v.get('why', '')}"
     peak = v.get("peak")
     peak = float(peak) if peak is not None else (loud[0] if loud else dur / 2)
     peak = min(max(peak, 0.0), dur)
@@ -369,6 +419,15 @@ def screen(c, src, dur, words, loud, out, system=None):
         e = min(e, s + CUT_MAX)
     if e - s < CUT_MIN:
         s, e = max(0.0, e - CUT_MIN), min(dur, max(e, s + CUT_MIN))
+    if v.get("dead"):                                   # cut out pauses, the map, menus, black screens
+        piece = clean_trim(s, e, peak, v["dead"])
+        if not piece or piece[1] - piece[0] < 7.0:          # a clean stretch of 7 s still makes a punchy reel
+            if v.get("use"):
+                v["use"] = False
+                v["why"] = f"too much pause/menu/black screen: {v.get('why', '')}"
+        else:
+            s, e = piece
+            peak = min(max(peak, s), e)
     v.update({"start": round(s, 2), "end": round(e, 2), "peak": round(peak, 2)})
     return v
 
@@ -389,7 +448,9 @@ every word said is captioned on screen, and the setup line you write explains th
 So never mark a clip down for nudity, swearing or needing context. Mark it down for a weak or unclear payoff, no reaction,
 or a moment we already posted. Name the best clip and score it honestly (7+ = we'd be proud to post it).
 Never pick a moment we already posted recently (the list is given). Then write its words:
-hook = the EVENT in 2 to 5 words ('HE STOLE GRANDMA'S SCOOTER'), never a mood ('X LOST IT', 'X IS UNIMPRESSED').
+Mark a clip down hard if the sheet shows a pause screen, the map, a menu, photo mode, a black or very dark screen, or nothing moving.
+hook = the EVENT in 2 to 5 words ('HE STOLE GRANDMA'S SCOOTER'), never a mood ('X LOST IT', 'X IS UNIMPRESSED'),
+and never the ending of the moment (tease it: 'HE TRIED TO OUTRUN THE COPS', not 'HE DROVE INTO THE CANAL').
 title starts with 'GTA 6: ' and names the event. setup = the context line, never giving the payoff away."""
 
 
@@ -402,12 +463,13 @@ def final_pick(cands, st, out):
     """The strong model sees the finalists side by side (2 frames each) and picks one, or none."""
     content = []
     for i, (c, v, info) in enumerate(cands):
-        shots = frames(info["src"], [v["start"] + 0.5, v["peak"]], out, f"fin{i}")
+        sh, _ = sheet(info["src"], v["start"], v["end"], out, f"fin{i}")
+        shots = [sh]
         content += [{"type": "text", "text": f"Clip {i}: {c['broadcaster_name']}, '{c['title']}' ({c.get('view_count', '?')} Twitch views). "
                                              f"Screener: {v.get('score')}/10, star {v.get('star')}, moment: {v.get('moment')}. {v.get('why')}\n"
                                              f"Trim {v['start']}-{v['end']}s, peak {v['peak']}s. Said:\n"
                                              f"{timed([w for w in info['words'] if v['start'] <= w['start'] <= v['end']])}\n"
-                                             f"Frames: the start, then the peak."}, *map(img, shots)]
+                                             f"Image: a contact sheet of the trim, 12 frames in order."}, *map(img, shots)]
     rec = recent_moments(st)
     content.append({"type": "text", "text": "Moments we posted in the last 3 days (don't repeat): " + ("; ".join(rec) if rec else "none")})
     try:
@@ -516,11 +578,11 @@ def publish_src(info, name, i):
 
 def seg(info, v, rel, credit, start, end, label=None, words=True, flash=False, blurs=None):
     ws = [{"w": x["w"], "start": round(x["start"] - start, 2), "end": round(x["end"] - start, 2)}
-          for x in info["words"] if start <= x["start"] < end] if words else []
+          for x in info["words"] if start <= x["start"] < end] if words and not v.get("captioned") else []
     return {"src": rel, "srcW": info["w"], "srcH": info["h"], "from": round(start, 2), "dur": round(end - start, 2),
             "facecam": v.get("facecam"), "gamebox": v.get("gamebox"), "star": v.get("star") or "gameplay",
             "peak": round(v["peak"] - start, 2) if start <= v["peak"] <= end else None,
-            "words": ws, "credit": credit, "label": label, "flash": flash,
+            "words": ws, "credit": credit, "label": label, "flash": flash, "face": bool(v.get("face_visible", True)),
             "blurs": [{**b, "t0": round(b["t0"] - start, 2), "t1": round(b["t1"] - start, 2)} for b in (blurs or []) if b["t1"] > start and b["t0"] < end]}
 
 
@@ -648,7 +710,7 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
     housekeeping(st)
     budget = {"screens": 0, "renders": renders, "best": (0, None, None)}
     KEEP = ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak", "story", "setup", "cold_open",
-            "nudity", "face_visible")
+            "nudity", "face_visible", "captioned", "dark", "dead")
 
     def decide(finalists):
         """The strong model's pick among the finalists, then the render. Returns (name, final) or None."""
@@ -870,6 +932,27 @@ def window(info, m, d):
     return s, min(info["dur"], s + d), pk
 
 
+PAIR = {"name": "pair", "description": "Is this a real GTA 5 vs GTA 6 pair?", "input_schema": {"type": "object", "properties": {
+    "ok": {"type": "boolean", "description": "true only if the SAME action is clearly visible in BOTH clips, readable at a glance"},
+    "why": {"type": "string"},
+    "start5": {"type": "number", "description": "seconds: where the action starts in the GTA 5 clip"},
+    "end5": {"type": "number"},
+    "start6": {"type": "number", "description": "seconds: where the same action starts in the GTA 6 clip"},
+    "end6": {"type": "number"}}, "required": ["ok", "why", "start5", "end5", "start6", "end6"]}}
+PAIR_SYS = """You approve GTA 5 vs GTA 6 comparison Shorts: the same action in both games, stacked and playing at the same time.
+Say ok only if the named action is clearly happening and readable in BOTH clips (not a guy standing still, not a dark screen,
+not a menu, not a black screen with WASTED). Then give, in each clip, the stretch (up to 8 s) where the action happens,
+so the two halves show the action at the same time. Each image is a contact sheet stamped with times."""
+
+
+def pair_check(action, sides):
+    content = []
+    for label, (info, m, sh, a0, b0) in zip(("GTA 5", "GTA 6"), sides):
+        content += [{"type": "text", "text": f"{label} clip ({m.get('name')}): {a0:.1f}s to {b0:.1f}s. Tagged: {m.get('moment') or action}."}, img(sh)]
+    content.append({"type": "text", "text": f"The action to compare: {action}. Is it clearly visible in both?"})
+    return ask(content, PAIR, PAIR_SYS)
+
+
 def make_vs(dry=False, today=None, pairs=2):
     """GTA 5 vs GTA 6: the same action in both games, stacked and playing together, 1 or 2 actions per reel.
     GTA 6 side: approved clips from the last 2 days (fresh ones screened if needed). GTA 5 side: the GTA 5 bank."""
@@ -894,42 +977,65 @@ def make_vs(dry=False, today=None, pairs=2):
         if not dry:
             save_state(st)
     p5 = {k: v for k, v in st["seen5"].items() if v.get("use") and v.get("action") in ACTIONS and not v.get("vs_used")}
-    chosen = []
-    for action in sorted({v["action"] for v in p6.values()} & {v["action"] for v in p5.values()},
-                         key=lambda a: -max(v.get("score") or 0 for v in p6.values() if v["action"] == a)):
+    shared = sorted({v["action"] for v in p6.values()} & {v["action"] for v in p5.values()},
+                    key=lambda a: -max(v.get("score") or 0 for v in p6.values() if v["action"] == a))
+    if not shared:
+        raise RuntimeError("no action found in both GTA 5 and GTA 6 clips yet")
+    name = None
+    prs, chosen, n = [], [], 0
+    for action in shared:
+        if len(prs) == pairs:
+            break
         k6 = max((k for k, v in p6.items() if v["action"] == action), key=lambda k: p6[k].get("score") or 0)
-        k5 = max((k for k, v in p5.items() if v["action"] == action), key=lambda k: p5[k].get("score") or 0)
-        chosen.append((action, k5, k6))
-        if len(chosen) == pairs:
+        for k5 in sorted((k for k, v in p5.items() if v["action"] == action), key=lambda k: -(p5[k].get("score") or 0))[:2]:
+            name = name or f"clip__{today:%Y%m%d}__vs_{k6[:16]}".replace("-", "_")
+            out = MEDIA_DIR / name
+            out.mkdir(parents=True, exist_ok=True)
+            print(f"      checking the pair: {action} ({p5[k5]['name']} vs {p6[k6]['name']})")
+            if dry:
+                chosen.append((action, k5, k6))
+                break
+            try:
+                sides = []
+                for m in (p5[k5], p6[k6]):
+                    sub = out / f"s{n}"
+                    sub.mkdir(exist_ok=True)
+                    info = quick_info(download(m["url"], sub))
+                    a0 = min(max(float(m.get("start") or 0), 0.0), info["dur"])
+                    b0 = min(float(m.get("end") or info["dur"]), info["dur"])
+                    sh, _ = sheet(info["src"], a0, b0 if b0 > a0 + 2 else info["dur"], sub, "vs")
+                    sides.append((info, m, sh, a0, b0 if b0 > a0 + 2 else info["dur"]))
+                    n += 1
+                v = pair_check(action, sides)
+            except Exception as e:
+                print(f"        skipped: {e}")
+                continue
+            print(f"        pair: {'OK' if v.get('ok') else 'NO'} {str(v.get('why'))[:140]}")
+            if not v.get("ok"):
+                continue
+            segs = []
+            d = None
+            for (info, m, _, a0, b0), (vs, ve) in zip(sides, ((v["start5"], v["end5"]), (v["start6"], v["end6"]))):
+                vs, ve = min(max(float(vs), a0), b0), min(max(float(ve), a0), b0)
+                d = min(d or 99, ve - vs if ve - vs >= 3 else b0 - a0)
+            d = round(min(8.0, d), 2)
+            for (info, m, _, a0, b0), vs in zip(sides, (v["start5"], v["start6"])):
+                st0 = min(max(float(vs), a0), max(a0, b0 - d))
+                rel = publish_src(info, name, len(segs) + 2 * len(prs))
+                segs.append(seg(info, {**m, "peak": st0 + d / 2}, rel, f"{m['name']} on Twitch", st0, st0 + d, words=False))
+            prs.append({"top": segs[0], "bottom": segs[1], "dur": d, "action": ACTIONS[action]})
+            chosen.append((action, k5, k6))
             break
     if not chosen:
-        raise RuntimeError("no action found in both GTA 5 and GTA 6 clips yet")
+        raise RuntimeError("no GTA 5 vs 6 pair passed the check")
     label = ACTIONS[chosen[0][0]]
-    name = f"clip__{today:%Y%m%d}__vs_{chosen[0][2][:16]}".replace("-", "_")
     out = MEDIA_DIR / name
-    out.mkdir(parents=True, exist_ok=True)
-    pairs_txt = ", ".join(f"{a} ({p5[k5]['name']} vs {p6[k6]['name']})" for a, k5, k6 in chosen)
-    print(f"      GTA 5 vs GTA 6: {pairs_txt}")
+    print("      GTA 5 vs GTA 6: " + ", ".join(f"{a} ({p5[k5]['name']} vs {p6[k6]['name']})" for a, k5, k6 in chosen))
     if dry:
         return name, None
-    prs, n = [], 0
-    for action, k5, k6 in chosen:
-        sides = []
-        for m in (p5[k5], p6[k6]):
-            sub = out / f"s{n}"
-            sub.mkdir(exist_ok=True)
-            info = quick_info(download(m["url"], sub))
-            sides.append((info, m, publish_src(info, name, n)))
-            n += 1
-        d = round(min(8.0, sides[0][0]["dur"], sides[1][0]["dur"]), 2)
-        segs = []
-        for info, m, rel in sides:
-            a, b, pk = window(info, m, d)
-            segs.append(seg(info, {**m, "peak": pk}, rel, f"{m['name']} on Twitch", a, b, words=False))
-        prs.append({"top": segs[0], "bottom": segs[1], "dur": d, "action": ACTIONS[action]})
     total = round(sum(x["dur"] for x in prs), 2)
     hook = f"GTA 5 VS 6: {label}"
-    props = {"pairs": prs, "hook": hook, "badge": badge(today), "duration": round(total + FOLLOW, 2), "follow": follow_card(today, total),
+    props = {"pairs": prs, "hook": hook, "badge": "", "duration": round(total + FOLLOW, 2), "follow": follow_card(today, total),
              "headA": "GTA 5 vs GTA 6", "headB": label.capitalize(), "pal": "vice"}
     (out / "props.json").write_text(json.dumps(props, indent=2, ensure_ascii=False))
     final = out / "final.mp4"

@@ -487,10 +487,46 @@ def z_post(topic, when=None, only=None, draft=False):
             print(f"      status check hiccup: {e}")
         print(f"      waiting for the platforms... {waited}s ({', '.join(x for x in platforms if x not in urls)})")
     if primary not in urls:
+        if urls and any("uploadLimitExceeded" in e or "exceeded the number of videos" in e for e in errors):
+            # YouTube's daily upload cap: the other platforms have it, YouTube gets retried later (retry_capped)
+            if record:
+                save_post(topic, urls=urls, yt_retry=True)
+            print(f"      YouTube upload cap hit: posted on {', '.join(urls)}, YouTube will be retried automatically")
+            return {"status": "live", "url": next(iter(urls.values())), "urls": urls, "errors": errors, "yt_retry": True}
         raise RuntimeError(f"No {primary} link after {waited}s (Zernio post {post_id}). {' | '.join(errors)}")
     if record:
         save_post(topic, urls=urls)
     return {"status": "live", "url": urls[primary], "urls": urls, "errors": errors}
+
+
+def retry_capped(max_age_h=48):
+    """Posts whose YouTube copy hit the daily upload cap: ask Zernio to retry the failed platform. Runs before every slot.
+    Never blocks anything; gives up (and says so) after max_age_h hours."""
+    done = []
+    for topic, p in load_posts().items():
+        if not p.get("yt_retry") or not p.get("zernio_id"):
+            continue
+        try:
+            age = (datetime.now(timezone.utc) - datetime.fromisoformat(p["posted_at"])).total_seconds() / 3600
+        except (KeyError, ValueError):
+            age = 0
+        if age > max_age_h:
+            save_post(topic, yt_retry=False, yt_gave_up=True)
+            print(f"      YouTube retry given up for {topic} (over {max_age_h} h)")
+            continue
+        try:
+            urls, _ = zernio_links(zget(p["zernio_id"]))
+            if "youtube" not in urls:
+                requests.post(f"{ZAPI}/posts/{p['zernio_id']}/retry", headers=zheaders(), timeout=120)
+                time.sleep(20)
+                urls, _ = zernio_links(zget(p["zernio_id"]))
+            if "youtube" in urls:
+                save_post(topic, urls={**p.get("urls", {}), **urls}, url=urls["youtube"], yt_retry=False)
+                done.append(topic)
+                print(f"      YouTube retry worked: {topic} {urls['youtube']}")
+        except Exception as e:
+            print(f"      YouTube retry for {topic} not yet: {str(e)[:120]}")
+    return done
 
 
 def z_check(topic, p, found, failed):
@@ -503,6 +539,8 @@ def z_check(topic, p, found, failed):
     if urls.get(PRIMARY):
         save_post(topic, urls=urls)
         found.append((p.get("title", topic), urls))
+    elif p.get("yt_retry"):
+        return                                   # YouTube cap: retry_capped handles it
     elif (errors or post_obj.get("status") == "failed") and overdue(p):
         msg = " | ".join(errors) or "failed"
         save_post(topic, failed=msg)

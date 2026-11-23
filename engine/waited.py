@@ -465,6 +465,12 @@ if __name__ == "__main__":
     a = ap.parse_args()
     import run
     try:
+        if a.post:
+            try:                                   # YouTube copies that hit the daily upload cap earlier: retry them first
+                from engine import upload
+                upload.retry_capped()
+            except Exception as e:
+                print(f"      YouTube retry skipped: {e}")
         topic, final = make_next(a.dry, a.flat, kind=a.format)
         if final and a.post:
             run.post(topic, now=True, slot="waited")

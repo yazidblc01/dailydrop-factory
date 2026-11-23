@@ -291,3 +291,22 @@ export const FollowCard: React.FC<{P: Pal; t: number; f: Follow}> = ({P, t, f}) 
     </AbsoluteFill>
   );
 };
+
+// ---------- the outro on every reel: the drop logo pops in on the Miami night, the wordmark, a Follow button ----------
+export const LogoOutro: React.FC<{t: number; at: number}> = ({t, at}) => {
+  const k = clamp01((t - at) / 0.25);
+  if (k <= 0) return null;
+  const pop = outBack(clamp01((t - at - 0.05) / 0.4), 2.2);
+  const rise = outBack(clamp01((t - at - 0.25) / 0.4), 1.6);
+  return (
+    <AbsoluteFill style={{opacity: k, background: 'radial-gradient(circle at 50% 38%, #FF4FA0 0%, #7b2b8f 35%, #1a0b2e 75%)'}}>
+      <div style={{position: 'absolute', left: 0, right: 0, top: 620, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{transform: `scale(${pop})`, filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.45))'}}><Drop size={260} fill="#FFF3EA" bars="#FF4FA0" /></div>
+        <div style={{fontFamily: 'Instrument Serif', fontSize: 132, color: '#FFF3EA', marginTop: 40, lineHeight: 1, opacity: clamp01((t - at - 0.15) / 0.25),
+          transform: `translateY(${(1 - rise) * 30}px)`}}>The Daily <i style={{color: '#FFE07A'}}>Drop</i></div>
+        <div style={{marginTop: 64, padding: '22px 64px', borderRadius: 999, background: '#FFF3EA', color: '#14081f', fontFamily: SANS, fontWeight: 900, fontSize: 52,
+          boxShadow: '0 16px 40px rgba(0,0,0,0.4)', transform: `scale(${rise})`}}>＋ Follow</div>
+      </div>
+    </AbsoluteFill>
+  );
+};

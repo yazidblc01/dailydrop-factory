@@ -13,7 +13,7 @@ SLOTS = [("09:07", "gta_waited.yml", {"format": "streamclip"}),              # s
          ("10:37", "gta_waited.yml", {"format": "streamclip"}),              # stream clip (GTA 5 vs 6 paused until its fix)
          ("12:07", "gta_waited.yml", {}),                                    # original: the GTA wave rotation
          ("13:37", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("15:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("15:07", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6 (fixed: pairs checked by Sonnet)
          ("16:37", "gta_waited.yml", {}),                                    # original: the GTA wave rotation
          ("18:07", "gta_waited.yml", {"format": "streamreact"}),             # streamers react
          ("18:47", "daily.yml", {"mode": "check"}),

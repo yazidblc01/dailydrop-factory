@@ -7,13 +7,13 @@
 // the streamer's credit, then the follow card.
 import React from 'react';
 import {AbsoluteFill, Audio, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
-import {Drop, Follow, FollowCard, PAL, SANS, MONO, clamp01, outBack, useEdFonts} from './kit';
+import {Drop, Follow, LogoOutro, SANS, MONO, clamp01, outBack, useEdFonts} from './kit';
 
 type Box = {x: number; y: number; w: number; h: number};   // fractions of the source frame
 type Word = {w: string; start: number; end: number};       // seconds into the segment
 export type Seg = {src: string; srcW: number; srcH: number; from: number; dur: number;   // from: seconds into the source
   facecam?: Box | null; gamebox?: Box | null; star?: 'reaction' | 'gameplay'; peak?: number | null;
-  words?: Word[]; credit: string; label?: string; flash?: boolean;
+  words?: Word[]; credit: string; label?: string; flash?: boolean; face?: boolean;   // face: a real human facecam (not an avatar)
   blurs?: {t0: number; t1: number; x: number; y: number; w: number; h: number}[]};   // nudity to blur: segment seconds, source fractions
 export type EdClipProps = {segs: Seg[]; hook: string; badge: string; duration: number; follow?: Follow; react?: boolean;
   setup?: string; setupAt?: number};   // setup: one line of context shown for the first seconds of the story
@@ -65,57 +65,63 @@ const gameRegion = (s: Seg, W: number, H: number): Box => {
   return {x: gx, y: gb.y, w: gw, h: gb.h};
 };
 
-// one segment, laid out (t = seconds into the segment)
-const Shot: React.FC<{s: Seg; t: number; hook: string; badge: string; showHook: boolean}> = ({s, t, hook, badge, showHook}) => {
-  const cam = s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
-  // the game gets most of the screen: the streamer keeps a strip on top (a bit more when the reaction is the star)
-  const camH = s.star === 'reaction' ? 660 : 540;
-  const gameTop = cam ? camH : 360, gameH = cam ? 1920 - camH : 1200;
-  const game = gameRegion(s, 1080, gameH);
-  // punch-in on the peak reaction: up to 12% over 0.35 s, held, then eased back
+// one segment, laid out (t = seconds into the segment): the game fills the screen, the streamer's face is a small square
+const SQ = 330, SQX = 40, SQY = 240;
+const square = (c: Box, s: Seg): Box => {          // the facecam cut to a square, centered on it
+  const side = Math.min(c.w * s.srcW, c.h * s.srcH);
+  const cx = c.x + c.w / 2, cy = c.y + c.h / 2;
+  return {x: cx - side / 2 / s.srcW, y: cy - side / 2 / s.srcH, w: side / s.srcW, h: side / s.srcH};
+};
+const Shot: React.FC<{s: Seg; t: number}> = ({s, t}) => {
+  const cam = s.face !== false && s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
+  const game = gameRegion(s, 1080, 1920);
+  // punch-in on the peak: up to 10% over 0.35 s, held, then eased back
   const pk = s.peak ?? -9;
-  const zoom = 1 + 0.12 * clamp01((t - (pk - 0.35)) / 0.35) * clamp01((pk + 1.4 - t) / 0.4);
+  const zoom = 1 + 0.1 * clamp01((t - (pk - 0.35)) / 0.35) * clamp01((pk + 1.4 - t) / 0.4);
   const caps = groups(s.words ?? []);
   const cap = caps.find((g) => t >= g[0].start - 0.05 && t <= g[g.length - 1].end + 0.25);
-  const seam = cam ? camH : gameTop;
-  const pop = outBack(clamp01(t / 0.35), 1.8);
   return (
     <AbsoluteFill style={{background: '#0d0718'}}>
-      {!cam && <Win s={s} r={{x: 0.2, y: 0, w: 0.6, h: 1}} W={1080} H={1920} top={0} blur muted />}
-      {cam && <Win s={s} r={cam} W={1080} H={camH} top={0} muted zoom={zoom} t={t} />}
-      <Win s={s} r={game} W={1080} H={gameH} top={gameTop} zoom={cam ? 1 : zoom} t={t} />
-      <div style={{position: 'absolute', left: 0, right: 0, top: seam - 3, height: 6, background: '#FF4FA0'}} />
-      {showHook && (
-        <div style={{position: 'absolute', left: 40, right: 40, bottom: 1920 - seam - 22, textAlign: 'center', transform: `scale(${0.7 + 0.3 * pop})`,
-          transformOrigin: 'center bottom'}}>
-          <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 900, fontSize: hook.length > 16 ? 70 : 90, lineHeight: 1.05, color: '#FFE07A',
-            textTransform: 'uppercase', WebkitTextStroke: '10px #1a0a2e', paintOrder: 'stroke fill', textShadow: '0 8px 30px rgba(0,0,0,0.6)'}}>{hook}</span>
+      <Win s={s} r={game} W={1080} H={1920} top={0} zoom={zoom} t={t} />
+      {cam && (
+        <div style={{position: 'absolute', left: SQX, top: SQY, width: SQ, height: SQ, borderRadius: 28, overflow: 'hidden', border: '5px solid #FF4FA0',
+          boxShadow: '0 14px 34px rgba(0,0,0,0.6)'}}>
+          <Win s={s} r={square(cam, s)} W={SQ - 10} H={SQ - 10} top={0} muted t={t} />
         </div>
       )}
+      <div style={{position: 'absolute', top: cam ? SQY + SQ + 14 : SQY, left: SQX}}>
+        <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 22, padding: '5px 12px', borderRadius: 999, background: 'rgba(13,7,24,0.7)', color: '#fff'}}>🎥 {s.credit}</span>
+      </div>
       {s.label && (
-        <div style={{position: 'absolute', left: 0, right: 0, top: seam + 40, textAlign: 'center'}}>
-          <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 900, fontSize: 48, padding: '8px 22px', borderRadius: 16, background: '#FF4FA0', color: '#fff',
+        <div style={{position: 'absolute', left: 0, right: 0, top: 700, textAlign: 'center'}}>
+          <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 900, fontSize: 44, padding: '8px 22px', borderRadius: 16, background: '#FF4FA0', color: '#fff',
             transform: `scale(${outBack(clamp01(t / 0.3), 2)})`}}>{s.label}</span>
         </div>
       )}
       {cap && (
-        <div style={{position: 'absolute', left: 50, right: 50, top: Math.min(1400, gameTop + gameH * 0.5), textAlign: 'center'}}>
-          <span style={{display: 'inline-block', padding: '10px 22px', borderRadius: 20, background: 'rgba(13,7,24,0.82)', fontFamily: SANS, fontWeight: 900, fontSize: 58, lineHeight: 1.2, color: '#fff'}}>
+        <div style={{position: 'absolute', left: 40, right: 40, top: 1420, textAlign: 'center'}}>
+          <span style={{fontFamily: SANS, fontWeight: 900, fontSize: 54, lineHeight: 1.2, color: '#fff', WebkitTextStroke: '9px #000', paintOrder: 'stroke fill'}}>
             {cap.map((w, i) => {
               const now = t >= w.start - 0.03 && t <= w.end + 0.08;
-              return <span key={i} style={{margin: '0 6px', padding: '0 6px', borderRadius: 8, background: now ? '#FFE07A' : 'transparent', color: now ? '#2A1046' : '#fff'}}>{w.w}</span>;
+              return <span key={i} style={{margin: '0 6px', color: now ? '#FFE07A' : '#fff'}}>{w.w}</span>;
             })}
           </span>
         </div>
       )}
-      <div style={{position: 'absolute', top: 160, left: 40}}>
-        <span style={{fontFamily: MONO, fontWeight: 700, fontSize: 24, letterSpacing: '0.12em', padding: '8px 16px', borderRadius: 999, background: '#FF4FA0', color: '#fff'}}>{badge}</span>
-      </div>
-      <div style={{position: 'absolute', top: 214, left: 40}}>
-        <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 26, padding: '7px 16px', borderRadius: 999, background: 'rgba(13,7,24,0.75)', color: '#fff'}}>🎥 {s.credit}</span>
-      </div>
       {s.flash && <AbsoluteFill style={{background: '#fff', opacity: clamp01(1 - (s.dur - t) / 0.12) * 0.9}} />}
     </AbsoluteFill>
+  );
+};
+
+// the hook: a small headline over the game for the first 3 s, then gone
+const Hook: React.FC<{text: string; t: number}> = ({text, t}) => {
+  if (!text || t > 3.3) return null;
+  const k = outBack(clamp01(t / 0.35), 1.8) * (1 - clamp01((t - 3.0) / 0.3));
+  return (
+    <div style={{position: 'absolute', left: 60, right: 60, top: 660, textAlign: 'center', opacity: clamp01(k * 1.5), transform: `scale(${0.8 + 0.2 * k})`}}>
+      <span style={{fontFamily: SANS, fontWeight: 900, fontSize: text.length > 18 ? 52 : 60, lineHeight: 1.08, color: '#FFE07A', textTransform: 'uppercase',
+        WebkitTextStroke: '8px #1a0a2e', paintOrder: 'stroke fill', textShadow: '0 6px 20px rgba(0,0,0,0.6)'}}>{text}</span>
+    </div>
   );
 };
 
@@ -140,17 +146,15 @@ const Brand: React.FC<{t: number}> = ({t}) => {
 
 // the context line: what is going on, so someone scrolling in understands the moment before it lands
 // where the facecam strip meets the game (the hook sits just above it, the setup line just below)
-const seamOf = (s: Seg) => (s.facecam && s.facecam.w > 0.05 ? (s.star === 'reaction' ? 660 : 540) : 360);
 
-const Setup: React.FC<{text: string; t: number; top: number}> = ({text, t, top}) => {
-  const hold = Math.max(3, text.split(' ').length / 3.2 + 0.8);
+const Setup: React.FC<{text: string; t: number}> = ({text, t}) => {
+  const hold = Math.min(3.5, Math.max(2.6, text.split(' ').length / 3.4 + 0.6));
   if (t < 0 || t > hold + 0.3) return null;
   const k = outBack(clamp01(t / 0.3), 1.6) * (1 - clamp01((t - hold) / 0.3));
   return (
-    <div style={{position: 'absolute', left: 50, right: 50, top, display: 'flex', justifyContent: 'center', opacity: k,
-      transform: `translateY(${(1 - k) * -30}px) scale(${0.9 + 0.1 * k})`}}>
-      <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 800, fontSize: 50, lineHeight: 1.2, padding: '16px 28px', borderRadius: 24,
-        background: 'rgba(255,255,255,0.96)', color: '#14081f', textAlign: 'center', boxShadow: '0 12px 36px rgba(0,0,0,0.5)'}}>{text}</span>
+    <div style={{position: 'absolute', left: 90, right: 90, top: 820, display: 'flex', justifyContent: 'center', opacity: k}}>
+      <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 700, fontSize: 34, lineHeight: 1.25, padding: '10px 20px', borderRadius: 16,
+        background: 'rgba(13,7,24,0.72)', color: '#fff', textAlign: 'center'}}>{text}</span>
     </div>
   );
 };
@@ -166,7 +170,7 @@ export const EdClip: React.FC<EdClipProps> = (p) => {
     const t = (frame - from) / fps;
     return (
       <Sequence key={i} from={from} durationInFrames={len}>
-        <Shot s={s} t={t} hook={p.hook} badge={p.badge} showHook />
+        <Shot s={s} t={t} />
         {i > 0 && <Audio src={staticFile('sfx/whoosh.mp3')} volume={0.35} endAt={Math.round(0.6 * fps)} />}
         {s.peak != null && s.peak > 0.2 && (
           <Sequence from={Math.round((s.peak - 0.05) * fps)} durationInFrames={Math.round(1.2 * fps)}>
@@ -179,9 +183,10 @@ export const EdClip: React.FC<EdClipProps> = (p) => {
   return (
     <AbsoluteFill style={{background: '#0d0718'}}>
       {parts}
-      {p.setup && p.segs.length > 0 && <Setup text={p.setup} t={frame / fps - (p.setupAt ?? 0)} top={seamOf(p.segs[p.segs.length - 1]) + 40} />}
+      <Hook text={p.hook} t={frame / fps} />
+      {p.setup && <Setup text={p.setup} t={frame / fps - (p.setupAt ?? 0)} />}
       <Brand t={frame / fps} />
-      {p.follow && <FollowCard P={PAL.vice} t={frame / fps} f={p.follow} />}
+      {p.follow && <LogoOutro t={frame / fps} at={p.follow.at} />}
     </AbsoluteFill>
   );
 };
@@ -201,7 +206,7 @@ const Half: React.FC<{s: Seg; top: number; label: string; tone: string; t: numbe
     <div style={{position: 'absolute', left: 0, top, width: 1080, height: H, overflow: 'hidden'}}>
       <OffthreadVideo src={staticFile(s.src)} volume={volume} startFrom={Math.round(s.from * FPS)}
         style={{position: 'absolute', left: -r.x * vw + (1080 - r.w * vw) / 2, top: -r.y * vh + (H - r.h * vh) / 2, width: vw, height: vh}} />
-      <div style={{position: 'absolute', left: 36, top: top === 0 ? 290 : 40, transform: `scale(${outBack(clamp01(t / 0.3), 2)})`, transformOrigin: 'left center'}}>
+      <div style={{position: 'absolute', left: 60, top: top === 0 ? 240 : 40, transform: `scale(${outBack(clamp01(t / 0.3), 2)})`, transformOrigin: 'left center'}}>
         <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 900, fontSize: 64, padding: '6px 24px', borderRadius: 18, background: tone, color: '#fff',
           boxShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>{label}</span>
       </div>
@@ -232,9 +237,6 @@ export const EdVs: React.FC<EdVsProps> = (p) => {
             <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 900, fontSize: 84, lineHeight: 1.05, color: '#FFE07A', textTransform: 'uppercase',
               WebkitTextStroke: '10px #1a0a2e', paintOrder: 'stroke fill', textShadow: '0 8px 30px rgba(0,0,0,0.6)'}}>{i === 0 ? p.hook : pr.action}</span>
           </div>
-          <div style={{position: 'absolute', top: 160, left: 40}}>
-            <span style={{fontFamily: MONO, fontWeight: 700, fontSize: 24, letterSpacing: '0.12em', padding: '8px 16px', borderRadius: 999, background: '#FF4FA0', color: '#fff'}}>{p.badge}</span>
-          </div>
         </AbsoluteFill>
         {i > 0 && <Audio src={staticFile('sfx/whoosh.mp3')} volume={0.35} endAt={Math.round(0.6 * fps)} />}
         {pr.bottom.peak != null && pr.bottom.peak > 0.2 && (
@@ -249,7 +251,7 @@ export const EdVs: React.FC<EdVsProps> = (p) => {
     <AbsoluteFill style={{background: '#0d0718'}}>
       {parts}
       <Brand t={frame / fps} />
-      {p.follow && <FollowCard P={PAL.vice} t={frame / fps} f={p.follow} />}
+      {p.follow && <LogoOutro t={frame / fps} at={p.follow.at} />}
     </AbsoluteFill>
   );
 };
