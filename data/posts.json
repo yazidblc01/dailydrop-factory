@@ -1318,5 +1318,24 @@
     "zernio_id": "6b0469a0e870282f3fa40a53",
     "posted_at": "2026-11-23T16:30:13+00:00",
     "slot": "waited"
+  },
+  "chat__20261123__2": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=RIYiotmBuls",
+      "facebook": "https://www.facebook.com/reel/1439468801676008",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7711419846205934855",
+      "instagram": "https://www.instagram.com/reel/DgF6lprnBHb/"
+    },
+    "title": "GTA 6: Fox Suit Standoff Gets Way Too Honest",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b04777973888eaec0fdfd9f",
+    "posted_at": "2026-11-23T17:27:43+00:00",
+    "url": "https://www.youtube.com/watch?v=RIYiotmBuls"
   }
 }
