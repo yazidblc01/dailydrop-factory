@@ -1302,5 +1302,21 @@
     "zernio_id": "6b044e425baac8e1ad16a7d3",
     "posted_at": "2026-11-23T14:32:38+00:00",
     "slot": "waited"
+  },
+  "clip__20261123__GleamingShyGazellePJSalt": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=H2WS-MgbiX4",
+      "facebook": "https://www.facebook.com/reel/1905917190845354"
+    },
+    "url": "https://www.youtube.com/watch?v=H2WS-MgbiX4",
+    "title": "GTA 6: Trying To Befriend A Gator Goes Horribly Wrong",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0469a0e870282f3fa40a53",
+    "posted_at": "2026-11-23T16:30:13+00:00",
+    "slot": "waited"
   }
 }

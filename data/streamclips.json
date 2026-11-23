@@ -311,9 +311,18 @@
     "AbrasiveArtsySwanDoubleRainbow-2gMbJ9Ep7llWNMzk",
     "GorgeousCorrectFerretAMPEnergyCherry-ifRn02RcyUwebMuk",
     "VainSwissGrasshopperMoreCowbell-x8hoBr8ypJqow4Ef",
-    "CrepuscularTameWaterCeilingCat-NB9altUAd-FUtZst"
+    "CrepuscularTameWaterCeilingCat-NB9altUAd-FUtZst",
+    "SmoggyCleverMosquitoTBTacoRight-RVBfPSPbe5p5k44q",
+    "BlueBlitheMarjoramWoofer-ZSasg_aIiI5hO6pA",
+    "OutstandingPoorMuleTooSpicy-EPG7Mkqz0hYMboIi",
+    "InspiringLaconicKimchiFloof-DyWYDvIETKOomjfJ",
+    "SingleUnsightlyPoultryPanicVis-oUgca-eF7JncDMdV",
+    "TenuousPiliablePuddingTebowing-k6QXC_vUjSZpLq2-",
+    "SaltyHomelyFungusStinkyCheese-ozemFy5KjZsUXlZV",
+    "GleamingShyGazellePJSalt-2fbchcJPDnE64Bd2",
+    "BrainyPuzzledOrcaStinkyCheese-0pzeND4vwJlgCVbP"
   ],
-  "count": 38,
+  "count": 39,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -10107,6 +10116,312 @@
       "nudity": false,
       "face_visible": true,
       "final_no": true
+    },
+    "SmoggyCleverMosquitoTBTacoRight-RVBfPSPbe5p5k44q": {
+      "at": "2026-11-23T15:50:51.921911+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/SmoggyCleverMosquitoTBTacoRight-RVBfPSPbe5p5k44q",
+      "title": "get away",
+      "views": 882,
+      "use": true,
+      "why": "Chaotic street shootout and car wreck, then a funny deadpan line of dialogue (\"Buddy this early in the day... let's get out of here, Jason\") while he grabs a new car. Facecam is visible and he is laughing and talking through it. Reaction is moderate, the dialogue carries it.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "shootout then stealing a red car",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.12,
+        "w": 0.21,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 42.0,
+      "end": 60.1,
+      "peak": 54.4,
+      "story": true,
+      "setup": "caseoh chats with Jason while a street turns into a shootout",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "BlueBlitheMarjoramWoofer-ZSasg_aIiI5hO6pA": {
+      "at": "2026-11-23T15:51:57.478621+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/BlueBlitheMarjoramWoofer-ZSasg_aIiI5hO6pA",
+      "title": "nice scooter",
+      "views": 357,
+      "use": true,
+      "why": "Chaotic action: the streamer's convertible hits a pedestrian, the chat calls it out, and the wanted stars appear. Facecam is visible, but the reaction is faint and there's no speech, so the score is middling.",
+      "score": 5,
+      "star": "gameplay",
+      "moment": "running over a pedestrian in Miami",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.23,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 11.8,
+      "story": true,
+      "setup": "caseoh cruises a convertible through Miami while chat watches closely",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "OutstandingPoorMuleTooSpicy-EPG7Mkqz0hYMboIi": {
+      "at": "2026-11-23T15:53:10.102642+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/OutstandingPoorMuleTooSpicy-EPG7Mkqz0hYMboIi",
+      "title": "is it",
+      "views": 242,
+      "use": true,
+      "why": "A bike ride down a country road ends with a deer hit, and the streamer's reaction is the payoff. The face is visible and the 'no way that deer survived, I was going about 60' line lands as a funny fail, but the moment is fairly small, so the score stays moderate.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "running over a deer on a bike",
+      "action": "none",
+      "facecam": {
+        "x": 0.05,
+        "y": 0.13,
+        "w": 0.17,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 36.0,
+      "peak": 31.0,
+      "story": true,
+      "setup": "caseoh_ rides a motorcycle down a dirt road and hits a deer",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "InspiringLaconicKimchiFloof-DyWYDvIETKOomjfJ": {
+      "at": "2026-11-23T15:55:48.480147+00:00",
+      "login": "lirik",
+      "name": "LIRIK",
+      "url": "https://www.twitch.tv/lirik/clip/InspiringLaconicKimchiFloof-DyWYDvIETKOomjfJ",
+      "title": "Lirik forgot it was Sunday",
+      "views": 691,
+      "use": false,
+      "why": "Rejected: the reaction is the star but no facecam is visible, so it's a voice over gameplay and menus. Nothing happens on screen beyond driving and pause menus, so there's no story.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "forgot it was Sunday",
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 5.0,
+      "end": 30.0,
+      "peak": 11.2,
+      "story": false,
+      "setup": "Lirik realizes mid-stream that he has got the day of the week wrong",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false
+    },
+    "SingleUnsightlyPoultryPanicVis-oUgca-eF7JncDMdV": {
+      "at": "2026-11-23T15:57:18.098862+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/SingleUnsightlyPoultryPanicVis-oUgca-eF7JncDMdV",
+      "title": "he saw the videos 😭😭😭",
+      "views": 547,
+      "use": false,
+      "why": "Nothing happens on screen: the PS5 menu sits on \"Continue where you left off\" while the streamer talks about videos of a real, unexplained event. No gameplay, no action, no visible payoff. Rejected for no story.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "streamer talks about the videos",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.04,
+        "w": 0.21,
+        "h": 0.37
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 1.2,
+      "end": 41.2,
+      "peak": 4.2,
+      "story": false,
+      "setup": "caseoh_ talks about videos while the PS5 menu sits open",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "TenuousPiliablePuddingTebowing-k6QXC_vUjSZpLq2-": {
+      "at": "2026-11-23T15:58:20.718033+00:00",
+      "login": "syndicate",
+      "name": "Syndicate",
+      "url": "https://www.twitch.tv/syndicate/clip/TenuousPiliablePuddingTebowing-k6QXC_vUjSZpLq2-",
+      "title": "She literally stood on the roof",
+      "views": 366,
+      "use": false,
+      "why": "no story: Weak clip. The streamer's commentary about a character standing on a roof watching a helicopter is funny in tone, and the facecam shows him reacting. But the on-screen action is just walking and a car drifting, and the joke depends on context the viewer doesn't get. Story is not clearly followable without the lead-in.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "rooftop helicopter commentary",
+      "action": "none",
+      "facecam": {
+        "x": 0.73,
+        "y": 0.16,
+        "w": 0.25,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 15.5,
+      "peak": 14.5,
+      "story": false,
+      "setup": "Syndicate describes a woman who climbed onto a rooftop and just stood there",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "SaltyHomelyFungusStinkyCheese-ozemFy5KjZsUXlZV": {
+      "at": "2026-11-23T16:00:14.026844+00:00",
+      "login": "carmen",
+      "name": "carmen",
+      "url": "https://www.twitch.tv/carmen/clip/SaltyHomelyFungusStinkyCheese-ozemFy5KjZsUXlZV",
+      "title": "human sacrifice",
+      "views": 314,
+      "use": true,
+      "why": "A candlelit ritual goes sideways, with Jay trying to stop her and a shocked streamer reacting to what's in the room. The payoff is a clear reaction to the reveal, with a readable line of dialogue. Story is followable, though the exact plot is unclear.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "human sacrifice ritual reveal",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.2,
+        "h": 0.43
+      },
+      "gamebox": {
+        "x": 0.2,
+        "y": 0.0,
+        "w": 0.8,
+        "h": 1.0
+      },
+      "start": 30.0,
+      "end": 50.0,
+      "peak": 42.5,
+      "story": true,
+      "setup": "Carmen tries to finish a human sacrifice while Jay tries to stop her",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "GleamingShyGazellePJSalt-2fbchcJPDnE64Bd2": {
+      "at": "2026-11-23T16:01:31.887260+00:00",
+      "login": "agent00",
+      "name": "Agent00",
+      "url": "https://www.twitch.tv/agent00/clip/GleamingShyGazellePJSalt-2fbchcJPDnE64Bd2",
+      "title": "Agent reacts to Emily becoming friends with a gator.",
+      "views": 314,
+      "use": true,
+      "why": "A gator on a beach, a warning shot, and a player who walks straight into the wrong direction until the screen flashes Wasted. Agent00 and the co-streamer both react loudly, and the spoken lines carry the joke. It's a clear setup and payoff, though the gator-friends bit is a bit of a slow build.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "gator encounter on the beach",
+      "action": "none",
+      "facecam": {
+        "x": 0.05,
+        "y": 0.22,
+        "w": 0.73,
+        "h": 0.27
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.495,
+        "w": 1,
+        "h": 0.48
+      },
+      "start": 0.0,
+      "end": 32.4,
+      "peak": 24.5,
+      "story": true,
+      "setup": "Agent00 warns Emily to back off from a gator on the beach",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
+    },
+    "BrainyPuzzledOrcaStinkyCheese-0pzeND4vwJlgCVbP": {
+      "at": "2026-11-23T16:03:16.766609+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/BrainyPuzzledOrcaStinkyCheese-0pzeND4vwJlgCVbP",
+      "title": "Hell yeah FIREWORKS",
+      "views": 511,
+      "use": true,
+      "why": "Funny, chaotic NPC moment: a delivery driver shows up at the door fully naked, and the streamer's reaction is loud and visible on the facecam. The payoff at ~19s (\"Whoa, bro! Tada!\") is strong, and the dialogue carries it even on mute. Nudity is an NPC body, so it's blurred, not a reject.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "naked delivery guy at the door",
+      "action": "none",
+      "facecam": {
+        "x": 0.8,
+        "y": 0.45,
+        "w": 0.2,
+        "h": 0.55
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.8,
+        "h": 1.0
+      },
+      "start": 4.0,
+      "end": 44.0,
+      "peak": 19.0,
+      "story": true,
+      "setup": "MissMikkaa orders a delivery and waits at the door for the driver",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "failed": true
     }
   },
   "posted": [
@@ -10451,6 +10766,15 @@
       ],
       "star": "reaction",
       "moment": "stumbling into underground cockfight",
+      "date": "2026-11-23"
+    },
+    {
+      "topic": "clip__20261123__GleamingShyGazellePJSalt",
+      "logins": [
+        "agent00"
+      ],
+      "star": "reaction",
+      "moment": "gator encounter on the beach",
       "date": "2026-11-23"
     }
   ],
@@ -11363,6 +11687,121 @@
       "start": 3.0,
       "end": 15.0,
       "peak": 9.25
+    },
+    "NurturingRealEggWOOP-EEE1HWYGLN8CcoBy": {
+      "at": "2026-11-23T15:40:47.507964+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/NurturingRealEggWOOP-EEE1HWYGLN8CcoBy",
+      "title": "Tony's self-imposed restrictions",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 29.5,
+      "peak": 28.0
+    },
+    "RealAttractivePeppermintFunRun-g6SLbf_an4PQXs0-": {
+      "at": "2026-11-23T15:41:37.769376+00:00",
+      "login": "erobb221",
+      "name": "erobb221",
+      "url": "https://www.twitch.tv/erobb221/clip/RealAttractivePeppermintFunRun-g6SLbf_an4PQXs0-",
+      "title": "Erobb221's lady brings him a steak and beer while gaming",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": {
+        "x": 0.55,
+        "y": 0.45,
+        "w": 0.45,
+        "h": 0.55
+      },
+      "gamebox": null,
+      "start": 0.0,
+      "end": 28.8,
+      "peak": 5.0
+    },
+    "MagnificentTenuousButterHassaanChop-OHC3bFdsWesEX7Gz": {
+      "at": "2026-11-23T15:44:04.278417+00:00",
+      "login": "pengwin",
+      "name": "Pengwin",
+      "url": "https://www.twitch.tv/pengwin/clip/MagnificentTenuousButterHassaanChop-OHC3bFdsWesEX7Gz",
+      "title": "Chris Handsome from Baitline LSBN catches his first weeb",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 15.4,
+      "end": 55.4,
+      "peak": 35.0
+    },
+    "RudeSweetDragonflyMikeHogu-sx4bgu0sbvGnS8Xx": {
+      "at": "2026-11-23T15:44:33.501117+00:00",
+      "login": "jennybeartv",
+      "name": "Jennybeartv",
+      "url": "https://www.twitch.tv/jennybeartv/clip/RudeSweetDragonflyMikeHogu-sx4bgu0sbvGnS8Xx",
+      "title": "husband and wife #happily married",
+      "use": false,
+      "score": 1,
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 16.8,
+      "peak": 7.25
+    },
+    "FurtiveDelightfulGarageRaccAttack-OCoU_QAz3mL7DRCU": {
+      "at": "2026-11-23T15:46:16.453439+00:00",
+      "login": "burn",
+      "name": "Burn",
+      "url": "https://www.twitch.tv/burn/clip/FurtiveDelightfulGarageRaccAttack-OCoU_QAz3mL7DRCU",
+      "title": "Johnny Silverhand Sent His Followers to Terrorize the Corpo Rats",
+      "use": false,
+      "score": 5,
+      "action": "explosion",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0.1,
+        "w": 1,
+        "h": 0.8
+      },
+      "start": 3.0,
+      "end": 15.0,
+      "peak": 6.25
+    },
+    "SparklingIntelligentOpossumEleGiggle-2UZpJkThDJt95t67": {
+      "at": "2026-11-23T15:48:06.078331+00:00",
+      "login": "crystalst",
+      "name": "Crystalst",
+      "url": "https://www.twitch.tv/crystalst/clip/SparklingIntelligentOpossumEleGiggle-2UZpJkThDJt95t67",
+      "title": "Brick Bois Comms",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 20.1,
+      "end": 60.1,
+      "peak": 45.5
     }
   }
 }
