@@ -1337,5 +1337,21 @@
     "zernio_id": "6b04777973888eaec0fdfd9f",
     "posted_at": "2026-11-23T17:27:43+00:00",
     "url": "https://www.youtube.com/watch?v=RIYiotmBuls"
+  },
+  "clip__20261123__OnerousScaryDeerTBTacoLe": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=ZOc5w62WMmI",
+      "facebook": "https://www.facebook.com/reel/1132043449467586"
+    },
+    "url": "https://www.youtube.com/watch?v=ZOc5w62WMmI",
+    "title": "GTA 6: MissMikkaa's Motorcycle Ride Goes Wrong",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b047af436f968d99dd64b8e",
+    "posted_at": "2026-11-23T17:43:07+00:00",
+    "slot": "waited"
   }
 }
