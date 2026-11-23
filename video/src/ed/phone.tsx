@@ -7,11 +7,11 @@ export type Msg = {from: 'me' | 'them'; text: string; at: number; big?: boolean}
 export type ChatProps = {contact: string; clock: string; date: string; stamp: string; openAt: number; notifications: {at: number; text: string}[]; messages: Msg[]};
 
 export const SW = 900, SH = 1680;
-const F = (w: number, s: number) => `${w} ${s}px Inter, "Noto Color Emoji", sans-serif`;
+export const F = (w: number, s: number) => `${w} ${s}px Inter, "Noto Color Emoji", sans-serif`;
 const EMOJI_ONLY = /^(\p{Extended_Pictographic}|️|‍|\s)+$/u;
-const BLUE = '#0A84FF', GREY = '#E9E9EB', INK = '#0b0b0c';
+export const BLUE = '#0A84FF', GREY = '#E9E9EB', INK = '#0b0b0c';
 
-const wrap = (x: CanvasRenderingContext2D, text: string, maxW: number) => {
+export const wrap = (x: CanvasRenderingContext2D, text: string, maxW: number) => {
   const lines: string[] = [];
   let cur = '';
   for (const w of text.split(' ')) {
@@ -21,7 +21,7 @@ const wrap = (x: CanvasRenderingContext2D, text: string, maxW: number) => {
   if (cur) lines.push(cur);
   return lines;
 };
-const statusBar = (x: CanvasRenderingContext2D, clock: string, col: string) => {
+export const statusBar = (x: CanvasRenderingContext2D, clock: string, col: string) => {
   x.fillStyle = col; x.font = F(800, 40); x.textAlign = 'left'; x.textBaseline = 'middle';
   x.fillText(clock, 78, 66);
   x.fillStyle = '#050506'; x.beginPath(); x.roundRect(SW / 2 - 135, 30, 270, 74, 37); x.fill();
@@ -31,7 +31,7 @@ const statusBar = (x: CanvasRenderingContext2D, clock: string, col: string) => {
   x.globalAlpha = 0.45; x.strokeStyle = col; x.lineWidth = 3; x.beginPath(); x.roundRect(752, 50, 66, 32, 10); x.stroke(); x.globalAlpha = 1;
   x.beginPath(); x.roundRect(757, 55, 44, 22, 6); x.fill();
 };
-const homeBar = (x: CanvasRenderingContext2D, col: string) => { x.fillStyle = col; x.beginPath(); x.roundRect(SW / 2 - 150, SH - 40, 300, 11, 6); x.fill(); };
+export const homeBar = (x: CanvasRenderingContext2D, col: string) => { x.fillStyle = col; x.beginPath(); x.roundRect(SW / 2 - 150, SH - 40, 300, 11, 6); x.fill(); };
 
 const drawLock = (x: CanvasRenderingContext2D, t: number, p: ChatProps, wall: [string, string, string]) => {
   const g = x.createLinearGradient(0, 0, SW * 0.6, SH);

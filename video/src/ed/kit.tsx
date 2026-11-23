@@ -246,8 +246,8 @@ export const Logo: React.FC<{P: Pal; size?: number}> = ({P, size = 44}) => (
     </div>
   </div>
 );
-export const Masthead: React.FC<{P: Pal; label: string; opacity?: number}> = ({P, label, opacity = 1}) => (
-  <div style={{position: 'absolute', top: 276, left: 84, width: 912, opacity}}>
+export const Masthead: React.FC<{P: Pal; label: string; opacity?: number; top?: number}> = ({P, label, opacity = 1, top = 276}) => (
+  <div style={{position: 'absolute', top, left: 84, width: 912, opacity}}>
     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
       <Logo P={P} />
       <div />{/* the small top-right labels (countdowns, "GTA MATH"...) are retired */}

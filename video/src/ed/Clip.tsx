@@ -21,7 +21,7 @@ export type EdClipProps = {segs: Seg[]; hook: string; badge: string; duration: n
 const FPS = 30;
 
 // a window of width W x height H showing the region r of the source, filled edge to edge
-const Win: React.FC<{s: Seg; r: Box; W: number; H: number; top: number; blur?: boolean; muted?: boolean; zoom?: number; t?: number}> =
+export const Win: React.FC<{s: Seg; r: Box; W: number; H: number; top: number; blur?: boolean; muted?: boolean; zoom?: number; t?: number}> =
   ({s, r, W, H, top, blur, muted, zoom = 1, t}) => {
   const k = Math.max(W / (r.w * s.srcW), H / (r.h * s.srcH)) * zoom;
   const vw = s.srcW * k, vh = s.srcH * k;
@@ -54,7 +54,7 @@ const groups = (words: Word[]) => {   // 1 to 4 words per caption, broken at pau
 
 // the part of the frame that is the game, cut to a W x H window (streamers' layouts add chat boxes, bars and borders around it);
 // centered, but slid off a facecam sitting on the game
-const gameRegion = (s: Seg, W: number, H: number): Box => {
+export const gameRegion = (s: Seg, W: number, H: number): Box => {
   const cam = s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
   const gb: Box = s.gamebox && s.gamebox.w > 0.2 && s.gamebox.h > 0.2 ? s.gamebox : {x: 0, y: 0, w: 1, h: 1};
   const gw = Math.min(gb.w, (gb.h * s.srcH * (W / H)) / s.srcW);
@@ -72,7 +72,7 @@ const square = (c: Box, s: Seg): Box => {          // the facecam cut to a squar
   const cx = c.x + c.w / 2, cy = c.y + c.h / 2;
   return {x: cx - side / 2 / s.srcW, y: cy - side / 2 / s.srcH, w: side / s.srcW, h: side / s.srcH};
 };
-const Shot: React.FC<{s: Seg; t: number}> = ({s, t}) => {
+export const Shot: React.FC<{s: Seg; t: number; camY?: number}> = ({s, t, camY = SQY}) => {
   const cam = s.face !== false && s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
   const game = gameRegion(s, 1080, 1920);
   // punch-in on the peak: up to 10% over 0.35 s, held, then eased back
@@ -84,12 +84,12 @@ const Shot: React.FC<{s: Seg; t: number}> = ({s, t}) => {
     <AbsoluteFill style={{background: '#0d0718'}}>
       <Win s={s} r={game} W={1080} H={1920} top={0} zoom={zoom} t={t} />
       {cam && (
-        <div style={{position: 'absolute', left: SQX, top: SQY, width: SQ, height: SQ, borderRadius: 28, overflow: 'hidden', border: '5px solid #FF4FA0',
+        <div style={{position: 'absolute', left: SQX, top: camY, width: SQ, height: SQ, borderRadius: 28, overflow: 'hidden', border: '5px solid #FF4FA0',
           boxShadow: '0 14px 34px rgba(0,0,0,0.6)'}}>
           <Win s={s} r={square(cam, s)} W={SQ - 10} H={SQ - 10} top={0} muted t={t} />
         </div>
       )}
-      <div style={{position: 'absolute', top: cam ? SQY + SQ + 14 : SQY, left: SQX}}>
+      <div style={{position: 'absolute', top: cam ? camY + SQ + 14 : camY, left: SQX}}>
         <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 22, padding: '5px 12px', borderRadius: 999, background: 'rgba(13,7,24,0.7)', color: '#fff'}}>🎥 {s.credit}</span>
       </div>
       {s.label && (
@@ -126,7 +126,7 @@ const Hook: React.FC<{text: string; t: number}> = ({text, t}) => {
 };
 
 // our name, top right: bobs gently, and every 4 s does a little hop with a squash on landing
-const Brand: React.FC<{t: number}> = ({t}) => {
+export const Brand: React.FC<{t: number}> = ({t}) => {
   const ph = t % 4;
   const hop = ph < 0.5 ? Math.sin((ph / 0.5) * Math.PI) * 26 : 0;
   const squash = ph >= 0.5 && ph < 0.68 ? Math.sin(((ph - 0.5) / 0.18) * Math.PI) * 0.1 : 0;

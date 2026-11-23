@@ -386,18 +386,23 @@ def make_other(kind, dry=False, today=None):
 
 
 # the 6:07 PM original: these take turns (texts from the future has its own daily 10:37 AM slot)
-ORIGINALS = ["data", "coins", "scale", "data", "scale"]
+ORIGINALS = ["chat", "data", "chat", "coins", "chat", "scale"]
 
 
 def make_original(kind, dry=False, today=None):
     """One original reel: texts from the future, money to scale, coins, or a data race (stocks, countries, prices).
     Falls through the other originals if one fails, so the slot is never empty."""
     from engine.texts import warn
-    order = [kind] + [k for k in ("scale", "coins", "data") if k != kind]
+    order = [kind] + [k for k in ("chat", "scale", "coins", "data") if k != kind]
     errors = []
     for k in order:
         try:
-            if k == "texts":
+            if k == "chat":                          # the Vice City group chat skit
+                from engine import vicechat
+                topic, final = vicechat.make(dry, today)
+                if dry:
+                    return topic, None
+            elif k == "texts":
                 from engine import texts, topics
                 topic, final = texts.make(None, dry, "gaming")
                 if not dry:
@@ -432,7 +437,7 @@ def make_original(kind, dry=False, today=None):
 
 def make_next(dry=False, flat_only=False, today=None, kind=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
-    if kind in ("texts", "scale", "coins", "data") or kind is None:
+    if kind in ("texts", "scale", "coins", "data", "chat") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
             st = load_state()
             kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
@@ -513,7 +518,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat"], help="force one format")
     a = ap.parse_args()
     import run
     try:
