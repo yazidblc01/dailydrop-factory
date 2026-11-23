@@ -292,9 +292,17 @@
     "KnottyAffluentGaurGivePLZ-Hak5tNGLqHkcs6ji",
     "KawaiiDepressedTrayBatChest-bsnx6Y07DBfG0o9h",
     "ExquisiteSoftZebraTakeNRG-qOHuHRykQjn2c2ka",
-    "GrossCuriousSpiderRalpherZ-K94AxOBZOTukKq6k"
+    "GrossCuriousSpiderRalpherZ-K94AxOBZOTukKq6k",
+    "CloudyMushyWormLitFam-s5VVK7wZDiEY6Twz",
+    "NaivePrettyWoodcockTheRinger-WORIMaIqGZWwLDes",
+    "ArborealComfortablePepperoniSwiftRage-MSq-W0OAyGlvO5qh",
+    "AttractiveEncouragingPidgeonPMSTwin-Gr35LOOyyJlC6Cjz",
+    "UglyOptimisticLocustUnSane-ffKr1hwTM3hfEYwb",
+    "SuccessfulEnticingCurlewWoofer-nKkpkwovwyx0G9V1",
+    "PrettyTacitDadBCWarrior-DwVaX2e3Mmie_OUY",
+    "VibrantCrunchyGoldfishLitty-mFQKdu4HOaDAf3wt"
   ],
-  "count": 36,
+  "count": 37,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -9483,6 +9491,272 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": true
+    },
+    "CloudyMushyWormLitFam-s5VVK7wZDiEY6Twz": {
+      "at": "2026-11-23T02:15:54.458525+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/CloudyMushyWormLitFam-s5VVK7wZDiEY6Twz",
+      "title": "LUCIA takes off clothes",
+      "views": 200,
+      "use": false,
+      "why": "Wardrobe menu browsing with commentary about modding Lucia. Nothing happens on screen, so there is no story. The title's \"takes off clothes\" is misleading: she is just switching outfits.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "Lucia wardrobe outfit browsing",
+      "action": "none",
+      "facecam": {
+        "x": 0.79,
+        "y": 0.45,
+        "w": 0.2,
+        "h": 0.52
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 20.2,
+      "story": false,
+      "setup": "MissMikkaa browses clothing in the wardrobe and argues about modding Lucia out of the game",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true
+    },
+    "NaivePrettyWoodcockTheRinger-WORIMaIqGZWwLDes": {
+      "at": "2026-11-23T02:17:52.218098+00:00",
+      "login": "syndicate",
+      "name": "Syndicate",
+      "url": "https://www.twitch.tv/syndicate/clip/NaivePrettyWoodcockTheRinger-WORIMaIqGZWwLDes",
+      "title": "That was good. And that's how you do it, ladies and gentlemen.",
+      "views": 302,
+      "use": true,
+      "why": "A robbery in Little Cuba pays out over $100K, then he moves cash through the phone menu while bragging. The payoff is mostly talk and menu screens, with a black-screen gap, so it is a weak reel. The streamer's face is visible throughout and the chat and money jokes are readable.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "first big robbery payout",
+      "action": "robbery",
+      "facecam": {
+        "x": 0.73,
+        "y": 0.16,
+        "w": 0.27,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 1.0,
+      "end": 41.0,
+      "peak": 12.1,
+      "story": true,
+      "setup": "Syndicate pulls a big robbery in Little Cuba and counts the cash",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "ArborealComfortablePepperoniSwiftRage-MSq-W0OAyGlvO5qh": {
+      "at": "2026-11-23T02:19:03.800650+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/ArborealComfortablePepperoniSwiftRage-MSq-W0OAyGlvO5qh",
+      "title": "xQc's reaction",
+      "views": 321,
+      "use": false,
+      "why": "Rejected: the clip shows a sexual scene (bedroom encounter with partial nudity, and dialogue \"on your knees\" and \"safe work from DMs\" makes the sexual content explicit). Reject rule applies regardless of the streamer's reaction.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "in-game intimate scene",
+      "action": "none",
+      "facecam": null,
+      "gamebox": null,
+      "start": 23.0,
+      "end": 35.0,
+      "peak": 33.25,
+      "story": false,
+      "setup": "xQc is in a bedroom scene with a woman in the game",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": false
+    },
+    "AttractiveEncouragingPidgeonPMSTwin-Gr35LOOyyJlC6Cjz": {
+      "at": "2026-11-23T02:20:30.362806+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/AttractiveEncouragingPidgeonPMSTwin-Gr35LOOyyJlC6Cjz",
+      "title": "Peanut Scooter scam",
+      "views": 278,
+      "use": true,
+      "why": "Funny, chaotic sequence: he rapidly repeats a phone call for \"three scooter guys\", a burning car sits in frame, then the screen distorts and he yells \"no! no! no!\" and \"oh my god!\". The payoff is clear and the reaction is visible through the avatar facecam, though the streamer is an animated avatar rather than a real face. The setup is thin, so the clip relies on the captions.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "scooter call goes wrong",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.15,
+        "y": 0.72,
+        "w": 0.1,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 16.0,
+      "peak": 12.8,
+      "story": true,
+      "setup": "TheBurntPeanut dials up his scooter guys on the phone after a crash",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "UglyOptimisticLocustUnSane-ffKr1hwTM3hfEYwb": {
+      "at": "2026-11-23T02:22:10.584179+00:00",
+      "login": "xqc",
+      "name": "xQc",
+      "url": "https://www.twitch.tv/xqc/clip/UglyOptimisticLocustUnSane-ffKr1hwTM3hfEYwb",
+      "title": "CINEMA",
+      "views": 247,
+      "use": true,
+      "why": "A police chase with dispatch radio chatter, then a loud reaction from xQc at 12.9s. The face is clearly visible. The clip is mostly radio talk over driving, so the payoff is modest, but the reaction is real and the chase has a clear consequence.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "police chase on the highway",
+      "action": null,
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 0.89,
+        "h": 0.42
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.49,
+        "w": 1,
+        "h": 0.51
+      },
+      "start": 22.0,
+      "end": 41.9,
+      "peak": 27.75,
+      "story": true,
+      "setup": "xQc is being chased by police in a white SUV on a highway",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "final_no": true
+    },
+    "SuccessfulEnticingCurlewWoofer-nKkpkwovwyx0G9V1": {
+      "at": "2026-11-23T02:24:43.054039+00:00",
+      "login": "syndicate",
+      "name": "Syndicate",
+      "url": "https://www.twitch.tv/syndicate/clip/SuccessfulEnticingCurlewWoofer-nKkpkwovwyx0G9V1",
+      "title": "It's not looking good, baby",
+      "views": 221,
+      "use": true,
+      "why": "A botched shootout with cops, a panicked \"it's not looking good, baby,\" then a deadpan payoff that the mess cost $111K and \"improved my relationship with my girlfriend.\" Story is followable, the streamer's face is visible and reacting, and the dialogue carries it with captions.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "botched shootout with cops, cost talk",
+      "action": null,
+      "facecam": {
+        "x": 0.73,
+        "y": 0.16,
+        "w": 0.25,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 7.5,
+      "end": 47.5,
+      "peak": 38.0,
+      "story": true,
+      "setup": "Syndicate's heist goes sideways with cops on every corner",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "posted": true
+    },
+    "PrettyTacitDadBCWarrior-DwVaX2e3Mmie_OUY": {
+      "at": "2026-11-23T02:26:31.571872+00:00",
+      "login": "dizzykitten",
+      "name": "DizzyKitten",
+      "url": "https://www.twitch.tv/dizzykitten/clip/PrettyTacitDadBCWarrior-DwVaX2e3Mmie_OUY",
+      "title": "Dizzy CRASH",
+      "views": 232,
+      "use": true,
+      "why": "A bike ride with a passenger ends in a crash into a pickup, with both riders tumbling across the road. The streamer's laughing face is visible on the facecam, and her \"covered in blood\" line adds a funny beat. The crash is a clear visual payoff, though the reel needs a little setup.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "motorcycle crash into pickup",
+      "action": "car crash",
+      "facecam": {
+        "x": 0,
+        "y": 0.25,
+        "w": 0.19,
+        "h": 0.49
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 4.0,
+      "end": 28.0,
+      "peak": 10.5,
+      "story": true,
+      "setup": "DizzyKitten rides a motorbike with a passenger down a quiet road",
+      "cold_open": true,
+      "nudity": false,
+      "face_visible": true
+    },
+    "VibrantCrunchyGoldfishLitty-mFQKdu4HOaDAf3wt": {
+      "at": "2026-11-23T02:27:36.045659+00:00",
+      "login": "lacy",
+      "name": "Lacy",
+      "url": "https://www.twitch.tv/lacy/clip/VibrantCrunchyGoldfishLitty-mFQKdu4HOaDAf3wt",
+      "title": "lol",
+      "views": 237,
+      "use": false,
+      "why": "Rejected for no story: Lacy wanders around a nightclub with dancers and a \"check on Jimmy De Santa\" objective, and the lines are about a gas pickup and a security guest, with no clear action or consequence. The funny \"we're in a club, y'all\" line is not enough to carry a reel. Nudity is present (a dancer's bare back), so it is flagged.",
+      "score": 2,
+      "star": "gameplay",
+      "moment": "nightclub visit with Jimmy",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.26,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.74,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.1,
+      "peak": 26.4,
+      "story": false,
+      "setup": "Lacy wanders through a nightclub while her ride is still on its way",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true
     }
   },
   "posted": [
@@ -9809,6 +10083,15 @@
       ],
       "star": "reaction",
       "moment": "finding naked woman in UFO event",
+      "date": "2026-11-22"
+    },
+    {
+      "topic": "clip__20261122__SuccessfulEnticingCurlew",
+      "logins": [
+        "syndicate"
+      ],
+      "star": "reaction",
+      "moment": "botched shootout with cops, cost talk",
       "date": "2026-11-22"
     }
   ],
@@ -10596,6 +10879,131 @@
       "end": 29.0,
       "peak": 8.0,
       "vs_used": true
+    },
+    "BlushingObliviousGarbageShazBotstix-A53SoOPGB84C2I4C": {
+      "at": "2026-11-23T02:10:08.344030+00:00",
+      "login": "darkviperau",
+      "name": "DarkViperAU",
+      "url": "https://www.twitch.tv/darkviperau/clip/BlushingObliviousGarbageShazBotstix-A53SoOPGB84C2I4C",
+      "title": "The Last Drive In Los Santos With Cougar In Missions Crew (Rockstar News First)",
+      "use": false,
+      "score": 4,
+      "action": null,
+      "facecam": {
+        "x": 0.81,
+        "y": 0.17,
+        "w": 0.17,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 15.0,
+      "end": 28.0,
+      "peak": 21.8
+    },
+    "GeniusLovelyHyenaKlappa-tY8KBg-fACAM_Hhg": {
+      "at": "2026-11-23T02:11:03.523183+00:00",
+      "login": "darkviperau",
+      "name": "DarkViperAU",
+      "url": "https://www.twitch.tv/darkviperau/clip/GeniusLovelyHyenaKlappa-tY8KBg-fACAM_Hhg",
+      "title": "discord subpoenaed",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": {
+        "x": 0.8,
+        "y": 0.73,
+        "w": 0.2,
+        "h": 0.27
+      },
+      "gamebox": null,
+      "start": 11.25,
+      "end": 51.25,
+      "peak": 14.25
+    },
+    "RelatedLovelyFungusDeIlluminati-DEwMm0tBqaByrM5_": {
+      "at": "2026-11-23T02:12:01.034076+00:00",
+      "login": "blau",
+      "name": "blau",
+      "url": "https://www.twitch.tv/blau/clip/RelatedLovelyFungusDeIlluminati-DEwMm0tBqaByrM5_",
+      "title": "no shot",
+      "use": false,
+      "score": 3,
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.21,
+        "w": 0.17,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 0.0
+    },
+    "TrustworthyIgnorantSnailTheRinger-4L1aX3ZP0p7LpZIe": {
+      "at": "2026-11-23T02:12:42.341764+00:00",
+      "login": "garek",
+      "name": "Garek",
+      "url": "https://www.twitch.tv/garek/clip/TrustworthyIgnorantSnailTheRinger-4L1aX3ZP0p7LpZIe",
+      "title": "Gloryon (Garek) Finally hits max jett 50% max.",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 30.0,
+      "peak": 28.5
+    },
+    "JoyousArborealRatDogFace-5EifMkwd4vBgxxd6": {
+      "at": "2026-11-23T02:13:58.593839+00:00",
+      "login": "harmless",
+      "name": "Harmless",
+      "url": "https://www.twitch.tv/harmless/clip/JoyousArborealRatDogFace-5EifMkwd4vBgxxd6",
+      "title": "Harmless (Maynard) checked Roflgator's stream",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": {
+        "x": 0.68,
+        "y": 0.08,
+        "w": 0.2,
+        "h": 0.17
+      },
+      "gamebox": null,
+      "start": 20.1,
+      "end": 60.1,
+      "peak": 26.0
+    },
+    "FineTrappedMageSSSsss-62gTLW1uMDTNorc9": {
+      "at": "2026-11-23T02:14:33.911923+00:00",
+      "login": "novasobored",
+      "name": "novasobored",
+      "url": "https://www.twitch.tv/novasobored/clip/FineTrappedMageSSSsss-62gTLW1uMDTNorc9",
+      "title": "vivi plummeting to the ground",
+      "use": true,
+      "score": 6,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 3.0,
+      "end": 15.0,
+      "peak": 9.25
     }
   }
 }

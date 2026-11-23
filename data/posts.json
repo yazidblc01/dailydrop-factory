@@ -1270,5 +1270,21 @@
     "posted_at": "2026-11-23T01:24:18+00:00",
     "url": "https://www.youtube.com/watch?v=D9xkHzujDfg",
     "slot": "waited"
+  },
+  "clip__20261122__SuccessfulEnticingCurlew": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=CKvk7-1_WwA",
+      "facebook": "https://www.facebook.com/reel/1136360958806171"
+    },
+    "url": "https://www.youtube.com/watch?v=CKvk7-1_WwA",
+    "title": "GTA 6: Shootout With Cops Costs Him $111K",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b03a84c1cddd92d517de358",
+    "posted_at": "2026-11-23T02:44:38+00:00",
+    "slot": "waited"
   }
 }
