@@ -93,31 +93,37 @@ def fetch(theme, moment):
     return lines, years, px.index[0].date(), px.index[-1].date()
 
 
-def logos(lines):
-    """Real logos from logo.dev (LOGO_DEV_TOKEN), saved next to the video's other files. A logo that won't load leaves the colored tile."""
+def logo_file(domain):
+    """A company's logo from logo.dev (LOGO_DEV_TOKEN), saved once under video/public/logos. Returns its path for the video, or None."""
     import os
     import requests
     from engine.render import PUBLIC
     token = os.environ.get("LOGO_DEV_TOKEN")
-    (PUBLIC / "logos").mkdir(parents=True, exist_ok=True)
-    for l in lines:
-        l["logo"] = None
-        if not token:
-            continue
-        rel = f"logos/{l['domain']}.png"
-        f = PUBLIC / rel
-        try:
-            if not f.exists():
-                r = requests.get(f"https://img.logo.dev/{l['domain']}?token={token}&size=256&format=png&retina=true", timeout=20)
-                r.raise_for_status()
-                if len(r.content) < 500 or not r.content.startswith(b"\x89PNG"):
-                    raise ValueError("not a logo")
-                f.write_bytes(r.content)
-            l["logo"] = rel
-        except Exception as e:
-            print(f"        no logo for {l['name']} ({str(e)[:60]})")
-    if not token:
+    if not token or not domain:
+        return None
+    rel = f"logos/{domain}.png"
+    f = PUBLIC / rel
+    try:
+        if not f.exists():
+            f.parent.mkdir(parents=True, exist_ok=True)
+            r = requests.get(f"https://img.logo.dev/{domain}?token={token}&size=256&format=png&retina=true", timeout=20)
+            r.raise_for_status()
+            if len(r.content) < 500 or not r.content.startswith(b"\x89PNG"):
+                raise ValueError("not a logo")
+            f.write_bytes(r.content)
+        return rel
+    except Exception as e:
+        print(f"        no logo for {domain} ({str(e)[:60]})")
+        return None
+
+
+def logos(lines):
+    """Real logos on the tiles. A logo that won't load leaves the colored tile."""
+    import os
+    if not os.environ.get("LOGO_DEV_TOKEN"):
         print("        no LOGO_DEV_TOKEN: colored tiles instead of logos")
+    for l in lines:
+        l["logo"] = logo_file(l["domain"])
 
 
 def candidates():

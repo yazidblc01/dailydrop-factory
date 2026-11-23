@@ -316,7 +316,10 @@ def consoles(n, today):
     with open(DATA_DIR / "console_launch_prices.csv", newline="") as f:
         rows = list(csv.DictReader(f))
     pick = random.Random(77 + n).sample(rows, 5)
-    items = [{"name": r["console"], "sub": r["us_launch_date"][:4], "value": float(r["launch_price_usd"]), "short": r["short"]} for r in pick]
+    from engine.stockrace import logo_file
+    brand = {"playstation": "playstation.com", "xbox": "xbox.com", "nintendo": "nintendo.com", "sega": "sega.com"}
+    items = [{"name": r["console"], "sub": r["us_launch_date"][:4], "value": float(r["launch_price_usd"]), "short": r["short"],
+              "logo": logo_file(brand.get(r["family"]))} for r in pick]
     top = max(items, key=lambda x: x["value"])
     props = {"pal": "vice", **HL_TIMING, "hookA": "Console launch prices.", "hookB": "Higher or lower?",
              "endA": f"The priciest one here: the {top['name']},", "endB": f"{usd(top['value'])} back in {top['sub']}.", "unit": "LAUNCH PRICE", "items": items}

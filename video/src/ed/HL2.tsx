@@ -4,10 +4,10 @@
 // joins the chart above, so the gaps between all of them stay visible. Ends on the top one, then the logo outro.
 // Layout (1080x1920): 0-150 free for the apps' buttons, header 160, title 258-428, panel 450-1660, bottom free.
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Img, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {LogoOutro, Masthead, PAL, SANS, SunsetSky, clamp01, lerp, outBack, outCubic, smooth, useEdFonts} from './kit';
 
-type Item = {name: string; sub: string; value: number; short?: string; color?: string};
+type Item = {name: string; sub: string; value: number; short?: string; color?: string; logo?: string | null};
 export type EdHL2Props = {hookA: string; hookB: string; endA: string; endB: string; unit: string; items: Item[]; start: number; round: number;
   outroAt: number; duration: number; fmt?: 'usd' | 'millions'; music?: string | null};
 
@@ -37,11 +37,22 @@ export const EdHL2: React.FC<EdHL2Props> = (p) => {
   const answer = (i: number) => p.items[i].value >= p.items[i - 1].value ? 'HIGHER' : 'LOWER';
   const titleK = outBack(clamp01(t / 0.35), 1.6);
 
-  const Tile: React.FC<{it: Item; i: number; size: number}> = ({it, i, size}) => (
-    <div style={{width: size, height: size, borderRadius: size * 0.24, background: it.color ?? COLS[i % COLS.length], display: 'grid', placeItems: 'center', flexShrink: 0,
-      fontFamily: SANS, fontWeight: 900, fontSize: Math.min(size * 0.36, (size * 0.86) / (Math.max(2, (it.short ?? it.name).length) * 0.62)), color: '#fff',
-      boxShadow: '0 8px 20px rgba(0,0,0,0.45), inset 0 0 0 3px rgba(255,255,255,0.18)'}}>{it.short ?? it.name.slice(0, 3)}</div>
-  );
+  // the tile: the brand's logo on white with the model under it (consoles), or a colored tile with a short name (games)
+  const Tile: React.FC<{it: Item; i: number; size: number}> = ({it, i, size}) => {
+    const label = it.short ?? it.name.slice(0, 3);
+    const shadow = '0 8px 20px rgba(0,0,0,0.45), inset 0 0 0 3px rgba(255,255,255,0.18)';
+    if (it.logo) return (
+      <div style={{width: size, height: size, borderRadius: size * 0.24, background: '#fff', flexShrink: 0, boxShadow: shadow, overflow: 'hidden',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: size * 0.02}}>
+        <Img src={staticFile(it.logo)} style={{width: size * 0.62, height: size * 0.46, objectFit: 'contain'}} />
+        <div style={{fontFamily: SANS, fontWeight: 900, fontSize: Math.min(size * 0.2, (size * 0.9) / (label.length * 0.62)), color: '#14081f', lineHeight: 1}}>{label}</div>
+      </div>
+    );
+    return (
+      <div style={{width: size, height: size, borderRadius: size * 0.24, background: it.color ?? COLS[i % COLS.length], display: 'grid', placeItems: 'center', flexShrink: 0,
+        fontFamily: SANS, fontWeight: 900, fontSize: Math.min(size * 0.36, (size * 0.86) / (Math.max(2, label.length) * 0.62)), color: '#fff', boxShadow: shadow}}>{label}</div>
+    );
+  };
 
   // the item in the spotlight this round
   const si = Math.min(cur, n - 1);
