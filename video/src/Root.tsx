@@ -13,6 +13,7 @@ import {Cover} from './ed/Cover';
 import {EdClip, EdVs} from './ed/Clip';
 import {EdChat} from './ed/Chat';
 import {EdRace} from './ed/Race';
+import {EdHL2} from './ed/HL2';
 import edskit from '../props/edskit.json';
 import edmath from '../props/edmath.json';
 import {EdWaited} from './ed/Waited';
@@ -99,6 +100,9 @@ export const RemotionRoot: React.FC = () => {
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdRace" component={EdRace as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{lines: [], years: [], pre: '', em: '', post: '', guess: 3.2, race: 9, podium: 3.6, outroAt: 15.8, duration: 17.4, source: ''} as any}
+      calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdHL2" component={EdHL2 as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
+      defaultProps={{hookA: '', hookB: '', endA: '', endB: '', unit: '', items: [], start: 2.2, round: 3.3, outroAt: 18, duration: 19.6} as any}
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdVs" component={EdVs as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{pairs: [], hook: 'GTA 5 VS GTA 6', badge: 'GTA 6 · DAY 1', duration: 10} as any}

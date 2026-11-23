@@ -293,20 +293,37 @@ def coins(n, today):
     return "EdCoins", "coins", props, meta
 
 
+# higher or lower v2 (video/src/ed/HL2.tsx): 5 items, the first one shown, 4 rounds, the top one, the logo outro
+_HL_START, _HL_ROUND, _HL_END = 2.2, 3.3, 2.6
+HL_TIMING = {"start": _HL_START, "round": _HL_ROUND, "outroAt": round(_HL_START + 4 * _HL_ROUND + _HL_END, 2),
+             "duration": round(_HL_START + 4 * _HL_ROUND + _HL_END + 1.6, 2)}
+
+
+def usd(v):
+    return f"${v:,.0f}" if float(v).is_integer() else f"${v:,.2f}"
+
+
+def short(name):
+    """A tile label from a game's name: GTA V -> GTAV, Red Dead Redemption 2 -> RDR2, Minecraft -> MIN."""
+    words = name.replace(":", " ").replace("-", " ").split()
+    if len(words) == 1:
+        return words[0][:4] if words[0].isupper() else words[0][:3].upper()
+    return "".join(w if (w.isupper() or w.isdigit()) and len(w) <= 4 else w[0].upper() for w in words)[:5]
+
+
 def consoles(n, today):
     import csv
     with open(DATA_DIR / "console_launch_prices.csv", newline="") as f:
         rows = list(csv.DictReader(f))
     pick = random.Random(77 + n).sample(rows, 5)
-    items = [{"name": r["console"], "sub": r["us_launch_date"][:4], "value": float(r["launch_price_usd"])} for r in pick]
+    items = [{"name": r["console"], "sub": r["us_launch_date"][:4], "value": float(r["launch_price_usd"]), "short": r["short"]} for r in pick]
     top = max(items, key=lambda x: x["value"])
-    props = {"pal": "vice", "duration": 20 + FOLLOW, "follow": follow_card(today, 20), "label": "HIGHER OR LOWER · GTA", "hookA": "Console launch prices.", "hookB": "Higher or lower?",
-             "endA": f"The priciest one here: the {top['name']},", "endB": f"back in {top['sub']}.", "unit": "LAUNCH PRICE", "items": items,
-             "start": 2.2, "round": 3.7}
+    props = {"pal": "vice", **HL_TIMING, "hookA": "Console launch prices.", "hookB": "Higher or lower?",
+             "endA": f"The priciest one here: the {top['name']},", "endB": f"{usd(top['value'])} back in {top['sub']}.", "unit": "LAUNCH PRICE", "items": items}
     meta = {"title": "Console launch prices: higher or lower? 🎮",
             "description": "US launch prices: " + ", ".join(f"{i['name']} ${i['value']:g} ({i['sub']})" for i in items) + ".\nGTA 6 comes out November 19, 2026 on PS5 and Xbox Series X and S.\n#gta6 #playstation #xbox",
             "pinned_comment": "How many did you get right? 👇"}
-    return "EdHL", "consoles", props, meta
+    return "EdHL2", "consoles", props, meta
 
 
 def bestsellers(n, today):
@@ -318,16 +335,16 @@ def bestsellers(n, today):
     gta = next(r for r in rows if r["game"] == "GTA V")
     pick = rnd.sample([r for r in rows if r is not gta], 4) + [gta]
     rnd.shuffle(pick)
-    items = [{"name": r["game"], "sub": r["year"], "value": float(r["million_copies"])} for r in pick]
+    items = [{"name": r["game"], "sub": r["year"], "value": float(r["million_copies"]), "short": short(r["game"])} for r in pick]
     top = max(items, key=lambda x: x["value"])
-    props = {"pal": "vice", "duration": 20 + FOLLOW, "follow": follow_card(today, 20), "label": "HIGHER OR LOWER · GTA", "hookA": "Best-selling games ever.", "hookB": "Higher or lower?",
+    props = {"pal": "vice", **HL_TIMING, "hookA": "Best-selling games ever.", "hookB": "Higher or lower?",
              "endA": f"The top seller here: {top['name']},", "endB": f"{top['value']:g} million copies.", "unit": "COPIES SOLD", "fmt": "millions",
-             "items": items, "start": 2.2, "round": 3.7}
+             "items": items}
     meta = {"title": "Best-selling games ever: higher or lower? 🎮",
             "description": "Copies sold, as reported by the publishers: " + ", ".join(f"{r['game']} {float(r['million_copies']):g}M ({r['as_of']})" for r in pick)
                            + ".\nGTA V alone has sold over 230 million copies. GTA 6 comes out November 19, 2026.\n#gta6 #gtav #gaming",
             "pinned_comment": "How many did you get right? 👇"}
-    return "EdHL", "bestsellers", props, meta
+    return "EdHL2", "bestsellers", props, meta
 
 
 FORMATS = ["waited", "board", "waited", "receipt", "bestsellers", "waited", "board", "consoles", "waited", "coins"]
@@ -386,14 +403,14 @@ def make_other(kind, dry=False, today=None):
 
 
 # the 6:07 PM original: these take turns (texts from the future has its own daily 10:37 AM slot)
-ORIGINALS = ["chat", "data", "chat", "coins", "chat", "scale"]
+ORIGINALS = ["chat", "data", "chat", "hl", "chat", "coins", "chat", "scale"]
 
 
 def make_original(kind, dry=False, today=None):
     """One original reel: the Vice City chat, texts from the future, money to scale, coins, or the stocks race.
     Falls through the other originals if one fails, so the slot is never empty."""
     from engine.texts import warn
-    order = [kind] + [k for k in ("chat", "scale", "coins", "data") if k != kind]
+    order = [kind] + [k for k in ("chat", "scale", "coins", "data", "hl") if k != kind]
     errors = []
     for k in order:
         try:
@@ -416,6 +433,9 @@ def make_original(kind, dry=False, today=None):
                     topics.mark_done(topic)
             elif k == "coins":
                 topic, final = make_other("coins", dry, today)
+            elif k == "hl":                          # higher or lower v2: consoles and best sellers take turns
+                n = load_state().get("other", {})
+                topic, final = make_other("bestsellers" if n.get("bestsellers", 0) <= n.get("consoles", 0) else "consoles", dry, today)
             else:                                    # the stocks race v2: 4 brands from one theme, from a moment people know
                 from engine import stockrace
                 topic, final = stockrace.make(dry, today)
@@ -431,7 +451,7 @@ def make_original(kind, dry=False, today=None):
 
 def make_next(dry=False, flat_only=False, today=None, kind=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
-    if kind in ("texts", "scale", "coins", "data", "chat") or kind is None:
+    if kind in ("texts", "scale", "coins", "data", "chat", "hl") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
             st = load_state()
             kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
@@ -512,7 +532,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl"], help="force one format")
     a = ap.parse_args()
     import run
     try:
