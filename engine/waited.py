@@ -280,6 +280,52 @@ def receipt(n, today):
     return "EdReceipt", "receipt", props, meta
 
 
+# Vice Pawn & Loan (video/src/ed/Pawn.tsx): 6 items, GTA V day (Sep 2013) vs the latest month, US average prices (BLS via FRED).
+# Each theme lists more than 6 so a series that fails to load is skipped.
+PAWN_THEMES = [
+    ("Breakfast on ", "GTA V", " day vs today", [
+        ("APU0000708111", "🥚", "Eggs, dozen"), ("APU0000704111", "🥓", "Bacon, lb"), ("APU0000702111", "🍞", "Bread, lb"),
+        ("APU0000709112", "🥛", "Milk, gallon"), ("APU0000717311", "☕", "Coffee, lb"), ("APU0000713111", "🍊", "Orange juice"),
+        ("APU0000711211", "🍌", "Bananas, lb")]),
+    ("A cookout on ", "GTA V", " day vs today", [
+        ("APU0000703112", "🍔", "Ground beef, lb"), ("APU0000706111", "🍗", "Chicken, lb"), ("APU0000710212", "🧀", "Cheddar, lb"),
+        ("APU0000712311", "🍅", "Tomatoes, lb"), ("APU0000712112", "🥔", "Potatoes, lb"), ("APU0000702111", "🍞", "Bread, lb"),
+        ("APU0000710411", "🍦", "Ice cream")]),
+    ("The basics on ", "GTA V", " day vs today", [
+        ("APU000074714", "⛽", "Gas, gallon"), ("APU000072610", "💡", "Power, kWh"), ("APU0000709112", "🥛", "Milk, gallon"),
+        ("APU0000708111", "🥚", "Eggs, dozen"), ("APU0000702111", "🍞", "Bread, lb"), ("APU0000715211", "🍬", "Sugar, lb"),
+        ("APU0000711211", "🍌", "Bananas, lb")]),
+]
+
+
+def pawn(n, today):
+    pre, em, post, cands = PAWN_THEMES[n % len(PAWN_THEMES)]
+    items, k_end = [], None
+    for sid, ico, name in cands:
+        if len(items) == 6:
+            break
+        try:
+            m = recipes.fred_monthly(sid)
+            k = latest_key(m, today)
+            items.append({"ico": ico, "name": name, "a": round(m["2013-09"], 2), "b": round(m[k], 2)})
+            k_end = max(k_end or k, k)
+        except Exception as e:
+            print(f"      skipped {name}: {e}")
+    if len(items) < 6:
+        raise RuntimeError(f"only {len(items)} prices loaded for the pawn shop")
+    start, step = 1.4, 1.35
+    total_at = start + 5 * step + step * 0.42 + 0.7
+    props = {"pal": "vice", "pre": pre, "em": em, "post": post, "colA": "SEP 2013", "items": items, "start": start, "step": step,
+             "outroAt": round(total_at + 2.6, 2), "duration": round(total_at + 2.6 + 1.6, 2), "headA": f"{pre}{em}{post}"}
+    ta, tb = sum(i["a"] for i in items), sum(i["b"] for i in items)
+    pct = round((tb / ta - 1) * 100)
+    lines = "\n".join(f"• {i['name']}: ${i['a']:.2f} (Sep 2013) vs ${i['b']:.2f} ({k_end})" for i in items)
+    meta = {"title": f"{pre}{em}{post} 🧾",
+            "description": f"Average US prices when GTA V came out (Sep 2013) vs now:\n{lines}\nThe cart: ${ta:.2f} vs ${tb:.2f} ({pct:+d}%).\n{SOURCE}\n#gta6 #gtav #inflation",
+            "pinned_comment": "Which one hurts the most? 👇"}
+    return "EdPawn", "pawn", props, meta
+
+
 def coins(n, today):
     m = recipes.fred_monthly("CPIAUCSL")
     k_end = latest_key(m, today)
@@ -358,7 +404,7 @@ def bestsellers(n, today):
 
 
 FORMATS = ["waited", "board", "waited", "receipt", "bestsellers", "waited", "board", "consoles", "waited", "coins"]
-OTHER = {"board": board, "receipt": receipt, "coins": coins, "consoles": consoles, "bestsellers": bestsellers}
+OTHER = {"pawn": pawn, "board": board, "receipt": receipt, "coins": coins, "consoles": consoles, "bestsellers": bestsellers}
 
 
 # ---------- video ----------
@@ -413,14 +459,14 @@ def make_other(kind, dry=False, today=None):
 
 
 # the 6:07 PM original: these take turns (texts from the future has its own daily 10:37 AM slot)
-ORIGINALS = ["chat", "data", "chat", "hl", "chat", "coins", "chat", "scale"]
+ORIGINALS = ["chat", "data", "chat", "hl", "chat", "pawn", "chat", "coins", "chat", "scale"]
 
 
 def make_original(kind, dry=False, today=None):
     """One original reel: the Vice City chat, texts from the future, money to scale, coins, or the stocks race.
     Falls through the other originals if one fails, so the slot is never empty."""
     from engine.texts import warn
-    order = [kind] + [k for k in ("chat", "scale", "coins", "data", "hl") if k != kind]
+    order = [kind] + [k for k in ("chat", "scale", "coins", "data", "hl", "pawn") if k != kind]
     errors = []
     for k in order:
         try:
@@ -441,8 +487,8 @@ def make_original(kind, dry=False, today=None):
                 topic, final = moneyscale.make(dry=dry, gaming=True)
                 if not dry:
                     topics.mark_done(topic)
-            elif k == "coins":
-                topic, final = make_other("coins", dry, today)
+            elif k in ("coins", "pawn"):
+                topic, final = make_other(k, dry, today)
             elif k == "hl":                          # higher or lower v2: consoles and best sellers take turns
                 n = load_state().get("other", {})
                 topic, final = make_other("bestsellers" if n.get("bestsellers", 0) <= n.get("consoles", 0) else "consoles", dry, today)
@@ -461,7 +507,7 @@ def make_original(kind, dry=False, today=None):
 
 def make_next(dry=False, flat_only=False, today=None, kind=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
-    if kind in ("texts", "scale", "coins", "data", "chat", "hl") or kind is None:
+    if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
             st = load_state()
             kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
@@ -542,7 +588,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn"], help="force one format")
     a = ap.parse_args()
     import run
     try:
