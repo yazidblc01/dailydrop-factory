@@ -48,7 +48,7 @@ def known_bad(gta=False):
     return {t for t, r in json.loads(POOL.read_text())["topics"].items() if r["status"] in bad}
 
 
-def pick_next(slot="main"):
+def pick_next(slot="main", only=None):
     """Returns (topic_id, payload). Builds data for candidates until one is interesting enough.
     slot "gta": the GTA week pool, in its set order, with no interest filter (the dates matter more)."""
     h = load_history()
@@ -62,7 +62,7 @@ def pick_next(slot="main"):
     else:
         # the gaming topics are kept for the GTA week Shorts until the week is over
         held = set(recipes.GTA_POOL) if datetime.now(schedule.TZ).date() <= schedule.GTA_END else set()
-        pool = [t for t in recipes.all_candidates() if t not in used and t not in held]
+        pool = [t for t in recipes.all_candidates() if t not in used and t not in held and (not only or recipe_of(t) in only)]
         if not pool:
             raise RuntimeError("No topics left. Add groups or years in engine/recipes.py.")
 

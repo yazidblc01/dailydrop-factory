@@ -2,7 +2,7 @@
 // Plays the same props as StoryReel (voice, captions, scenes), so the engine needs no change. ----------
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig, Easing} from 'remotion';
-import {Backdrop, Em, Grain, Head, MONO, Masthead, PAL, PalName, ProgressRule, SANS, outBack, smooth, useEdFonts} from './kit';
+import {Backdrop, Em, Grain, Head, MONO, Masthead, PAL, PalName, ProgressRule, SANS, outBack, smooth, useEdFonts, LogoOutro} from './kit';
 import {Item, short} from '../RankingReveal';
 import {StoryProps} from '../StoryReel';
 
@@ -199,6 +199,7 @@ export const EdStory: React.FC<StoryProps & {pal?: PalName; label?: string}> = (
       {sc.revealAt && <Sequence from={Math.round((rv + 0.3) * fps)} durationInFrames={24}><Audio src={staticFile('sfx/thud.wav')} volume={0.9} /></Sequence>}
       {sfx.impact && sc.revealAt && <Sequence from={Math.round((rv + 0.33) * fps)} durationInFrames={fps * 2}><Audio src={staticFile(sfx.impact)} volume={0.5} /></Sequence>}
       {p.audio ? <Audio src={staticFile(p.audio)} /> : null}
+      {(p as {follow?: {at: number}}).follow && <LogoOutro t={frame / fps} at={(p as {follow?: {at: number}}).follow!.at} />}
     </AbsoluteFill>
   );
 };

@@ -177,7 +177,8 @@ def render(out, final, flat_only=False):
     """3D design first; if that fails, the same design drawn flat; if even that fails, the old design. The day never breaks."""
     from engine.texts import warn
     props = json.loads((out / "props.json").read_text())
-    (out / "props_ed.json").write_text(json.dumps({**props, "duration": props["edDuration"]}, indent=2))
+    (out / "props_ed.json").write_text(json.dumps({**props, "duration": round(props["edDuration"] + 1.6, 2),
+                                                   "follow": {"at": props["edDuration"]}}, indent=2))   # + the logo outro
     gl = "angle" if sys.platform == "darwin" else "swangle"   # GitHub has no graphics card: software 3D
     base = ["npx", "remotion", "render", "src/index.ts"]
     ed = [f"--props={out / 'props_ed.json'}", "--codec=h264", "--crf=18"]

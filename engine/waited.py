@@ -385,9 +385,61 @@ def make_other(kind, dry=False, today=None):
     return topic, final
 
 
+# the 6:07 PM original: these take turns (texts from the future has its own daily 10:37 AM slot)
+ORIGINALS = ["data", "coins", "scale", "data", "scale"]
+
+
+def make_original(kind, dry=False, today=None):
+    """One original reel: texts from the future, money to scale, coins, or a data race (stocks, countries, prices).
+    Falls through the other originals if one fails, so the slot is never empty."""
+    from engine.texts import warn
+    order = [kind] + [k for k in ("scale", "coins", "data") if k != kind]
+    errors = []
+    for k in order:
+        try:
+            if k == "texts":
+                from engine import texts, topics
+                topic, final = texts.make(None, dry, "gaming")
+                if not dry:
+                    topics.mark_done(topic)
+                    if texts.left_count() < texts.LOW_STOCK:
+                        warn(f"⚠️ Only {texts.left_count()} texts stories left. Time to add more to data/text_stories.csv.")
+            elif k == "scale":
+                from engine import moneyscale, topics
+                topic, final = moneyscale.make(dry=dry, gaming=True)
+                if not dry:
+                    topics.mark_done(topic)
+            elif k == "coins":
+                topic, final = make_other("coins", dry, today)
+            else:                                    # a data race: stocks, countries or prices, Miami style
+                from engine import data, render, script, topics, voice
+                topic, payload = topics.pick_next("main", only={"invest", "wb", "prices"})
+                print(f"      {payload['angle']}")
+                s, _ = script.write_script(topic)
+                print(f"      {s['title']}")
+                if dry:
+                    return topic, None
+                voice.build(topic)
+                final = render.render(topic)
+                topics.mark_done(topic)
+            return topic, final
+        except Exception as e:
+            print(f"      {k} failed ({e}), trying the next original")
+            errors.append(f"{k}: {e}")
+    warn("⚠️ Every original failed, posted a waited reel instead.\n" + "\n".join(errors))
+    return make(dry, False, today)
+
+
 def make_next(dry=False, flat_only=False, today=None, kind=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
-    kind = kind or FORMATS[load_state()["count"] % len(FORMATS)]
+    if kind in ("texts", "scale", "coins", "data") or kind is None:
+        if kind is None:                             # the 6:07 PM original: the next one in the rotation
+            st = load_state()
+            kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
+            if not dry:
+                st["orig"] = st.get("orig", 0) + 1
+                STATE.write_text(json.dumps(st, indent=2))
+        return make_original(kind, dry, today)
     if kind in ("streamclip", "streamreact", "streamvs"):   # streamers' GTA 6 Twitch moments (engine/streamclips.py)
         from engine import streamclips
         from engine.texts import warn
@@ -461,7 +513,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data"], help="force one format")
     a = ap.parse_args()
     import run
     try:

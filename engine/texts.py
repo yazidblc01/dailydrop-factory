@@ -34,7 +34,9 @@ LOW_STOCK = 6
 # gaming stories, in the order the 7 PM GTA slot uses them; the main slot leaves them alone during GTA month
 GAMING = ["gta6_announced", "gta6_delay1_hold", "gta5_launch", "gta6_trailer2_gpu", "gtaiv_apple", "gta6_delay2_dip", "gtav_pc_nvidia", "gtav_ps5_amd",
           "ps4_nvidia", "gta6_trailer_ttwo", "switch_2017", "rdr2_ttwo", "ps5_amd", "xbox360_2005", "gtx1080_2016",
-          "ps3_2006", "minecraft_2014", "steamdeck_amd", "wii_2006", "pokemon_go_2016", "gme_tradein_2019", "gme_moon"]
+          "ps3_2006", "minecraft_2014", "steamdeck_amd", "wii_2006", "pokemon_go_2016", "gme_tradein_2019", "gme_moon",
+          "rtx3080_2020", "xbox_series_2020", "gta_online_2013", "twitch_amazon_2014", "halo3_2007", "fortnite_br_2017",
+          "ps2_2000", "activision_msft_2022", "xboxone_2013", "cyberpunk_2020", "fifa23_ea_2022", "roblox_ipo_2021"]
 MAX_DURATION = 30.0
 REVEAL_GAP = 4.5        # seconds the 3D number reveal holds before the next text
 PALETTE = "paper"
@@ -415,7 +417,7 @@ def make(story_id=None, dry=False, pool="main", flat_only=False):
         "bigHook": True,      # the first notifications shown big over the scene: the first second already says the story
         "music": f"music/{music}" if music else None,
     }
-    if props["pal"] == "vice" and schedule.gta_week():   # GTA season: end on the follow card (GTA 6 countdown)
+    if True:                                       # every reel ends on the logo outro
         from engine.waited import FOLLOW, follow_card
         props["follow"] = follow_card(datetime.now(schedule.TZ).date(), duration)
         props["duration"] = round(duration + FOLLOW, 2)

@@ -236,6 +236,8 @@ def build_story_props(topic, theme=None):
     only = STORY_CAPTION_SECTIONS + (("reveal",) if timing.get("silent") else ())  # no voice: the reveal is read too
     props["captions"] = build_captions(timing["sections"], timing["words"], only=only)
     props["duration"] = props["scenes"][-1]["end"]
+    props["follow"] = {"at": props["duration"]}       # the logo outro
+    props["duration"] = round(props["duration"] + 1.6, 2)
     props_path.write_text(json.dumps(props, indent=2))
     return props_path, props
 

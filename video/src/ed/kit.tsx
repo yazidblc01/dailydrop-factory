@@ -36,6 +36,9 @@ export const PAL: Record<PalName, Pal> = {
   vice: {name: 'vice', bg: '#2A1046', bg2: '#FF5E8A', ink: '#FFF3EA', mute: 'rgba(255,243,234,0.75)', rule: 'rgba(255,243,234,0.35)', accent: '#FF4FA0', onAccent: '#fff', money: '#7FE0B0',
     card: '#FFF3EA', cardInk: '#2A1046', display: 'Instrument Serif', dWeight: 400, dItalic: true, dTrack: -0.02, font3d: 'serif', shadow: 0.45, grain: 0.22, blend: 'overlay', dark: true},
 };
+// Miami everywhere: every palette name now draws the GTA night look (the cream/paper designs are retired)
+for (const k of Object.keys(PAL) as PalName[]) if (k !== 'vice') PAL[k] = PAL.vice;
+
 export const MONO = 'JetBrains Mono', SANS = 'Inter';
 
 // ===== fonts: CSS faces for overlays and canvas, opentype outlines for real 3D type =====
@@ -247,7 +250,7 @@ export const Masthead: React.FC<{P: Pal; label: string; opacity?: number}> = ({P
   <div style={{position: 'absolute', top: 276, left: 84, width: 912, opacity}}>
     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
       <Logo P={P} />
-      <div style={{fontFamily: MONO, fontWeight: 500, fontSize: 21, letterSpacing: '0.14em', color: P.mute}}>{label}</div>
+      <div />{/* the small top-right labels (countdowns, "GTA MATH"...) are retired */}
     </div>
     <div style={{height: 2, background: P.ink, marginTop: 16}} />
   </div>
@@ -268,29 +271,7 @@ export const ProgressRule: React.FC<{P: Pal; k: number}> = ({P, k}) => (
 
 // ---------- the last 1.5 s of a GTA-season reel: a reason to follow, tied to the GTA 6 countdown ----------
 export type Follow = {at: number; kicker: string; big: string; line: string; em: string};
-export const FollowCard: React.FC<{P: Pal; t: number; f: Follow}> = ({P, t, f}) => {
-  const k = smooth(f.at, f.at + 0.3, t);
-  if (k <= 0) return null;
-  const pop = outBack(clamp01((t - f.at - 0.15) / 0.4), 1.6);
-  const ser = (s: number): React.CSSProperties => ({fontFamily: P.display, fontWeight: P.dWeight, fontSize: s, lineHeight: 1, letterSpacing: P.dTrack + 'em'});
-  const gold = P.name === 'vice' ? '#FFE07A' : P.accent;
-  return (
-    <AbsoluteFill style={{opacity: k}}>
-      <Backdrop P={P} horizon={0.5} />
-      <div style={{position: 'absolute', left: 0, right: 0, top: 520, textAlign: 'center'}}>
-        <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 28, letterSpacing: '0.16em', color: gold}}>{f.kicker}</div>
-        <div style={{...ser(f.big.length > 3 ? 260 : 420), color: P.ink, marginTop: 10, transform: `scale(${0.6 + 0.4 * pop})`}}>{f.big}</div>
-        <div style={{...ser(P.dItalic ? 92 : 76), color: P.ink, marginTop: -6, padding: '0 70px'}}>{f.line} <Em P={P}>{f.em}</Em></div>
-      </div>
-      <div style={{position: 'absolute', left: 290, top: 1250, width: 500, height: 110, borderRadius: 60, background: P.name === 'vice' ? '#FFF3EA' : P.ink, color: P.name === 'vice' ? '#2A1046' : P.bg,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 18, fontFamily: SANS, fontWeight: 800, fontSize: 44, boxShadow: '0 20px 40px rgba(20,0,40,0.4)',
-        transform: `translateY(${(1 - pop) * 40}px)`}}>
-        <span style={{width: 44, height: 44, borderRadius: '50%', background: P.accent, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 34}}>+</span> Follow
-      </div>
-      <Masthead P={P} label="THE DAILY DROP" />
-    </AbsoluteFill>
-  );
-};
+export const FollowCard: React.FC<{P: Pal; t: number; f: Follow}> = ({t, f}) => <LogoOutro t={t} at={f.at} />;   // every reel ends on the logo
 
 // ---------- the outro on every reel: the drop logo pops in on the Miami night, the wordmark, a Follow button ----------
 export const LogoOutro: React.FC<{t: number; at: number}> = ({t, at}) => {

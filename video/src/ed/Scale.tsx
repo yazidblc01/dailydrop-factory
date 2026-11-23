@@ -4,7 +4,7 @@ import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
-import {Backdrop, Cam, Em, Grain, Head, MONO, Masthead, PAL, Pal, PalName, ProgressRule, Sil3D, Studio, Tag, V3, clamp01, lerp, outBack, projector, rnd, smooth, useEdFonts} from './kit';
+import {Backdrop, Cam, Em, Grain, Head, MONO, Masthead, PAL, Pal, PalName, ProgressRule, Sil3D, Studio, Tag, V3, clamp01, lerp, outBack, projector, rnd, smooth, useEdFonts, LogoOutro} from './kit';
 
 export {THINGS, cmOf, height, money};
 export type EdScaleProps = {pal: PalName; duration: number; label: string; hookA: string; hookB: string;
@@ -305,6 +305,7 @@ export const EdScale: React.FC<EdScaleProps> = (p) => {
       })()}
       <Grain P={P} />
       <ProgressRule P={P} k={t / p.duration} />
+      {(p as {follow?: {at: number}}).follow && <LogoOutro t={frame / fps} at={(p as {follow?: {at: number}}).follow!.at} />}
     </AbsoluteFill>
   );
 };

@@ -9,16 +9,12 @@ from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("America/Toronto")
 # (Toronto time, workflow, inputs)
-SLOTS = [("09:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("10:37", "gta_waited.yml", {"format": "streamclip"}),              # stream clip (GTA 5 vs 6 paused until its fix)
-         ("12:07", "gta_waited.yml", {}),                                    # original: the GTA wave rotation
-         ("13:37", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("15:07", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6 (fixed: pairs checked by Sonnet)
-         ("16:37", "gta_waited.yml", {}),                                    # original: the GTA wave rotation
-         ("18:07", "gta_waited.yml", {"format": "streamreact"}),             # streamers react
+SLOTS = [("10:37", "gta_waited.yml", {"format": "texts"}),                   # original: texts from the future
+         ("12:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("15:07", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6
+         ("18:07", "gta_waited.yml", {}),                                    # original: the rotation (data race, coins, money to scale)
          ("18:47", "daily.yml", {"mode": "check"}),
-         ("20:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("21:07", "gta_waited.yml", {"format": "streamclip"})]              # stream clip (GTA 5 vs 6 paused until its fix)
+         ("20:07", "gta_waited.yml", {"format": "streamclip"})]              # stream clip
 # the old 6:13 AM morning reel and the catch-up job are retired (nothing schedules them any more)
 PAUSE_UNTIL = datetime(2000, 1, 1, tzinfo=TZ)
 PAUSED = set()
