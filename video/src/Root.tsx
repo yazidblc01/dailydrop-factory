@@ -16,6 +16,7 @@ import {EdRace} from './ed/Race';
 import {EdHL2} from './ed/HL2';
 import {EdPawn} from './ed/Pawn';
 import {EdFlip} from './ed/Flip';
+import {EdBarRace} from './ed/BarRace';
 import edskit from '../props/edskit.json';
 import edmath from '../props/edmath.json';
 import {EdWaited} from './ed/Waited';
@@ -111,6 +112,9 @@ export const RemotionRoot: React.FC = () => {
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdFlip" component={EdFlip as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{events: [], hook: 1, step: 0.9, endFor: 2.2, outroAt: 16, duration: 17.6, titleA: '', titleEm: ''} as any}
+      calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdBarRace" component={EdBarRace as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
+      defaultProps={{theme: '', titleA: '', titleEm: '', unit: 'usd_big', years: [2000, 2001], countries: [], toasts: [], hook: 1.8, race: 12.5, outroAt: 16.9, duration: 18.5, ask: '', endAsk: '', source: ''} as any}
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdVs" component={EdVs as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{pairs: [], hook: 'GTA 5 VS GTA 6', badge: 'GTA 6 · DAY 1', duration: 10} as any}

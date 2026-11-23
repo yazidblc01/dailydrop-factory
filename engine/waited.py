@@ -503,14 +503,14 @@ def make_other(kind, dry=False, today=None):
 
 
 # the 6:07 PM original: these take turns (texts from the future has its own daily 10:37 AM slot)
-ORIGINALS = ["chat", "data", "chat", "hl", "chat", "pawn", "chat", "flip", "chat", "coins", "chat", "scale"]
+ORIGINALS = ["chat", "data", "chat", "hl", "chat", "pawn", "chat", "flip", "chat", "bars", "chat", "coins", "chat", "scale"]
 
 
 def make_original(kind, dry=False, today=None):
     """One original reel: the Vice City chat, texts from the future, money to scale, coins, or the stocks race.
     Falls through the other originals if one fails, so the slot is never empty."""
     from engine.texts import warn
-    order = [kind] + [k for k in ("chat", "scale", "coins", "data", "hl", "pawn", "flip") if k != kind]
+    order = [kind] + [k for k in ("chat", "scale", "coins", "data", "hl", "pawn", "flip", "bars") if k != kind]
     errors = []
     for k in order:
         try:
@@ -533,6 +533,9 @@ def make_original(kind, dry=False, today=None):
                     topics.mark_done(topic)
             elif k == "flip":
                 topic, final = make_flip(dry, today)
+            elif k == "bars":                        # bars v2: a country bar chart race, World Bank data
+                from engine import barrace
+                topic, final = barrace.make(dry, today)
             elif k in ("coins", "pawn"):
                 topic, final = make_other(k, dry, today)
             elif k == "hl":                          # higher or lower v2: consoles and best sellers take turns
@@ -553,7 +556,7 @@ def make_original(kind, dry=False, today=None):
 
 def make_next(dry=False, flat_only=False, today=None, kind=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
-    if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn", "flip") or kind is None:
+    if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn", "flip", "bars") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
             st = load_state()
             kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
@@ -634,7 +637,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip", "bars"], help="force one format")
     a = ap.parse_args()
     import run
     try:
