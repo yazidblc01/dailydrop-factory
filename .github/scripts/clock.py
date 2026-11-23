@@ -9,9 +9,8 @@ from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("America/Toronto")
 # (Toronto time, workflow, inputs)
-SLOTS = [("06:13", "daily.yml", {"once": "yes"}),                            # original: the main daily reel (paused, see below)
-         ("09:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("10:37", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6
+SLOTS = [("09:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+         ("10:37", "gta_waited.yml", {"format": "streamclip"}),              # stream clip (GTA 5 vs 6 paused until its fix)
          ("12:07", "gta_waited.yml", {}),                                    # original: the GTA wave rotation
          ("13:37", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
          ("15:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
@@ -19,10 +18,10 @@ SLOTS = [("06:13", "daily.yml", {"once": "yes"}),                            # o
          ("18:07", "gta_waited.yml", {"format": "streamreact"}),             # streamers react
          ("18:47", "daily.yml", {"mode": "check"}),
          ("20:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
-         ("21:07", "gta_waited.yml", {"format": "streamvs"})]                # GTA 5 vs GTA 6
-# the main daily data reel stays paused until this time (the originals come back once a day, decided Monday)
-PAUSE_UNTIL = datetime(2026, 11, 25, 15, 12, tzinfo=TZ)
-PAUSED = {"06:13"}
+         ("21:07", "gta_waited.yml", {"format": "streamclip"})]              # stream clip (GTA 5 vs 6 paused until its fix)
+# the old 6:13 AM morning reel and the catch-up job are retired (nothing schedules them any more)
+PAUSE_UNTIL = datetime(2000, 1, 1, tzinfo=TZ)
+PAUSED = set()
 LATE_OK = timedelta(minutes=90)
 LIFE = timedelta(hours=5, minutes=30)
 

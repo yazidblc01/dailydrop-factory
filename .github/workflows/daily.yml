@@ -7,9 +7,6 @@ on:
     # GitHub sometimes drops scheduled runs: the Clock workflow also starts this one at the same times (with once=yes),
     # and the morning run is tried 3 times here. The first one that runs makes the video; the others see it exists and stop.
     # The first one that runs makes the video; the others see it exists and stop (--once-a-day).
-    - cron: "13 11 * * *"   # make: 6:13 AM Toronto in winter (7:13 in summer)
-    - cron: "43 12 * * *"   # make, backup: 7:43 AM
-    - cron: "13 14 * * *"   # make, backup: 9:13 AM
     - cron: "47 23 * * *"   # check: 6:47 PM Toronto in winter (7:47 in summer), after every slot
     # (the GTA-season 7 PM Short is off during launch hype: stream clips take its place, see .github/scripts/clock.py)
   workflow_dispatch:
@@ -64,9 +61,8 @@ jobs:
             *) MODE=make ;;
           esac
           if [ "${{ inputs.mode }}" = "check" ]; then MODE=check; fi
-          # clips only for a week: automatic daily reels paused until Nov 25, 3:12 PM Toronto (a manual run still works)
-          if [ "$MODE" = "make" ] && { [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.once }}" = "yes" ]; } \
-             && [ "$(TZ=America/Toronto date +%Y%m%d%H%M)" -lt 202611251512 ]; then MODE=paused; echo "Paused: clips only until Nov 25"; fi
+          # the old morning reel is retired: automatic make runs do nothing (its formats moved to the GTA slots; a manual run still works)
+          if [ "$MODE" = "make" ] && { [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.once }}" = "yes" ]; }; then MODE=paused; echo "Retired: the morning reel"; fi
           case "$S" in
             "13 17 * 11,12 *"|"43 18 * 11,12 *") SLOT=gta ;;
             *) SLOT=main ;;
