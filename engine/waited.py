@@ -311,6 +311,11 @@ def short(name):
     return "".join(w if (w.isupper() or w.isdigit()) and len(w) <= 4 else w[0].upper() for w in words)[:5]
 
 
+# the publisher's logo on each game's tile (logo.dev); a game missing here keeps a colored tile
+PUBLISHERS = {"Minecraft": "mojang.com", "GTA V": "rockstargames.com", "Red Dead Redemption 2": "rockstargames.com",
+              "Wii Sports": "nintendo.com", "Mario Kart 8": "nintendo.com", "PUBG": "krafton.com", "Super Mario Bros.": "nintendo.com"}
+
+
 def consoles(n, today):
     import csv
     with open(DATA_DIR / "console_launch_prices.csv", newline="") as f:
@@ -338,7 +343,9 @@ def bestsellers(n, today):
     gta = next(r for r in rows if r["game"] == "GTA V")
     pick = rnd.sample([r for r in rows if r is not gta], 4) + [gta]
     rnd.shuffle(pick)
-    items = [{"name": r["game"], "sub": r["year"], "value": float(r["million_copies"]), "short": short(r["game"])} for r in pick]
+    from engine.stockrace import logo_file
+    items = [{"name": r["game"], "sub": r["year"], "value": float(r["million_copies"]), "short": short(r["game"]),
+              "logo": logo_file(PUBLISHERS.get(r["game"]))} for r in pick]
     top = max(items, key=lambda x: x["value"])
     props = {"pal": "vice", **HL_TIMING, "hookA": "Best-selling games ever.", "hookB": "Higher or lower?",
              "endA": f"The top seller here: {top['name']},", "endB": f"{top['value']:g} million copies.", "unit": "COPIES SOLD", "fmt": "millions",
