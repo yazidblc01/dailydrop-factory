@@ -1353,5 +1353,21 @@
     "zernio_id": "6b047af436f968d99dd64b8e",
     "posted_at": "2026-11-23T17:43:07+00:00",
     "slot": "waited"
+  },
+  "clip__20261123__HonorableCogentMarjoramK": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=gGabN5ZPYhM",
+      "facebook": "https://www.facebook.com/reel/2343002843142507"
+    },
+    "url": "https://www.youtube.com/watch?v=gGabN5ZPYhM",
+    "title": "GTA 6: Jerma Hears Cries For Help Out At Sea",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b04a933f07a6b376576e9e5",
+    "posted_at": "2026-11-23T21:00:33+00:00",
+    "slot": "waited"
   }
 }
