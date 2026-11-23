@@ -83,7 +83,7 @@ def source():
 def ask(context):
     import anthropic
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    msg = client.messages.create(model=CLAUDE_MODEL, max_tokens=1500, system=SYS, tools=[TOOL], tool_choice={"type": "tool", "name": "chat"},
+    msg = client.messages.create(model=CLAUDE_MODEL, max_tokens=1500, system=SYS, tools=[TOOL],
                                  messages=[{"role": "user", "content": f"{context}\nCast: {json.dumps(CAST)}"}])
     return next(b.input for b in msg.content if b.type == "tool_use")
 
@@ -126,6 +126,7 @@ def make(dry=False, today=None):
     _, topic, cid, v = src
     name = f"chat__{today:%Y%m%d}__{st['count']}"
     out = MEDIA_DIR / name
+    subprocess.run(["rm", "-rf", str(out)])                # a fresh folder: never reuse a half-downloaded clip
     out.mkdir(parents=True, exist_ok=True)
     print(f"      chat about: {v.get('name') or v.get('login')}: {v.get('moment')} ({topic})")
     lvl = streamclips.download(v["url"], out)
