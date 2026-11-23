@@ -14,7 +14,8 @@ type Word = {w: string; start: number; end: number};       // seconds into the s
 export type Seg = {src: string; srcW: number; srcH: number; from: number; dur: number;   // from: seconds into the source
   facecam?: Box | null; gamebox?: Box | null; star?: 'reaction' | 'gameplay'; peak?: number | null;
   words?: Word[]; credit: string; label?: string; flash?: boolean; face?: boolean;   // face: a real human facecam (not an avatar)
-  blurs?: {t0: number; t1: number; x: number; y: number; w: number; h: number}[]};   // nudity to blur: segment seconds, source fractions
+  blurs?: {t0: number; t1: number; x: number; y: number; w: number; h: number}[];   // nudity to blur: segment seconds, source fractions
+  layout?: 'crop' | 'zoom'; bg?: string | null};   // bg: the small pre-blurred background video (zoom layout)   // crop: the game fills the screen; zoom: the whole game width in a band, the facecam large on top
 export type EdClipProps = {segs: Seg[]; hook: string; badge: string; duration: number; follow?: Follow; react?: boolean;
   setup?: string; setupAt?: number};   // setup: one line of context shown for the first seconds of the story
 
@@ -72,6 +73,46 @@ const square = (c: Box, s: Seg): Box => {          // the facecam cut to a squar
   const cx = c.x + c.w / 2, cy = c.y + c.h / 2;
   return {x: cx - side / 2 / s.srcW, y: cy - side / 2 / s.srcH, w: side / s.srcW, h: side / s.srcH};
 };
+// the zoom layout: the game at 1.15x (only the sides trimmed) in a full-width band from y=640, the facecam 16:9 on top,
+// a blurred copy of the game behind everything. The hook, setup and captions sit in the blur under the band.
+export const ZOOM = 1.15, BAND_Y = 640, BAND_MAX = 820;
+export const zoomBand = (s: Seg): {r: Box; h: number} => {
+  const gb: Box = s.gamebox && s.gamebox.w > 0.2 && s.gamebox.h > 0.2 ? s.gamebox : {x: 0, y: 0, w: 1, h: 1};
+  const gw = gb.w / ZOOM;
+  const gx = gb.x + (gb.w - gw) / 2;                                       // always centered: the same amount trimmed off each side
+  const h = Math.min(BAND_MAX, Math.round((1080 * gb.h * s.srcH) / (gw * s.srcW)));
+  return {r: {x: gx, y: gb.y, w: gw, h: gb.h}, h};
+};
+const ZoomShot: React.FC<{s: Seg; t: number; zoom: number}> = ({s, t, zoom}) => {
+  const cam = s.face !== false && s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
+  const band = zoomBand(s);
+  const FW = 640, FH = 360;
+  return (
+    <>
+      {s.bg ? <Win s={{...s, src: s.bg, srcW: 360, srcH: 640, blurs: []}} r={{x: 0, y: 0, w: 1, h: 1}} W={1080} H={1920} top={0} muted />
+        : <AbsoluteFill style={{background: 'radial-gradient(circle at 50% 40%, #3a1458, #0d0718 70%)'}} />}
+      {cam && (
+        <div style={{position: 'absolute', left: (1080 - FW) / 2, top: 250, width: FW, height: FH, borderRadius: 28, overflow: 'hidden', border: '5px solid #FF4FA0',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.6)'}}>
+          <Win s={s} r={cam} W={FW - 10} H={FH - 10} top={0} muted t={t} />
+        </div>
+      )}
+      <div style={{position: 'absolute', left: 0, top: BAND_Y, width: 1080, height: band.h, overflow: 'hidden', boxShadow: '0 0 60px rgba(0,0,0,0.65)'}}>
+        <Win s={s} r={band.r} W={1080} H={band.h} top={0} zoom={zoom} t={t} />
+      </div>
+      <div style={{position: 'absolute', top: BAND_Y - 52, left: 40}}>
+        <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 22, padding: '5px 12px', borderRadius: 999, background: 'rgba(13,7,24,0.7)', color: '#fff'}}>🎥 {s.credit}</span>
+      </div>
+    </>
+  );
+};
+// where the hook, the setup line and the captions go: over the game (crop) or in the blur under the band (zoom)
+export const textSpots = (s?: Seg) => {
+  if (s?.layout !== 'zoom') return {hook: 660, setup: 820, cap: 1420};
+  const b = BAND_Y + zoomBand(s).h;
+  return {hook: b + 30, setup: b + 170, cap: Math.min(1600, b + 330)};
+};
+
 export const Shot: React.FC<{s: Seg; t: number; camY?: number}> = ({s, t, camY = SQY}) => {
   const cam = s.face !== false && s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
   const game = gameRegion(s, 1080, 1920);
@@ -80,18 +121,20 @@ export const Shot: React.FC<{s: Seg; t: number; camY?: number}> = ({s, t, camY =
   const zoom = 1 + 0.1 * clamp01((t - (pk - 0.35)) / 0.35) * clamp01((pk + 1.4 - t) / 0.4);
   const caps = groups(s.words ?? []);
   const cap = caps.find((g) => t >= g[0].start - 0.05 && t <= g[g.length - 1].end + 0.25);
+  const zl = s.layout === 'zoom';
+  const spots = textSpots(s);
   return (
     <AbsoluteFill style={{background: '#0d0718'}}>
-      <Win s={s} r={game} W={1080} H={1920} top={0} zoom={zoom} t={t} />
-      {cam && (
+      {zl ? <ZoomShot s={s} t={t} zoom={zoom} /> : <Win s={s} r={game} W={1080} H={1920} top={0} zoom={zoom} t={t} />}
+      {!zl && cam && (
         <div style={{position: 'absolute', left: SQX, top: camY, width: SQ, height: SQ, borderRadius: 28, overflow: 'hidden', border: '5px solid #FF4FA0',
           boxShadow: '0 14px 34px rgba(0,0,0,0.6)'}}>
           <Win s={s} r={square(cam, s)} W={SQ - 10} H={SQ - 10} top={0} muted t={t} />
         </div>
       )}
-      <div style={{position: 'absolute', top: cam ? camY + SQ + 14 : camY, left: SQX}}>
+      {!zl && <div style={{position: 'absolute', top: cam ? camY + SQ + 14 : camY, left: SQX}}>
         <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 22, padding: '5px 12px', borderRadius: 999, background: 'rgba(13,7,24,0.7)', color: '#fff'}}>🎥 {s.credit}</span>
-      </div>
+      </div>}
       {s.label && (
         <div style={{position: 'absolute', left: 0, right: 0, top: 700, textAlign: 'center'}}>
           <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 900, fontSize: 44, padding: '8px 22px', borderRadius: 16, background: '#FF4FA0', color: '#fff',
@@ -99,7 +142,7 @@ export const Shot: React.FC<{s: Seg; t: number; camY?: number}> = ({s, t, camY =
         </div>
       )}
       {cap && (
-        <div style={{position: 'absolute', left: 40, right: 40, top: 1420, textAlign: 'center'}}>
+        <div style={{position: 'absolute', left: 40, right: 40, top: spots.cap, textAlign: 'center'}}>
           <span style={{fontFamily: SANS, fontWeight: 900, fontSize: 54, lineHeight: 1.2, color: '#fff', WebkitTextStroke: '9px #000', paintOrder: 'stroke fill'}}>
             {cap.map((w, i) => {
               const now = t >= w.start - 0.03 && t <= w.end + 0.08;
@@ -114,11 +157,11 @@ export const Shot: React.FC<{s: Seg; t: number; camY?: number}> = ({s, t, camY =
 };
 
 // the hook: a small headline over the game for the first 3 s, then gone
-const Hook: React.FC<{text: string; t: number}> = ({text, t}) => {
+const Hook: React.FC<{text: string; t: number; top?: number}> = ({text, t, top = 660}) => {
   if (!text || t > 3.3) return null;
   const k = outBack(clamp01(t / 0.35), 1.8) * (1 - clamp01((t - 3.0) / 0.3));
   return (
-    <div style={{position: 'absolute', left: 60, right: 60, top: 660, textAlign: 'center', opacity: clamp01(k * 1.5), transform: `scale(${0.8 + 0.2 * k})`}}>
+    <div style={{position: 'absolute', left: 60, right: 60, top, textAlign: 'center', opacity: clamp01(k * 1.5), transform: `scale(${0.8 + 0.2 * k})`}}>
       <span style={{fontFamily: SANS, fontWeight: 900, fontSize: text.length > 18 ? 52 : 60, lineHeight: 1.08, color: '#FFE07A', textTransform: 'uppercase',
         WebkitTextStroke: '8px #1a0a2e', paintOrder: 'stroke fill', textShadow: '0 6px 20px rgba(0,0,0,0.6)'}}>{text}</span>
     </div>
@@ -147,12 +190,12 @@ export const Brand: React.FC<{t: number}> = ({t}) => {
 // the context line: what is going on, so someone scrolling in understands the moment before it lands
 // where the facecam strip meets the game (the hook sits just above it, the setup line just below)
 
-const Setup: React.FC<{text: string; t: number}> = ({text, t}) => {
+const Setup: React.FC<{text: string; t: number; top?: number}> = ({text, t, top = 820}) => {
   const hold = Math.min(3.5, Math.max(2.6, text.split(' ').length / 3.4 + 0.6));
   if (t < 0 || t > hold + 0.3) return null;
   const k = outBack(clamp01(t / 0.3), 1.6) * (1 - clamp01((t - hold) / 0.3));
   return (
-    <div style={{position: 'absolute', left: 90, right: 90, top: 820, display: 'flex', justifyContent: 'center', opacity: k}}>
+    <div style={{position: 'absolute', left: 90, right: 90, top, display: 'flex', justifyContent: 'center', opacity: k}}>
       <span style={{display: 'inline-block', fontFamily: SANS, fontWeight: 700, fontSize: 34, lineHeight: 1.25, padding: '10px 20px', borderRadius: 16,
         background: 'rgba(13,7,24,0.72)', color: '#fff', textAlign: 'center'}}>{text}</span>
     </div>
@@ -183,8 +226,8 @@ export const EdClip: React.FC<EdClipProps> = (p) => {
   return (
     <AbsoluteFill style={{background: '#0d0718'}}>
       {parts}
-      <Hook text={p.hook} t={frame / fps} />
-      {p.setup && <Setup text={p.setup} t={frame / fps - (p.setupAt ?? 0)} />}
+      <Hook text={p.hook} t={frame / fps} top={textSpots(p.segs[0]).hook} />
+      {p.setup && <Setup text={p.setup} t={frame / fps - (p.setupAt ?? 0)} top={textSpots(p.segs[p.segs.length - 1]).setup} />}
       <Brand t={frame / fps} />
       {p.follow && <LogoOutro t={frame / fps} at={p.follow.at} />}
     </AbsoluteFill>

@@ -29,6 +29,7 @@ import argparse
 import base64
 import json
 import os
+import random
 import re
 import statistics
 import subprocess
@@ -372,7 +373,9 @@ GAUNTLET = {"name": "verdict", "description": "Pass or fail the vertical.", "inp
 
 GAUNTLET_SYS = """You review frames of a finished vertical Short before it posts. Fail it ONLY if something is broken:
 the video is black, frozen or just blur; the facecam crop cuts the face off badly; the hook text is unreadable or covers the
-streamer's face; or nudity is visible. Small layout preferences are not a reason to fail. Otherwise pass it."""
+streamer's face; or nudity is visible. Small layout preferences are not a reason to fail. Otherwise pass it.
+Some reels show the whole game in a band across the middle with a blurred copy of it behind and the facecam on top: that's our
+design, not a fault (only fail if the sharp game band itself is blurry, black or frozen)."""
 
 
 def timed(words):
@@ -437,8 +440,13 @@ FINAL = {"name": "pick", "description": "Pick the clip to post, or none.", "inpu
     "pick": {"type": "integer", "description": "the number of the best clip (always name one)"},
     "score": {"type": "integer", "description": "1 to 10 for that clip, as it will look in our finished reel"},
     "why": {"type": "string"},
+    "layout": {"type": "string", "enum": ["crop", "zoom", "either"],
+               "description": "how to frame the game for this clip: crop = the game cropped to fill the vertical screen (close action: "
+                              "one character, a conversation, a cutscene, the action in the middle); zoom = the whole game width shown "
+                              "(wide action: driving, chases, crowds, several characters, the game's subtitles or money near the edges); "
+                              "either = not clear"},
     **{k: SCREEN["input_schema"]["properties"][k] for k in ("setup", "hook", "title", "description", "pinned_comment")}},
-    "required": ["pick", "score", "why", "setup", "hook", "title", "description", "pinned_comment"]}}
+    "required": ["pick", "score", "why", "layout", "setup", "hook", "title", "description", "pinned_comment"]}}
 FINAL_SYS = """You make the final call on which GTA 6 stream clip The Daily Drop posts (Shorts, gamers 13 to 25).
 What wins: an absurd, chaotic or funny thing happening, with the streamer's face reacting. Our reels caption every word said,
 so a funny line of dialogue works too. Chaos is a story: an action and its consequence, or a fail and the reaction.
@@ -451,7 +459,9 @@ Never pick a moment we already posted recently (the list is given). Then write i
 Mark a clip down hard if the sheet shows a pause screen, the map, a menu, photo mode, a black or very dark screen, or nothing moving.
 hook = the EVENT in 2 to 5 words ('HE STOLE GRANDMA'S SCOOTER'), never a mood ('X LOST IT', 'X IS UNIMPRESSED'),
 and never the ending of the moment (tease it: 'HE TRIED TO OUTRUN THE COPS', not 'HE DROVE INTO THE CANAL').
-title starts with 'GTA 6: ' and names the event. setup = the context line, never giving the payoff away."""
+title starts with 'GTA 6: ' and names the event. setup = the context line, never giving the payoff away.
+layout: look at where the action happens across the sheet. If cropping the 16:9 frame to its middle third would cut off
+what matters (a car chase, people at the sides, the game's subtitles), say zoom; if the middle holds it all, say crop."""
 
 
 def recent_moments(st, days=3):
@@ -576,13 +586,27 @@ def publish_src(info, name, i):
     return rel
 
 
-def seg(info, v, rel, credit, start, end, label=None, words=True, flash=False, blurs=None):
+def zoom_bg(info, v, name, i):
+    """The blurred background for the zoom layout, made once by ffmpeg: small (360x640), heavily blurred, no sound.
+    Blurring the full 4K video in the browser crashed the render on a Mac; a small pre-blurred file costs almost nothing."""
+    (render.PUBLIC / "clips").mkdir(parents=True, exist_ok=True)
+    rel = f"clips/{name}_{i}_bg.mp4"
+    g = v.get("gamebox") if v.get("gamebox") and v["gamebox"].get("w", 0) > 0.2 and v["gamebox"].get("h", 0) > 0.2 else {"x": 0, "y": 0, "w": 1, "h": 1}
+    crop = f"crop=iw*{g['w']:.3f}:ih*{g['h']:.3f}:iw*{g['x']:.3f}:ih*{g['y']:.3f}"
+    vf = f"{crop},scale=360:640:force_original_aspect_ratio=increase,crop=360:640,boxblur=18:3,eq=brightness=-0.18"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(info["src"]), "-vf", vf, "-an", "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "30",
+                    str(render.PUBLIC / rel)], check=True)
+    return rel
+
+
+def seg(info, v, rel, credit, start, end, label=None, words=True, flash=False, blurs=None, bg=None):
     ws = [{"w": x["w"], "start": round(x["start"] - start, 2), "end": round(x["end"] - start, 2)}
           for x in info["words"] if start <= x["start"] < end] if words and not v.get("captioned") else []
     return {"src": rel, "srcW": info["w"], "srcH": info["h"], "from": round(start, 2), "dur": round(end - start, 2),
             "facecam": v.get("facecam"), "gamebox": v.get("gamebox"), "star": v.get("star") or "gameplay",
             "peak": round(v["peak"] - start, 2) if start <= v["peak"] <= end else None,
             "words": ws, "credit": credit, "label": label, "flash": flash, "face": bool(v.get("face_visible", True)),
+            "layout": v.get("layout") if v.get("layout") in ("crop", "zoom") else "crop", "bg": bg,
             "blurs": [{**b, "t0": round(b["t0"] - start, 2), "t1": round(b["t1"] - start, 2)} for b in (blurs or []) if b["t1"] > start and b["t0"] < end]}
 
 
@@ -602,6 +626,8 @@ def render_reel(segs, hook, out, today, setup=None, setup_at=0.0):
     finally:
         for s in segs:
             (render.PUBLIC / s["src"]).unlink(missing_ok=True)
+            if s.get("bg"):
+                (render.PUBLIC / s["bg"]).unlink(missing_ok=True)
     return final, dur
 
 
@@ -641,13 +667,14 @@ def gauntlet(final, dur, out):
                GAUNTLET, GAUNTLET_SYS, model=CLAUDE_FAST)
 
 
-def finish(name, out, final, title, description, pinned, credits, st, logins, star, moment=None, platforms=None):
+def finish(name, out, final, title, description, pinned, credits, st, logins, star, moment=None, platforms=None, layout=None, layout_by=None):
     meta = {"topic": name, "title": title, "description": f"{description}\n\n{credits}", "pinned_comment": pinned, "file": str(final)}
     if platforms:
         meta["platforms"] = platforms
     (out / "upload.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False))
     st["count"] += 1
-    st["posted"].append({"topic": name, "logins": logins, "star": star, "moment": moment, "date": datetime.now().strftime("%Y-%m-%d")})
+    st["posted"].append({"topic": name, "logins": logins, "star": star, "moment": moment, "date": datetime.now().strftime("%Y-%m-%d"),
+                         **({"layout": layout, "layout_by": layout_by} if layout else {})})
 
 
 # ---------- the two formats ----------
@@ -656,14 +683,21 @@ def build(c, v, info, name, out, st, today, worded=False):
     try:
         if not worded:
             v = copy(c, v, info["words"])
+        # the layout: Claude's call when it's clear, a coin flip when it said "either" (logged, so the two can be compared)
+        lay, by = v.get("layout"), "claude"
+        if lay not in ("crop", "zoom"):
+            lay, by = random.choice(["crop", "zoom"]), "coin"
+        v = {**v, "layout": lay}
+        print(f"        layout: {lay} ({by})")
         info = bleep(info, out)
         blurs = blur_list(info["src"], v["start"], v["end"], out)
         rel = publish_src(info, name, 0)
         credit = f"{c['broadcaster_name']} on Twitch"
-        main = seg(info, v, rel, credit, v["start"], v["end"], blurs=blurs)
+        bg = zoom_bg(info, v, name, 0) if lay == "zoom" else None
+        main = seg(info, v, rel, credit, v["start"], v["end"], blurs=blurs, bg=bg)
         segs = [main]
         if v.get("cold_open"):                     # the payoff flashed first, only when it makes sense on its own
-            segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True, blurs=blurs), main]
+            segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True, blurs=blurs, bg=bg), main]
         final, dur = render_reel(segs, v["hook"], out, today, setup=v.get("setup"), setup_at=sum(x["dur"] for x in segs[:-1]))
         g = gauntlet(final, dur, out)
         if g["pass"] and (blurs or v.get("nudity")):           # the safety net: nothing exposed may be left in the final reel
@@ -679,7 +713,7 @@ def build(c, v, info, name, out, st, today, worded=False):
     st["seen"].setdefault(c["id"], {})["posted"] = True
     finish(name, out, final, v["title"], v["description"], v["pinned_comment"],
            f"🎥 {c['broadcaster_name']} on Twitch: https://twitch.tv/{c['login']}\nOriginal clip: {c['url']}",
-           st, [c["login"]], v.get("star"), v.get("moment"), CLIP_PLATFORMS)
+           st, [c["login"]], v.get("star"), v.get("moment"), CLIP_PLATFORMS, lay, by)
     return final
 
 
@@ -731,7 +765,7 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
                     st["seen"].get(x[0]["id"], {})["final_no"] = True
                 return None
             c, v, info, name, out = finalists.pop(i)
-            v.update({k: f[k] for k in ("setup", "hook", "title", "description", "pinned_comment") if f.get(k)})
+            v.update({k: f[k] for k in ("setup", "hook", "title", "description", "pinned_comment", "layout") if f.get(k)})
             budget["renders"] -= 1
             final = build(c, v, info, name, out, st, today, worded=True)
             if final:
@@ -812,7 +846,7 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
         if fin and not dry and budget["renders"] > 0:
             c, v, info, name, out = fin
             print(f"      no 7/10 today, posting the best {score}/10: {c['broadcaster_name']}: {c['title']}")
-            v.update({k: f[k] for k in ("setup", "hook", "title", "description", "pinned_comment") if f.get(k)})
+            v.update({k: f[k] for k in ("setup", "hook", "title", "description", "pinned_comment", "layout") if f.get(k)})
             final = build(c, v, info, name, out, st, today, worded=True)
             if final:
                 return name, final
