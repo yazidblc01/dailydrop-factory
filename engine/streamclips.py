@@ -460,6 +460,9 @@ def screen(c, src, dur, words, loud, out, system=None):
                f"({', '.join(f'{t:.1f}s' for t in times)}). Image 2: the frame at the loudest moment ({pk0:.1f}s).\n"
                f"Loudest moments (s): {loud}\nWhat they say, with times:\n{timed(words)}"}]
     v = ask(content, SCREEN, system or SCREEN_SYS, model=CLAUDE_FAST)   # the cheap model screens; the strong one writes the words on winners
+    v.setdefault("why", "")                                     # the model sometimes leaves out a field it was asked for
+    v.setdefault("use", False)
+    v.setdefault("score", 0)
     # keep the trim sane, whatever came back
     if v.get("use") and v.get("story") is False:
         v["use"] = False
@@ -1004,7 +1007,7 @@ def make_spike(cid, dry=False, today=None):
         st["seen"][cid] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
                            "url": c["url"], "title": c["title"], "views": c["view_count"], "language": c.get("language"),
                            **{k: v.get(k) for k in SEEN_KEYS}}
-        print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('moment')}) {v['why'][:110]}")
+        print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('moment')}) {str(v.get('why', ''))[:110]}")
         if not v["use"]:
             raise RuntimeError(f"the screener said no: {v['why'][:100]}")
         if dry:
@@ -1092,7 +1095,7 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
             st["seen"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
                                    "url": c["url"], "title": c["title"], "views": c["view_count"], "language": c.get("language"),
                                    **{k: v.get(k) for k in KEEP}}
-            print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('star')}, {v.get('moment')}) {v['why'][:110]}")
+            print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('star')}, {v.get('moment')}) {str(v.get('why', ''))[:110]}")
             if not v["use"] or screen_only:
                 continue
             finalists.append((c, v, info, name, out))
