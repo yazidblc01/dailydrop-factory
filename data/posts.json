@@ -1463,5 +1463,24 @@
     "posted_at": "2026-11-24T21:04:35+00:00",
     "url": "https://www.youtube.com/watch?v=1oHZfmCJNCo",
     "slot": "waited"
+  },
+  "chat__20261124__4": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=k0YuX7Ul1vM",
+      "facebook": "https://www.facebook.com/reel/2209727757089891",
+      "instagram": "https://www.instagram.com/reel/DgJHc-jE-Dg/"
+    },
+    "url": "https://www.youtube.com/watch?v=k0YuX7Ul1vM",
+    "title": "GTA 6: Puppy On Board Does Not Stop Crashes",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b061b01c6a457b49ce311c6",
+    "posted_at": "2026-11-24T23:17:50+00:00",
+    "slot": "waited"
   }
 }
