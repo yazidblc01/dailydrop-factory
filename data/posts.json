@@ -1389,5 +1389,21 @@
     "posted_at": "2026-11-23T23:21:04+00:00",
     "url": "https://www.youtube.com/watch?v=qGkoCwIp3pc",
     "slot": "waited"
+  },
+  "clip__20261123__FancyRealOtterEagleEye_U": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=DaMBHfE4SBM",
+      "facebook": "https://www.facebook.com/reel/1417056766869283"
+    },
+    "title": "GTA 6: Jerma Rides Into Pedestrians With A Puppy Aboard",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b04eea17fc4d25e1cc5a977",
+    "posted_at": "2026-11-24T01:56:34+00:00",
+    "url": "https://www.youtube.com/watch?v=DaMBHfE4SBM",
+    "slot": "waited"
   }
 }
