@@ -1444,5 +1444,24 @@
     "posted_at": "2026-11-24T18:05:15+00:00",
     "url": "https://www.youtube.com/watch?v=asXJBr4pkyM",
     "slot": "waited"
+  },
+  "race__cars__ps5": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=1oHZfmCJNCo",
+      "facebook": "https://www.facebook.com/reel/1331447649106988",
+      "instagram": "https://www.instagram.com/reel/DgI4NaTiMQm/"
+    },
+    "title": "$1,000 in car stocks the day the PS5 came out: who won?",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b05fbd1d301c97adf09b79f",
+    "posted_at": "2026-11-24T21:04:35+00:00",
+    "url": "https://www.youtube.com/watch?v=1oHZfmCJNCo",
+    "slot": "waited"
   }
 }
