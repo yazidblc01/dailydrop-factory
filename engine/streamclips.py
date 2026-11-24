@@ -57,7 +57,7 @@ CUT_MIN, CUT_MAX = 12, 40        # what we keep: 12 to 20 s for a punchy moment,
 MIN_VIEWS = 200                  # viewers voted: a clip needs this many Twitch views (views per hour and the outlier rank the rest)
 FRESH_H = 24                     # fresh clips only (day-1 missions age out); 48 h if 24 comes up dry
 MIN_SCORE = 7                    # the final pick's bar
-FLOOR = 6                        # after a full search with no 7, the best 6 is posted; never lower
+FLOOR = 7                        # no 6/10 fallback any more: a slot with no 7 posts an original instead (Nov 24 2026)
 EXPOSED = {"FEMALE_BREAST_EXPOSED", "FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED", "BUTTOCKS_EXPOSED", "ANUS_EXPOSED"}
 CLIP_PLATFORMS = ["youtube", "facebook"]   # plain clips: TikTok and Instagram demote reposted streams
 PER_STREAMER_DAY = 2
@@ -72,7 +72,8 @@ LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-vf", "unsharp=5:5:0.6:5:5:0.0
 def load_state():
     st = json.loads(STATE.read_text()) if STATE.exists() else {}
     return {"used": st.get("used", []), "count": st.get("count", 0), "seen": st.get("seen", {}),
-            "posted": st.get("posted", []), "house": st.get("house", ""), "seen5": st.get("seen5", {}), "spikes": st.get("spikes", [])}
+            "posted": st.get("posted", []), "house": st.get("house", ""), "seen5": st.get("seen5", {}), "spikes": st.get("spikes", []),
+            "mined": st.get("mined", {})}
 
 
 def save_state(st):
@@ -457,6 +458,7 @@ Our hit: a streamer knocks a grandma off her mobility scooter and steals it. A f
 Judge each clip as it will look in OUR finished reel, not raw: swears get bleeped,
 every word said is captioned on screen, and the setup line you write explains the context in the first seconds.
 So never mark a clip down for swearing or needing context (clips with nudity never reach you). Mark it down for a weak or unclear payoff, no reaction,
+or nothing really happening on screen (a small bump or crash with no clear consequence is a 5 at most, however loud the streamer is),
 or a moment we already posted. Name the best clip and score it honestly (7+ = we'd be proud to post it).
 Never pick a moment we already posted recently (the list is given). Then write its words:
 Mark a clip down hard if the sheet shows a pause screen, the map, a menu, photo mode, a black or very dark screen, or nothing moving.
@@ -797,7 +799,8 @@ def build(c, v, info, name, out, st, today, worded=False):
         info = bleep(info, out)
         blurs = []                                  # clips with nudity are skipped at screening; the final check below is the safety net
         rel = publish_src(info, name, 0)
-        credit = f"{c['broadcaster_name']} on Twitch"
+        plat = c.get("platform", "Twitch")
+        credit = f"{c['broadcaster_name']} on {plat}"
         bg = zoom_bg(info, v, name, 0) if lay == "zoom" else None
         main = seg(info, v, rel, credit, v["start"], v["end"], blurs=blurs, bg=bg)
         segs = [main]
@@ -817,7 +820,9 @@ def build(c, v, info, name, out, st, today, worded=False):
         return None
     st["seen"].setdefault(c["id"], {})["posted"] = True
     finish(name, out, final, v["title"], v["description"], v["pinned_comment"],
-           f"🎥 {c['broadcaster_name']} on Twitch: https://twitch.tv/{c['login']}\nOriginal clip: {c['url']}",
+           (f"🎥 {c['broadcaster_name']} on Twitch: https://twitch.tv/{c['login']}" if plat == "Twitch"
+            else f"🎥 {c['broadcaster_name']} on YouTube: https://www.youtube.com/{c['login']}")
+           + f"\n{'Original stream' if c.get('mined') else 'Original clip'}: {c['url']}",
            st, [c["login"]], v.get("star"), v.get("moment"), CLIP_PLATFORMS, lay, by)
     return final
 
@@ -839,7 +844,8 @@ def bank(st, hours=72):
         try:
             tok = token()
             now = datetime.now(timezone.utc)
-            views = {c["id"]: c["view_count"] for c in helix("clips", tok, id=[k for k, _ in pool][:100])}
+            ids = [k for k, v in pool if not v.get("mined")][:100]          # mined moments have no Twitch clip to refresh
+            views = {c["id"]: c["view_count"] for c in helix("clips", tok, id=ids)} if ids else {}
             for k, v in pool:
                 if k in views:
                     hrs = max((now - datetime.fromisoformat(v["at"])).total_seconds() / 3600, 0.5)
@@ -984,32 +990,46 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
                 finalists = []
         return decide(finalists)
 
+    def from_bank(items):
+        """Already approved, never posted: re-downloaded (or re-cut, for mined moments), then the strong model decides."""
+        picks = []
+        for cid, m in items:
+            print(f"      from the bank: {m['name']}: {m['title']} (score {m.get('score')})")
+            name = f"clip__{today:%Y%m%d}__{cid[:24]}".replace("-", "_")
+            out = MEDIA_DIR / name
+            out.mkdir(parents=True, exist_ok=True)
+            try:
+                if m.get("vod_cut"):                          # a moment mined from a stream recording: cut it again
+                    from engine import vodmine
+                    info = media_info(vodmine.section(m, out))
+                else:
+                    info = media_info(download(m["url"], out))
+            except Exception as e:
+                print(f"        skipped: {e}")
+                m["failed"] = True
+                continue
+            c = {"id": cid, "login": m["login"], "broadcaster_name": m["name"], "url": m["url"], "title": m["title"], "view_count": m.get("views"),
+                 "platform": m.get("platform", "Twitch"), "mined": m.get("mined", False)}
+            pk = min(max(m.get("peak") or info["dur"] / 2, 0.0), info["dur"])
+            v = {**m, "peak": pk, "start": min(m.get("start") or 0.0, pk), "end": max(min(m.get("end") or info["dur"], info["dur"]), pk),
+                 "hook": "WAIT FOR IT", "title": f"GTA 6: {m['name']} {m.get('moment') or ''}".strip()[:60],
+                 "description": f"{m['name']} playing GTA 6.", "pinned_comment": "Would you have done the same? 👇"}
+            picks.append((c, v, info, name, out))
+        return decide(picks)
+
     try:
+        # 0. moments mined from stream recordings that the screener rated 7+: they go first (nobody else has them)
+        if not screen_only:
+            got = from_bank([x for x in bank(st) if x[1].get("mined") and (x[1].get("score") or 0) >= 7][:3])
+            if got:
+                return got
         found = candidates(st)
         print(f"      stream clips: {len(found)} fresh allowlisted GTA 6 clips (last {FRESH_H} h, {MIN_VIEWS}+ views)")
         got = fresh(found, SCREENS)
         if got or screen_only:
             return got or (None, None)
 
-        picks = []                                       # 2. already approved, never posted
-        for cid, m in bank(st)[:3]:
-            print(f"      from the bank: {m['name']}: {m['title']} (score {m.get('score')})")
-            name = f"clip__{today:%Y%m%d}__{cid[:24]}".replace("-", "_")
-            out = MEDIA_DIR / name
-            out.mkdir(parents=True, exist_ok=True)
-            try:
-                info = media_info(download(m["url"], out))
-            except Exception as e:
-                print(f"        skipped: {e}")
-                m["failed"] = True
-                continue
-            c = {"id": cid, "login": m["login"], "broadcaster_name": m["name"], "url": m["url"], "title": m["title"], "view_count": m.get("views")}
-            pk = min(max(m.get("peak") or info["dur"] / 2, 0.0), info["dur"])
-            v = {**m, "peak": pk, "start": min(m.get("start") or 0.0, pk), "end": max(min(m.get("end") or info["dur"], info["dur"]), pk),
-                 "hook": "WAIT FOR IT", "title": f"GTA 6: {m['name']} {m.get('moment') or ''}".strip()[:60],
-                 "description": f"{m['name']} playing GTA 6.", "pinned_comment": "Would you have done the same? 👇"}
-            picks.append((c, v, info, name, out))
-        got = decide(picks)
+        got = from_bank(bank(st)[:3])                    # 2. already approved, never posted
         if got:
             return got
 

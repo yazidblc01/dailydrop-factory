@@ -23,7 +23,7 @@ from config import CLAUDE_MODEL, DATA_DIR, MEDIA_DIR
 from engine.render import PUBLIC, VIDEO_DIR
 
 STATE = DATA_DIR / "vicechat.json"
-INTRO_MIN, INTRO_MAX = 4.0, 7.0  # the clip plays full screen first, through to the payoff
+INTRO_MIN, INTRO_MAX = 4.0, 8.0  # the clip plays full screen first, through to the payoff
 LOOP = 3.0                      # then the video bubble loops just the payoff
 OUTRO = 1.6                     # the logo outro
 CAST = {"lucia": "Lucia, GTA 6's lead: sharp, sarcastic, the brains, roasts Jason",
@@ -93,8 +93,9 @@ def windows(v, dur):
     """The intro (full screen, ends just after the payoff) and the payoff the bubble loops, in source seconds.
     The payoff is the peak when it sits inside the story; otherwise the end of the final pick's trim (it ends on the payoff)."""
     s0, s1 = float(v["start"]), min(float(v["end"]), dur)
+    # the trim ends on the payoff; the loudest second is often the streamer yelling before it happens (the canal reel)
     pk = v.get("peak")
-    pay = float(pk) if pk is not None and s0 + INTRO_MIN - 1 <= float(pk) <= s1 else s1 - 1.0
+    pay = max(s1 - 1.0, float(pk) if pk is not None and float(pk) <= s1 else 0)
     ie = min(s1, pay + 1.0, dur)
     i0 = max(s0, ie - INTRO_MAX)
     i0 = max(0.0, min(i0, ie - INTRO_MIN))
@@ -151,7 +152,8 @@ def make(dry=False, today=None):
     said = " ".join(w["w"] for w in info["words"] if i0 <= w["start"] <= ie)[:500]   # only what the viewer sees and hears
     c = ask(f"Clip title: {v.get('title')}\nWhat happens: {v.get('setup') or ''}. {v.get('moment')}\n"
             f"The viewer sees the last {intro_dur:.0f} seconds, ending on the payoff. What the streamer says in them: {said}\n"
-            "The chat must only react to what's in those seconds.")
+            "The chat must only react to what's in those seconds. If 'what happens' mentions something the streamer's words "
+            "don't confirm in those seconds, leave it out: never describe an outcome the viewer may not see.")
     print(f"      title: {c['hook']}\n        {c['poster']:>8}: [the clip]")
     for m in c["msgs"]:
         print(f"        {m['who']:>8}: {m['text']}  {' '.join(m.get('taps', []))}")

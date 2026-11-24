@@ -349,8 +349,21 @@ def pick_music(story):
 
 
 # ---------- the whole thing ----------
+def dull(story, facts):
+    """A stock story only works with a big payoff: at least double, at least halved, or a big run up then crash."""
+    if story["kind"] != "stock":
+        return False
+    for d in facts["data"]:
+        ch = float(d["change"].rstrip("%"))
+        if ch >= 100 or ch <= -50 or d.get("peak_value"):
+            return False
+    return True
+
+
 def write(story, max_tries=4):
     facts = build_facts(story)
+    if dull(story, facts):
+        raise RuntimeError(f"payoff too small ({', '.join(d['name'] + ' ' + d['change'] for d in facts['data'])}), skipped")
     feedback = None
     for n in range(max_tries):
         try:

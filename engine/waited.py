@@ -554,8 +554,21 @@ def make_original(kind, dry=False, today=None):
     return make(dry, False, today)
 
 
+def next_original(dry=False, today=None):
+    """The next original in the rotation (the fallback for any slot that can't post its own format)."""
+    st = load_state()
+    kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
+    if not dry:
+        st["orig"] = st.get("orig", 0) + 1
+        STATE.write_text(json.dumps(st, indent=2))
+    return make_original(kind, dry, today)
+
+
 def make_next(dry=False, flat_only=False, today=None, kind=None, clip=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
+    if kind == "vodmine":                      # mine stream recordings for big moments (fills the clip bank, posts nothing)
+        from engine import vodmine
+        return vodmine.run(dry, today)
     if kind == "spike":                        # a clip blowing up right now (the clock's spike watch): post it or nothing
         from engine import streamclips
         try:
@@ -565,11 +578,7 @@ def make_next(dry=False, flat_only=False, today=None, kind=None, clip=None):
             return None, None
     if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn", "flip", "bars") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
-            st = load_state()
-            kind = ORIGINALS[st.get("orig", 0) % len(ORIGINALS)]
-            if not dry:
-                st["orig"] = st.get("orig", 0) + 1
-                STATE.write_text(json.dumps(st, indent=2))
+            return next_original(dry, today)
         return make_original(kind, dry, today)
     if kind in ("streamclip", "streamreact", "streamvs"):   # streamers' GTA 6 Twitch moments (engine/streamclips.py)
         from engine import streamclips
@@ -587,29 +596,30 @@ def make_next(dry=False, flat_only=False, today=None, kind=None, clip=None):
         try:
             return streamclips.make(dry, today)
         except Exception as e:                     # nothing usable: a regular GTA wave reel, so the slot is never empty
-            print(f"      stream clip failed ({e}), making a waited reel instead")
-            warn(f"ℹ️ No stream clip this slot ({e}), posted a waited reel instead.")
-            return make(dry, flat_only, today)
+            print(f"      stream clip failed ({e}), making the next original instead")
+            warn(f"ℹ️ No 7/10 stream clip this slot ({e}), posted the next original instead.")
+            return next_original(dry, today)
     if kind == "gtamath":   # the voiced comedy countdown (3:07 and 9:07 PM slots); a waited reel if it fails
         try:
             from engine import gtamath
             return gtamath.make(dry, today)
         except Exception as e:
             from engine.texts import warn
-            print(f"      gtamath failed ({e}), making a waited reel instead")
-            warn(f"⚠️ GTA Math reel failed, posted a waited reel instead.\n{e}")
-            return make(dry, flat_only, today)
+            print(f"      gtamath failed ({e}), making the next original instead")
+            warn(f"⚠️ GTA Math reel failed, posted the next original instead.\n{e}")
+            return next_original(dry, today)
     if kind != "waited":
         try:
             return make_other(kind, dry, today)
         except Exception as e:
             from engine.texts import warn
-            print(f"      {kind} failed ({e}), making a waited reel instead")
-            warn(f"⚠️ GTA {kind} reel failed, posted a waited reel instead.\n{e}")
+            print(f"      {kind} failed ({e}), making the next original instead")
+            warn(f"⚠️ GTA {kind} reel failed, posted the next original instead.\n{e}")
             if not dry:
                 st = load_state()
                 st["count"] += 1     # move past it next time
                 STATE.write_text(json.dumps(st, indent=2))
+            return next_original(dry, today)
     return make(dry, flat_only, today)
 
 
@@ -644,7 +654,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip", "bars", "spike"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip", "bars", "spike", "vodmine"], help="force one format")
     ap.add_argument("--clip", help="with --format spike: the Twitch clip id")
     a = ap.parse_args()
     import run
