@@ -550,8 +550,8 @@ def make_original(kind, dry=False, today=None):
         except Exception as e:
             print(f"      {k} failed ({e}), trying the next original")
             errors.append(f"{k}: {e}")
-    warn("⚠️ Every original failed, posted a waited reel instead.\n" + "\n".join(errors))
-    return make(dry, False, today)
+    warn("⚠️ Every original failed, nothing posted this slot.\n" + "\n".join(errors))
+    raise RuntimeError("every original failed: " + "; ".join(errors)[:400])
 
 
 def next_original(dry=False, today=None):
@@ -624,6 +624,11 @@ def make_next(dry=False, flat_only=False, today=None, kind=None, clip=None):
 
 
 def make(dry=False, flat_only=False, today=None):
+    """The old "while we waited" reel: DELETED (Nov 24 2026). Nothing may post it, not even as a last resort."""
+    raise RuntimeError("the old 'while we waited' format is deleted; nothing posted")
+
+
+def _make_waited_retired(dry=False, flat_only=False, today=None):
     topic, props, meta, fin = build(today)
     out = MEDIA_DIR / topic
     out.mkdir(parents=True, exist_ok=True)
