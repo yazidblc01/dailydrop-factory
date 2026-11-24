@@ -1405,5 +1405,25 @@
     "posted_at": "2026-11-24T01:56:34+00:00",
     "url": "https://www.youtube.com/watch?v=DaMBHfE4SBM",
     "slot": "waited"
+  },
+  "texts__gta6_delay2_dip": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=29wtjbmROlk",
+      "facebook": "https://www.facebook.com/reel/1656506232883437",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7711766531247443221",
+      "instagram": "https://www.instagram.com/reel/DgIUj0Olkw5/"
+    },
+    "title": "GTA 6: Future me said buy the GTA 6 delay dip 💀",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b05b2c66bad630a425d1e1b",
+    "posted_at": "2026-11-24T15:53:01+00:00",
+    "url": "https://www.youtube.com/watch?v=29wtjbmROlk",
+    "slot": "waited"
   }
 }
