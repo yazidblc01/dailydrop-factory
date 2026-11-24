@@ -1425,5 +1425,24 @@
     "posted_at": "2026-11-24T15:53:01+00:00",
     "url": "https://www.youtube.com/watch?v=29wtjbmROlk",
     "slot": "waited"
+  },
+  "waited__20261124__18": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=asXJBr4pkyM",
+      "facebook": "https://www.facebook.com/reel/1417985754737663",
+      "instagram": "https://www.instagram.com/reel/DgIjqc2EfqD/"
+    },
+    "title": "GTA 6: GTA V day vs GTA 6 day: what changed 💸",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b05d1bcb1151df8dbadf5bb",
+    "posted_at": "2026-11-24T18:05:15+00:00",
+    "url": "https://www.youtube.com/watch?v=asXJBr4pkyM",
+    "slot": "waited"
   }
 }

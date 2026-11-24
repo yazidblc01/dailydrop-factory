@@ -362,7 +362,23 @@
     "PoliteHealthyAlligatorPJSugar-ZJfOlCydRO0LWEKU",
     "StupidMoistOstrichPermaSmug-j73zeNOHkkA0aSFJ",
     "YummyVictoriousBaguetteFeelsBadMan-KrJIgFuxCdonlW0T",
-    "BumblingSmokyNeanderthalNerfRedBlaster-aBAgofpHLD3f_TvF"
+    "BumblingSmokyNeanderthalNerfRedBlaster-aBAgofpHLD3f_TvF",
+    "LitigiousNaiveHorseradishPeteZaroll-8_k23aP-Jtri0HQd",
+    "SavoryEnchantingCarabeefBCWarrior-XRRfYMaqn-QSOcQ4",
+    "SparklingDeliciousElephantDuDudu-7ZtEIG3eWcRoA8BV",
+    "PrettiestFastHamJebaited-dmfYeM9YNFLNsFxB",
+    "CuteDoubtfulTeaDendiFace-Fbbl3Ga2fZ06p37b",
+    "RelatedExpensiveEelBleedPurple-EER18eheN5qmhA_W",
+    "BlindingAgreeableTurtleKreygasm-OFxrS3_6aayEoRV3",
+    "SourAggressiveLaptopBloodTrail-uxWVwJyY7CRC1KuJ",
+    "FineHelplessSwordFloof-ZljlVQd7GopiyUDf",
+    "SolidPrettySwordOSfrog-2PRQOLx6FLoffjlQ",
+    "KawaiiTrustworthyDolphinTakeNRG-8LBVMoDRRcSGq3oo",
+    "SpikyTsundereLadiesKlappa-CiT4I-7PCivi4K-K",
+    "SpeedyOilyClipzWOOP-SYHCWnkVXwnYbUaP",
+    "SoftCorrectPelicanWTRuck-kb9MC2L943Swag5P",
+    "TrustworthyAbrasivePangolinWoofer-S8iUej6zte8Ol6eB",
+    "SpineyInventiveNikudonTriHard-MH44RJZIV4mxGmsz"
   ],
   "count": 42,
   "seen": {
@@ -6678,7 +6694,7 @@
       "name": "Lacy",
       "url": "https://www.twitch.tv/lacy/clip/CrunchyFrigidBasenjiBuddhaBar-YfaqN-_QU8RpMv8b",
       "title": "a",
-      "views": 375,
+      "views": 894,
       "use": true,
       "why": "Lacy goes off on a valet who lost his car, with funny lines like \"worth more than your f****** life\" and \"plenty of other jobs out there.\" The payoff is weak: he drops it and asks how to call his car, so the reaction is funny but not a big laugh. Facecam is visible, so the reaction counts.",
       "score": 5,
@@ -6704,7 +6720,8 @@
       "setup": "Lacy rips into a valet who can't find his car",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 7.5
     },
     "PolishedFrailRuffPeteZaroll-gZE2L3MI3Cjm2Zf9": {
       "at": "2026-11-21T20:15:37.709548+00:00",
@@ -6781,7 +6798,7 @@
       "name": "TypicalGamer",
       "url": "https://www.twitch.tv/typicalgamer/clip/LightHungryStinkbugRitzMitz--9h2hfQUsrxODcRm",
       "title": "Typical gamer finds unknown island with a lost phone on it",
-      "views": 485,
+      "views": 2973,
       "use": true,
       "why": "Mystery discovery with a clear reaction: he opens a lost phone on a deserted island, the photo on it creeps him out, and his \"what the heck\" and \"that is creepy\" are on camera with a visible face. Story is light and the reaction is mild, so it's a middling pick rather than a standout.",
       "score": 5,
@@ -6807,7 +6824,8 @@
       "setup": "TypicalGamer explores a deserted island and finds something strange on the sand",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 35.9
     },
     "CredulousThoughtfulAntShadyLulu-N_vWOLxl5HhOInev": {
       "at": "2026-11-21T23:10:33.344212+00:00",
@@ -6913,7 +6931,7 @@
       "name": "CohhCarnage",
       "url": "https://www.twitch.tv/cohhcarnage/clip/SingleHumbleLampPRChase-_q_OQxnCg2e_L7QB",
       "title": "its offical cohh is a jerk",
-      "views": 259,
+      "views": 646,
       "use": true,
       "why": "Streamer shoves an NPC on the dock, then rants about a free harpoon and laughs hard on camera. The shove is mildly absurd and the laugh is a clear reaction, but the payoff is thin and the harpoon bit is hard to follow without the voice.",
       "score": 4,
@@ -6939,7 +6957,8 @@
       "setup": "CohhCarnage shoves a dockside NPC and the harpoon gag begins",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 5.8
     },
     "MuddyMagnificentCrowNerfBlueBlaster-131ywfTee4YhKzIy": {
       "at": "2026-11-21T23:15:29.900220+00:00",
@@ -7611,7 +7630,7 @@
       "name": "ohnePixel",
       "url": "https://www.twitch.tv/ohnepixel/clip/AlertObedientFlamingoPanicVis-imGR9XpmGvyXE9mn",
       "title": "gta real life",
-      "views": 534,
+      "views": 6027,
       "use": true,
       "why": "Talking-head rant with a clear setup (going outside, passing a dog) and a punchline (he had GTA-style options but just said hello, then admits he only played GTA for three days). Funny and followable, but the game itself is not on screen, and the chat overlay covers most of the frame. Face is visible in the bottom-left.",
       "score": 4,
@@ -7632,7 +7651,8 @@
       "setup": "ohnePixel walks outside after days indoors and passes a dog.",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 85.2
     },
     "GlamorousMoralLyrebirdPlanking-oKeuiJPRk2E0JHlD": {
       "at": "2026-11-22T01:14:39.998912+00:00",
@@ -7703,7 +7723,7 @@
       "name": "novasobored",
       "url": "https://www.twitch.tv/novasobored/clip/HilariousLaconicDeerWoofer-cOY6SciyVht_GCLF",
       "title": "light work",
-      "views": 353,
+      "views": 772,
       "use": true,
       "why": "Chaotic police chase with a clear setup and payoff: the crew is fleeing on a convertible, then the cops close in and the streamer says \"Shit caught up with us.\" No facecam, so it's a gameplay-star clip, which is allowed. Mid-level energy, not a standout reaction.",
       "score": 5,
@@ -7724,7 +7744,8 @@
       "setup": "Novasobored's crew flees in a convertible while cops keep closing in",
       "cold_open": false,
       "nudity": false,
-      "face_visible": false
+      "face_visible": false,
+      "growth": 6.5
     },
     "CourteousNimbleAxeFutureMan-aBqOfCOT53ToYqjQ": {
       "at": "2026-11-22T01:18:50.554805+00:00",
@@ -8965,7 +8986,7 @@
       "name": "xQc",
       "url": "https://www.twitch.tv/xqc/clip/KathishVivaciousBadgerEleGiggle-EFtXHIk7I9GBwi-O",
       "title": "XQC Camera Roll",
-      "views": 431,
+      "views": 3942,
       "use": true,
       "why": "Mostly a talk-driven clip: xQc flips through a phone camera roll of lost-looking photos and jokes about them, with a visible facecam reaction. The gameplay is light, and the funny lines carry it, but the payoff is modest.",
       "score": 5,
@@ -8991,7 +9012,8 @@
       "setup": "xQc scrolls through his in-game phone camera roll and jokes about the photos",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 82.7
     },
     "DiligentCloudyAnteaterRlyTho-wToiIPYE4haHsuxU": {
       "at": "2026-11-22T23:12:34.957520+00:00",
@@ -9363,7 +9385,7 @@
       "name": "ohnePixel",
       "url": "https://www.twitch.tv/ohnepixel/clip/OutstandingLongElkPeoplesChamp-wDpsX2-RjUu9iv7g",
       "title": "jason fell LULE",
-      "views": 215,
+      "views": 500,
       "use": true,
       "why": "Funny, chaotic moment: Jason crawls along a ledge above a parking lot while the streamer says he doesn't want cops again, then takes a fall. The streamer's laughing face is visible throughout, but the fall itself is only partly on screen, so the payoff is a bit soft.",
       "score": 5,
@@ -9389,7 +9411,8 @@
       "setup": "ohnePixel runs from cops again and Jason tries to climb along a ledge",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 7.0
     },
     "AverageBlazingPlumageDoubleRainbow-hcN6PsPOOLMvgifw": {
       "at": "2026-11-23T01:13:54.601436+00:00",
@@ -9534,7 +9557,7 @@
       "name": "carmen",
       "url": "https://www.twitch.tv/carmen/clip/GrossCuriousSpiderRalpherZ-K94AxOBZOTukKq6k",
       "title": "saving an alien baby",
-      "views": 278,
+      "views": 349,
       "use": true,
       "why": "Clear setup and payoff: she thinks an alien baby is dead, plans a burial, then changes course and carries it home. The reaction is visible on the facecam and the dialogue is funny, though the chaos is mild and there's no big action.",
       "score": 6,
@@ -9560,7 +9583,9 @@
       "setup": "Carmen finds a strange alien creature and decides what to do with it",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 1.8,
+      "final_no": true
     },
     "CloudyMushyWormLitFam-s5VVK7wZDiEY6Twz": {
       "at": "2026-11-23T02:15:54.458525+00:00",
@@ -9766,7 +9791,7 @@
       "name": "DizzyKitten",
       "url": "https://www.twitch.tv/dizzykitten/clip/PrettyTacitDadBCWarrior-DwVaX2e3Mmie_OUY",
       "title": "Dizzy CRASH",
-      "views": 232,
+      "views": 331,
       "use": true,
       "why": "A bike ride with a passenger ends in a crash into a pickup, with both riders tumbling across the road. The streamer's laughing face is visible on the facecam, and her \"covered in blood\" line adds a funny beat. The crash is a clear visual payoff, though the reel needs a little setup.",
       "score": 6,
@@ -9792,7 +9817,9 @@
       "setup": "DizzyKitten rides a motorbike with a passenger down a quiet road",
       "cold_open": true,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 2.5,
+      "final_no": true
     },
     "VibrantCrunchyGoldfishLitty-mFQKdu4HOaDAf3wt": {
       "at": "2026-11-23T02:27:36.045659+00:00",
@@ -10374,7 +10401,7 @@
       "name": "carmen",
       "url": "https://www.twitch.tv/carmen/clip/SaltyHomelyFungusStinkyCheese-ozemFy5KjZsUXlZV",
       "title": "human sacrifice",
-      "views": 314,
+      "views": 485,
       "use": true,
       "why": "A candlelit ritual goes sideways, with Jay trying to stop her and a shocked streamer reacting to what's in the room. The payoff is a clear reaction to the reveal, with a readable line of dialogue. Story is followable, though the exact plot is unclear.",
       "score": 6,
@@ -10400,7 +10427,9 @@
       "setup": "Carmen tries to finish a human sacrifice while Jay tries to stop her",
       "cold_open": false,
       "nudity": false,
-      "face_visible": true
+      "face_visible": true,
+      "growth": 6.7,
+      "final_no": true
     },
     "GleamingShyGazellePJSalt-2fbchcJPDnE64Bd2": {
       "at": "2026-11-23T16:01:31.887260+00:00",
@@ -11970,6 +11999,588 @@
       "captioned": null,
       "dark": null,
       "dead": null
+    },
+    "LitigiousNaiveHorseradishPeteZaroll-8_k23aP-Jtri0HQd": {
+      "at": "2026-11-24T17:11:33.063100+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/LitigiousNaiveHorseradishPeteZaroll-8_k23aP-Jtri0HQd",
+      "title": "slight scratch",
+      "views": 926,
+      "use": true,
+      "why": "Chaotic highway chase: a red SUV weaves through traffic, flips cars and crashes, and the streamer's stressed, funny dialogue and facecam reactions carry it. Story works as a chase, crash and escape, and no spoilers, nudity or dead air show.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "highway chase and crash spree",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.22,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 22.0,
+      "end": 52.0,
+      "peak": 36.7,
+      "story": true,
+      "setup": "caseoh_ speeds a red SUV down a highway with cops and wrecks piling up behind",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "final_no": true
+    },
+    "SavoryEnchantingCarabeefBCWarrior-XRRfYMaqn-QSOcQ4": {
+      "at": "2026-11-24T17:13:11.792221+00:00",
+      "login": "pokelawls",
+      "name": "pokelawls",
+      "url": "https://www.twitch.tv/pokelawls/clip/SavoryEnchantingCarabeefBCWarrior-XRRfYMaqn-QSOcQ4",
+      "title": "GTA 6 issue",
+      "views": 1734,
+      "use": false,
+      "why": "Nothing absurd or funny happens on screen. The streamer crouches in bushes and talks about game sound design, with no visible reaction and no face on camera to carry it. Score is low.",
+      "score": 2,
+      "star": "gameplay",
+      "moment": "streamer talks about game sound design",
+      "action": "none",
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 23.6,
+      "peak": 17.6,
+      "story": false,
+      "setup": "Streamer crouches in tropical bushes while complaining about the game's sounds",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "SparklingDeliciousElephantDuDudu-7ZtEIG3eWcRoA8BV": {
+      "at": "2026-11-24T17:14:31.408141+00:00",
+      "login": "jynxzi",
+      "name": "Jynxzi",
+      "url": "https://www.twitch.tv/jynxzi/clip/SparklingDeliciousElephantDuDudu-7ZtEIG3eWcRoA8BV",
+      "title": "jynxzi checks on nickeh30",
+      "views": 2611,
+      "use": true,
+      "why": "Jynxzi's facecam shows a clear reaction: laughing, hand over mouth, then \"Oh hey, how you doing?\" while his friend nickeh30 lies sprawled on a rooftop. Burned-in captions carry the jokes, and the reaction builds into a fireworks-style explosion at the end. The setup is understandable, though the payoff is mild.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "checking on friend on rooftop",
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 8.5,
+      "end": 29.0,
+      "peak": 16.5,
+      "story": true,
+      "setup": "Jynxzi finds his friend nickeh30 sprawled on a rooftop after a fight",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": true,
+      "dark": false,
+      "dead": [],
+      "final_no": true
+    },
+    "PrettiestFastHamJebaited-dmfYeM9YNFLNsFxB": {
+      "at": "2026-11-24T17:16:49.733271+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/PrettiestFastHamJebaited-dmfYeM9YNFLNsFxB",
+      "title": "slow drive",
+      "views": 384,
+      "use": true,
+      "why": "Funny, chaotic mix: caseoh_ hauls a cement mixer through the city while a HIPAA-stonewalling phone call and his rising frustration play out, then he flattens pedestrians and a car, reacting loudly on webcam. Clear setup, payoff and reaction.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "driving a cement truck to hospital",
+      "action": "car crash",
+      "facecam": {
+        "x": 0,
+        "y": 0.127,
+        "w": 0.21,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 20.0,
+      "end": 58.0,
+      "peak": 51.5,
+      "story": true,
+      "setup": "He's stuck driving a cement truck to the hospital while the dispatcher refuses to help",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "failed": true
+    },
+    "CuteDoubtfulTeaDendiFace-Fbbl3Ga2fZ06p37b": {
+      "at": "2026-11-24T17:31:11.970223+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/CuteDoubtfulTeaDendiFace-Fbbl3Ga2fZ06p37b",
+      "title": "beyond belief",
+      "views": 382,
+      "use": true,
+      "why": "Chaotic gunfight through a rundown town, with the streamer firing at several enemies, then his character goes down. Some chat-visible spoken lines are funny, but the streamer's on-camera reaction is small and the payoff is modest, so it's a middling clip.",
+      "score": 4,
+      "star": "gameplay",
+      "moment": "shootout in the trailer park",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.1,
+        "w": 0.1,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 30.0,
+      "end": 57.0,
+      "peak": 53.8,
+      "story": true,
+      "setup": "caseoh_ fights through a hostile town with a pistol and very little ammo",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [
+        [
+          57,
+          60
+        ]
+      ],
+      "final_no": true
+    },
+    "RelatedExpensiveEelBleedPurple-EER18eheN5qmhA_W": {
+      "at": "2026-11-24T17:33:24.905465+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/RelatedExpensiveEelBleedPurple-EER18eheN5qmhA_W",
+      "title": "traffic",
+      "views": 245,
+      "use": false,
+      "why": "reaction with no real face on screen: Absurd premise: a cement mixer used as an ambulance, racing through Miami traffic, then the FAILED screen. The streamer's face is visible and he reacts with lines like \"Good job, Bubba!\" and \"good Lord, dude!\". Funny but the payoff is a mission fail, not a big moment.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "cement truck hospital run fails",
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 20.0,
+      "end": 55.0,
+      "peak": 49.75,
+      "story": true,
+      "setup": "caseoh_ races a cement mixer through Miami traffic with a patient aboard",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": null,
+      "captioned": null,
+      "dark": null,
+      "dead": null
+    },
+    "BlindingAgreeableTurtleKreygasm-OFxrS3_6aayEoRV3": {
+      "at": "2026-11-24T17:35:30.763449+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/BlindingAgreeableTurtleKreygasm-OFxrS3_6aayEoRV3",
+      "title": "heated",
+      "views": 255,
+      "use": true,
+      "why": "Mostly map and phone menus, then a walk to a parked SUV, a car theft, and the NPC owner yelling \"Not my car!\" It's a small but understandable action and consequence. The streamer's reaction is mild and the chatter is about the story, so the score stays low.",
+      "score": 4,
+      "star": "gameplay",
+      "moment": "stealing a car from an NPC",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.15,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 40.0,
+      "end": 60.1,
+      "peak": 58.0,
+      "story": true,
+      "setup": "Caseoh walks down a dirt road toward a parked SUV with a plan",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [
+        [
+          0,
+          22
+        ]
+      ],
+      "final_no": true
+    },
+    "SourAggressiveLaptopBloodTrail-uxWVwJyY7CRC1KuJ": {
+      "at": "2026-11-24T17:36:33.860302+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/SourAggressiveLaptopBloodTrail-uxWVwJyY7CRC1KuJ",
+      "title": "honest-truth",
+      "views": 1092,
+      "use": true,
+      "why": "Mildly funny: ohnePixel demands the brutal truth from Lucia during a yoga class, then cringes and laughs at her deadpan \"Okay, great. Now everyone inhale?\" No nudity, slurs, spoilers or gore, and his face is visible throughout. The reaction is modest, so it's a middling score.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "Lucia's yoga class with the streamer",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0.8,
+        "w": 0.25,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 19.9,
+      "peak": 18.5,
+      "story": true,
+      "setup": "ohnePixel asks Lucia for the brutal truth during a yoga class",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "final_no": true
+    },
+    "FineHelplessSwordFloof-ZljlVQd7GopiyUDf": {
+      "at": "2026-11-24T17:38:11.448106+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/FineHelplessSwordFloof-ZljlVQd7GopiyUDf",
+      "title": "bodysuits",
+      "views": 366,
+      "use": false,
+      "why": "no story: Mostly a clothing-shop browse with clothed outfits, so no nudity. The payoff is a shocked \"What in the chop s*** is this?\" at the item prices, with his face visible. The gameplay is weak, so it only scores middling.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "wardrobe bodysuit shopping",
+      "action": "none",
+      "facecam": {
+        "x": 0.5,
+        "y": 0,
+        "w": 0.5,
+        "h": 0.54
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0.54,
+        "w": 1,
+        "h": 0.46
+      },
+      "start": 0.0,
+      "end": 33.7,
+      "peak": 30.7,
+      "story": false,
+      "setup": "ohnePixel browses bodysuits in the wardrobe and keeps checking the prices",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "SolidPrettySwordOSfrog-2PRQOLx6FLoffjlQ": {
+      "at": "2026-11-24T17:39:21.672417+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/SolidPrettySwordOSfrog-2PRQOLx6FLoffjlQ",
+      "title": "Peanut scared",
+      "views": 641,
+      "use": false,
+      "why": "Reaction is the star, but the streamer's face is an avatar, not a real face, so there is no human reaction to show. The payoff is unclear and the clip cuts to the pause menu from about 9.4 s onward, leaving dead air.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "approaching a woman in a purple room",
+      "action": "none",
+      "facecam": {
+        "x": 0.18,
+        "y": 0.72,
+        "w": 0.12,
+        "h": 0.28
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 9.4,
+      "peak": 7.8,
+      "story": false,
+      "setup": "Lucia walks into a dim purple room where a woman stands on a ledge",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false,
+      "captioned": true,
+      "dark": false,
+      "dead": [
+        [
+          9.4,
+          17.4
+        ]
+      ]
+    },
+    "KawaiiTrustworthyDolphinTakeNRG-8LBVMoDRRcSGq3oo": {
+      "at": "2026-11-24T17:47:48.937480+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/KawaiiTrustworthyDolphinTakeNRG-8LBVMoDRRcSGq3oo",
+      "title": "scientology-honest-truth-gta-6",
+      "views": 1842,
+      "use": true,
+      "why": "Funny in-game dialogue carries it: Jenna's bridesmaid confession about throwing up on Lauren's mom, which is captioned by the game's own subtitles. The streamer's reaction is subdued (hand on chin, looking at screen), so it is more gameplay-driven than a big reaction.",
+      "score": 5,
+      "star": "gameplay",
+      "moment": "yoga circle secret confession",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.6,
+        "w": 0.25,
+        "h": 0.4
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 4.0,
+      "end": 32.0,
+      "peak": 18.3,
+      "story": true,
+      "setup": "Lucia's yoga class plays a \"tell us a secret\" game and Jenna confesses",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "final_no": true
+    },
+    "SpikyTsundereLadiesKlappa-CiT4I-7PCivi4K-K": {
+      "at": "2026-11-24T17:49:11.850296+00:00",
+      "login": "jerma985",
+      "name": "Jerma985",
+      "url": "https://www.twitch.tv/jerma985/clip/SpikyTsundereLadiesKlappa-CiT4I-7PCivi4K-K",
+      "title": "Run Over?",
+      "views": 1595,
+      "use": true,
+      "why": "Jerma's face is clearly visible and he reacts with a grumpy, exasperated line (\"Why did somebody die? I didn't do anything!\") over a night boat ride in Vice City. The payoff is a funny line, not a big action moment, and the setup is vague, so it's a modest clip.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "boat ride blamed for a death",
+      "action": "boat",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.065,
+        "w": 0.755,
+        "h": 0.43
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.59,
+        "w": 1.0,
+        "h": 0.41
+      },
+      "start": 6.0,
+      "end": 23.9,
+      "peak": 21.5,
+      "story": true,
+      "setup": "Jerma is on a night boat ride while someone yells at him from the boat",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "final_no": true
+    },
+    "SpeedyOilyClipzWOOP-SYHCWnkVXwnYbUaP": {
+      "at": "2026-11-24T17:51:02.001548+00:00",
+      "login": "caseoh_",
+      "name": "caseoh_",
+      "url": "https://www.twitch.tv/caseoh_/clip/SpeedyOilyClipzWOOP-SYHCWnkVXwnYbUaP",
+      "title": "OMG STRAIGHT CHEEKS ACTION LMAO",
+      "views": 838,
+      "use": false,
+      "why": "Rejected for nudity: the 52.6s frame shows a bare body in close-up, and the caption \"Giorgio, cover your balls\" confirms it. The clip also builds to a character reveal (Nico) that reads as a story beat. The bit with the arguing shirtless men is funny, but the nudity rule applies.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "caseoh meets shirtless man in sauna",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.2,
+        "h": 0.25
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 30.0,
+      "end": 60.0,
+      "peak": 52.6,
+      "story": true,
+      "setup": "caseoh walks a shirtless man through a dim building, then a figure in red turns hostile",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "captioned": true,
+      "dark": false,
+      "dead": []
+    },
+    "SoftCorrectPelicanWTRuck-kb9MC2L943Swag5P": {
+      "at": "2026-11-24T17:52:18.669190+00:00",
+      "login": "missmikkaa",
+      "name": "MissMikkaa",
+      "url": "https://www.twitch.tv/missmikkaa/clip/SoftCorrectPelicanWTRuck-kb9MC2L943Swag5P",
+      "title": "Snack time!",
+      "views": 978,
+      "use": true,
+      "why": "Low-energy but readable beat: she snacks in her kitchen, Jason walks in behind her, and she snaps \"shut up, Jason\" while her face reacts. The payoff is mild, so it only works as a short reel.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "Jason walks in during snack time",
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 24.0,
+      "end": 39.9,
+      "peak": 37.8,
+      "story": true,
+      "setup": "MissMikkaa snacks in her kitchen while Jason strolls in behind her",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "final_no": true
+    },
+    "TrustworthyAbrasivePangolinWoofer-S8iUej6zte8Ol6eB": {
+      "at": "2026-11-24T17:53:47.470473+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/TrustworthyAbrasivePangolinWoofer-S8iUej6zte8Ol6eB",
+      "title": "That's a whole lot of ASS!!!!",
+      "views": 526,
+      "use": false,
+      "why": "Rejected: the streamer's reaction is the star but the only webcam is a VTuber-style avatar, so no real face shows. The payoff is also unclear (a suggestive \"ass\" line over a bent-over character near a van, possibly a sexual or nudity-adjacent scene), and the clip is mostly pause-menu dead air after 6 seconds.",
+      "score": 3,
+      "star": "reaction",
+      "moment": "character bends over by van",
+      "action": "none",
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 15.9,
+      "peak": 4.0,
+      "story": false,
+      "setup": "A streamer reacts to a character bending over beside a van",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false,
+      "captioned": true,
+      "dark": false,
+      "dead": [
+        [
+          6.0,
+          15.9
+        ]
+      ]
+    },
+    "SpineyInventiveNikudonTriHard-MH44RJZIV4mxGmsz": {
+      "at": "2026-11-24T17:55:51.558647+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/SpineyInventiveNikudonTriHard-MH44RJZIV4mxGmsz",
+      "title": "repair glitch",
+      "views": 1004,
+      "use": true,
+      "why": "A flipped sports car gets 'repaired' through a glitch, with a black-screen gap and a laughing reaction at the garage. The payoff is funny but small, and the streamer's face is visible throughout.",
+      "score": 5,
+      "star": "reaction",
+      "moment": "car flips then magically repaired",
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.68,
+        "w": 0.15,
+        "h": 0.32
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 14.0,
+      "end": 35.5,
+      "peak": 33.1,
+      "story": true,
+      "setup": "ohnePixel drives a pink supercar, flips it, then tries to get it fixed",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [
+        [
+          12.8,
+          14.0
+        ]
+      ],
+      "final_no": true
     }
   },
   "posted": [
@@ -12355,7 +12966,7 @@
       "layout_by": "claude"
     }
   ],
-  "house": "2026-11-23",
+  "house": "2026-11-24",
   "seen5": {
     "TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN": {
       "at": "2026-11-18T21:16:59.699365+00:00",
@@ -13495,5 +14106,6 @@
       "end": 32.7,
       "peak": 24.0
     }
-  }
+  },
+  "spikes": []
 }
