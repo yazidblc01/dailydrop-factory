@@ -72,7 +72,7 @@ LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-vf", "unsharp=5:5:0.6:5:5:0.0
 def load_state():
     st = json.loads(STATE.read_text()) if STATE.exists() else {}
     return {"used": st.get("used", []), "count": st.get("count", 0), "seen": st.get("seen", {}),
-            "posted": st.get("posted", []), "house": st.get("house", ""), "seen5": st.get("seen5", {})}
+            "posted": st.get("posted", []), "house": st.get("house", ""), "seen5": st.get("seen5", {}), "spikes": st.get("spikes", [])}
 
 
 def save_state(st):
@@ -823,7 +823,8 @@ def build(c, v, info, name, out, st, today, worded=False):
 
 
 def bank(st, hours=72):
-    """Clips Claude already approved that never got posted (a slot only uses one): free, no new screening."""
+    """Clips Claude already approved that never got posted (a slot only uses one): free, no new screening.
+    Best screener score first; among equal scores, the clip still gaining the most views right now (one Twitch call, free)."""
     cut = (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat()
     today = datetime.now().strftime("%Y-%m-%d")
     done = {}
@@ -834,7 +835,77 @@ def bank(st, hours=72):
     pool = [(k, v) for k, v in st["seen"].items() if v.get("use") and v.get("story") and not v.get("posted") and not v.get("failed")
             and not v.get("final_no") and v.get("nudity") is False
             and v.get("at", "") > cut and done.get(v.get("login"), 0) < PER_STREAMER_DAY]
-    return sorted(pool, key=lambda kv: -(kv[1].get("score") or 0))
+    if pool:
+        try:
+            tok = token()
+            now = datetime.now(timezone.utc)
+            views = {c["id"]: c["view_count"] for c in helix("clips", tok, id=[k for k, _ in pool][:100])}
+            for k, v in pool:
+                if k in views:
+                    hrs = max((now - datetime.fromisoformat(v["at"])).total_seconds() / 3600, 0.5)
+                    v["growth"] = round((views[k] - (v.get("views") or 0)) / hrs, 1)
+                    v["views"] = views[k]
+        except Exception as e:
+            print(f"      bank: view refresh skipped ({str(e)[:80]})")
+    return sorted(pool, key=lambda kv: (-(kv[1].get("score") or 0), -(kv[1].get("growth") or 0)))
+
+
+# ---------- a spike: one clip blowing up right now, posted within the hour ----------
+SEEN_KEYS = ("use", "why", "score", "star", "moment", "action", "facecam", "gamebox", "start", "end", "peak", "story", "setup", "cold_open",
+             "nudity", "face_visible", "captioned", "dark", "dead")
+SPIKES_PER_DAY = 2
+
+
+def make_spike(cid, dry=False, today=None):
+    """The clock's spike watch saw this clip blowing up. Screen it like any clip, have the strong model write its words and score it,
+    and post it if it scores 6+ (the crowd has already voted with its views). Never falls back to anything else."""
+    if not cid:
+        raise RuntimeError("no clip id")
+    today = today or datetime.now().date()
+    st = load_state()
+    if sum(1 for x in st.get("spikes", []) if x.get("date") == f"{today}") >= SPIKES_PER_DAY:
+        raise RuntimeError("2 spikes already today")
+    if cid in st["used"]:
+        raise RuntimeError("already looked at this clip")
+    tok = token()
+    got = helix("clips", tok, id=cid)
+    if not got:
+        raise RuntimeError(f"Twitch has no clip {cid}")
+    c = got[0]
+    c["login"] = (helix("users", tok, id=c["broadcaster_id"]) or [{"login": c["broadcaster_name"].lower()}])[0]["login"]
+    age = max((datetime.now(timezone.utc) - datetime.fromisoformat(c["created_at"].replace("Z", "+00:00"))).total_seconds() / 3600, 0.25)
+    c["vph"], c["outlier"] = c["view_count"] / age, 1.0
+    name = f"clip__{today:%Y%m%d}__{cid[:24]}".replace("-", "_")
+    out = MEDIA_DIR / name
+    out.mkdir(parents=True, exist_ok=True)
+    print(f"      spike: {c['broadcaster_name']}: {c['title']} ({c['view_count']} views, {c['vph']:.0f}/h)")
+    st["used"].append(cid)
+    try:
+        info = media_info(download(c["url"], out))
+        a = audio(info["src"])
+        v = screen(c, info["src"], info["dur"], info["words"], peaks(a), out)
+        st["seen"][cid] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
+                           "url": c["url"], "title": c["title"], "views": c["view_count"], **{k: v.get(k) for k in SEEN_KEYS}}
+        print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('moment')}) {v['why'][:110]}")
+        if not v["use"]:
+            raise RuntimeError(f"the screener said no: {v['why'][:100]}")
+        if dry:
+            return name, None
+        f = final_pick([(c, v, info)], st, out)
+        print(f"        final pick: {f.get('pick')} ({f.get('score')}/10) {str(f.get('why'))[:140]}")
+        if f.get("pick", -1) != 0 or (f.get("score") or 0) < FLOOR:
+            raise RuntimeError(f"the final pick scored it {f.get('score')}/10")
+        v.update({k: f[k] for k in ("setup", "hook", "title", "description", "pinned_comment", "layout") if f.get(k)})
+        final = build(c, v, info, name, out, st, today, worded=True)
+        if not final:
+            st["seen"][cid]["failed"] = True
+            raise RuntimeError("the reel failed its checks")
+        st.setdefault("spikes", []).append({"id": cid, "date": f"{today}"})
+        st["spikes"] = st["spikes"][-50:]
+        return name, final
+    finally:
+        if not dry:
+            save_state(st)
 
 
 def make(dry=False, today=None, tries=30, renders=4, screen_only=False):

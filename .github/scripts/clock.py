@@ -19,6 +19,8 @@ SLOTS = [("10:37", "gta_waited.yml", {"format": "texts"}),                   # o
 PAUSE_UNTIL = datetime(2000, 1, 1, tzinfo=TZ)
 PAUSED = set()
 LATE_OK = timedelta(minutes=90)
+SPIKE_EVERY = timedelta(minutes=20)        # the spike watch (.github/scripts/spike.py), 9 AM to 11:30 PM Toronto
+SPIKE_FROM, SPIKE_TO = 9, 23.5
 LIFE = timedelta(hours=5, minutes=30)
 
 
@@ -73,12 +75,33 @@ def fire(at, wf, inputs):
     return r.returncode == 0
 
 
+def spike_watch(now):
+    """A clip blowing up right now gets its own run (format=spike) instead of waiting for the next clip slot."""
+    if not SPIKE_FROM <= now.hour + now.minute / 60 <= SPIKE_TO:
+        return
+    try:
+        import spike
+        cid, why = spike.find(now)
+    except Exception as e:
+        print(f"{now:%H:%M} spike watch skipped: {str(e)[:160]}")
+        return
+    if not cid:
+        print(f"{now:%H:%M} spike watch: {why}")
+        return
+    r = gh("workflow", "run", "gta_waited.yml", "-f", "format=spike", "-f", f"clip={cid}")
+    print(f"{now:%H:%M} spike watch: started a run for {cid}: {'ok' if r.returncode == 0 else r.stderr.strip()}")
+
+
 def main():
     start = datetime.now(TZ)
     print(f"clock up at {start:%Y-%m-%d %H:%M} Toronto")
     done = set()
+    last_spike = start - SPIKE_EVERY
     while datetime.now(TZ) - start < LIFE:
         now = datetime.now(TZ)
+        if now - last_spike >= SPIKE_EVERY:
+            last_spike = now
+            spike_watch(now)
         for at, wf, inputs in due(now):
             key = (at.isoformat(), wf)
             if key not in done and fire(at, wf, inputs):

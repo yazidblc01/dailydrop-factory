@@ -11,7 +11,10 @@ on:
         description: "flat finale only, no 3D (yes/no)"
         default: "no"
       format:
-        description: "force one format (waited, board, receipt, coins, consoles, bestsellers, gtamath, streamclip, streamreact, streamvs); empty = the rotation"
+        description: "force one format (streamclip, streamvs, spike, texts, chat, ...); empty = the 6:07 PM rotation"
+        default: ""
+      clip:
+        description: "with format=spike: the Twitch clip id that is blowing up (the clock's spike watch fills this)"
         default: ""
 
 permissions:
@@ -78,6 +81,7 @@ jobs:
           ARGS="--post"
           if [ "${{ inputs.flat }}" = "yes" ]; then ARGS="$ARGS --flat"; fi
           if [ -n "${{ inputs.format }}" ]; then ARGS="$ARGS --format ${{ inputs.format }}"; fi
+          if [ -n "${{ inputs.clip }}" ]; then ARGS="$ARGS --clip ${{ inputs.clip }}"; fi
           python -m engine.waited $ARGS
 
       - name: Save state and post records

@@ -554,8 +554,15 @@ def make_original(kind, dry=False, today=None):
     return make(dry, False, today)
 
 
-def make_next(dry=False, flat_only=False, today=None, kind=None):
+def make_next(dry=False, flat_only=False, today=None, kind=None, clip=None):
     """The next video in the rotation. Anything other than the waited reel falls back to it if it fails."""
+    if kind == "spike":                        # a clip blowing up right now (the clock's spike watch): post it or nothing
+        from engine import streamclips
+        try:
+            return streamclips.make_spike(clip, dry, today)
+        except Exception as e:
+            print(f"      spike skipped: {e}")
+            return None, None
     if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn", "flip", "bars") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
             st = load_state()
@@ -637,7 +644,8 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip", "bars"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip", "bars", "spike"], help="force one format")
+    ap.add_argument("--clip", help="with --format spike: the Twitch clip id")
     a = ap.parse_args()
     import run
     try:
@@ -647,7 +655,7 @@ if __name__ == "__main__":
                 upload.retry_capped()
             except Exception as e:
                 print(f"      YouTube retry skipped: {e}")
-        topic, final = make_next(a.dry, a.flat, kind=a.format)
+        topic, final = make_next(a.dry, a.flat, kind=a.format, clip=a.clip)
         if final and a.post:
             run.post(topic, now=True, slot="waited")
         elif final:

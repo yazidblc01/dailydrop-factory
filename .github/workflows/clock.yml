@@ -10,7 +10,7 @@ on:
 
 permissions:
   actions: write
-  contents: read
+  contents: read        # the spike watch reads data/streamclips.json and data/streamers.json
 
 concurrency:
   group: clock
@@ -23,6 +23,8 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
+      TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}           # the spike watch
+      TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
     steps:
       - uses: actions/checkout@v4
         with:
