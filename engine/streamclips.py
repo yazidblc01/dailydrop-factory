@@ -325,7 +325,7 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
     "facecam": {**BOX, "description": "the streamer's webcam as fractions of the frame (x, y = top-left), null if none"},
     "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and the streamer's overlays (social-handle bars, alerts, goals)"},
     "start": {"type": "number", "description": "seconds: where the reel starts. Punchy moment: just before it (12 to 20 s in total). Only a moment that needs a setup starts earlier (up to 40 s)"},
-    "nudity": {"type": "boolean", "description": "true if any nude body shows (it gets blurred automatically, do NOT reject for it)"},
+    "nudity": {"type": "boolean", "description": "true if any nude body shows, even briefly (we skip those clips)"},
     "face_visible": {"type": "boolean", "description": "true only if a REAL HUMAN face shows on a webcam. An avatar, VTuber, cartoon, mascot or costume head does NOT count"},
     "dead": {"type": "array", "items": {"type": "array", "items": {"type": "number"}},
              "description": "[start, end] seconds where nothing playable shows: a pause or settings menu, the map, photo mode, a loading or black screen, frozen video, alt-tabbed away. Empty if none"},
@@ -348,7 +348,7 @@ an absurd, chaotic or funny thing happening, plus a visible reaction. Our reels 
 funny line of dialogue counts too: it doesn't have to work on mute.
 Score 1 to 10 on that. Low scores: talking about the game, opinions ("it's too easy"), menus, walking around, a truck driving by.
 Reject the clip (use=false) ONLY if:
-- a sex act or sexual scene (nudity alone is fine: it gets blurred automatically; set nudity=true)
+- a sex act or sexual scene, or any nudity (set nudity=true)
 - slurs or hateful content (ordinary swearing is fine: it gets bleeped)
 - a major story spoiler (an ending, a main character's death, a big twist)
 - graphic gore in the first 7 seconds
@@ -410,6 +410,9 @@ def screen(c, src, dur, words, loud, out, system=None):
     if v.get("use") and v.get("dark"):
         v["use"] = False
         v["why"] = f"too dark to see: {v.get('why', '')}"
+    if v.get("use") and v.get("nudity"):            # blurring game nudity was unreliable: we skip those clips
+        v["use"] = False
+        v["why"] = f"nudity: {v.get('why', '')}"
     peak = v.get("peak")
     peak = float(peak) if peak is not None else (loud[0] if loud else dur / 2)
     peak = min(max(peak, 0.0), dur)
@@ -451,9 +454,9 @@ FINAL_SYS = """You make the final call on which GTA 6 stream clip The Daily Drop
 What wins: an absurd, chaotic or funny thing happening, with the streamer's face reacting. Our reels caption every word said,
 so a funny line of dialogue works too. Chaos is a story: an action and its consequence, or a fail and the reaction.
 Our hit: a streamer knocks a grandma off her mobility scooter and steals it. A flop: a streamer says the game is too easy as a truck drives by.
-Judge each clip as it will look in OUR finished reel, not raw: nudity gets blurred automatically, swears get bleeped,
+Judge each clip as it will look in OUR finished reel, not raw: swears get bleeped,
 every word said is captioned on screen, and the setup line you write explains the context in the first seconds.
-So never mark a clip down for nudity, swearing or needing context. Mark it down for a weak or unclear payoff, no reaction,
+So never mark a clip down for swearing or needing context (clips with nudity never reach you). Mark it down for a weak or unclear payoff, no reaction,
 or a moment we already posted. Name the best clip and score it honestly (7+ = we'd be proud to post it).
 Never pick a moment we already posted recently (the list is given). Then write its words:
 Mark a clip down hard if the sheet shows a pause screen, the map, a menu, photo mode, a black or very dark screen, or nothing moving.
@@ -508,33 +511,135 @@ def bleep(info, out):
 _NUDE = None
 
 
+GRIDS = [(1, 1), (2, 2), (4, 3)]           # NudeNet looks at 320x320: a whole frame shrunk that far hides small bodies, so tiles too
+
+
 def nude_boxes(src, t0, t1, out, fps=5):
-    """NudeNet (free, runs on the processor) on frames of [t0, t1]: exposed body parts as (time, x, y, w, h), as fractions of the frame."""
+    """NudeNet (free, runs on the processor) on frames of [t0, t1]: exposed body parts as (time, x, y, w, h, score), x..h as fractions of the frame.
+    Each frame is checked whole and in overlapping tiles (2x2 and 4x3), so a small naked NPC in a wide shot is still found."""
     global _NUDE
+    import cv2
     from nudenet import NudeDetector
     _NUDE = _NUDE or NudeDetector()
     d = out / "nn"
     subprocess.run(["rm", "-rf", str(d)])
     d.mkdir()
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{max(0.0, t0):.2f}", "-to", f"{t1:.2f}", "-i", str(src), "-vf", f"fps={fps},scale=960:-2",
-                    str(d / "%05d.jpg")], check=True)
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{max(0.0, t0):.2f}", "-to", f"{t1:.2f}", "-i", str(src), "-vf", f"fps={fps},scale=1280:-2",
+                    "-q:v", "3", str(d / "%05d.jpg")], check=True)
     found = []
     for f in sorted(d.glob("*.jpg")):
         t = max(0.0, t0) + (int(f.stem) - 1) / fps
-        import cv2                                # comes with NudeNet
-        H, W = cv2.imread(str(f)).shape[:2]
-        for hit in _NUDE.detect(str(f)):
-            if hit["class"] in EXPOSED and hit["score"] >= 0.3:
-                x, y, w, h = hit["box"]
-                found.append((t, x / W, y / H, w / W, h / H))
+        im = cv2.imread(str(f))
+        H, W = im.shape[:2]
+        for cols, rows in GRIDS:
+            tw, th = W / cols, H / rows
+            pw, ph = (tw * 0.25 if cols > 1 else 0), (th * 0.25 if rows > 1 else 0)      # 25% overlap so nothing sits on a seam
+            for c in range(cols):
+                for r in range(rows):
+                    x0, y0 = int(max(0, c * tw - pw)), int(max(0, r * th - ph))
+                    x1, y1 = int(min(W, (c + 1) * tw + pw)), int(min(H, (r + 1) * th + ph))
+                    for hit in _NUDE.detect(im[y0:y1, x0:x1].copy()):
+                        if hit["class"] in EXPOSED and hit["score"] >= 0.25:
+                            x, y, w, h = hit["box"]
+                            found.append((t, (x0 + x) / W, (y0 + y) / H, w / W, h / H, hit["score"]))
     subprocess.run(["rm", "-rf", str(d)])
     return found
+
+
+# ---------- nudity: burned into the source before anything renders ----------
+GROW, HOLD, NUDE_FPS = 1.45, 0.6, 6        # boxes 45% bigger, held 0.6 s either side, NudeNet on 6 frames a second
+
+
+def confirmed(hits, fps):
+    """Drop the one-off false alarms (a random patch of a wall or a car that looks like skin for a single frame): a hit counts
+    when NudeNet is fairly sure (score 0.45+), or when it sees something in about the same place in a neighbouring frame.
+    Boxes bigger than a third of the screen are never a body part: dropped."""
+    keep = []
+    for i, (t, x, y, w, h, sc) in enumerate(hits):
+        if w * h > 0.33:
+            continue
+        cx, cy = x + w / 2, y + h / 2
+        near = any(j != i and 0 < abs(t2 - t) <= 1.6 / fps and abs((x2 + w2 / 2) - cx) < 0.12 and abs((y2 + h2 / 2) - cy) < 0.12
+                   for j, (t2, x2, y2, w2, h2, _) in enumerate(hits))
+        if sc >= 0.45 or near:
+            keep.append((t, x, y, w, h, sc))
+    return keep
+
+
+def nude_list(src, t0, t1, out, fps=NUDE_FPS):
+    out_list = []
+    for t, x, y, w, h, _ in confirmed(nude_boxes(src, t0, t1, out, fps=fps), fps):
+        cx, cy, w2, h2 = x + w / 2, y + h / 2, w * GROW, h * GROW
+        out_list.append({"t0": t - HOLD, "t1": t + HOLD, "x": max(0.0, cx - w2 / 2), "y": max(0.0, cy - h2 / 2),
+                         "w": min(1.0, w2), "h": min(1.0, h2)})
+    return out_list
+
+
+def still_exposed(final, dur, out):
+    """The last safety net on the finished reel (2 frames a second): fail when exposed nudity shows in 2+ frames,
+    or in one frame with NudeNet sure of it (0.5+). A single unsure hit in the zoomed reel is a false alarm."""
+    hits = nude_boxes(final, 0, dur, out, fps=2)
+    frames = {round(h[0], 2) for h in hits if h[3] * h[4] <= 0.33}
+    if len(frames) >= 2 or any(h[5] >= 0.5 for h in hits):
+        return len(frames) or 1
+    return 0
+
+
+def burn(src, boxes, dst):
+    """Pixelate then blur every box, frame by frame (OpenCV), and keep the original sound. Nothing is left for CSS to get wrong."""
+    import cv2
+    cap = cv2.VideoCapture(str(src))
+    fps = cap.get(cv2.CAP_PROP_FPS) or 30
+    W, H = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}", "-r", f"{fps}", "-i", "-",
+                            "-i", str(src), "-map", "0:v", "-map", "1:a?", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16",
+                            "-pix_fmt", "yuv420p", "-c:a", "copy", "-shortest", str(dst)], stdin=subprocess.PIPE)
+    i = 0
+    while True:
+        ok, fr = cap.read()
+        if not ok:
+            break
+        t = i / fps
+        for b in boxes:
+            if b["t0"] <= t <= b["t1"]:
+                x0, y0 = int(b["x"] * W), int(b["y"] * H)
+                x1, y1 = min(W, int((b["x"] + b["w"]) * W)), min(H, int((b["y"] + b["h"]) * H))
+                if x1 - x0 < 4 or y1 - y0 < 4:
+                    continue
+                roi = fr[y0:y1, x0:x1]
+                small = cv2.resize(roi, (max(2, (x1 - x0) // 40), max(2, (y1 - y0) // 40)), interpolation=cv2.INTER_AREA)
+                roi = cv2.resize(small, (x1 - x0, y1 - y0), interpolation=cv2.INTER_NEAREST)
+                fr[y0:y1, x0:x1] = cv2.GaussianBlur(roi, (0, 0), 14)
+        enc.stdin.write(fr.tobytes())
+        i += 1
+    cap.release()
+    enc.stdin.close()
+    if enc.wait() != 0:
+        raise RuntimeError("burning the nudity blur failed")
+
+
+def censor(info, start, end, out):
+    """Find nudity on 6 frames a second, burn pixelation into the source itself, then check the result again and patch
+    anything left (twice at most). Returns (info with the censored source, number of boxes). The final check still runs after."""
+    boxes = nude_list(info["src"], start - 0.6, end + 0.6, out)
+    if not boxes:
+        return info, 0
+    src = info["src"]
+    for k in range(3):
+        dst = out / f"censored{k}.mp4"
+        burn(src, boxes, dst)
+        left = nude_list(dst, start - 0.3, end + 0.3, out, fps=3)
+        print(f"        nudity: {len(boxes)} box(es) burned in, {len(left)} left after pass {k + 1}")
+        if not left:
+            break
+        boxes += left
+    return {**info, "src": dst}, len(boxes)
 
 
 def blur_list(src, start, end, out):
     """Blur boxes for the trimmed part: each box 30% bigger and held 0.5 s either side, so a missed frame never flashes anything."""
     out_list = []
-    for t, x, y, w, h in nude_boxes(src, start - 0.5, end + 0.5, out):
+    for t, x, y, w, h, _ in nude_boxes(src, start - 0.5, end + 0.5, out):
         cx, cy, w2, h2 = x + w / 2, y + h / 2, w * 1.3, h * 1.3
         out_list.append({"t0": round(t - 0.5, 2), "t1": round(t + 0.5, 2), "x": round(cx - w2 / 2, 4), "y": round(cy - h2 / 2, 4),
                          "w": round(w2, 4), "h": round(h2, 4)})
@@ -690,7 +795,7 @@ def build(c, v, info, name, out, st, today, worded=False):
         v = {**v, "layout": lay}
         print(f"        layout: {lay} ({by})")
         info = bleep(info, out)
-        blurs = blur_list(info["src"], v["start"], v["end"], out)
+        blurs = []                                  # clips with nudity are skipped at screening; the final check below is the safety net
         rel = publish_src(info, name, 0)
         credit = f"{c['broadcaster_name']} on Twitch"
         bg = zoom_bg(info, v, name, 0) if lay == "zoom" else None
@@ -700,10 +805,10 @@ def build(c, v, info, name, out, st, today, worded=False):
             segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True, blurs=blurs, bg=bg), main]
         final, dur = render_reel(segs, v["hook"], out, today, setup=v.get("setup"), setup_at=sum(x["dur"] for x in segs[:-1]))
         g = gauntlet(final, dur, out)
-        if g["pass"] and (blurs or v.get("nudity")):           # the safety net: nothing exposed may be left in the final reel
-            left = nude_boxes(final, 0, dur, out, fps=2)
+        if g["pass"]:                                          # the safety net: any nudity the screener missed fails the reel
+            left = still_exposed(final, dur, out)
             if left:
-                g = {"pass": False, "faults": f"nudity still visible in {len(left)} frame(s) after blurring"}
+                g = {"pass": False, "faults": f"nudity in {left} frame(s)"}
         print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
         if not g["pass"]:
             return None
@@ -727,7 +832,7 @@ def bank(st, hours=72):
             for lg in p["logins"]:
                 done[lg] = done.get(lg, 0) + 1
     pool = [(k, v) for k, v in st["seen"].items() if v.get("use") and v.get("story") and not v.get("posted") and not v.get("failed")
-            and not v.get("final_no") and v.get("nudity") is not None
+            and not v.get("final_no") and v.get("nudity") is False
             and v.get("at", "") > cut and done.get(v.get("login"), 0) < PER_STREAMER_DAY]
     return sorted(pool, key=lambda kv: -(kv[1].get("score") or 0))
 
@@ -1098,6 +1203,38 @@ def make_vs(dry=False, today=None, pairs=2):
     return name, final
 
 
+def make_one(ref, layout=None, today=None):
+    """A test render of one given clip: a key of data/streamclips.json "seen" (reuses its screening) or a Twitch clip URL/ID
+    (screened fresh). Rendered and checked like the real thing; never posted, and the saved state is not touched."""
+    today = today or datetime.now().date()
+    st = load_state()
+    key = next((k for k in st["seen"] if k == ref or k.startswith(ref)), None)
+    cid = key or ref.rstrip("/").split("/")[-1].split("?")[0]
+    tok = token()
+    got = helix("clips", tok, id=cid)
+    if not got:
+        raise SystemExit(f"Twitch has no clip {cid}")
+    c = got[0]
+    c["login"] = (helix("users", tok, id=c["broadcaster_id"]) or [{"login": c["broadcaster_name"].lower()}])[0]["login"]
+    name = f"test__{cid[:24]}".replace("-", "_")
+    out = MEDIA_DIR / name
+    subprocess.run(["rm", "-rf", str(out)])
+    out.mkdir(parents=True, exist_ok=True)
+    print(f"      test: {c['broadcaster_name']}: {c['title']}")
+    info = media_info(download(c["url"], out))
+    if key and st["seen"][key].get("start") is not None:
+        v = dict(st["seen"][key])
+        print(f"        reusing the screening: {v.get('moment')} ({v.get('start')}-{v.get('end')} s)")
+    else:
+        v = screen(c, info["src"], info["dur"], info["words"], peaks(audio(info["src"])), out)
+        print(f"        screen: {v.get('score')}/10, {v.get('moment')}")
+    if layout:
+        v["layout"] = layout
+    final = build(c, v, info, name, out, st, today)
+    print(f"      {'rendered: ' + str(final) if final else 'no reel (see above)'}")
+    return final
+
+
 if __name__ == "__main__":
     from dotenv import load_dotenv
     load_dotenv()
@@ -1106,7 +1243,12 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--react", action="store_true")
     ap.add_argument("--vs", action="store_true")
+    ap.add_argument("--clip", help="test one clip: a seen key (or its start) or a Twitch clip URL; never posts")
+    ap.add_argument("--layout", choices=["crop", "zoom"], help="with --clip: force the layout")
     a = ap.parse_args()
+    if a.clip:
+        make_one(a.clip, a.layout)
+        raise SystemExit
     if a.list:
         for c in candidates(load_state())[:20]:
             print(f"{c['rank']:>8.0f} {c['vph']:>6.0f}/h {c['outlier']:>4.1f}x  {c['broadcaster_name']:<14} {c['duration']:>4.0f}s  {c['title']}  {c['url']}")

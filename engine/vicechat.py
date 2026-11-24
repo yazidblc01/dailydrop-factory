@@ -73,7 +73,7 @@ def source():
         tail = p["topic"].split("__")[-1]
         cid = next((k for k in st["seen"] if k[:24].replace("-", "_") == tail), None)
         v = st["seen"].get(cid or "")
-        if not v or not v.get("url") or v.get("start") is None:
+        if not v or not v.get("url") or v.get("start") is None or v.get("nudity"):
             continue
         cand = (v.get("score") or 0, p["topic"], cid, v)
         if not best or cand[0] > best[0]:
@@ -158,7 +158,7 @@ def make(dry=False, today=None):
     if dry:
         return name, None
     info = streamclips.bleep(info, out)
-    blurs = streamclips.blur_list(info["src"], i0, ie, out)
+    blurs = []                                                # clips with nudity are never used
     rel = streamclips.publish_src(info, name, 0)
     credit = f"{v.get('name') or v.get('login')} on Twitch"
     intro = streamclips.seg(info, v, rel, credit, i0, ie, blurs=blurs)
@@ -176,9 +176,8 @@ def make(dry=False, today=None):
     finally:
         (PUBLIC / rel).unlink(missing_ok=True)
     faults = streamclips.free_checks(final, props["duration"])
-    if blurs or v.get("nudity"):                                 # the safety net: nothing exposed may be left
-        if streamclips.nude_boxes(final, 0, props["duration"], out, fps=2):
-            faults.append("nudity still visible after blurring")
+    if streamclips.still_exposed(final, props["duration"], out):   # the safety net: any nudity fails the reel
+        faults.append("nudity in the reel")
     if faults:
         raise RuntimeError(f"chat reel failed its checks: {'; '.join(faults)}")
     login = v.get("login") or ""
