@@ -53,15 +53,15 @@ ACTIONS = {"police chase": "POLICE", "car crash": "CRASHES", "swimming": "WATER"
            "shootout": "GUNFIGHTS", "driving fast": "DRIVING", "motorcycle": "BIKES", "flying": "FLYING", "fist fight": "FIGHTS",
            "robbery": "ROBBERIES", "weather": "WEATHER", "beach": "BEACHES", "npc reaction": "NPCS", "ragdoll": "RAGDOLL"}
 MIN_S, MAX_S = 15, 60            # Twitch clips we look at
-CUT_MIN, CUT_MAX = 12, 40        # what we keep: 12 to 20 s for a punchy moment, longer only when it needs a setup
-MIN_VIEWS = 200                  # viewers voted: a clip needs this many Twitch views (views per hour and the outlier rank the rest)
-FRESH_H = 24                     # fresh clips only (day-1 missions age out); 48 h if 24 comes up dry
+CUT_MIN, CUT_MAX = 12, 60        # what we keep: the whole clip minus dead time at the start and end, up to 60 s (Nov 24 2026)
+MIN_VIEWS = 100                  # viewers voted: a clip needs this many Twitch views (views per hour and the outlier rank the rest)
+FRESH_H = 36                     # fresh clips only (day-1 missions age out); 48 h if 36 comes up dry
 MIN_SCORE = 7                    # the final pick's bar
 FLOOR = 7                        # no 6/10 fallback any more: a slot with no 7 posts an original instead (Nov 24 2026)
 EXPOSED = {"FEMALE_BREAST_EXPOSED", "FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED", "BUTTOCKS_EXPOSED", "ANUS_EXPOSED"}
 CLIP_PLATFORMS = ["youtube", "facebook"]   # plain clips: TikTok and Instagram demote reposted streams
 PER_STREAMER_DAY = 2
-SCREENS = 10         # most fresh clips the cheap model screens per reel (about half a cent each); free filter first
+SCREENS = 14         # most fresh clips the cheap model screens per reel (about half a cent each); free filter first
 SWEARS = re.compile(r"^(f+u+c+k\w*|motherf\w*|s+h+i+t\w*|bitch\w*|asshole\w*|dick\w*|pussy\w*|bastard\w*|cunt\w*)([.,!?]*)$", re.I)
 # the clip at the same loudness as every other, its picture lightly sharpened (it gets enlarged in the vertical) and kept near-lossless
 LEVEL = ["-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-vf", "unsharp=5:5:0.6:5:5:0.0", "-c:v", "libx264", "-crf", "12", "-preset", "veryfast",
@@ -227,13 +227,74 @@ def worth_a_look(a, words):
 
 
 _MODEL = None
+_LANG = None       # small multilingual model: tells which language the streamer speaks
+_MULTI = None      # multilingual transcription for non-English streamers (their words get translated to English)
+TRANSLATE = {"name": "translate", "description": "The lines in English.", "input_schema": {"type": "object", "properties": {
+    "lines": {"type": "array", "items": {"type": "string"}, "description": "one English line per input line, same order, same count"}},
+    "required": ["lines"]}}
+TRANSLATE_SYS = """You translate what a streamer says on a GTA 6 stream into English captions for a YouTube Short.
+Casual, natural English, the way an American gamer would say it; keep it short, keep names, keep the energy.
+One English line per input line, same order, same count. Keep swears as swears (in English)."""
 
 
-def transcribe(a):
-    """Word timings from a stronger model than the narration uses (stream audio is noisy). Strong swears get starred."""
+def star(t):
+    m = SWEARS.match(t)
+    return m.group(1)[0] + "*" * (len(m.group(1)) - 1) + m.group(2) if m else t
+
+
+def language(a):
+    """The streamer's language (ISO code) from the first 30 s; English unless clearly another language."""
+    global _LANG
+    from faster_whisper import WhisperModel
+    if _LANG is None:
+        _LANG = WhisperModel("base", device="cpu", compute_type="int8")
+    _, info = _LANG.transcribe(a, vad_filter=True)
+    return info.language if info.language != "en" and info.language_probability >= 0.5 else "en"
+
+
+def foreign(a, lang):
+    """Non-English speech: transcribe it in its own language, translate each line to English with the cheap model,
+    and spread the English words over each line's time. Marked tr=True (the audio bleep skips them: timings are approximate)."""
+    global _MULTI
+    from faster_whisper import WhisperModel
+    if _MULTI is None:
+        _MULTI = WhisperModel("medium", device="cpu", compute_type="int8")
+    segs, _ = _MULTI.transcribe(a, language=lang, vad_filter=True)
+    segs = [(s.start, s.end, s.text.strip()) for s in segs if s.text.strip()]
+    if not segs:
+        return []
+    got = ask([{"type": "text", "text": f"Language: {lang}\n" + "\n".join(f"{i + 1}. {t}" for i, (_, _, t) in enumerate(segs))}],
+              TRANSLATE, TRANSLATE_SYS, model=CLAUDE_FAST)
+    lines = got.get("lines") or []
+    if len(lines) != len(segs):
+        raise RuntimeError(f"translation came back with {len(lines)} lines for {len(segs)}")
+    words = []
+    for (s0, s1, _), en in zip(segs, lines):
+        ws = [w for w in re.sub(r"^\d+\.\s*", "", en).split() if w]
+        step = (s1 - s0) / max(1, len(ws))
+        for k, w in enumerate(ws):
+            words.append({"w": star(w), "start": round(s0 + k * step, 2), "end": round(s0 + (k + 1) * step, 2), "tr": True})
+    return words
+
+
+def transcribe(a, hint=None):
+    """Word timings from a stronger model than the narration uses (stream audio is noisy). Strong swears get starred.
+    Streamers who speak another language get English captions (translated)."""
     global _MODEL
     if a.size < 16000:
         return []
+    hint = (hint or "").lower().split("-")[0]
+    if hint and hint not in ("other", "asl"):
+        lang = hint                                   # Twitch's own tag for the stream: the reliable one
+    else:
+        try:
+            lang = language(a)
+        except Exception as e:
+            print(f"        language check failed ({str(e)[:60]}), assuming English")
+            lang = "en"
+    if lang != "en":
+        print(f"        streamer speaks '{lang}': English captions by translation")
+        return foreign(a, lang)
     from faster_whisper import WhisperModel
     if _MODEL is None:
         _MODEL = WhisperModel("distil-large-v3", device="cpu", compute_type="int8")
@@ -241,10 +302,7 @@ def transcribe(a):
     words = []
     for s in segs:
         for w in s.words or []:
-            t = w.word.strip()
-            m = SWEARS.match(t)
-            if m:
-                t = m.group(1)[0] + "*" * (len(m.group(1)) - 1) + m.group(2)
+            t = star(w.word.strip())
             if t:
                 words.append({"w": t, "start": round(w.start, 2), "end": round(w.end, 2)})
     return words
@@ -324,15 +382,15 @@ SCREEN = {"name": "screen", "description": "Your verdict on the clip.", "input_s
     "moment": {"type": "string", "description": "3 to 6 words naming the game moment, so the same moment can be matched across streamers, e.g. 'first time seeing Lucia', 'first police chase', 'the opening drive'"},
     "action": {"type": "string", "enum": [*ACTIONS, "none"], "description": "the main on-screen action, for GTA 5 vs GTA 6 comparisons; none if no clear one"},
     "facecam": {**BOX, "description": "the streamer's webcam as fractions of the frame (x, y = top-left), null if none"},
-    "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and the streamer's overlays (social-handle bars, alerts, goals)"},
-    "start": {"type": "number", "description": "seconds: where the reel starts. Punchy moment: just before it (12 to 20 s in total). Only a moment that needs a setup starts earlier (up to 40 s)"},
+    "gamebox": {**BOX, "description": "the region that shows the game itself, as fractions, leaving out chat, black bars, borders and the streamer's overlays (social-handle bars, alerts, goals, and the stream's OWN caption/subtitle text of what the streamer says, often big text along the bottom: keep the box above it)"},
+    "start": {"type": "number", "description": "seconds: where the reel starts. Keep the build-up: only cut dead time at the start (walking, menus, idle talk about something else). Up to 60 s in total"},
     "nudity": {"type": "boolean", "description": "true if any nude body shows, even briefly (we skip those clips)"},
     "face_visible": {"type": "boolean", "description": "true only if a REAL HUMAN face shows on a webcam. An avatar, VTuber, cartoon, mascot or costume head does NOT count"},
     "dead": {"type": "array", "items": {"type": "array", "items": {"type": "number"}},
              "description": "[start, end] seconds where nothing playable shows: a pause or settings menu, the map, photo mode, a loading or black screen, frozen video, alt-tabbed away. Empty if none"},
     "captioned": {"type": "boolean", "description": "true if the stream already shows its OWN burned-in captions of what the streamer says (not the game's subtitles)"},
     "dark": {"type": "boolean", "description": "true if the gameplay is too dark to see what happens"},
-    "end": {"type": "number", "description": "seconds: after the streamer's reaction to the payoff ends"},
+    "end": {"type": "number", "description": "seconds: right after the streamer's reaction to the payoff ends; cut any dead time after it"},
     "story": {"type": "boolean", "description": "true only if a viewer with no context can follow it: a setup, a payoff and a reaction"},
     "setup": {"type": "string", "description": "one line shown for the first seconds, 6 to 14 words, present tense, what is going on BEFORE the payoff, never revealing it. E.g. 'xQc tries to rob a store with cops one block away'"},
     "cold_open": {"type": "boolean", "description": "true only if flashing the payoff for 1 second first makes sense on its own (a crash, an explosion); false for anything that needs the setup"},
@@ -358,8 +416,9 @@ Reject the clip (use=false) ONLY if:
   off screen. For GTA, chaos IS the story: an action and its consequence (a fight then the cops, a crash then an explosion, a theft
   then a chase, running naked through a club with cops coming) or a fail and the streamer reacting all count as a story
 - the reaction is the star but the streamer's face is not visible (face_visible=false): a voice over gameplay is not a reaction
-Find the facecam and the game region. Trim to fit the moment: a punchy moment is 12 to 20 seconds, starting just before it;
-only a moment that needs context starts earlier (up to 40 s). End after the reaction, no dead air. Write the setup line.
+Find the facecam and the game region. Trim: keep the whole clip, build-up included, and only cut DEAD time at the start
+(walking around, menus, talk about something else) and after the reaction ends. A clip with no dead time stays whole (up to 60 s).
+Never cut the build-up just to make it shorter: it is what makes the payoff land. Write the setup line.
 Also tag the main on-screen action (police chase, car crash, ...) so the clip can be paired with GTA 5; none if there isn't one."""
 
 SCREEN5_SYS = """You tag GTA 5 (Grand Theft Auto V) stream clips, to pair them with GTA 6 clips of the SAME action in a 'GTA 5 vs GTA 6' Short.
@@ -464,6 +523,8 @@ Never pick a moment we already posted recently (the list is given). Then write i
 Mark a clip down hard if the sheet shows a pause screen, the map, a menu, photo mode, a black or very dark screen, or nothing moving.
 hook = the EVENT in 2 to 5 words ('HE STOLE GRANDMA'S SCOOTER'), never a mood ('X LOST IT', 'X IS UNIMPRESSED'),
 and never the ending of the moment (tease it: 'HE TRIED TO OUTRUN THE COPS', not 'HE DROVE INTO THE CANAL').
+Write hook, title, setup, description and pinned_comment in English, even when the streamer speaks another language
+(their words reach you already translated).
 title starts with 'GTA 6: ' and names the event. setup = the context line, never giving the payoff away.
 layout: look at where the action happens across the sheet. If cropping the 16:9 frame to its middle third would cut off
 what matters (a car chase, people at the sides, the game's subtitles), say zoom; if the middle holds it all, say crop."""
@@ -497,7 +558,7 @@ def final_pick(cands, st, out):
 
 def bleep(info, out):
     """Swear words muted with a beep laid over them (the captions star them out). Returns info for the new file."""
-    spans = [(max(0.0, w["start"] - 0.03), w["end"] + 0.03) for w in info["words"] if SWEARS.match(re.sub(r"[^\w*.,!?]", "", w["w"]) or "") or "*" in w["w"]]
+    spans = [(max(0.0, w["start"] - 0.03), w["end"] + 0.03) for w in info["words"] if not w.get("tr") and (SWEARS.match(re.sub(r"[^\w*.,!?]", "", w["w"]) or "") or "*" in w["w"])]
     if not spans:
         return info
     on = "+".join(f"between(t,{a:.2f},{b:.2f})" for a, b in spans)
@@ -577,13 +638,62 @@ def nude_list(src, t0, t1, out, fps=NUDE_FPS):
     return out_list
 
 
-def still_exposed(final, dur, out):
+NUDE_CHECK = {"name": "check", "description": "Your verdict.", "input_schema": {"type": "object", "properties": {
+    "nudity": {"type": "boolean", "description": "true only if a naked breast, genitals or bare buttocks really show in the marked area"},
+    "what": {"type": "string", "description": "what is actually in the marked area, in a few words"}}, "required": ["nudity", "what"]}}
+
+
+def nude_confirmed(final, hits, out):
+    """NudeNet flags things that aren't nudity (a shirt collar at night, a skin-coloured blob). Before failing a reel, the cheap
+    vision model looks at the flagged spot (the frame with the area boxed, plus a close-up) in up to 3 frames: nudity only if it agrees."""
+    import cv2
+    best = sorted(hits, key=lambda h: -h[5])
+    picked, seen_t = [], set()
+    for h in best:
+        if round(h[0], 1) not in seen_t:
+            picked.append(h)
+            seen_t.add(round(h[0], 1))
+        if len(picked) == 3:
+            break
+    for i, (t, x, y, w, h, sc) in enumerate(picked):
+        f = frames(final, [t], out, f"nv{i}_")[0]
+        im = cv2.imread(str(f))
+        H, W = im.shape[:2]
+        x0, y0, x1, y1 = int(x * W), int(y * H), int((x + w) * W), int((y + h) * H)
+        pad = max(x1 - x0, y1 - y0)
+        close = im[max(0, y0 - pad):min(H, y1 + pad), max(0, x0 - pad):min(W, x1 + pad)]
+        cp = out / f"nv{i}_close.jpg"
+        cv2.imwrite(str(cp), cv2.resize(close, (512, int(512 * close.shape[0] / max(1, close.shape[1])))))
+        cv2.rectangle(im, (x0, y0), (x1, y1), (0, 0, 255), 3)
+        cv2.imwrite(str(f), im)
+        try:
+            v = ask([{"type": "text", "text": "A frame from a GTA 6 gameplay reel. A nudity detector flagged the area in the red box "
+                                              "(second image: a close-up of it). Is there real nudity there?"}, img(f), img(cp)],
+                    NUDE_CHECK, "You double-check a nudity detector that has many false alarms. Be accurate, not cautious.", model=CLAUDE_FAST)
+        except Exception as e:
+            print(f"        nudity double-check failed ({str(e)[:60]}), counting it as nudity")
+            return True
+        print(f"        nudity double-check at {t:.1f}s: {'YES' if v.get('nudity') else 'no'} ({v.get('what')})")
+        if v.get("nudity"):
+            return True
+    return False
+
+
+def still_exposed(final, dur, out, zoom=False):
     """The last safety net on the finished reel (2 frames a second): fail when exposed nudity shows in 2+ frames,
-    or in one frame with NudeNet sure of it (0.5+). A single unsure hit in the zoomed reel is a false alarm."""
+    or in one frame with NudeNet sure of it (0.5+), and the vision model confirms it on the flagged spot.
+    zoom: the zoom layout's blurred background (above the facecam, below the gameplay band) is skin-coloured mush to NudeNet,
+    so only hits in the facecam + gameplay band count (y 250 to 1460 of 1920)."""
     hits = nude_boxes(final, 0, dur, out, fps=2)
-    frames = {round(h[0], 2) for h in hits if h[3] * h[4] <= 0.33}
-    if len(frames) >= 2 or any(h[5] >= 0.5 for h in hits):
-        return len(frames) or 1
+    if zoom:
+        hits = [h for h in hits if 250 / 1920 <= h[2] + h[4] / 2 <= 1460 / 1920]
+    if hits:
+        print("        nudity hits (t, x, y, w, h, score): " + "; ".join(f"{h[0]:.1f}s {h[1]:.2f},{h[2]:.2f} {h[3]:.2f}x{h[4]:.2f} {h[5]:.2f}" for h in hits[:8]))
+    frames_hit = {round(h[0], 2) for h in hits if h[3] * h[4] <= 0.33}
+    if len(frames_hit) >= 2 or any(h[5] >= 0.5 for h in hits):
+        if nude_confirmed(final, hits, out):
+            return len(frames_hit) or 1
+        print("        the vision model saw no nudity at the flagged spots: false alarm, reel kept")
     return 0
 
 
@@ -670,10 +780,11 @@ def copy(c, v, words):
     return v
 
 
-def media_info(lvl):
+def media_info(lvl, lang=None):
+    """lang: the stream's language as Twitch tags it (clip["language"]); None = check the audio."""
     w, h, dur = probe(lvl)
     try:
-        words = transcribe(audio(lvl))
+        words = transcribe(audio(lvl), lang)
     except Exception as e:
         print(f"        no transcript ({str(e)[:80]})")
         words = []
@@ -708,7 +819,7 @@ def zoom_bg(info, v, name, i):
 
 def seg(info, v, rel, credit, start, end, label=None, words=True, flash=False, blurs=None, bg=None):
     ws = [{"w": x["w"], "start": round(x["start"] - start, 2), "end": round(x["end"] - start, 2)}
-          for x in info["words"] if start <= x["start"] < end] if words and not v.get("captioned") else []
+          for x in info["words"] if start <= x["start"] < end] if words and (not v.get("captioned") or any(x.get("tr") for x in info["words"])) else []
     return {"src": rel, "srcW": info["w"], "srcH": info["h"], "from": round(start, 2), "dur": round(end - start, 2),
             "facecam": v.get("facecam"), "gamebox": v.get("gamebox"), "star": v.get("star") or "gameplay",
             "peak": round(v["peak"] - start, 2) if start <= v["peak"] <= end else None,
@@ -809,7 +920,7 @@ def build(c, v, info, name, out, st, today, worded=False):
         final, dur = render_reel(segs, v["hook"], out, today, setup=v.get("setup"), setup_at=sum(x["dur"] for x in segs[:-1]))
         g = gauntlet(final, dur, out)
         if g["pass"]:                                          # the safety net: any nudity the screener missed fails the reel
-            left = still_exposed(final, dur, out)
+            left = still_exposed(final, dur, out, zoom=lay == "zoom")
             if left:
                 g = {"pass": False, "faults": f"nudity in {left} frame(s)"}
         print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
@@ -887,11 +998,12 @@ def make_spike(cid, dry=False, today=None):
     print(f"      spike: {c['broadcaster_name']}: {c['title']} ({c['view_count']} views, {c['vph']:.0f}/h)")
     st["used"].append(cid)
     try:
-        info = media_info(download(c["url"], out))
+        info = media_info(download(c["url"], out), c.get("language"))
         a = audio(info["src"])
         v = screen(c, info["src"], info["dur"], info["words"], peaks(a), out)
         st["seen"][cid] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
-                           "url": c["url"], "title": c["title"], "views": c["view_count"], **{k: v.get(k) for k in SEEN_KEYS}}
+                           "url": c["url"], "title": c["title"], "views": c["view_count"], "language": c.get("language"),
+                           **{k: v.get(k) for k in SEEN_KEYS}}
         print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('moment')}) {v['why'][:110]}")
         if not v["use"]:
             raise RuntimeError(f"the screener said no: {v['why'][:100]}")
@@ -966,7 +1078,7 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
             print(f"      {c['broadcaster_name']}: {c['title']} ({c['view_count']} views, {c['vph']:.0f}/h, {c['outlier']:.1f}x usual)")
             st["used"].append(c["id"])                 # never look at the same clip twice
             try:
-                info = media_info(download(c["url"], out))
+                info = media_info(download(c["url"], out), c.get("language"))
                 a = audio(info["src"])
                 skip = worth_a_look(a, info["words"])
                 if skip:
@@ -978,7 +1090,8 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
                 print(f"        skipped: {e}")
                 continue
             st["seen"][c["id"]] = {"at": datetime.now(timezone.utc).isoformat(), "login": c["login"], "name": c["broadcaster_name"],
-                                   "url": c["url"], "title": c["title"], "views": c["view_count"], **{k: v.get(k) for k in KEEP}}
+                                   "url": c["url"], "title": c["title"], "views": c["view_count"], "language": c.get("language"),
+                                   **{k: v.get(k) for k in KEEP}}
             print(f"        screen: {'yes' if v['use'] else 'no'} ({v.get('score')}/10, {v.get('star')}, {v.get('moment')}) {v['why'][:110]}")
             if not v["use"] or screen_only:
                 continue
@@ -1001,9 +1114,9 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
             try:
                 if m.get("vod_cut"):                          # a moment mined from a stream recording: cut it again
                     from engine import vodmine
-                    info = media_info(vodmine.section(m, out))
+                    info = media_info(vodmine.section(m, out), m.get("language"))
                 else:
-                    info = media_info(download(m["url"], out))
+                    info = media_info(download(m["url"], out), m.get("language"))
             except Exception as e:
                 print(f"        skipped: {e}")
                 m["failed"] = True
@@ -1096,7 +1209,7 @@ def make_react(dry=False, today=None):
         meta = pool[i]
         sub = out / f"s{n}"
         sub.mkdir(exist_ok=True)
-        info = bleep(media_info(download(meta["url"], sub)), sub)
+        info = bleep(media_info(download(meta["url"], sub), meta.get("language")), sub)
         pk = min(max(meta.get("peak") or info["dur"] / 2, 0.0), info["dur"])
         s, e = max(0.0, pk - 5.5), min(info["dur"], pk + 2.5)      # each streamer: the build-up and the reaction, about 8 s
         v = {**meta, "star": "reaction", "peak": pk}
@@ -1312,7 +1425,7 @@ def make_one(ref, layout=None, today=None):
     subprocess.run(["rm", "-rf", str(out)])
     out.mkdir(parents=True, exist_ok=True)
     print(f"      test: {c['broadcaster_name']}: {c['title']}")
-    info = media_info(download(c["url"], out))
+    info = media_info(download(c["url"], out), c.get("language"))
     if key and st["seen"][key].get("start") is not None:
         v = dict(st["seen"][key])
         print(f"        reusing the screening: {v.get('moment')} ({v.get('start')}-{v.get('end')} s)")

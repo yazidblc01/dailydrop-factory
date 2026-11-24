@@ -145,7 +145,7 @@ def make(dry=False, today=None):
     out.mkdir(parents=True, exist_ok=True)
     print(f"      chat about: {v.get('name') or v.get('login')}: {v.get('moment')} ({topic})")
     lvl = streamclips.download(v["url"], out)
-    info = streamclips.media_info(lvl)
+    info = streamclips.media_info(lvl, v.get("language"))
     i0, ie, l0, l1 = windows(v, info["dur"])
     intro_dur = round(ie - i0, 2)
     print(f"      intro {i0}-{ie} s, bubble loops {l0}-{l1} s")
