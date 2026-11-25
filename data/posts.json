@@ -1518,5 +1518,21 @@
     "posted_at": "2026-11-25T15:51:18+00:00",
     "url": "https://www.youtube.com/watch?v=xhV6sUmwjSw",
     "slot": "waited"
+  },
+  "clip__20261125__ImpossibleLazyAntelopeJo": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=IGjZX4urxzI",
+      "facebook": "https://www.facebook.com/reel/2160637407897527"
+    },
+    "url": "https://www.youtube.com/watch?v=IGjZX4urxzI",
+    "title": "GTA 6: Giant Mutant Crab Attacks Streamer In His House",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b071b3dfeeb5200841ee50b",
+    "posted_at": "2026-11-25T17:32:21+00:00",
+    "slot": "waited"
   }
 }

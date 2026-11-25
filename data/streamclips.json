@@ -419,9 +419,14 @@
     "PeppyPeacefulStarlingShadyLulu-FbkcX75x7KrIFXKR",
     "MoldyDarlingCardJebaited-9zXoY6rxfXDBuq36",
     "UgliestBombasticLyrebirdGrammarKing-dnKxm2XupKOuVp3Z",
-    "WrongTolerantKangarooDBstyle-9doWn2icz0aOnvU0"
+    "WrongTolerantKangarooDBstyle-9doWn2icz0aOnvU0",
+    "SquarePhilanthropicGarbageOSsloth-Cc0LdBQc6lRbz2B8",
+    "CuteBillowingNewtFutureMan-tke0qzRbN2y_lJpx",
+    "ImpossibleLazyAntelopeJonCarnage-YbwyOQkfvvWWgrKI",
+    "GoldenPoisedKeyboardRedCoat-HO3GxS3GCBEqzXcR",
+    "GloriousShortRamenANELE-1Bn-506RuvLm-UJb"
   ],
-  "count": 43,
+  "count": 44,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -13944,7 +13949,7 @@
       "name": "MissMikkaa",
       "url": "https://www.twitch.tv/missmikkaa/clip/MoldyDarlingCardJebaited-9zXoY6rxfXDBuq36",
       "title": "Behold, the perfect car!",
-      "views": 807,
+      "views": 1130,
       "language": "en",
       "use": true,
       "why": "Mild but readable payoff: she builds up a custom car with \"anime girls\" and the reveal lands on \"Tentacles!\" with a visible reaction. The joke is light, so the score stays middling.",
@@ -13964,7 +13969,8 @@
       "face_visible": true,
       "captioned": true,
       "dark": false,
-      "dead": []
+      "dead": [],
+      "growth": 20.7
     },
     "UgliestBombasticLyrebirdGrammarKing-dnKxm2XupKOuVp3Z": {
       "at": "2026-11-25T01:34:55.604231+00:00",
@@ -14027,6 +14033,187 @@
       "dark": false,
       "dead": [],
       "posted": true
+    },
+    "SquarePhilanthropicGarbageOSsloth-Cc0LdBQc6lRbz2B8": {
+      "at": "2026-11-25T17:12:06.916334+00:00",
+      "login": "rubius",
+      "name": "Rubius",
+      "url": "https://www.twitch.tv/rubius/clip/SquarePhilanthropicGarbageOSsloth-Cc0LdBQc6lRbz2B8",
+      "title": "LA COBRA SODOMIZAD4",
+      "views": 3794,
+      "language": "es",
+      "use": false,
+      "why": "Rejected: the clip is a sexualized photo-mode session. The camera screen shows a woman posing suggestively on a bed, and the title and \"Bill's got a few hobbies\" line point to sexual content. Nudity isn't clearly visible, so the flag stays false, but the content is still unsafe for the channel.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "photo mode with Bill's photos",
+      "action": "none",
+      "facecam": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 17.1,
+      "peak": 11.8,
+      "story": false,
+      "setup": "Rubius photographs a woman posing on a bed through an in-game camera",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": true,
+      "dark": false,
+      "dead": []
+    },
+    "CuteBillowingNewtFutureMan-tke0qzRbN2y_lJpx": {
+      "at": "2026-11-25T17:15:13.738880+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/CuteBillowingNewtFutureMan-tke0qzRbN2y_lJpx",
+      "title": "paid actor",
+      "views": 324,
+      "language": "en",
+      "use": false,
+      "why": "Webcam only, no GTA 6 gameplay on screen. He drinks from a can and mutters fragments (\"not bad\", \"all right\") with no visible action or payoff, so nothing understandable happens.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "paid actor drink and talk",
+      "action": "none",
+      "facecam": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "gamebox": null,
+      "start": 0.0,
+      "end": 31.9,
+      "peak": 28.6,
+      "story": false,
+      "setup": "ohnePixel drinks from a can and talks about something off screen",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [
+        [
+          0,
+          31.9
+        ]
+      ]
+    },
+    "ImpossibleLazyAntelopeJonCarnage-YbwyOQkfvvWWgrKI": {
+      "at": "2026-11-25T17:16:43.596033+00:00",
+      "login": "montanablack88",
+      "name": "MontanaBlack88",
+      "url": "https://www.twitch.tv/montanablack88/clip/ImpossibleLazyAntelopeJonCarnage-YbwyOQkfvvWWgrKI",
+      "title": "Krabbe greift Monte an",
+      "views": 355,
+      "language": "de",
+      "use": true,
+      "why": "A giant mutant crab creature attacks the streamer inside a house, and he shouts and laughs through it. The first 20 seconds are laptop and spreadsheet talk, so the reel starts later. Chat and the German-language UI are not a problem.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "giant crab attacks in house",
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 21.0,
+      "end": 58.0,
+      "peak": 36.5,
+      "story": true,
+      "setup": "He hunts for a safe code on a laptop, then the creature shows up",
+      "cold_open": true,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [
+        [
+          0,
+          21
+        ]
+      ],
+      "posted": true
+    },
+    "GoldenPoisedKeyboardRedCoat-HO3GxS3GCBEqzXcR": {
+      "at": "2026-11-25T17:17:22.158085+00:00",
+      "login": "hasanabi",
+      "name": "HasanAbi",
+      "url": "https://www.twitch.tv/hasanabi/clip/GoldenPoisedKeyboardRedCoat-HO3GxS3GCBEqzXcR",
+      "title": "Parachute WASTED",
+      "views": 625,
+      "language": "en",
+      "use": true,
+      "why": "Clear fail with a payoff: he jumps off a rooftop trying to glide, then the Wasted screen hits. His webcam reaction (\"how do you do that?\") is captioned and visible. Worth a mid-level score.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "failed rooftop glide",
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 16.0,
+      "peak": 12.0,
+      "story": true,
+      "setup": "HasanAbi climbs a rooftop and tries to glide off the edge",
+      "cold_open": true,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": true,
+      "dark": false,
+      "dead": [
+        [
+          16.0,
+          17.5
+        ]
+      ]
+    },
+    "GloriousShortRamenANELE-1Bn-506RuvLm-UJb": {
+      "at": "2026-11-25T17:18:32.401943+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/GloriousShortRamenANELE-1Bn-506RuvLm-UJb",
+      "title": "Did Lucia Get In?",
+      "views": 649,
+      "language": "en",
+      "use": true,
+      "why": "A jet getaway on the tarmac ends in a crash-landing into emergency vehicles, with the streamer panicking (\"oh my God, I'm gonna die\"). The payoff is clear and the shouted build-up gives context. The facecam is an avatar, so there is no real face to react.",
+      "score": 6,
+      "star": "gameplay",
+      "moment": "plane crash-landing on runway",
+      "action": null,
+      "facecam": {
+        "x": 0.17,
+        "y": 0.74,
+        "w": 0.11,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 22.9,
+      "peak": 12.75,
+      "story": true,
+      "setup": "Streamer scrambles to get a passenger into a jet on the tarmac",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false,
+      "captioned": false,
+      "dark": false,
+      "dead": []
     }
   },
   "posted": [
@@ -14421,9 +14608,20 @@
       "date": "2026-11-24",
       "layout": "zoom",
       "layout_by": "claude"
+    },
+    {
+      "topic": "clip__20261125__ImpossibleLazyAntelopeJo",
+      "logins": [
+        "montanablack88"
+      ],
+      "star": "reaction",
+      "moment": "giant crab attacks in house",
+      "date": "2026-11-25",
+      "layout": "zoom",
+      "layout_by": "claude"
     }
   ],
-  "house": "2026-11-24",
+  "house": "2026-11-25",
   "seen5": {
     "TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN": {
       "at": "2026-11-18T21:16:59.699365+00:00",
