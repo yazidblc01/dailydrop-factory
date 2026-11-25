@@ -9,11 +9,12 @@ from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("America/Toronto")
 # (Toronto time, workflow, inputs)
-SLOTS = [("10:37", "gta_waited.yml", {"format": "texts"}),                   # original: texts from the future
-         ("12:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
+# The day (Nov 25): 3 clips, 1 original, 1 explainer. Texts from the future joined the 6:07 PM original rotation.
+SLOTS = [("12:07", "gta_waited.yml", {"format": "streamclip"}),              # stream clip
          ("15:07", "gta_waited.yml", {"format": "streamvs"}),                # GTA 5 vs GTA 6
          ("18:07", "gta_waited.yml", {}),                                    # original: the rotation (data race, coins, money to scale)
          ("18:47", "daily.yml", {"mode": "check"}),
+         ("19:13", "gta_waited.yml", {"format": "explain"}),                 # explainer (maps, history, money, casino, science...)
          ("20:07", "gta_waited.yml", {"format": "streamclip"})]              # stream clip
 # the old 6:13 AM morning reel and the catch-up job are retired (nothing schedules them any more)
 PAUSE_UNTIL = datetime(2000, 1, 1, tzinfo=TZ)

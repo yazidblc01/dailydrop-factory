@@ -76,6 +76,12 @@ jobs:
             ~/.cache/huggingface
           key: chrome-models-v1
 
+      - name: Cache the map data (Natural Earth, historical borders)
+        uses: actions/cache@v4
+        with:
+          path: cache/ne
+          key: map-data-v1
+
       - name: Make and post
         run: |
           ARGS="--post"
@@ -89,4 +95,4 @@ jobs:
         run: |
           git config user.name "daily-drop-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          python3 .github/scripts/save_state.py "state: $(date +%F) gta waited" data/waited.json data/gtamath.json data/streamclips.json data/streamers.json data/clipstats.json data/posts.json data/history.json data/vicechat.json data/stockrace.json data/barrace.json data/images_used.json
+          python3 .github/scripts/save_state.py "state: $(date +%F) gta waited" data/waited.json data/gtamath.json data/streamclips.json data/streamers.json data/clipstats.json data/posts.json data/history.json data/vicechat.json data/stockrace.json data/barrace.json data/images_used.json data/explain.json

@@ -415,11 +415,33 @@ def zernio_body(topic, meta, media_url, when, platforms, draft, cover_url=None, 
     return body
 
 
+IG_EVERYTHING = ("explain__", "map__")   # Instagram gets at most 2 a day: the explainer and the day's first clip (Nov 25)
+
+
+def ig_ok(topic):
+    """Instagram punishes heavy posting and reaches the least: only the explainer and the first clip of the day go there."""
+    if topic.startswith(IG_EVERYTHING):
+        return True
+    if not topic.startswith("clip__"):
+        return False
+    today = datetime.now(ZoneInfo(TZ_NAME)).date()
+    for t, p in load_posts().items():
+        if t == topic or not t.startswith("clip__") or not p.get("posted_at"):
+            continue
+        day = datetime.fromisoformat(p["posted_at"]).astimezone(ZoneInfo(TZ_NAME)).date()
+        if day == today and ("instagram" in (p.get("platforms") or []) or p.get("ig_zernio_id")):
+            return False
+    return True
+
+
 def z_post(topic, when=None, only=None, draft=False):
     out = MEDIA_DIR / topic
     meta = seo(json.loads((out / "upload.json").read_text()))
     platforms = only or [p for p in meta.get("platforms") or PLATFORMS if p in PLATFORMS]   # a reel can name its own platforms
     record = not only and not draft
+    if record and "instagram" in platforms and len(platforms) > 1 and not ig_ok(topic):
+        platforms = [x for x in platforms if x != "instagram"]
+        print("      Instagram skipped (2 a day: the explainer and the first clip)")
     delay_ig = (record and topic.startswith("clip__") and "instagram" in platforms and len(platforms) > 1
                 and datetime.now(timezone.utc).date().isoformat() < IG_DELAY_UNTIL)
     if delay_ig:

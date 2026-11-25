@@ -18,7 +18,7 @@ import sys
 
 import requests
 
-from config import MEDIA_DIR, ROOT
+from config import DATA_DIR, MEDIA_DIR, ROOT
 from engine import mapx
 
 VIDEO_DIR = ROOT / "video"
@@ -398,6 +398,42 @@ def prisoners():
 
 
 TOPICS = {"rome": rome, "costco": costco, "roulette": roulette, "moon": moon, "cardtap": cardtap, "digestion": digestion, "prisoners": prisoners}
+
+
+# ---------- the daily 7:13 PM slot: the next explainer nobody has posted yet ----------
+STATE = DATA_DIR / "explain.json"
+START = "2026-12-05"       # the first 7 explainers were scheduled by hand through Dec 4
+
+
+def queue():
+    from engine import mapx as mx
+    return [f"map__{k}" for k in mx.TOPICS] + [f"explain__{k}" for k in TOPICS]
+
+
+def next_queued(dry=False, today=None):
+    from datetime import date
+    from engine.texts import warn
+    today = today or date.today()
+    if today.isoformat() < START:
+        print(f"      explainer slot starts {START}, nothing to do")
+        return None, None
+    st = json.loads(STATE.read_text()) if STATE.exists() else {"done": []}
+    left = [n for n in queue() if n not in st["done"]]
+    if not left:
+        warn("📭 No explainer left in the queue, nothing posted at 7:13 PM. Ask Claude for the next batch.")
+        return None, None
+    name = left[0]
+    kind, topic = name.split("__", 1)
+    if kind == "map":
+        name, final = mapx.make(topic, True, dry)
+    else:
+        name, final = make(topic, True, dry)
+    if not dry:
+        st["done"].append(name)
+        STATE.write_text(json.dumps(st, indent=2))
+        if len(left) <= 3:
+            warn(f"🗺️ Only {len(left) - 1} explainers left in the queue. Ask Claude for the next batch.")
+    return name, final
 
 
 def make(topic, use_voice=True, dry=False):

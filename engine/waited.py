@@ -527,8 +527,8 @@ def make_other(kind, dry=False, today=None):
     return topic, final
 
 
-# the 6:07 PM original: these take turns (texts from the future has its own daily 10:37 AM slot)
-ORIGINALS = ["chat", "data", "chat", "hl", "chat", "pawn", "chat", "flip", "chat", "bars", "chat", "coins", "chat", "scale"]
+# the 6:07 PM original, the only original of the day: these take turns (texts from the future lost its own 10:37 AM slot on Nov 25)
+ORIGINALS = ["chat", "texts", "data", "chat", "hl", "texts", "pawn", "chat", "flip", "texts", "bars", "chat", "coins", "scale"]
 
 
 def make_original(kind, dry=False, today=None):
@@ -601,6 +601,9 @@ def make_next(dry=False, flat_only=False, today=None, kind=None, clip=None):
         except Exception as e:
             print(f"      spike skipped: {e}")
             return None, None
+    if kind == "explain":                      # the 7:13 PM explainer: the next one in the queue (engine/explain.py), or nothing
+        from engine import explain
+        return explain.next_queued(dry, today)
     if kind in ("texts", "scale", "coins", "data", "chat", "hl", "pawn", "flip", "bars") or kind is None:
         if kind is None:                             # the 6:07 PM original: the next one in the rotation
             return next_original(dry, today)
@@ -684,7 +687,7 @@ if __name__ == "__main__":
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--flat", action="store_true")
     ap.add_argument("--post", action="store_true", help="post right away when done")
-    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip", "bars", "spike", "vodmine"], help="force one format")
+    ap.add_argument("--format", choices=["waited", "board", "receipt", "coins", "consoles", "bestsellers", "gtamath", "streamclip", "streamreact", "streamvs", "texts", "scale", "data", "chat", "hl", "pawn", "flip", "bars", "spike", "vodmine", "explain"], help="force one format")
     ap.add_argument("--clip", help="with --format spike: the Twitch clip id")
     a = ap.parse_args()
     import run
