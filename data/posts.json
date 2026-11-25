@@ -1482,5 +1482,21 @@
     "zernio_id": "6b061b01c6a457b49ce311c6",
     "posted_at": "2026-11-24T23:17:50+00:00",
     "slot": "waited"
+  },
+  "clip__20261124__WrongTolerantKangarooDBs": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=Bj5ss4yi5n8",
+      "facebook": "https://www.facebook.com/reel/1693219882152720"
+    },
+    "url": "https://www.youtube.com/watch?v=Bj5ss4yi5n8",
+    "title": "GTA 6: Jerma Screams As Biker Catches Fire On Highway",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b063d61fef11abbb1f46461",
+    "posted_at": "2026-11-25T01:45:07+00:00",
+    "slot": "waited"
   }
 }
