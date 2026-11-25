@@ -21,15 +21,10 @@ def load():
 
 
 def views_in(x):
-    """Total views in an analytics answer, whatever its shape (impressions if a platform has no views)."""
-    if isinstance(x, dict):
-        own = x.get("views") if isinstance(x.get("views"), (int, float)) else x.get("impressions") if isinstance(x.get("impressions"), (int, float)) else None
-        if own is not None and not any(isinstance(v, (dict, list)) for v in x.values()):
-            return own
-        return sum(views_in(v) for k, v in x.items() if isinstance(v, (dict, list)))
-    if isinstance(x, list):
-        return sum(views_in(v) for v in x)
-    return 0
+    """Zernio's analytics answer: 'analytics' holds the totals across platforms, 'platformAnalytics' one entry per platform."""
+    tot = (x.get("analytics") or {}).get("views")
+    per = {p.get("platform"): (p.get("analytics") or {}).get("views") or 0 for p in x.get("platformAnalytics") or [] if p.get("platform")}
+    return int(tot if isinstance(tot, (int, float)) else sum(per.values())), per
 
 
 def run():
@@ -44,13 +39,18 @@ def run():
             continue
         age = now - datetime.fromisoformat(at)
         old = stats.get(p["topic"], {})
-        if age < timedelta(hours=20) or age > timedelta(days=8) or old.get("at", "") > (now - timedelta(hours=20)).isoformat():
+        if age < timedelta(hours=20) or age > timedelta(days=8) or (old.get("views") and old.get("at", "") > (now - timedelta(hours=20)).isoformat()):
             continue
         r = requests.get(f"{ZAPI}/analytics", params={"postId": zid}, headers=zheaders(), timeout=60)
         if r.status_code >= 400:
             print(f"      clip stats: analytics unavailable ({r.status_code}: {r.text[:120]})")
             break
-        stats[p["topic"]] = {"logins": p["logins"], "star": p.get("star"), "views": views_in(r.json()), "at": now.isoformat()}
+        j = r.json()
+        total, per = views_in(j)
+        a = j.get("analytics") or {}
+        stats[p["topic"]] = {"logins": p["logins"], "star": p.get("star"), "views": total, "per_platform": per,
+                             "completion": a.get("completionRate"), "avg_watch_ms": a.get("igReelsAvgWatchTime"),
+                             "layout": p.get("layout"), "at": now.isoformat()}
         n += 1
     FILE.write_text(json.dumps(stats, indent=2))
     print(f"      clip stats: updated {n}")
