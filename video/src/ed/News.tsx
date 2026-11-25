@@ -46,8 +46,16 @@ const Gta6: React.FC<{size?: number}> = ({size = 26}) => (
 const GRAIN = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")`;
 const tc = (sec: number) => { const h = 18, m = 48 + Math.floor(sec / 60), s2 = Math.floor(sec % 60), fr = Math.floor((sec * 30) % 30); const p = (n: number) => String(n).padStart(2, '0'); return `${p(h)}:${p(m)}:${p(s2)}:${p(fr)}`; };
 const Footage: React.FC<{s: Seg; t: number; startAt: number; muted?: boolean; dim?: number; look?: string; mode?: string}> = ({s, t, startAt, muted, dim = 0, look = 'clean', mode = 'band'}) => {
-  const cam = s.face !== false && s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
+  const cam0 = s.face !== false && s.facecam && s.facecam.w > 0.05 ? s.facecam : null;
   const band = newsBand(s, mode);
+  // the streamer's webcam already inside the game picture (a cam drawn over the game): no second copy as an inset,
+  // just the EYEWITNESS tag pinned to the webcam where it already is
+  const r = band.r;
+  const ov = cam0 ? Math.max(0, Math.min(cam0.x + cam0.w, r.x + r.w) - Math.max(cam0.x, r.x)) * Math.max(0, Math.min(cam0.y + cam0.h, r.y + r.h) - Math.max(cam0.y, r.y)) : 0;
+  const inside = !!cam0 && ov > 0.5 * cam0.w * cam0.h;
+  const cam = inside ? null : cam0;
+  const tagX = inside && cam0 ? Math.max(8, ((cam0.x - r.x) / r.w) * 1080) : 0;
+  const tagY = inside && cam0 ? Math.min(band.h - 40, ((cam0.y + cam0.h - r.y) / r.h) * band.h - 34) : 0;
   const S = {...s, from: startAt};
   const PW = 288, PH = 162;
   const name = s.credit.replace(/ on (Twitch|YouTube)$/, '');
@@ -71,7 +79,7 @@ const Footage: React.FC<{s: Seg; t: number; startAt: number; muted?: boolean; di
               <div key={i} style={{position: 'absolute', width: 54, height: 54, [x ? 'right' : 'left']: 26, [y ? 'bottom' : 'top']: 26,
                 [x ? 'borderRight' : 'borderLeft']: '4px solid rgba(255,255,255,0.85)', [y ? 'borderBottom' : 'borderTop']: '4px solid rgba(255,255,255,0.85)'} as any} />
             ))}
-            <div style={{position: 'absolute', bottom: 18, right: 22, display: 'flex', alignItems: 'center', gap: 12, fontFamily: MONO, fontWeight: 700, fontSize: 22,
+            <div style={{position: 'absolute', ...(inside && tagX > 480 && tagY > band.h * 0.55 ? {top: 18} : {bottom: 18}), right: 22, display: 'flex', alignItems: 'center', gap: 12, fontFamily: MONO, fontWeight: 700, fontSize: 22,
               color: '#fff', textShadow: '0 2px 6px rgba(0,0,0,0.8)', letterSpacing: '0.06em'}}>
               <span style={{color: RED, opacity: Math.floor(t * 2) % 2 ? 1 : 0.3}}>●</span> REC <span style={{opacity: 0.85}}>CAM 2</span> <span>{tc(t + 12)}</span>
             </div>
@@ -80,6 +88,13 @@ const Footage: React.FC<{s: Seg; t: number; startAt: number; muted?: boolean; di
         <AbsoluteFill style={{background: `rgba(10,4,20,${dim})`}} />
         {look === 'clean' && <div style={{position: 'absolute', top: 16, right: 18, fontFamily: MONO, fontWeight: 700, fontSize: 20, color: CREAM, padding: '6px 12px',
           background: 'rgba(10,4,20,0.6)', borderRadius: 8, letterSpacing: '0.06em'}}><span style={{color: RED}}>●</span> FOOTAGE FROM THE SCENE</div>}
+        {inside && (
+          <div style={{position: 'absolute', left: tagX, top: tagY, display: 'flex', alignItems: 'stretch', fontFamily: SANS, fontWeight: 800,
+            boxShadow: '0 6px 18px rgba(0,0,0,0.5)'}}>
+            <div style={{background: PINK, color: '#fff', fontSize: 15, letterSpacing: '0.12em', padding: '6px 8px'}}>EYEWITNESS</div>
+            <div style={{background: 'rgba(26,10,46,0.9)', color: CREAM, fontSize: 18, padding: '5px 10px'}}>{name}</div>
+          </div>
+        )}
         {cam && (
           <div style={{position: 'absolute', left: 16, top: 16, width: PW, height: PH, borderRadius: 12, overflow: 'hidden',
             boxShadow: '0 12px 32px rgba(0,0,0,0.65), 0 0 0 3px rgba(255,243,234,0.95)'}}>
