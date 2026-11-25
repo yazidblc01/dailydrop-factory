@@ -15,6 +15,7 @@ import {EdChat} from './ed/Chat';
 import {EdRace} from './ed/Race';
 import {EdHL2} from './ed/HL2';
 import {EdPawn} from './ed/Pawn';
+import {EdMap} from './ed/MapX';
 import {EdFlip} from './ed/Flip';
 import {EdBarRace} from './ed/BarRace';
 import {EdNews} from './ed/News';
@@ -107,6 +108,9 @@ export const RemotionRoot: React.FC = () => {
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdHL2" component={EdHL2 as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{hookA: '', hookB: '', endA: '', endB: '', unit: '', items: [], start: 2.2, round: 3.3, outroAt: 18, duration: 19.6} as any}
+      calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdMap" component={EdMap as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
+      defaultProps={{pre: '', em: '', hook: [], land: '', near: [], regions: [], fake: {gta: '', fact: '', at: [0, 0]}, end: [], ask: '', start: 2.6, step: 2.7, fakeAt: 16, endAt: 19, outroAt: 22, duration: 24} as any}
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdPawn" component={EdPawn as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{pre: '', em: '', post: '', colA: '', items: [], start: 1.4, step: 1.35, outroAt: 14, duration: 15.6} as any}
