@@ -4,7 +4,7 @@
 // 3. just before the payoff the footage freezes: DEVELOPING STORY with 3 unconfirmed reports, then the payoff plays and one is CONFIRMED
 // 4. the anchor's sign-off
 import React from 'react';
-import {AbsoluteFill, Freeze, Sequence, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Freeze, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {Drop, SANS, MONO, clamp01, outBack, outCubic, useEdFonts} from './kit';
 import {Seg, Win, zoomBand} from './Clip';
 
@@ -484,6 +484,19 @@ export const EdNews: React.FC<EdNewsProps> = ({seg, copy, open, freezeAt, freeze
   const grey = quiz === 'show' && frozen ? clamp01((T - p2) / 0.25) : 0;
   return (
     <AbsoluteFill style={{background: INK}}>
+      {/* sound: the news sting under the ident, a whoosh and an impact as the slabs land; in the quiz a tense bed, a tick a second, a ding on the answer */}
+      <Sequence from={0} durationInFrames={Math.round(3 * FPS)}><Audio src={staticFile('sfx/news_sting.mp3')} volume={0.6} /></Sequence>
+      <Sequence from={Math.round((IDENT_HOLD + 0.45) * FPS)} durationInFrames={Math.round(0.6 * FPS)}><Audio src={staticFile('sfx/news_whoosh.mp3')} volume={0.5} /></Sequence>
+      <Sequence from={Math.round((IDENT_HOLD + 0.55) * FPS)} durationInFrames={Math.round(0.9 * FPS)}><Audio src={staticFile('sfx/news_impact.mp3')} volume={0.55} /></Sequence>
+      {quiz === 'show' && freezeFor > 0 && (
+        <>
+          <Sequence from={Math.round(p2 * FPS)} durationInFrames={Math.round(freezeFor * FPS)}><Audio src={staticFile('sfx/news_quiz_bed.mp3')} volume={0.35} /></Sequence>
+          {[0, 1, 2, 3, 4].map((k) => (
+            <Sequence key={k} from={Math.round((p2 + 0.5 + k) * FPS)} durationInFrames={Math.round(0.12 * FPS) + 1}><Audio src={staticFile('sfx/news_tick.mp3')} volume={0.5} /></Sequence>
+          ))}
+          <Sequence from={Math.round(p3 * FPS)} durationInFrames={Math.round(1.4 * FPS)}><Audio src={staticFile('sfx/news_ding.mp3')} volume={0.6} /></Sequence>
+        </>
+      )}
       {T < p1 && <ColdOpen s={seg} copy={copy} t={T} peak={peak} dur={open} />}
       {T >= p1 && T < end && (
         <>
