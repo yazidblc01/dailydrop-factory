@@ -39,7 +39,7 @@ COLORS = {"USA": "#3C6DF0", "CHN": "#E8433A", "JPN": "#F06AA0", "DEU": "#F5A623"
           "SAU": "#16A085", "TUR": "#D63A5A", "NGA": "#27AE60", "PAK": "#1E8449", "CHE": "#E74C3C", "NOR": "#5D6DFF", "IRL": "#2ECC71", "SGP": "#FF6B81",
           "QAT": "#9B2A5E", "DNK": "#C0392B", "NLD": "#FF8C1A", "SWE": "#3D8BFF", "ARE": "#1ABC9C", "ISL": "#5DADE2", "LUX": "#48C9B0", "AUT": "#EC7063"}
 PALETTE = ["#FF4FA0", "#2FB6FF", "#FFB13B", "#7C5CFF", "#22C55E", "#FF5E5E", "#00C2A8"]
-HOOK, RACE, HOLD, OUTRO = 1.8, 12.5, 2.6, 1.6
+HOOK, RACE, HOLD, POD, OUTRO = 1.8, 12.5, 2.6, 4.2, 1.6   # HOLD: bars stand still at the finish; POD: the results card
 
 
 def flag(iso2):
@@ -110,7 +110,8 @@ def build(theme):
     for c in out:
         del c["iso3"]
     props = {"theme": badge, "titleA": ta, "titleEm": tem, "unit": unit, "years": years, "countries": out, "toasts": toasts,
-             "hook": HOOK, "race": RACE, "outroAt": HOOK + RACE + HOLD, "duration": round(HOOK + RACE + HOLD + OUTRO, 2), "ask": ask, "endAsk": end_ask,
+             "hook": HOOK, "race": RACE, "hold": HOLD, "focus": 2 if "#2" in end_ask else 1,
+             "outroAt": HOOK + RACE + HOLD + POD, "duration": round(HOOK + RACE + HOLD + POD + OUTRO, 2), "ask": ask, "endAsk": end_ask,
              "source": f"Source: World Bank, {start} to {end}", "headA": f"{ta}{tem}", "pal": "vice"}
     return props, final, start, end
 
