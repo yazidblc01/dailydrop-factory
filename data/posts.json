@@ -1498,5 +1498,25 @@
     "zernio_id": "6b063d61fef11abbb1f46461",
     "posted_at": "2026-11-25T01:45:07+00:00",
     "slot": "waited"
+  },
+  "texts__gtav_pc_nvidia": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=xhV6sUmwjSw",
+      "facebook": "https://www.facebook.com/reel/2696376910812395",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712137149163785479",
+      "instagram": "https://www.instagram.com/reel/DgK5IzTzEM4/"
+    },
+    "title": "GTA 6: I texted my 2015 self about Nvidia 💀",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok",
+      "instagram"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0703dd271c52718aab1733",
+    "posted_at": "2026-11-25T15:51:18+00:00",
+    "url": "https://www.youtube.com/watch?v=xhV6sUmwjSw",
+    "slot": "waited"
   }
 }
