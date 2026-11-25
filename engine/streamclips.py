@@ -128,6 +128,54 @@ def game_id(tok, name=GAME):
     return g[0]["id"]
 
 
+TITLE_BOOST = {0: 0.25, 1: 1.0, 2: 2.0, 3: 3.5}       # multiplies the views-based rank: action titles jump the queue, a lazy title keeps its place
+
+
+TITLE_SYS = """You sort Twitch clip titles for a channel that posts the wildest GTA 6 moments. Judge each title only, in any language
+(Spanish, Portuguese, French, German, Russian...). Score each one:
+0 = clearly nothing happens or not gameplay (talking, a song, menus, IRL, sponsor/ads, shopping, customizing, browsing)
+1 = can't tell (a name, an emoji, 'lol', 'WW', an inside joke, or just the stream's own title like '[DROPS] GTA 6 PLAYTHROUGH' or 'BEATING GTA 6')
+2 = sounds like something funny or wild happens
+3 = clearly action or chaos (a fight, cops, a chase, a crash, an explosion, a robbery, a fail, wasted, NPCs going crazy, hurting an animal or NPC)
+Answer with one line per title, exactly 'number: score' (e.g. '1: 3'), nothing else."""
+
+
+def _title_scores(batch):
+    import anthropic
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    lines = "\n".join(f"{i + 1}. [{c['broadcaster_name']}] {c['title']}" for i, c in enumerate(batch))
+    msg = client.messages.create(model=CLAUDE_FAST, max_tokens=1500, system=TITLE_SYS, messages=[{"role": "user", "content": lines}])
+    text = "".join(b.text for b in msg.content if b.type == "text")
+    got = {int(m.group(1)): int(m.group(2)) for m in re.finditer(r"(\d+)\s*[:.)-]\s*([0-3])\b", text)}
+    return [got.get(i + 1) for i in range(len(batch))]
+
+
+def title_check(clips):
+    """Cheap text-only calls read every fresh title (any language) and guess how likely it is that something happens.
+    The guess reorders the queue before anything is downloaded; it never removes a clip on its own (an unread title stays neutral)."""
+    if not clips:
+        return
+    batch = clips[:300]
+    scores = [None] * len(batch)
+    # big batches first; whatever comes back unread (one odd title can make the model answer badly) is asked again in small ones
+    for size in (75, 15, 3):
+        todo = [i for i, x in enumerate(scores) if x is None]
+        for j in range(0, len(todo), size):
+            idx = todo[j:j + size]
+            try:
+                for i, x in zip(idx, _title_scores([batch[i] for i in idx])):
+                    scores[i] = x
+            except Exception as e:
+                print(f"      title check: a batch failed ({str(e)[:60]})")
+    for c, sc in zip(batch, scores):
+        if sc is not None:
+            c["title_score"] = max(0, min(3, sc))
+            c["rank"] *= TITLE_BOOST[c["title_score"]]
+    n = {k: sum(1 for c in batch if c.get("title_score") == k) for k in range(4)}
+    print(f"      title check: {n[3]} action, {n[2]} maybe fun, {n[1]} unclear, {n[0]} nothing happening"
+          f"{', ' + str(sum(1 for c in batch if 'title_score' not in c)) + ' unread' if any('title_score' not in c for c in batch) else ''}")
+
+
 def candidates(st, hours=FRESH_H, game=GAME):
     """Allowlisted clips of `game` (GTA 6 unless asked) from the last `hours`, best first."""
     from engine import clipstats
@@ -163,6 +211,8 @@ def candidates(st, hours=FRESH_H, game=GAME):
             c["login"], c["vph"], c["outlier"] = u["login"], c["view_count"] / max(age, 1), c["view_count"] / med
             c["rank"] = c["vph"] * min(c["outlier"], 9) ** 0.5 * weights.get(u["login"], 1.0)
             out.append(c)
+    out.sort(key=lambda c: -c["rank"])
+    title_check(out)
     return sorted(out, key=lambda c: -c["rank"])
 
 
@@ -1094,7 +1144,8 @@ def make(dry=False, today=None, tries=30, renders=4, screen_only=False):
             name = f"clip__{today:%Y%m%d}__{c['id'][:24]}".replace("-", "_")
             out = MEDIA_DIR / name
             out.mkdir(parents=True, exist_ok=True)
-            print(f"      {c['broadcaster_name']}: {c['title']} ({c['view_count']} views, {c['vph']:.0f}/h, {c['outlier']:.1f}x usual)")
+            print(f"      {c['broadcaster_name']}: {c['title']} ({c['view_count']} views, {c['vph']:.0f}/h, {c['outlier']:.1f}x usual"
+                  f"{', title ' + str(c['title_score']) + '/3' if 'title_score' in c else ''})")
             st["used"].append(c["id"])                 # never look at the same clip twice
             try:
                 info = media_info(download(c["url"], out), c.get("language"))
