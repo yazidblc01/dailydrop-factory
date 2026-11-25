@@ -484,7 +484,9 @@ Reject the clip (use=false) ONLY if:
 - no story (story=false): ONLY when nothing understandable happens: wandering around, menus, loading, talking about something
   off screen. For GTA, chaos IS the story: an action and its consequence (a fight then the cops, a crash then an explosion, a theft
   then a chase, running naked through a club with cops coming) or a fail and the streamer reacting all count as a story
-- the reaction is the star but the streamer's face is not visible (face_visible=false): a voice over gameplay is not a reaction
+Never reject for these: the game's HUD, menus or subtitles in another language (German, Spanish, Russian, French...: still GTA 6;
+only reject as not GTA 6 if it is clearly another game, a website or real life); no visible face (then judge it as a gameplay clip:
+star=gameplay, face_visible=false, and a strong action or fail still scores high).
 Find the facecam and the game region. Trim: keep the whole clip, build-up included, and only cut DEAD time at the start
 (walking around, menus, talk about something else) and after the reaction ends. A clip with no dead time stays whole (up to 60 s).
 Never cut the build-up just to make it shorter: it is what makes the payoff land. Write the setup line.
@@ -536,9 +538,8 @@ def screen(c, src, dur, words, loud, out, system=None):
     if v.get("use") and v.get("story") is False:
         v["use"] = False
         v["why"] = f"no story: {v.get('why', '')}"
-    if v.get("use") and v.get("star") == "reaction" and not v.get("face_visible"):
-        v["use"] = False
-        v["why"] = f"reaction with no real face on screen: {v.get('why', '')}"
+    if v.get("star") == "reaction" and not v.get("face_visible"):
+        v["star"] = "gameplay"                     # no face: judged on the gameplay, shown without the webcam inset
     if v.get("use") and v.get("dark"):
         v["use"] = False
         v["why"] = f"too dark to see: {v.get('why', '')}"
