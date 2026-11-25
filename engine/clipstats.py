@@ -47,10 +47,16 @@ def run():
             break
         j = r.json()
         total, per = views_in(j)
+        if rec.get("ig_zernio_id"):                # the Instagram delay test posts Instagram separately
+            ri = requests.get(f"{ZAPI}/analytics", params={"postId": rec["ig_zernio_id"]}, headers=zheaders(), timeout=60)
+            if ri.status_code < 400:
+                it, ip = views_in(ri.json())
+                per["instagram"] = per.get("instagram", 0) + ip.get("instagram", it)
+                total += ip.get("instagram", it)
         a = j.get("analytics") or {}
         stats[p["topic"]] = {"logins": p["logins"], "star": p.get("star"), "views": total, "per_platform": per,
                              "completion": a.get("completionRate"), "avg_watch_ms": a.get("igReelsAvgWatchTime"),
-                             "layout": p.get("layout"), "at": now.isoformat()}
+                             "layout": p.get("layout"), "ig_delayed": bool(rec.get("ig_zernio_id")), "at": now.isoformat()}
         n += 1
     FILE.write_text(json.dumps(stats, indent=2))
     print(f"      clip stats: updated {n}")

@@ -20,7 +20,8 @@ import re
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import requests
 from dotenv import load_dotenv
@@ -36,6 +37,9 @@ POSTS = DATA_DIR / "posts.json"
 CATEGORY_EDUCATION = "27"
 POLL_EVERY, POLL_MAX = 15, 900  # seconds
 PRIMARY = "youtube"  # a post counts as live once this one has a link
+# Instagram test (Nov 25 to Dec 2 2026): Instagram gets ~7 views a reel while Facebook gets ~1,000. Does Meta treat the
+# same-minute Instagram copy as a duplicate? Clip reels go to Instagram 2 hours after the other platforms until IG_DELAY_UNTIL.
+IG_DELAY_UNTIL, IG_DELAY_H = "2026-12-02", 2
 
 TAGS = {
     "invest": ["investing", "stocks", "stock market", "finance", "money", "data"],
@@ -415,8 +419,12 @@ def z_post(topic, when=None, only=None, draft=False):
     out = MEDIA_DIR / topic
     meta = seo(json.loads((out / "upload.json").read_text()))
     platforms = only or [p for p in meta.get("platforms") or PLATFORMS if p in PLATFORMS]   # a reel can name its own platforms
-    primary = PRIMARY if PRIMARY in platforms else platforms[0]
     record = not only and not draft
+    delay_ig = (record and topic.startswith("clip__") and "instagram" in platforms and len(platforms) > 1
+                and datetime.now(timezone.utc).date().isoformat() < IG_DELAY_UNTIL)
+    if delay_ig:
+        platforms = [x for x in platforms if x != "instagram"]
+    primary = PRIMARY if PRIMARY in platforms else platforms[0]
     known = load_posts().get(topic, {}) if record else {}
     if known.get("url"):
         print(f"Already posted: {known['url']}")
@@ -458,6 +466,17 @@ def z_post(topic, when=None, only=None, draft=False):
     post_id = p.get("_id") or p.get("id")
     if draft:
         return {"status": "draft", "id": post_id, "post_status": p.get("status")}
+    if delay_ig:                                   # the Instagram test: its own post, 2 hours later (never blocks the main post)
+        try:
+            at = (when or datetime.now(ZoneInfo(TZ_NAME)).replace(tzinfo=None)) + timedelta(hours=IG_DELAY_H)
+            r = requests.post(f"{ZAPI}/posts", headers=zheaders(), timeout=120,
+                              json=zernio_body(topic, meta, pre["publicUrl"], at, ["instagram"], False, cover_url, cover_ms))
+            ig = zjson(r, "Instagram post")
+            ig = ig.get("post", ig)
+            save_post(topic, ig_zernio_id=ig.get("_id") or ig.get("id"), ig_when=at.isoformat())
+            print(f"      Instagram scheduled {IG_DELAY_H} h later ({at:%H:%M}), the delay test")
+        except Exception as e:
+            print(f"      Instagram delay post failed ({str(e)[:120]})")
 
     base = {"title": meta["title"], "platforms": platforms, "service": "zernio", "zernio_id": post_id,
             "posted_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
