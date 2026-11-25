@@ -298,9 +298,32 @@ PAWN_THEMES = [
 ]
 
 
+# Gamer bills: US list prices, no live source, so they are fixed here and checked by hand. Telegram asks for a recheck after 90 days.
+# 2013: GTA V, PS4 and Xbox One launch prices, PS Plus year, DualShock 4, Netflix. Now: Rockstar, Sony (Apr 2026), Microsoft (Aug 2026), Netflix (Mar 2026).
+GAMER_CHECKED = "2026-11-25"
+GAMER_PAWN = [
+    {"ico": "", "name": "New GTA game", "a": 59.99, "b": 79.99, "chip": {"bg": "#E8436E", "a": "GTA\nV", "b": "GTA\n6"}},
+    {"ico": "", "name": "PlayStation", "a": 399.99, "b": 649.99, "chip": {"bg": "#0070D1", "a": "PS4", "b": "PS5"}},
+    {"ico": "", "name": "Xbox", "a": 499.99, "b": 799.99, "chip": {"bg": "#107C10", "a": "XBOX\nONE", "b": "SERIES\nX"}},
+    {"ico": "🌐", "name": "PS Plus, 1 year", "a": 49.99, "b": 79.99},
+    {"ico": "🎮", "name": "Extra controller", "a": 59.99, "b": 74.99},
+    {"ico": "📺", "name": "Netflix, 1 month", "a": 7.99, "b": 19.99},
+]
+
+
 def pawn(n, today):
-    pre, em, post, cands = PAWN_THEMES[n % len(PAWN_THEMES)]
-    items, k_end = [], None
+    k_end, cart, ask, src = None, "The cart", "Which one hurts the most? 👇", SOURCE
+    if n % (len(PAWN_THEMES) + 1) == 0:                        # every 4th pawn reel is gamer bills, starting with the next one
+        pre, em, post, col = "Gamer bills in ", "2013", " vs today", "2013"
+        items, k_end, cart, ask = [dict(i) for i in GAMER_PAWN], "now", "All of it", "Which one hurts the most? 👇"
+        src = f"Sources: Rockstar, Sony, Microsoft and Netflix US list prices (checked {GAMER_CHECKED})."
+        if (today - datetime.strptime(GAMER_CHECKED, "%Y-%m-%d").date()).days > 90:
+            from engine.texts import warn
+            warn(f"🕹️ Gamer bills pawn prices were last checked {GAMER_CHECKED}. Ask Claude to recheck them.")
+        cands = []
+    else:
+        pre, em, post, cands = PAWN_THEMES[n % (len(PAWN_THEMES) + 1) - 1]
+        col, items = "SEP 2013", []
     for sid, ico, name in cands:
         if len(items) == 6:
             break
@@ -314,15 +337,17 @@ def pawn(n, today):
     if len(items) < 6:
         raise RuntimeError(f"only {len(items)} prices loaded for the pawn shop")
     start, step = 1.4, 1.35
-    total_at = start + 5 * step + step * 0.42 + 0.7
-    props = {"pal": "vice", "pre": pre, "em": em, "post": post, "colA": "SEP 2013", "items": items, "start": start, "step": step,
-             "outroAt": round(total_at + 2.6, 2), "duration": round(total_at + 2.6 + 1.6, 2), "headA": f"{pre}{em}{post}"}
+    total_at = start + 5 * step + step * 0.42 + 2.1               # same as pawnTimes() in Pawn.tsx: biggest jump, then the total
+    props = {"pal": "vice", "pre": pre, "em": em, "post": post, "colA": col, "items": items, "start": start, "step": step,
+             "cart": cart, "ask": ask, "outroAt": round(total_at + 3.4, 2), "duration": round(total_at + 3.4 + 1.6, 2), "headA": f"{pre}{em}{post}"}
     ta, tb = sum(i["a"] for i in items), sum(i["b"] for i in items)
     pct = round((tb / ta - 1) * 100)
-    lines = "\n".join(f"• {i['name']}: ${i['a']:.2f} (Sep 2013) vs ${i['b']:.2f} ({k_end})" for i in items)
+    when = "2013" if col == "2013" else "Sep 2013"
+    lines = "\n".join(f"• {i['name']}: ${i['a']:.2f} ({when}) vs ${i['b']:.2f} ({k_end})" for i in items)
+    intro = "US list prices the year GTA V came out (2013) vs now" if col == "2013" else "Average US prices when GTA V came out (Sep 2013) vs now"
     meta = {"title": f"{pre}{em}{post} 🧾",
-            "description": f"Average US prices when GTA V came out (Sep 2013) vs now:\n{lines}\nThe cart: ${ta:.2f} vs ${tb:.2f} ({pct:+d}%).\n{SOURCE}\n#gta6 #gtav #inflation",
-            "pinned_comment": "Which one hurts the most? 👇"}
+            "description": f"{intro}:\n{lines}\n{cart}: ${ta:,.2f} vs ${tb:,.2f} ({pct:+d}%).\n{src}\n#gta6 #gtav #inflation",
+            "pinned_comment": ask}
     return "EdPawn", "pawn", props, meta
 
 
