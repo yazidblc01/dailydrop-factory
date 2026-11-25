@@ -304,6 +304,27 @@ def language(a):
     return info.language if info.language != "en" and info.language_probability >= 0.5 else "en"
 
 
+def translate_lines(texts, lang):
+    """One English line per input line. The model sometimes merges or drops a line: ask again, then fall back to
+    numbered plain text (a line it still skips comes back empty, so that stretch simply has no caption)."""
+    numbered = f"Language: {lang}\n" + "\n".join(f"{i + 1}. {t}" for i, t in enumerate(texts))
+    for _ in range(2):
+        try:
+            lines = (ask([{"type": "text", "text": numbered}], TRANSLATE, TRANSLATE_SYS, model=CLAUDE_FAST).get("lines") or [])
+        except Exception:
+            lines = []
+        if len(lines) == len(texts):
+            return lines
+    import anthropic
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    msg = client.messages.create(model=CLAUDE_FAST, max_tokens=2000, system=TRANSLATE_SYS + "\nAnswer only with lines 'number. English text', one per input line.",
+                                 messages=[{"role": "user", "content": numbered}])
+    text = "".join(b.text for b in msg.content if b.type == "text")
+    got = {int(m.group(1)): m.group(2).strip() for m in re.finditer(r"^\s*(\d+)[.):]\s*(.+)$", text, re.M)}
+    print(f"        translation: {len(got)}/{len(texts)} lines by the fallback")
+    return [got.get(i + 1, "") for i in range(len(texts))]
+
+
 def foreign(a, lang):
     """Non-English speech: transcribe it in its own language, translate each line to English with the cheap model,
     and spread the English words over each line's time. Marked tr=True (the audio bleep skips them: timings are approximate)."""
@@ -315,11 +336,7 @@ def foreign(a, lang):
     segs = [(s.start, s.end, s.text.strip()) for s in segs if s.text.strip()]
     if not segs:
         return []
-    got = ask([{"type": "text", "text": f"Language: {lang}\n" + "\n".join(f"{i + 1}. {t}" for i, (_, _, t) in enumerate(segs))}],
-              TRANSLATE, TRANSLATE_SYS, model=CLAUDE_FAST)
-    lines = got.get("lines") or []
-    if len(lines) != len(segs):
-        raise RuntimeError(f"translation came back with {len(lines)} lines for {len(segs)}")
+    lines = translate_lines([t for _, _, t in segs], lang)
     words = []
     for (s0, s1, _), en in zip(segs, lines):
         ws = [w for w in re.sub(r"^\d+\.\s*", "", en).split() if w]
