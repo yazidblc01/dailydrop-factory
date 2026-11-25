@@ -1534,5 +1534,21 @@
     "zernio_id": "6b071b3dfeeb5200841ee50b",
     "posted_at": "2026-11-25T17:32:21+00:00",
     "slot": "waited"
+  },
+  "clip__20261125__KnottyClumsyPepperPogCha": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=t3yp2gHOCjY",
+      "facebook": "https://www.facebook.com/reel/1744097847075715"
+    },
+    "url": "https://www.youtube.com/watch?v=t3yp2gHOCjY",
+    "title": "GTA 6: Rubius Gets Flattened While Grabbing Cash",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0747fa2400496e4e3da2a7",
+    "posted_at": "2026-11-25T20:42:29+00:00",
+    "slot": "waited"
   }
 }

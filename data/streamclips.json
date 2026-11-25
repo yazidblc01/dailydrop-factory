@@ -424,9 +424,15 @@
     "CuteBillowingNewtFutureMan-tke0qzRbN2y_lJpx",
     "ImpossibleLazyAntelopeJonCarnage-YbwyOQkfvvWWgrKI",
     "GoldenPoisedKeyboardRedCoat-HO3GxS3GCBEqzXcR",
-    "GloriousShortRamenANELE-1Bn-506RuvLm-UJb"
+    "GloriousShortRamenANELE-1Bn-506RuvLm-UJb",
+    "KnottyClumsyPepperPogChamp-yMfYotTaJGHSMpt5",
+    "CloudySoftAnacondaKreygasm-5ADDipgBhFJMEqU6",
+    "LongObeseOrangeResidentSleeper-43PVWVke_FHK_Yz4",
+    "ConsiderateLittleCougarWTRuck-wXNSmnXiZplUK07k",
+    "HorribleIronicSeahorseKippa-jomOUpme93oe5E1-",
+    "JollyComfortableSparrowJonCarnage-fCCEA6T-iAe1lHGR"
   ],
-  "count": 44,
+  "count": 45,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -13949,7 +13955,7 @@
       "name": "MissMikkaa",
       "url": "https://www.twitch.tv/missmikkaa/clip/MoldyDarlingCardJebaited-9zXoY6rxfXDBuq36",
       "title": "Behold, the perfect car!",
-      "views": 1130,
+      "views": 1168,
       "language": "en",
       "use": true,
       "why": "Mild but readable payoff: she builds up a custom car with \"anime girls\" and the reveal lands on \"Tentacles!\" with a visible reaction. The joke is light, so the score stays middling.",
@@ -14150,7 +14156,7 @@
       "name": "HasanAbi",
       "url": "https://www.twitch.tv/hasanabi/clip/GoldenPoisedKeyboardRedCoat-HO3GxS3GCBEqzXcR",
       "title": "Parachute WASTED",
-      "views": 625,
+      "views": 801,
       "language": "en",
       "use": true,
       "why": "Clear fail with a payoff: he jumps off a rooftop trying to glide, then the Wasted screen hits. His webcam reaction (\"how do you do that?\") is captioned and visible. Worth a mid-level score.",
@@ -14175,7 +14181,8 @@
           16.0,
           17.5
         ]
-      ]
+      ],
+      "growth": 58.5
     },
     "GloriousShortRamenANELE-1Bn-506RuvLm-UJb": {
       "at": "2026-11-25T17:18:32.401943+00:00",
@@ -14183,7 +14190,7 @@
       "name": "TheBurntPeanut",
       "url": "https://www.twitch.tv/theburntpeanut/clip/GloriousShortRamenANELE-1Bn-506RuvLm-UJb",
       "title": "Did Lucia Get In?",
-      "views": 649,
+      "views": 745,
       "language": "en",
       "use": true,
       "why": "A jet getaway on the tarmac ends in a crash-landing into emergency vehicles, with the streamer panicking (\"oh my God, I'm gonna die\"). The payoff is clear and the shouted build-up gives context. The facecam is an avatar, so there is no real face to react.",
@@ -14211,6 +14218,241 @@
       "cold_open": false,
       "nudity": false,
       "face_visible": false,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "growth": 32.1
+    },
+    "KnottyClumsyPepperPogChamp-yMfYotTaJGHSMpt5": {
+      "at": "2026-11-25T20:20:48.314968+00:00",
+      "login": "rubius",
+      "name": "Rubius",
+      "url": "https://www.twitch.tv/rubius/clip/KnottyClumsyPepperPogChamp-yMfYotTaJGHSMpt5",
+      "title": "aplastado",
+      "views": 310,
+      "language": "es",
+      "use": true,
+      "why": "Funny chaos: she keeps grabbing dropped cash while a box truck rolls up and flattens her, then the streamer reacts with \"IS THIS GAME, DUDE?\". Clear action and payoff with a face reaction.",
+      "score": 7,
+      "star": "reaction",
+      "moment": "grabbing cash then run over by truck",
+      "action": null,
+      "facecam": {
+        "x": 0.02,
+        "y": 0.2,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.9
+      },
+      "start": 0.0,
+      "end": 18.5,
+      "peak": 15.5,
+      "story": true,
+      "setup": "Rubius keeps grabbing dropped cash while a big truck rolls up the street",
+      "cold_open": true,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": true,
+      "dark": false,
+      "dead": [
+        [
+          18.5,
+          24.1
+        ]
+      ],
+      "posted": true
+    },
+    "CloudySoftAnacondaKreygasm-5ADDipgBhFJMEqU6": {
+      "at": "2026-11-25T20:22:14.211992+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/CloudySoftAnacondaKreygasm-5ADDipgBhFJMEqU6",
+      "title": "This Is Where u Do the....",
+      "views": 161,
+      "language": "en",
+      "use": false,
+      "why": "Rejected for nudity: the character is shown partly or fully undressed while the streamer cycles through bodysuits and bras in the clothing store, including bare-back frames. Also no real payoff: the store try-on is the whole content.",
+      "score": 2,
+      "star": "gameplay",
+      "moment": "clothing store outfit try-on",
+      "action": null,
+      "facecam": {
+        "x": 0.03,
+        "y": 0.6,
+        "w": 0.1,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 27.7,
+      "peak": 20.0,
+      "story": false,
+      "setup": "ohnePixel browses bodysuits and bras in a clothing store, trying outfits on",
+      "cold_open": false,
+      "nudity": true,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "LongObeseOrangeResidentSleeper-43PVWVke_FHK_Yz4": {
+      "at": "2026-11-25T20:24:15.213092+00:00",
+      "login": "squeezie",
+      "name": "Squeezie",
+      "url": "https://www.twitch.tv/squeezie/clip/LongObeseOrangeResidentSleeper-43PVWVke_FHK_Yz4",
+      "title": "GTA 6 BRAQUAGE DAY LIVE 676h NON-STOP!!",
+      "views": 655,
+      "language": "fr",
+      "use": false,
+      "why": "Nothing happens on screen: the character walks into a building and the car drives around Vice City while Squeezie talks about a heist and a \"chick\" in French. No action, no visible payoff, so there is no story.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "talking heist plans while driving",
+      "action": null,
+      "facecam": {
+        "x": 0.79,
+        "y": 0.16,
+        "w": 0.21,
+        "h": 0.22
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.95
+      },
+      "start": 0.0,
+      "end": 60.0,
+      "peak": 29.0,
+      "story": false,
+      "setup": "Squeezie walks into a Vice City building and talks about a heist",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "ConsiderateLittleCougarWTRuck-wXNSmnXiZplUK07k": {
+      "at": "2026-11-25T20:25:25.506856+00:00",
+      "login": "ohnepixel",
+      "name": "ohnePixel",
+      "url": "https://www.twitch.tv/ohnepixel/clip/ConsiderateLittleCougarWTRuck-wXNSmnXiZplUK07k",
+      "title": "eyyyyy, you hurt lucia",
+      "views": 120,
+      "language": "en",
+      "use": true,
+      "why": "Reckless supercar driving, then a hit on a pedestrian and an open-mouthed reaction from the streamer at the peak. Clear setup and payoff, and the phone texts add context. Not a big score because the payoff is fairly small and there is no speech.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "running down a pedestrian in a supercar",
+      "action": "car crash",
+      "facecam": {
+        "x": 0.13,
+        "y": 0.74,
+        "w": 0.13,
+        "h": 0.26
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 18.9,
+      "peak": 13.5,
+      "story": true,
+      "setup": "ohnePixel reads Lucia's texts, then drives a supercar down the street",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "HorribleIronicSeahorseKippa-jomOUpme93oe5E1-": {
+      "at": "2026-11-25T20:27:47.990735+00:00",
+      "login": "squeezie",
+      "name": "Squeezie",
+      "url": "https://www.twitch.tv/squeezie/clip/HorribleIronicSeahorseKippa-jomOUpme93oe5E1-",
+      "title": "Pool boy😂😂",
+      "views": 1594,
+      "language": "fr",
+      "use": false,
+      "why": "no story: Low-energy but funny: Squeezie gives a deadpan, overly serious monologue about sunscreen and \"losing the flex\" while Lucia complains. No real payoff or big reaction, and the sunscreen scene is in bikinis, not nudity. Usable as a light comedy reel with captions.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "sunscreen by the pool with Lucia",
+      "action": null,
+      "facecam": {
+        "x": 0.79,
+        "y": 0.1,
+        "w": 0.17,
+        "h": 0.24
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.92
+      },
+      "start": 0.0,
+      "end": 60.0,
+      "peak": 6.75,
+      "story": false,
+      "setup": "Squeezie is putting sunscreen on Lucia and takes the job very seriously",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "JollyComfortableSparrowJonCarnage-fCCEA6T-iAe1lHGR": {
+      "at": "2026-11-25T20:29:03.685598+00:00",
+      "login": "illojuan",
+      "name": "IlloJuan",
+      "url": "https://www.twitch.tv/illojuan/clip/JollyComfortableSparrowJonCarnage-fCCEA6T-iAe1lHGR",
+      "title": "sitcom",
+      "views": 249,
+      "language": "es",
+      "use": true,
+      "why": "Action and consequence: he hides in bushes, police spot him and shout to surrender, then he runs and escapes on a dirt bike. No streamer speech, so the reaction is weak and the clip is only a mid-level chase.",
+      "score": 5,
+      "star": "gameplay",
+      "moment": "hiding from police at substation",
+      "action": "police chase",
+      "facecam": {
+        "x": 0.023,
+        "y": 0.42,
+        "w": 0.156,
+        "h": 0.287
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.88
+      },
+      "start": 0.0,
+      "end": 19.9,
+      "peak": 5.8,
+      "story": true,
+      "setup": "IlloJuan hides in the bushes by a substation as police close in",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
       "captioned": false,
       "dark": false,
       "dead": []
@@ -14619,6 +14861,17 @@
       "date": "2026-11-25",
       "layout": "zoom",
       "layout_by": "claude"
+    },
+    {
+      "topic": "clip__20261125__KnottyClumsyPepperPogCha",
+      "logins": [
+        "rubius"
+      ],
+      "star": "reaction",
+      "moment": "grabbing cash then run over by truck",
+      "date": "2026-11-25",
+      "layout": "zoom",
+      "layout_by": "coin"
     }
   ],
   "house": "2026-11-25",
@@ -15890,6 +16143,131 @@
       "start": 18.0,
       "end": 27.2,
       "peak": 24.0
+    },
+    "SmallLongNewtPastaThat-ohtAXkcBy0FfbQUz": {
+      "at": "2026-11-25T20:11:46.233650+00:00",
+      "login": "anthonyz",
+      "name": "AnthonyZ",
+      "url": "https://www.twitch.tv/anthonyz/clip/SmallLongNewtPastaThat-ohtAXkcBy0FfbQUz",
+      "title": "T-unit ends the Johnson family",
+      "use": true,
+      "score": 6,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 28.0,
+      "peak": 7.0
+    },
+    "SmallThoughtfulBottleBudBlast-VDphLxKtKnhLkUMG": {
+      "at": "2026-11-25T20:12:31.991668+00:00",
+      "login": "crystalst",
+      "name": "Crystalst",
+      "url": "https://www.twitch.tv/crystalst/clip/SmallThoughtfulBottleBudBlast-VDphLxKtKnhLkUMG",
+      "title": "Crystal kills Burn",
+      "use": false,
+      "score": 1,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 18.9,
+      "peak": 3.0
+    },
+    "ManlyBlueRavenFreakinStinkin-PpazDmxIoNirGNtA": {
+      "at": "2026-11-25T20:14:06.468924+00:00",
+      "login": "sasatikk",
+      "name": "sasatikk",
+      "url": "https://www.twitch.tv/sasatikk/clip/ManlyBlueRavenFreakinStinkin-PpazDmxIoNirGNtA",
+      "title": "爆発オチなんてサイテー！全員死亡",
+      "use": false,
+      "score": 4,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 17.0,
+      "end": 30.0,
+      "peak": 21.3
+    },
+    "VivaciousBitterDadBlargNaut-fjB9TgdjFrEj7ZEt": {
+      "at": "2026-11-25T20:14:41.253891+00:00",
+      "login": "sasatikk",
+      "name": "sasatikk",
+      "url": "https://www.twitch.tv/sasatikk/clip/VivaciousBitterDadBlargNaut-fjB9TgdjFrEj7ZEt",
+      "title": "プリズンに送られるゆうが",
+      "use": false,
+      "score": 2,
+      "action": null,
+      "facecam": {
+        "x": 0.0,
+        "y": 0.55,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 1.0
+      },
+      "start": 0.0,
+      "end": 9.0,
+      "peak": 7.75
+    },
+    "GoodHilariousSwanTBTacoRight-cOMQLJSqj1sqVd28": {
+      "at": "2026-11-25T20:16:02.697872+00:00",
+      "login": "jennybeartv",
+      "name": "Jennybeartv",
+      "url": "https://www.twitch.tv/jennybeartv/clip/GoodHilariousSwanTBTacoRight-cOMQLJSqj1sqVd28",
+      "title": "Cozy Rosy one shots the hack from Fleeca Bank Heist",
+      "use": false,
+      "score": 5,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 38.0,
+      "end": 50.0,
+      "peak": 42.6
+    },
+    "ShinyFilthyLarkCoolStoryBro-tZhD6x58pP8i-wDf": {
+      "at": "2026-11-25T20:17:44.644002+00:00",
+      "login": "nakkida",
+      "name": "Nakkida",
+      "url": "https://www.twitch.tv/nakkida/clip/ShinyFilthyLarkCoolStoryBro-tZhD6x58pP8i-wDf",
+      "title": "Clowns go after the brickbois",
+      "use": false,
+      "score": 5,
+      "action": null,
+      "facecam": null,
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 34.0,
+      "peak": 22.0
     }
   },
   "spikes": [],
