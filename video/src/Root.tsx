@@ -17,6 +17,7 @@ import {EdHL2} from './ed/HL2';
 import {EdPawn} from './ed/Pawn';
 import {EdFlip} from './ed/Flip';
 import {EdBarRace} from './ed/BarRace';
+import {EdNews} from './ed/News';
 import edskit from '../props/edskit.json';
 import edmath from '../props/edmath.json';
 import {EdWaited} from './ed/Waited';
@@ -118,6 +119,11 @@ export const RemotionRoot: React.FC = () => {
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdVs" component={EdVs as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{pairs: [], hook: 'GTA 5 VS GTA 6', badge: 'GTA 6 · DAY 1', duration: 10} as any}
+      calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdNews" component={EdNews as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
+      defaultProps={{seg: {src: 'clips/sample.mp4', srcW: 1920, srcH: 1080, from: 0, dur: 8, credit: 'Streamer on Twitch', layout: 'zoom'},
+        copy: {headline: ['BREAKING'], kicker: '', chyron: '', sub: '', ticker: [''], question: '', options: ['', '', ''], answer: 0, signoff: '', place: '', clock: '',
+          weather: '', wanted: 1}, open: 3.6, freezeAt: 3, freezeFor: 5.5, signoff: 1.8, duration: 20} as any}
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdClip" component={EdClip as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{segs: [{src: 'clips/sample.mp4', srcW: 1920, srcH: 1080, from: 0, dur: 8.4, facecam: {x: 0.74, y: 0.04, w: 0.24, h: 0.3},

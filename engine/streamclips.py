@@ -33,6 +33,7 @@ import random
 import re
 import statistics
 import subprocess
+import sys
 from datetime import datetime, timedelta, timezone
 
 import requests
@@ -42,6 +43,7 @@ from engine import render
 from engine.render import VIDEO_DIR
 from engine.waited import GTA6, follow_card
 FOLLOW = 1.2                     # the logo outro at the end of every clip
+NEWS = True                      # every single-clip reel as a Leonida Live news segment (engine/news.py), Nov 24 2026
 
 STATE = DATA_DIR / "streamclips.json"
 ALLOW = DATA_DIR / "streamers.json"
@@ -56,8 +58,8 @@ MIN_S, MAX_S = 15, 60            # Twitch clips we look at
 CUT_MIN, CUT_MAX = 12, 60        # what we keep: the whole clip minus dead time at the start and end, up to 60 s (Nov 24 2026)
 MIN_VIEWS = 100                  # viewers voted: a clip needs this many Twitch views (views per hour and the outlier rank the rest)
 FRESH_H = 36                     # fresh clips only (day-1 missions age out); 48 h if 36 comes up dry
-MIN_SCORE = 7                    # the final pick's bar
-FLOOR = 7                        # no 6/10 fallback any more: a slot with no 7 posts an original instead (Nov 24 2026)
+MIN_SCORE = 6 if NEWS else 7     # the final pick's bar: 6 for news reels (our headline, ticker and quiz carry them), 7 for bare clips
+FLOOR = 7                        # spikes (posted bare, right away) still need a 7; a slot with nothing good enough posts an original
 EXPOSED = {"FEMALE_BREAST_EXPOSED", "FEMALE_GENITALIA_EXPOSED", "MALE_GENITALIA_EXPOSED", "BUTTOCKS_EXPOSED", "ANUS_EXPOSED"}
 CLIP_PLATFORMS = ["youtube", "facebook"]   # plain clips: TikTok and Instagram demote reposted streams
 PER_STREAMER_DAY = 2
@@ -877,9 +879,12 @@ def free_checks(final, dur):
     return faults
 
 
-def gauntlet(final, dur, out):
-    """Free checks first. Claude (the cheap model) only looks when one of them finds something."""
+def gauntlet(final, dur, out, news=False):
+    """Free checks first. Claude (the cheap model) only looks when one of them finds something.
+    news: the news segment freezes on purpose (the cold open, the quiz), so a frozen stretch is not a fault there."""
     faults = free_checks(final, dur + FOLLOW)   # the reel plus the follow card at the end
+    if news:
+        faults = [f for f in faults if f != "frozen video"]
     if not faults:
         return {"pass": True, "faults": "free checks clean"}
     print(f"        free checks flagged: {'; '.join(faults)}, asking Claude")
@@ -915,15 +920,26 @@ def build(c, v, info, name, out, st, today, worded=False):
         rel = publish_src(info, name, 0)
         plat = c.get("platform", "Twitch")
         credit = f"{c['broadcaster_name']} on {plat}"
-        bg = zoom_bg(info, v, name, 0) if lay == "zoom" else None
-        main = seg(info, v, rel, credit, v["start"], v["end"], blurs=blurs, bg=bg)
-        segs = [main]
-        if v.get("cold_open"):                     # the payoff flashed first, only when it makes sense on its own
-            segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True, blurs=blurs, bg=bg), main]
-        final, dur = render_reel(segs, v["hook"], out, today, setup=v.get("setup"), setup_at=sum(x["dur"] for x in segs[:-1]))
-        g = gauntlet(final, dur, out)
+        if NEWS:                                   # Leonida Live: zoom = the 1.15x band, crop = zoomed in
+            from engine import news
+            bg = zoom_bg(info, v, name, 0)
+            main = seg(info, v, rel, credit, v["start"], v["end"], blurs=blurs, bg=bg)
+            nc, freeze_at = news.write(sys.modules[__name__], v, main)
+            print(f"        news: {' / '.join(nc['headline'])} | {nc['chyron']} | quiz: {'yes' if freeze_at is not None else 'no'}")
+            if freeze_at is not None:
+                v = {**v, "pinned_comment": "A, B or C? Comment your guess before the reveal 👇"}
+            final, total = news.render(sys.modules[__name__], main, nc, freeze_at, "band" if lay == "zoom" else "crop", st["count"] + 1, out)
+            dur = total - FOLLOW                   # the gauntlet adds the old follow card back
+        else:
+            bg = zoom_bg(info, v, name, 0) if lay == "zoom" else None
+            main = seg(info, v, rel, credit, v["start"], v["end"], blurs=blurs, bg=bg)
+            segs = [main]
+            if v.get("cold_open"):                     # the payoff flashed first, only when it makes sense on its own
+                segs = [seg(info, v, rel, credit, max(0.0, v["peak"] - 0.45), min(info["dur"], v["peak"] + 0.55), words=False, flash=True, blurs=blurs, bg=bg), main]
+            final, dur = render_reel(segs, v["hook"], out, today, setup=v.get("setup"), setup_at=sum(x["dur"] for x in segs[:-1]))
+        g = gauntlet(final, dur, out, news=NEWS)
         if g["pass"]:                                          # the safety net: any nudity the screener missed fails the reel
-            left = still_exposed(final, dur, out, zoom=lay == "zoom")
+            left = still_exposed(final, dur + (FOLLOW if NEWS else 0), out, zoom=lay == "zoom" and not NEWS)
             if left:
                 g = {"pass": False, "faults": f"nudity in {left} frame(s)"}
         print(f"        gauntlet: {'PASS' if g['pass'] else 'FAIL'} {g['faults'][:160]}")
