@@ -1550,5 +1550,23 @@
     "zernio_id": "6b0747fa2400496e4e3da2a7",
     "posted_at": "2026-11-25T20:42:29+00:00",
     "slot": "waited"
+  },
+  "chat__20261125__5": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=FLIvBDQRiS0",
+      "facebook": "https://www.facebook.com/reel/2115586175985989",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712252171483401524"
+    },
+    "title": "GTA 6: Highway Pedestrian Wallet Audit",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b076c7ec48fa1e1b4bb962a",
+    "posted_at": "2026-11-25T23:17:40+00:00",
+    "url": "https://www.youtube.com/watch?v=FLIvBDQRiS0",
+    "slot": "waited"
   }
 }
