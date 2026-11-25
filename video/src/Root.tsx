@@ -16,6 +16,8 @@ import {EdRace} from './ed/Race';
 import {EdHL2} from './ed/HL2';
 import {EdPawn} from './ed/Pawn';
 import {EdMap} from './ed/MapX';
+import {EdMapV} from './ed/MapV';
+import {EdExplain} from './ed/Explain';
 import {EdFlip} from './ed/Flip';
 import {EdBarRace} from './ed/BarRace';
 import {EdNews} from './ed/News';
@@ -108,6 +110,12 @@ export const RemotionRoot: React.FC = () => {
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdHL2" component={EdHL2 as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{hookA: '', hookB: '', endA: '', endB: '', unit: '', items: [], start: 2.2, round: 3.3, outroAt: 18, duration: 19.6} as any}
+      calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdExplain" component={EdExplain as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
+      defaultProps={{els: [], base: [], beats: [], theme: {bg: '#111', accent: '#FFD23F', fade: '#000'}, voice: null, music: null, outroAt: 30, duration: 31.6} as any}
+      calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
+    <Composition id="EdMapV" component={EdMapV as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
+      defaultProps={{layers: {sea: [], near: [], land: '', lakes: '', bands: {}, border: []}, cities: [], beats: [], accent: '#FFD23F', scale: {km: 500, px: 90}, voice: null, music: null, outroAt: 30, duration: 31.6} as any}
       calculateMetadata={({props}: any) => ({durationInFrames: Math.ceil(props.duration * FPS)})} />
     <Composition id="EdMap" component={EdMap as any} width={1080} height={1920} fps={FPS} durationInFrames={Math.ceil(10 * FPS)}
       defaultProps={{pre: '', em: '', hook: [], land: '', near: [], regions: [], fake: {gta: '', fact: '', at: [0, 0]}, end: [], ask: '', start: 2.6, step: 2.7, fakeAt: 16, endAt: 19, outroAt: 22, duration: 24} as any}

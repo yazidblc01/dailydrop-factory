@@ -18,3 +18,5 @@ preview*.mp4
 .DS_Store
 video/public/bg/
 video/public/bg/
+cache/
+video/public/mapvoice/
