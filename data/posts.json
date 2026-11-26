@@ -1626,5 +1626,23 @@
     "posted_at": "2026-11-26T20:36:35+00:00",
     "url": "https://www.youtube.com/watch?v=uDizwTNbad0",
     "slot": "waited"
+  },
+  "gta_bestsellers__20261126__19": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=Vf1aKtgV194",
+      "facebook": "https://www.facebook.com/reel/1178110654786551",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712620640741772596"
+    },
+    "title": "GTA 6: Best-selling games ever: higher or lower? 🎮",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b08bc1ba0fb1758bdaeb027",
+    "posted_at": "2026-11-26T23:09:28+00:00",
+    "url": "https://www.youtube.com/watch?v=Vf1aKtgV194",
+    "slot": "waited"
   }
 }
