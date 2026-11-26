@@ -1568,5 +1568,25 @@
     "posted_at": "2026-11-25T23:17:40+00:00",
     "url": "https://www.youtube.com/watch?v=FLIvBDQRiS0",
     "slot": "waited"
+  },
+  "clip__20261125__CrackyApatheticMeatloafS": {
+    "ig_zernio_id": "6b078d4c5948abe7008da3af",
+    "ig_when": "2026-11-25T22:37:16.355323",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=CAwi07yC2Lo",
+      "facebook": "https://www.facebook.com/reel/1468780018565292",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712288112877112597"
+    },
+    "url": "https://www.youtube.com/watch?v=CAwi07yC2Lo",
+    "title": "GTA 6: IlloJuan Tries To Steal A Car With A Man Inside",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b078d1b42837c6d5cd5ef1c",
+    "posted_at": "2026-11-26T01:37:19+00:00",
+    "slot": "waited"
   }
 }
