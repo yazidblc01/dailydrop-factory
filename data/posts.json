@@ -1608,5 +1608,23 @@
     "zernio_id": "6b086fec2271938f0d42fc24",
     "posted_at": "2026-11-26T17:45:20+00:00",
     "slot": "waited"
+  },
+  "clip__20261126__FriendlyDarlingRamenKeep": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=uDizwTNbad0",
+      "facebook": "https://www.facebook.com/reel/1831208801426231",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712581721090166036"
+    },
+    "title": "GTA 6: Night Highway Drive Ends Upside Down In The Harbor",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b089824e7b66c4b095f904d",
+    "posted_at": "2026-11-26T20:36:35+00:00",
+    "url": "https://www.youtube.com/watch?v=uDizwTNbad0",
+    "slot": "waited"
   }
 }
