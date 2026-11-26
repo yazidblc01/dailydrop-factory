@@ -1588,5 +1588,25 @@
     "zernio_id": "6b078d1b42837c6d5cd5ef1c",
     "posted_at": "2026-11-26T01:37:19+00:00",
     "slot": "waited"
+  },
+  "clip__20261126__IronicAntsyMeerkatHotPok": {
+    "ig_zernio_id": "6b08702de8f2140fe6cb3473",
+    "ig_when": "2026-11-26T14:45:17.370018",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=9It5RLL9nW0",
+      "facebook": "https://www.facebook.com/reel/4135051470121903",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712537671951797525"
+    },
+    "url": "https://www.youtube.com/watch?v=9It5RLL9nW0",
+    "title": "GTA 6: Hotel Elevator With Cops Turns Into A Shootout",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b086fec2271938f0d42fc24",
+    "posted_at": "2026-11-26T17:45:20+00:00",
+    "slot": "waited"
   }
 }

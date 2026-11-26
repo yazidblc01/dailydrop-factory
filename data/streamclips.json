@@ -435,9 +435,13 @@
     "ImpossibleRealSwordCorgiDerp-vk-lFoxUWkn5RHRS",
     "CrackyApatheticMeatloafShadyLulu-JehvNaPWimJCSHE3",
     "SpotlessIgnorantMomPunchTrees-REkZts3DCZZYQgW3",
-    "ObliviousRoughDelicataFutureMan-CS3ZEl3poE2C9fMP"
+    "ObliviousRoughDelicataFutureMan-CS3ZEl3poE2C9fMP",
+    "TubularProudMuleSaltBae-iOdQKPfUngadf0O9",
+    "BoxyImpartialFiddleheadsPanicBasket-UVecwsCgf_E0tdBj",
+    "FunDeafHedgehogFailFish-0TDrovhC2Km6_93R",
+    "IronicAntsyMeerkatHotPokket-Px5KXcpo886zO19J"
   ],
-  "count": 46,
+  "count": 47,
   "seen": {
     "PeacefulGlutenFreeVultureShazBotstix-KgHnVnwwgZOeO6Xs": {
       "at": "2026-11-18T19:34:57.856938+00:00",
@@ -13960,7 +13964,7 @@
       "name": "MissMikkaa",
       "url": "https://www.twitch.tv/missmikkaa/clip/MoldyDarlingCardJebaited-9zXoY6rxfXDBuq36",
       "title": "Behold, the perfect car!",
-      "views": 1199,
+      "views": 1253,
       "language": "en",
       "use": true,
       "why": "Mild but readable payoff: she builds up a custom car with \"anime girls\" and the reveal lands on \"Tentacles!\" with a visible reaction. The joke is light, so the score stays middling.",
@@ -14161,7 +14165,7 @@
       "name": "HasanAbi",
       "url": "https://www.twitch.tv/hasanabi/clip/GoldenPoisedKeyboardRedCoat-HO3GxS3GCBEqzXcR",
       "title": "Parachute WASTED",
-      "views": 998,
+      "views": 1256,
       "language": "en",
       "use": true,
       "why": "Clear fail with a payoff: he jumps off a rooftop trying to glide, then the Wasted screen hits. His webcam reaction (\"how do you do that?\") is captioned and visible. Worth a mid-level score.",
@@ -14195,7 +14199,7 @@
       "name": "TheBurntPeanut",
       "url": "https://www.twitch.tv/theburntpeanut/clip/GloriousShortRamenANELE-1Bn-506RuvLm-UJb",
       "title": "Did Lucia Get In?",
-      "views": 880,
+      "views": 1197,
       "language": "en",
       "use": true,
       "why": "A jet getaway on the tarmac ends in a crash-landing into emergency vehicles, with the streamer panicking (\"oh my God, I'm gonna die\"). The payoff is clear and the shouted build-up gives context. The facecam is an avatar, so there is no real face to react.",
@@ -14354,7 +14358,7 @@
       "name": "ohnePixel",
       "url": "https://www.twitch.tv/ohnepixel/clip/ConsiderateLittleCougarWTRuck-wXNSmnXiZplUK07k",
       "title": "eyyyyy, you hurt lucia",
-      "views": 155,
+      "views": 212,
       "language": "en",
       "use": true,
       "why": "Reckless supercar driving, then a hit on a pedestrian and an open-mouthed reaction from the streamer at the peak. Clear setup and payoff, and the phone texts add context. Not a big score because the payoff is fairly small and there is no speech.",
@@ -14431,7 +14435,7 @@
       "name": "IlloJuan",
       "url": "https://www.twitch.tv/illojuan/clip/JollyComfortableSparrowJonCarnage-fCCEA6T-iAe1lHGR",
       "title": "sitcom",
-      "views": 390,
+      "views": 759,
       "language": "es",
       "use": true,
       "why": "Action and consequence: he hides in bushes, police spot him and shout to surrender, then he runs and escapes on a dirt bike. No streamer speech, so the reaction is weak and the clip is only a mid-level chase.",
@@ -14508,7 +14512,7 @@
       "name": "bratishkinOFF",
       "url": "https://www.twitch.tv/bratishkinoff/clip/ImpossibleRealSwordCorgiDerp-vk-lFoxUWkn5RHRS",
       "title": "умный в гору не пойдет он в нее залетит",
-      "views": 201,
+      "views": 456,
       "language": "ru",
       "use": true,
       "why": "A clear action and consequence: the streamer drives a USPS mail van across a dirt site, the van launches off a mound, and he reacts with a shocked face and a loud \"WHAT THE F***\". Chaotic and funny with a visible reaction, though the payoff is modest.",
@@ -14528,7 +14532,8 @@
       "face_visible": true,
       "captioned": false,
       "dark": false,
-      "dead": []
+      "dead": [],
+      "growth": 16.0
     },
     "CrackyApatheticMeatloafShadyLulu-JehvNaPWimJCSHE3": {
       "at": "2026-11-26T01:16:27.464151+00:00",
@@ -14613,7 +14618,7 @@
       "name": "CohhCarnage",
       "url": "https://www.twitch.tv/cohhcarnage/clip/ObliviousRoughDelicataFutureMan-CS3ZEl3poE2C9fMP",
       "title": "Cohhs GTA Racing Experience",
-      "views": 1157,
+      "views": 1257,
       "language": "en",
       "use": true,
       "why": "A racer gets rear-ended mid-race, then crashes into a wall, and he reacts loudly on his webcam with a clear, funny rant. The crash and the reaction carry it, and the dialogue works with captions.",
@@ -14648,7 +14653,156 @@
           25.4,
           31.0
         ]
+      ],
+      "growth": 6.3
+    },
+    "TubularProudMuleSaltBae-iOdQKPfUngadf0O9": {
+      "at": "2026-11-26T17:13:50.744701+00:00",
+      "login": "alanzoka",
+      "name": "alanzoka",
+      "url": "https://www.twitch.tv/alanzoka/clip/TubularProudMuleSaltBae-iOdQKPfUngadf0O9",
+      "title": "Black no Kabum",
+      "views": 1983,
+      "language": "pt",
+      "use": false,
+      "why": "The whole clip sits on the GTA 6 pause/main menu while the streamer rants about Black Friday deals on a Kabum website. Nothing playable happens, and the talk is about something off screen, so there is no story.",
+      "score": 2,
+      "star": "reaction",
+      "moment": "menu rant about Black Friday deals",
+      "action": "none",
+      "facecam": {
+        "x": 0.774,
+        "y": 0.447,
+        "w": 0.22,
+        "h": 0.3
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.1,
+      "end": 60.1,
+      "peak": 25.8,
+      "story": false,
+      "setup": "alanzoka rants about Black Friday deals on a shopping website",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": [
+        [
+          0,
+          60.1
+        ]
       ]
+    },
+    "BoxyImpartialFiddleheadsPanicBasket-UVecwsCgf_E0tdBj": {
+      "at": "2026-11-26T17:21:24.600673+00:00",
+      "login": "montanablack88",
+      "name": "MontanaBlack88",
+      "url": "https://www.twitch.tv/montanablack88/clip/BoxyImpartialFiddleheadsPanicBasket-UVecwsCgf_E0tdBj",
+      "title": "Monte schafft es in den Bunker",
+      "views": 279,
+      "language": "de",
+      "use": true,
+      "why": "Chaotic foot chase with wanted stars showing, a fiery blast at the bunker entrance, then the streamer's relieved \"we did it\" and \"friends\". Strong build-up and payoff, and the face cam reacts throughout.",
+      "score": 6,
+      "star": "reaction",
+      "moment": "sprint to the bunker escape",
+      "action": null,
+      "facecam": {
+        "x": 0.68,
+        "y": 0.64,
+        "w": 0.22,
+        "h": 0.36
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 60.0,
+      "peak": 40.5,
+      "story": true,
+      "setup": "Monte sprints through a forest with wanted stars, chased toward a bunker",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "FunDeafHedgehogFailFish-0TDrovhC2Km6_93R": {
+      "at": "2026-11-26T17:23:45.652590+00:00",
+      "login": "bratishkinoff",
+      "name": "bratishkinOFF",
+      "url": "https://www.twitch.tv/bratishkinoff/clip/FunDeafHedgehogFailFish-0TDrovhC2Km6_93R",
+      "title": "МЯУ",
+      "views": 291,
+      "language": "ru",
+      "use": true,
+      "why": "Weak but followable: he hears a meow, the chat asks if anyone heard it, and he runs the beach looking for the source. The payoff is small and the reaction is mild, so it stays low. Webcam shows a real face, GTA 6 visuals, no nudity or spoilers.",
+      "score": 4,
+      "star": "reaction",
+      "moment": "hearing a mysterious meow sound",
+      "action": "none",
+      "facecam": {
+        "x": 0.026,
+        "y": 0.405,
+        "w": 0.195,
+        "h": 0.2
+      },
+      "gamebox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.83,
+        "h": 1
+      },
+      "start": 0.0,
+      "end": 30.1,
+      "peak": 24.1,
+      "story": true,
+      "setup": "A streamer hears a strange meow and searches the beach for its source",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": true,
+      "captioned": false,
+      "dark": false,
+      "dead": []
+    },
+    "IronicAntsyMeerkatHotPokket-Px5KXcpo886zO19J": {
+      "at": "2026-11-26T17:26:01.708520+00:00",
+      "login": "theburntpeanut",
+      "name": "TheBurntPeanut",
+      "url": "https://www.twitch.tv/theburntpeanut/clip/IronicAntsyMeerkatHotPokket-Px5KXcpo886zO19J",
+      "title": "LMFAOOOOO",
+      "views": 509,
+      "language": "en",
+      "use": true,
+      "why": "Chaotic payoff: the character turns on the cops in a hotel lobby and ends up standing over a dead officer, with the streamer swearing in disbelief (\"What the f***\"). The build-up in the elevator gives it context. Facecam is a VTuber avatar, so no real face. No nudity, no slurs, no story spoiler, and no lyrics. The reaction is strong but the payoff is less absurd than a full chase.",
+      "score": 6,
+      "star": "gameplay",
+      "moment": "cops in the hotel elevator go wrong",
+      "action": null,
+      "facecam": null,
+      "gamebox": null,
+      "start": 0.0,
+      "end": 30.1,
+      "peak": 26.5,
+      "story": true,
+      "setup": "Her character is escorted through a hotel with cops, and the plan goes wrong",
+      "cold_open": false,
+      "nudity": false,
+      "face_visible": false,
+      "captioned": false,
+      "dark": false,
+      "dead": [],
+      "posted": true
     }
   },
   "posted": [
@@ -15076,9 +15230,20 @@
       "date": "2026-11-25",
       "layout": "crop",
       "layout_by": "claude"
+    },
+    {
+      "topic": "clip__20261126__IronicAntsyMeerkatHotPok",
+      "logins": [
+        "theburntpeanut"
+      ],
+      "star": "gameplay",
+      "moment": "cops in the hotel elevator go wrong",
+      "date": "2026-11-26",
+      "layout": "crop",
+      "layout_by": "claude"
     }
   ],
-  "house": "2026-11-25",
+  "house": "2026-11-26",
   "seen5": {
     "TriumphantArtisticPlumageMrDestructoid-u5Wdapw98-mqa4WN": {
       "at": "2026-11-18T21:16:59.699365+00:00",
