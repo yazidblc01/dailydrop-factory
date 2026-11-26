@@ -419,9 +419,9 @@ def next_queued(dry=False, today=None):
         return None, None
     st = json.loads(STATE.read_text()) if STATE.exists() else {"done": []}
     left = [n for n in queue() if n not in st["done"]]
-    if not left:
-        warn("📭 No explainer left in the queue, nothing posted at 7:13 PM. Ask Claude for the next batch.")
-        return None, None
+    if not left:                              # hand-made ones first; then the automatic writer (engine/autoexplain.py)
+        from engine import autoexplain
+        return autoexplain.make_auto(dry)
     name = left[0]
     kind, topic = name.split("__", 1)
     if kind == "map":
@@ -431,8 +431,6 @@ def next_queued(dry=False, today=None):
     if not dry:
         st["done"].append(name)
         STATE.write_text(json.dumps(st, indent=2))
-        if len(left) <= 3:
-            warn(f"🗺️ Only {len(left) - 1} explainers left in the queue. Ask Claude for the next batch.")
     return name, final
 
 

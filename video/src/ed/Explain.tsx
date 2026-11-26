@@ -81,6 +81,7 @@ export const EdExplain: React.FC<EdExplainProps> = (p) => {
   const render = (e: El): React.ReactNode => {
     const a0 = (appear[e.id] ?? Infinity) + (e.delay ?? 0);
     if (t < a0) return null;
+    if ((e.minz && z < e.minz) || (e.maxz && z >= e.maxz)) return null;   // labels that only make sense zoomed in (or out)
     const dur = e.dur ?? (e.anim === 'draw' || e.anim === 'wipe' ? 1.1 : 0.35);
     const k = clamp01((t - a0) / dur);
     const out = e.id in leave ? 1 - smooth(leave[e.id], leave[e.id] + 0.4, t) : 1;
@@ -113,8 +114,10 @@ export const EdExplain: React.FC<EdExplainProps> = (p) => {
         }
         return wrap(<>{raised}{body}{tex}</>);
       }
-      case 'circle':
-        return wrap(<circle cx={e.cx} cy={e.cy} r={e.r} fill={e.fill ?? 'none'} stroke={stroke} strokeWidth={strokeW} filter={glow} />);
+      case 'circle': {
+        const rr = e.ss ? e.r / Math.sqrt(z) : e.r;      // ss: dots grow only a little when the camera zooms in
+        return wrap(<circle cx={e.cx} cy={e.cy} r={rr} fill={e.fill ?? 'none'} stroke={stroke} strokeWidth={e.ss ? strokeW / z : strokeW} filter={glow} />);
+      }
       case 'rect':
         return wrap(<rect x={e.x} y={e.y} width={anim === 'grow' ? e.w * smooth(0, 1, k) : e.w} height={e.h} rx={e.rx ?? 0} fill={e.fill ?? 'none'} stroke={stroke}
           strokeWidth={strokeW} filter={glow} />);
