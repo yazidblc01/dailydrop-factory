@@ -1682,5 +1682,23 @@
     "zernio_id": "6b09bd3c1a52465739956ee5",
     "posted_at": "2026-11-27T17:27:05+00:00",
     "slot": "waited"
+  },
+  "clip__20261127__SmokyCaringPineappleHone": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=G0XhAwTmWpk",
+      "facebook": "https://www.facebook.com/reel/2250190559184670",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712954091823058196"
+    },
+    "url": "https://www.youtube.com/watch?v=G0XhAwTmWpk",
+    "title": "GTA 6: Loserfruit's Boat Shootout Has One Rule",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b09eac8f38000092c7ba1b1",
+    "posted_at": "2026-11-27T20:41:53+00:00",
+    "slot": "waited"
   }
 }
