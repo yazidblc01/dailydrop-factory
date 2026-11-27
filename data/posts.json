@@ -1662,5 +1662,25 @@
     "zernio_id": "6b08db78738bfcd69d055277",
     "posted_at": "2026-11-27T01:23:56+00:00",
     "slot": "waited"
+  },
+  "clip__20261127__GoldenWildPepperoniTwitc": {
+    "ig_zernio_id": "6b09bd673788f8c631362436",
+    "ig_when": "2026-11-27T14:27:02.921815",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=11EIdh8zt8s",
+      "facebook": "https://www.facebook.com/reel/1121941463984576",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712903670991506740"
+    },
+    "url": "https://www.youtube.com/watch?v=11EIdh8zt8s",
+    "title": "GTA 6: ohnePixel Tries A Slow-Mo Hostage Standoff",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b09bd3c1a52465739956ee5",
+    "posted_at": "2026-11-27T17:27:05+00:00",
+    "slot": "waited"
   }
 }
