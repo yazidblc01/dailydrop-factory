@@ -1644,5 +1644,23 @@
     "posted_at": "2026-11-26T23:09:28+00:00",
     "url": "https://www.youtube.com/watch?v=Vf1aKtgV194",
     "slot": "waited"
+  },
+  "clip__20261126__CloudyBeautifulSageAlien": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=3wOSe20UXKw",
+      "facebook": "https://www.facebook.com/reel/2443581052714618",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712655719559974152"
+    },
+    "url": "https://www.youtube.com/watch?v=3wOSe20UXKw",
+    "title": "GTA 6: Streamer Takes The Keys And Bolts",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b08db78738bfcd69d055277",
+    "posted_at": "2026-11-27T01:23:56+00:00",
+    "slot": "waited"
   }
 }
