@@ -1700,5 +1700,23 @@
     "zernio_id": "6b09eac8f38000092c7ba1b1",
     "posted_at": "2026-11-27T20:41:53+00:00",
     "slot": "waited"
+  },
+  "texts__gtav_ps5_amd": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=8HK9hxXljlI",
+      "facebook": "https://www.facebook.com/reel/997528279616172",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7712995662677314836"
+    },
+    "url": "https://www.youtube.com/watch?v=8HK9hxXljlI",
+    "title": "GTA 6: Future me stopped me from buying GTA V again 💀",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0a10af501b5f3b8251aacb",
+    "posted_at": "2026-11-27T23:22:46+00:00",
+    "slot": "waited"
   }
 }

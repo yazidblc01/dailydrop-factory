@@ -18,7 +18,8 @@
     "texts__gta6_trailer2_gpu",
     "texts__gtaiv_apple",
     "texts__gta6_delay2_dip",
-    "texts__gtav_pc_nvidia"
+    "texts__gtav_pc_nvidia",
+    "texts__gtav_ps5_amd"
   ],
   "skipped": []
 }
