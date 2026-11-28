@@ -1718,5 +1718,23 @@
     "zernio_id": "6b0a10af501b5f3b8251aacb",
     "posted_at": "2026-11-27T23:22:46+00:00",
     "slot": "waited"
+  },
+  "clip__20261127__SneakySpicyFriseeMrDestr": {
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=It3QVGbY5AA",
+      "facebook": "https://www.facebook.com/reel/1174991871728853",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7713029510756666631"
+    },
+    "title": "GTA 6: Highway Gunpoint Standoff Over A Kid",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0a2f6e44cdc18e5368d7c8",
+    "posted_at": "2026-11-28T01:34:20+00:00",
+    "url": "https://www.youtube.com/watch?v=It3QVGbY5AA",
+    "slot": "waited"
   }
 }
