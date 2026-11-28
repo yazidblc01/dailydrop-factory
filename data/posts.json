@@ -1736,5 +1736,25 @@
     "posted_at": "2026-11-28T01:34:20+00:00",
     "url": "https://www.youtube.com/watch?v=It3QVGbY5AA",
     "slot": "waited"
+  },
+  "clip__20261128__TsundereSpeedyHareReside": {
+    "ig_zernio_id": "6b0b0fb1cbb0820a06f5198e",
+    "ig_when": "2026-11-28T14:30:25.121943",
+    "urls": {
+      "youtube": "https://www.youtube.com/watch?v=QU1A1azseEI",
+      "facebook": "https://www.facebook.com/reel/1631960398683472",
+      "tiktok": "https://www.tiktok.com/@thedailydrop.ytb/video/7713275826099211528"
+    },
+    "url": "https://www.youtube.com/watch?v=QU1A1azseEI",
+    "title": "GTA 6: Hasan Tries To Vibe With A Polar Bear",
+    "platforms": [
+      "youtube",
+      "facebook",
+      "tiktok"
+    ],
+    "service": "zernio",
+    "zernio_id": "6b0b0f6a5d26c66fa425ca48",
+    "posted_at": "2026-11-28T17:30:28+00:00",
+    "slot": "waited"
   }
 }

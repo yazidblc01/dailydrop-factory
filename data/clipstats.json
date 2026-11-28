@@ -337,11 +337,11 @@
       "jerma985"
     ],
     "star": "reaction",
-    "views": 6435,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 6436,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 799,
-      "facebook": 5636
+      "facebook": 5637
     },
     "completion": 0,
     "avg_watch_ms": 11504,
@@ -353,11 +353,11 @@
       "theburntpeanut"
     ],
     "star": "reaction",
-    "views": 6237,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 6244,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 99,
-      "facebook": 6138
+      "facebook": 6145
     },
     "completion": 0,
     "avg_watch_ms": 11795,
@@ -372,7 +372,7 @@
     ],
     "star": "react",
     "views": 104,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 95,
       "facebook": 9
@@ -388,7 +388,7 @@
     ],
     "star": "reaction",
     "views": 60,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 32,
       "facebook": 28
@@ -403,10 +403,10 @@
       "joe_bartolozzi"
     ],
     "star": "reaction",
-    "views": 265,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 271,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
-      "youtube": 233,
+      "youtube": 239,
       "facebook": 32
     },
     "completion": 0,
@@ -419,11 +419,11 @@
       "caseoh_"
     ],
     "star": "reaction",
-    "views": 530,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 531,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 159,
-      "facebook": 371
+      "facebook": 372
     },
     "completion": 0,
     "avg_watch_ms": 6918,
@@ -435,11 +435,11 @@
       "caseoh_"
     ],
     "star": "reaction",
-    "views": 1221,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 1222,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 25,
-      "facebook": 1196
+      "facebook": 1197
     },
     "completion": 0,
     "avg_watch_ms": 11062,
@@ -452,7 +452,7 @@
     ],
     "star": "reaction",
     "views": 28,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 16,
       "facebook": 12
@@ -467,11 +467,11 @@
       "vanillamace"
     ],
     "star": "reaction",
-    "views": 498,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 502,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
-      "youtube": 191,
-      "facebook": 307
+      "youtube": 192,
+      "facebook": 310
     },
     "completion": 0,
     "avg_watch_ms": 5433,
@@ -484,7 +484,7 @@
     ],
     "star": "reaction",
     "views": 63,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 16,
       "facebook": 47
@@ -500,7 +500,7 @@
     ],
     "star": "reaction",
     "views": 54,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 15,
       "facebook": 39
@@ -516,10 +516,10 @@
     ],
     "star": "vs",
     "views": 588,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 57,
-      "facebook": 71,
+      "facebook": 72,
       "tiktok": 454,
       "instagram": 6
     },
@@ -534,10 +534,10 @@
     ],
     "star": "reaction",
     "views": 350,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 4,
-      "facebook": 346
+      "facebook": 347
     },
     "completion": 0,
     "avg_watch_ms": 8737,
@@ -550,15 +550,15 @@
     ],
     "star": "vs",
     "views": 1344,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 13,
       "facebook": 562,
-      "tiktok": 643,
+      "tiktok": 644,
       "instagram": 127
     },
-    "completion": 0.08189126213592234,
-    "avg_watch_ms": 6090,
+    "completion": 0.0824089485458613,
+    "avg_watch_ms": 6094,
     "layout": null,
     "ig_delayed": false
   },
@@ -568,7 +568,7 @@
     ],
     "star": "reaction",
     "views": 357,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 8,
       "facebook": 350
@@ -584,10 +584,10 @@
     ],
     "star": "reaction",
     "views": 476,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 5,
-      "facebook": 473
+      "facebook": 475
     },
     "completion": 0,
     "avg_watch_ms": 10337,
@@ -600,7 +600,7 @@
     ],
     "star": "reaction",
     "views": 53,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 34,
       "facebook": 19
@@ -616,13 +616,13 @@
     ],
     "star": "reaction",
     "views": 24,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 8,
-      "facebook": 16
+      "facebook": 17
     },
     "completion": 0,
-    "avg_watch_ms": 3419,
+    "avg_watch_ms": 3637,
     "layout": null,
     "ig_delayed": false
   },
@@ -632,7 +632,7 @@
     ],
     "star": "reaction",
     "views": 21,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 1,
       "facebook": 20
@@ -647,11 +647,11 @@
       "lacy"
     ],
     "star": "reaction",
-    "views": 382,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 383,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 9,
-      "facebook": 375
+      "facebook": 378
     },
     "completion": 0,
     "avg_watch_ms": 10979,
@@ -664,7 +664,7 @@
     ],
     "star": "reaction",
     "views": 223,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 2,
       "facebook": 221
@@ -679,11 +679,11 @@
       "missmikkaa"
     ],
     "star": "reaction",
-    "views": 278,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "views": 279,
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 4,
-      "facebook": 274
+      "facebook": 275
     },
     "completion": 0,
     "avg_watch_ms": 4334,
@@ -696,7 +696,7 @@
     ],
     "star": "reaction",
     "views": 295,
-    "at": "2026-11-27T17:08:24.644772+00:00",
+    "at": "2026-11-28T17:08:16.241370+00:00",
     "per_platform": {
       "youtube": 7,
       "facebook": 288
@@ -720,7 +720,7 @@
     "avg_watch_ms": 5068,
     "layout": "zoom",
     "ig_delayed": false,
-    "at": "2026-11-27T17:08:24.644772+00:00"
+    "at": "2026-11-28T17:08:16.241370+00:00"
   },
   "clip__20261124__WrongTolerantKangarooDBs": {
     "logins": [
@@ -736,7 +736,7 @@
     "avg_watch_ms": 6346,
     "layout": "zoom",
     "ig_delayed": false,
-    "at": "2026-11-27T17:08:24.644772+00:00"
+    "at": "2026-11-28T17:08:16.241370+00:00"
   },
   "clip__20261125__ImpossibleLazyAntelopeJo": {
     "logins": [
@@ -752,7 +752,7 @@
     "avg_watch_ms": 2146,
     "layout": "zoom",
     "ig_delayed": false,
-    "at": "2026-11-27T17:08:24.644772+00:00"
+    "at": "2026-11-28T17:08:16.241370+00:00"
   },
   "clip__20261125__KnottyClumsyPepperPogCha": {
     "logins": [
@@ -768,59 +768,111 @@
     "avg_watch_ms": 3380,
     "layout": "zoom",
     "ig_delayed": false,
-    "at": "2026-11-27T17:08:24.644772+00:00"
+    "at": "2026-11-28T17:08:16.241370+00:00"
   },
   "clip__20261125__CrackyApatheticMeatloafS": {
     "logins": [
       "illojuan"
     ],
     "star": "reaction",
-    "views": 454,
+    "views": 558,
     "per_platform": {
       "youtube": 1,
-      "facebook": 236,
-      "tiktok": 217,
+      "facebook": 237,
+      "tiktok": 320,
       "instagram": 0
     },
-    "completion": 0.006930616740088106,
+    "completion": 0.010953405017921147,
     "avg_watch_ms": 4214,
     "layout": "crop",
     "ig_delayed": true,
-    "at": "2026-11-27T17:08:24.644772+00:00"
+    "at": "2026-11-28T17:08:16.241370+00:00"
   },
   "clip__20261126__IronicAntsyMeerkatHotPok": {
     "logins": [
       "theburntpeanut"
     ],
     "star": "gameplay",
-    "views": 607,
+    "views": 721,
     "per_platform": {
       "youtube": 1,
-      "facebook": 239,
-      "tiktok": 355,
+      "facebook": 240,
+      "tiktok": 469,
       "instagram": 12
     },
-    "completion": 0,
-    "avg_watch_ms": 4396,
+    "completion": 0.0038366713681241183,
+    "avg_watch_ms": 4732,
     "layout": "crop",
     "ig_delayed": true,
-    "at": "2026-11-27T17:08:24.644772+00:00"
+    "at": "2026-11-28T17:08:16.241370+00:00"
   },
   "clip__20261126__FriendlyDarlingRamenKeep": {
     "logins": [
       "missmikkaa"
     ],
     "star": "reaction",
-    "views": 545,
+    "views": 637,
     "per_platform": {
       "youtube": 0,
-      "facebook": 297,
-      "tiktok": 248
+      "facebook": 304,
+      "tiktok": 333
     },
     "completion": 0.011967706422018349,
     "avg_watch_ms": 4717,
     "layout": "zoom",
     "ig_delayed": false,
-    "at": "2026-11-27T17:08:24.644772+00:00"
+    "at": "2026-11-28T17:08:16.241370+00:00"
+  },
+  "clip__20261126__CloudyBeautifulSageAlien": {
+    "logins": [
+      "joe_bartolozzi"
+    ],
+    "star": "reaction",
+    "views": 384,
+    "per_platform": {
+      "youtube": 11,
+      "facebook": 178,
+      "tiktok": 195
+    },
+    "completion": 0.0036562499999999998,
+    "avg_watch_ms": 3241,
+    "layout": "zoom",
+    "ig_delayed": false,
+    "at": "2026-11-28T17:08:16.241370+00:00"
+  },
+  "clip__20261127__GoldenWildPepperoniTwitc": {
+    "logins": [
+      "ohnepixel"
+    ],
+    "star": "reaction",
+    "views": 806,
+    "per_platform": {
+      "youtube": 2,
+      "facebook": 280,
+      "tiktok": 391,
+      "instagram": 133
+    },
+    "completion": 0.04177251114413076,
+    "avg_watch_ms": 6524,
+    "layout": "zoom",
+    "ig_delayed": true,
+    "at": "2026-11-28T17:08:16.241370+00:00"
+  },
+  "clip__20261127__SmokyCaringPineappleHone": {
+    "logins": [
+      "loserfruit"
+    ],
+    "star": "reaction",
+    "views": 382,
+    "per_platform": {
+      "youtube": 0,
+      "facebook": 205,
+      "tiktok": 177
+    },
+    "completion": 0.006301570680628272,
+    "avg_watch_ms": 3359,
+    "layout": "zoom",
+    "ig_delayed": false,
+    "at": "2026-11-28T17:08:16.241370+00:00"
   }
 }
